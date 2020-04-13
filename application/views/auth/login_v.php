@@ -35,6 +35,7 @@
                 </div>
                 <div class="login-form">
                     <form action="<?php echo base_url('Auth/login');?>" method="post">
+                        <div class="flash-data" data-flashdata="<?= $this->session->flashdata('msg');?>"></div>
                         <div class="form-group">
                             <label>Email address</label>
                             <input type="text" id="ktp" name="ktp" class="form-control" placeholder="No KTP">
