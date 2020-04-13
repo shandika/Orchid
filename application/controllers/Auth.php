@@ -49,7 +49,7 @@ class Auth extends CI_Controller
 
         if ($this->form_validation->run() == FALSE) {
             echo $this->session->set_flashdata('msg','Silahkan Isi Seluruh Form !');
-            $this->load->view('Auth/login');
+            redirect('Auth', 'refresh');
         } else{
             $cekCust = $this->auth->cekCust($k,$p);
             if ($cekCust->num_rows() > 0) {
@@ -67,6 +67,12 @@ class Auth extends CI_Controller
                 }
                 echo $this->session->set_flashdata('msg','success-login');
                 redirect('Home/customer', 'refresh');
+            }elseif ($cekCust->num_rows() <= 0) {
+                echo $this->session->set_flashdata('msg','Username atau Password Tidak Terdaftar !');
+                redirect('Auth', 'refresh');
+            }else{
+                echo $this->session->set_flashdata('msg','Username atau Password Tidak Sesuai !');
+                redirect('Auth', 'refresh');
             }
             $cekPm = $this->auth->cekPm($k,$p);
             if ($cekPm->num_rows() > 0) {
@@ -84,6 +90,12 @@ class Auth extends CI_Controller
                 }
                 echo $this->session->set_flashdata('msg','success-login');
                 redirect('Home/pm', 'refresh');
+            }elseif ($cekPm->num_rows() <= 0) {
+                echo $this->session->set_flashdata('msg','Username atau Password Tidak Terdaftar !');
+                redirect('Auth', 'refresh');
+            }else{
+                echo $this->session->set_flashdata('msg','Username atau Password Tidak Sesuai !');
+                redirect('Auth', 'refresh');
             }
             $cekMar = $this->auth->cekMar($k,$p);
             if ($cekMar->num_rows() > 0) {
@@ -101,6 +113,12 @@ class Auth extends CI_Controller
                 }
                 echo $this->session->set_flashdata('msg','success-login');
                 redirect('Home/marketing', 'refresh');
+            }elseif ($cekMar->num_rows() <= 0) {
+                echo $this->session->set_flashdata('msg','Username atau Password Tidak Terdaftar !');
+                redirect('Auth', 'refresh');
+            }else{
+                echo $this->session->set_flashdata('msg','Username atau Password Tidak Sesuai !');
+                redirect('Auth', 'refresh');
             }
 	    }
     }
