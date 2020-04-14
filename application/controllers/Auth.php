@@ -139,33 +139,42 @@ class Auth extends CI_Controller
         $this->form_validation->set_rules('no_telp', 'no_telp', 'trim|xss_clean');
         $this->form_validation->set_rules('password1', 'password1', 'required|trim|matches[password2]',);
         $this->form_validation->set_rules('password2', 'password2', 'required|trim|matches[password1]');
-        $ktp = $this->input->post('ktp');
+
+        $db = $this->input->post('jabatan');
         $nama = $this->input->post('nama');
         $alamat = $this->input->post('alamat');
         $no_telp = $this->input->post('no_telp');
         $psw1 = $this->input->post('password1');
         $psw2 = $this->input->post('password2');
-        $k = ($ktp);
+
         $p1 = sha1($psw1);
         $p2 = sha1($psw2);
 
         if ($p1 != $p2) {
             $error = 'Password tidak sama';
         }
-        // if ($nama == null) {
-        //     $error = 'Nama Kosong, Silahkan Isi !';
-        // }
-        // if ($alamat == null) {
-        //     $error = 'Alamat Kosong, Silahkan isi!';
-        // }
-        // if ($no_telp == null) {
-        //     $error = 'Nomor Telepon kosong, Silahkan Isi!';
-        // }
+        if ($db == 'akun_marketing') {
+            $this->form_validation->set_rules('ktp', 'ktp', 'required|trim|xss_clean|is_unique[akun_marketing.ktp]');
+            $ktp = $this->input->post('ktp');
+            $k = ($ktp);
+        } elseif ($db == 'akun_purchasing') {
+            $this->form_validation->set_rules('ktp', 'ktp', 'required|trim|xss_clean|is_unique[akun_purchasing.ktp]');
+            $ktp = $this->input->post('ktp');
+            $k = ($ktp);
+        } elseif ($db == 'akun_project_manager') {
+            $this->form_validation->set_rules('ktp', 'ktp', 'required|trim|xss_clean|is_unique[akun_project_manager.ktp]');
+            $ktp = $this->input->post('ktp');
+            $k = ($ktp);
+        } elseif ($db == 'akun_keuangan') {
+            $this->form_validation->set_rules('ktp', 'ktp', 'required|trim|xss_clean|is_unique[akun_keuangan.ktp]');
+            $ktp = $this->input->post('ktp');
+            $k = ($ktp);
+        }
         if ($this->form_validation->run() == FALSE) {
             echo $this->session->set_flashdata('msg', $error);
             redirect('Auth', 'refresh');
         } else {
-            $register = $this->auth->registrasi($ktp, $nama, $alamat, $p1, '1', $no_telp);
+            $register = $this->auth->registrasi($ktp, $nama, $alamat, $p1, '1', $no_telp, $db);
         }
     }
     public function move_registration()

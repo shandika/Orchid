@@ -54,7 +54,7 @@
                         </div>
                         <div class="form-group">
                             <label> Jabatan // can jalan</label>
-                            <select class="form-control">
+                            <select class="form-control" name="jabatan" id="jabatan">
                                 <option value="Select">Select</option>
                                 <option value="akun_marketing" id="akun_marketing" name="akun_marketing">Marketing</option>
                                 <option value="akun_project_manager" id="akun_project_manager" name="akun_project_manager">Project manager</option>

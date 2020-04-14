@@ -39,17 +39,17 @@ class Auth_model extends CI_Model
         $this->db->limit(1);
         return $this->db->get("akun_keuangan");
     }
-    function registrasi($k, $n, $a, $p, $s, $ntlp)
+    function registrasi($k, $n, $a, $p, $s, $ntlp, $db)
     {
         $data = [
             'ktp' => $k,
             'nama' => $n,
             'alamat' => $a,
-            'password' => sha1($p),
+            'password' => $p,
             'status' => $s,
             'no_tlp' => $ntlp
         ];
 
-        $this->db->insert('akun_marketing', $data);
+        $this->db->insert($db, $data);
     }
 }
