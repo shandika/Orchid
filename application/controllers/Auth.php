@@ -113,8 +113,8 @@ class Auth extends CI_Controller
                 }
                 echo $this->session->set_flashdata('msg', 'success-login');
                 redirect('Home/marketing', 'refresh');
-            } else {
-                echo $this->session->set_flashdata('msg', 'Username atau Password Tidak Sesuai !');
+            }else{
+                echo $this->session->set_flashdata('msg','Username atau Password Tidak Sesuai !');
                 redirect('Auth', 'refresh');
             }
         }

@@ -12,14 +12,15 @@
     <div class="col-sm-4">
         <div class="card float-left">
             <div class="page-title">
-                <button type="button" class="btn btn-primary"><i class="fa fa-star"></i>&nbsp; Primary</button>
+                <!-- <button type="button" class="btn btn-primary"><i class="fa fa-star"></i>&nbsp; Pemesanan Unit</button> -->
+                <a href="<?php echo base_url('Marketing/pesanunit')?>" class="btn btn-primary"><i class="fa fa-star"></i>&nbsp; Pemesanan Unit</a>
             </div>
         </div>
     </div>
     <div class="col-sm-8">
         <div class="card float-right">
             <div class="page-title">
-                    <button class="btn btn-success" data-toggle="modal" data-target="#modal_add_new"><i class="fa fa-plus"></i> Add Person</button>
+                    <button class="btn btn-success" data-toggle="modal" data-target="#modal_add_new"><i class="fa fa-plus"></i> Tambah Project</button>
             </div>
         </div>
     </div>
@@ -42,14 +43,14 @@
                         <div class="table-responsive" >
                           <table border="0" >
                             <tr >
-                              <td><h6>Nama</h6></td>
+                              <td><h6>DEBIT</h6></td>
                               <td><h6>:</h6></td>
-                              <td><h6>Shandika</h6></td>
+                              <td><h6>300.000.000</h6></td>
                             </tr>
                             <tr >
-                              <td style="width:70px"> <h6 id="nip">NIPEG</h6></td>
+                              <td style="width:70px"> <h6 id="nip">KREDIT</h6></td>
                               <td style="width:20px"><h6 >:</h6></td>
-                              <td><h6>123</h6></td>
+                              <td><h6>300.000.000</h6></td>
                             </tr>
                           </table>
                         </div>
@@ -57,7 +58,7 @@
                         <div>
                             <button id="payment-button" type="submit" class="btn btn-lg btn-info btn-block">
                                 <i class="fa fa-lock fa-lg"></i>&nbsp;
-                                <span id="payment-button-amount">Selengkapnya</span>
+                                <span id="payment-button-amount">DETAIL</span>
                                 <span id="payment-button-sending" style="display:none;">Sending…</span>
                             </button>
                         </div>
@@ -83,14 +84,14 @@
                         <div class="table-responsive" >
                           <table border="0" >
                             <tr >
-                              <td><h6>Nama</h6></td>
+                              <td><h6>DEBIT</h6></td>
                               <td><h6>:</h6></td>
-                              <td><h6>Shandika</h6></td>
+                              <td><h6>250.000.000</h6></td>
                             </tr>
                             <tr >
-                              <td style="width:70px"> <h6 id="nip">NIPEG</h6></td>
+                              <td style="width:70px"> <h6 id="nip">KREDIT</h6></td>
                               <td style="width:20px"><h6 >:</h6></td>
-                              <td><h6>123</h6></td>
+                              <td><h6>300.000.000</h6></td>
                             </tr>
                           </table>
                         </div>
@@ -98,7 +99,7 @@
                         <div>
                             <button id="payment-button" type="submit" class="btn btn-lg btn-info btn-block">
                                 <i class="fa fa-lock fa-lg"></i>&nbsp;
-                                <span id="payment-button-amount">Selengkapnya</span>
+                                <span id="payment-button-amount">DETAIL</span>
                                 <span id="payment-button-sending" style="display:none;">Sending…</span>
                             </button>
                         </div>
@@ -124,14 +125,14 @@
                         <div class="table-responsive" >
                           <table border="0" >
                             <tr >
-                              <td><h6>Nama</h6></td>
+                              <td><h6>DEBIT</h6></td>
                               <td><h6>:</h6></td>
-                              <td><h6>Shandika</h6></td>
+                              <td><h6>350.000.000</h6></td>
                             </tr>
                             <tr >
-                              <td style="width:70px"> <h6 id="nip">NIPEG</h6></td>
+                              <td style="width:70px"> <h6 id="nip">KREDIT</h6></td>
                               <td style="width:20px"><h6 >:</h6></td>
-                              <td><h6>123</h6></td>
+                              <td><h6>350.000.000</h6></td>
                             </tr>
                           </table>
                         </div>
@@ -139,7 +140,7 @@
                         <div>
                             <button id="payment-button" type="submit" class="btn btn-lg btn-info btn-block">
                                 <i class="fa fa-lock fa-lg"></i>&nbsp;
-                                <span id="payment-button-amount">Selengkapnya</span>
+                                <span id="payment-button-amount">DETAIL</span>
                                 <span id="payment-button-sending" style="display:none;">Sending…</span>
                             </button>
                         </div>
@@ -156,15 +157,15 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title">Person Form</h3>
+                <h3 class="modal-title">FORM TAMBAH PROJECT</h3>
             </div>
             <div class="modal-body form">
                 <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
                     <div class="row form-group">
-                        <div class="col col-md-3"><label for="text-input" class=" form-control-label">Text Input</label></div>
+                        <div class="col col-md-3"><label for="text-input" class=" form-control-label">NAMA PROJECT</label></div>
                         <div class="col-12 col-md-9"><input type="text" id="text-input" name="text-input" placeholder="Text" class="form-control"><small class="form-text text-muted">This is a help text</small></div>
                     </div>
-                    <div class="row form-group">
+                    <!-- <div class="row form-group">
                         <div class="col col-md-3"><label for="email-input" class=" form-control-label">Email Input</label></div>
                         <div class="col-12 col-md-9"><input type="email" id="email-input" name="email-input" placeholder="Enter Email" class="form-control"><small class="help-block form-text">Please enter your email</small></div>
                     </div>
@@ -318,15 +319,15 @@
                                     </label>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="row form-group">
-                            <div class="col col-md-3"><label for="file-input" class=" form-control-label">File input</label></div>
+                            <div class="col col-md-3"><label for="file-input" class=" form-control-label">GAMBAR</label></div>
                             <div class="col-12 col-md-9"><input type="file" id="file-input" name="file-input" class="form-control-file"></div>
                         </div>
-                        <div class="row form-group">
+                        <!-- <div class="row form-group">
                             <div class="col col-md-3"><label for="file-multiple-input" class=" form-control-label">Multiple File input</label></div>
                             <div class="col-12 col-md-9"><input type="file" id="file-multiple-input" name="file-multiple-input" multiple="" class="form-control-file"></div>
-                        </div>
+                        </div> -->
                 </form>
             </div>
             <div class="modal-footer">
