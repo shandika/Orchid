@@ -21,12 +21,6 @@ class Auth extends CI_Controller
                     'title' => $title,
                 );
                 $this->load->view('auth/registration', $data);
-            } elseif ($level == 5) {
-                $title = 'LOGIN';
-                $data = array(
-                    'title' => $title,
-                );
-                $this->load->view('auth/login_v', $data);
             }
         } else {
             $title = 'LOGIN';
@@ -113,8 +107,8 @@ class Auth extends CI_Controller
                 }
                 echo $this->session->set_flashdata('msg', 'success-login');
                 redirect('Home/marketing', 'refresh');
-            }else{
-                echo $this->session->set_flashdata('msg','Username atau Password Tidak Sesuai !');
+            } else {
+                echo $this->session->set_flashdata('msg', 'Username atau Password Tidak Sesuai !');
                 redirect('Auth', 'refresh');
             }
         }
@@ -171,10 +165,12 @@ class Auth extends CI_Controller
             $k = ($ktp);
         }
         if ($this->form_validation->run() == FALSE) {
-            echo $this->session->set_flashdata('msg', $error);
-            redirect('Auth', 'refresh');
+            echo $this->session->set_flashdata('msg', 'error-register');
+            redirect('Auth');
         } else {
             $register = $this->auth->registrasi($ktp, $nama, $alamat, $p1, '1', $no_telp, $db);
+            echo $this->session->set_flashdata('msg', 'success-registration');
+            redirect('', 'refresh');
         }
     }
     public function move_registration()
