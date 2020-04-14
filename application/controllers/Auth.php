@@ -51,29 +51,23 @@ class Auth extends CI_Controller
             echo $this->session->set_flashdata('msg','Silahkan Isi Seluruh Form !');
             redirect('Auth', 'refresh');
         } else{
-            $cekCust = $this->auth->cekCust($k,$p);
-            if ($cekCust->num_rows() > 0) {
-                //login berhasil, buat session
-                foreach ($cekCust->result() as $login) {
-                    $sesi = array(
-                    'ktp'       => $login->ktp,
-                    'nama'      => $login->nama,
-                    'alamat'    => $login->alamat,
-                    'password'  => $login->password,
-                    'level'     => 1,
-                );
-                $this->session->set_userdata('masuk',TRUE);
-                $this->session->set_userdata($sesi);
-                }
-                echo $this->session->set_flashdata('msg','success-login');
-                redirect('Home/customer', 'refresh');
-            }elseif ($cekCust->num_rows() <= 0) {
-                echo $this->session->set_flashdata('msg','Username atau Password Tidak Terdaftar !');
-                redirect('Auth', 'refresh');
-            }else{
-                echo $this->session->set_flashdata('msg','Username atau Password Tidak Sesuai !');
-                redirect('Auth', 'refresh');
-            }
+            // $cekCust = $this->auth->cekCust($k,$p);
+            // if ($cekCust->num_rows() > 0) {
+            //     //login berhasil, buat session
+            //     foreach ($cekCust->result() as $login) {
+            //         $sesi = array(
+            //         'ktp'       => $login->ktp,
+            //         'nama'      => $login->nama,
+            //         'alamat'    => $login->alamat,
+            //         'password'  => $login->password,
+            //         'level'     => 1,
+            //     );
+            //     $this->session->set_userdata('masuk',TRUE);
+            //     $this->session->set_userdata($sesi);
+            //     }
+            //     echo $this->session->set_flashdata('msg','success-login');
+            //     redirect('Home/customer', 'refresh');
+            // }
             $cekPm = $this->auth->cekPm($k,$p);
             if ($cekPm->num_rows() > 0) {
                 //login berhasil, buat session
@@ -90,12 +84,6 @@ class Auth extends CI_Controller
                 }
                 echo $this->session->set_flashdata('msg','success-login');
                 redirect('Home/pm', 'refresh');
-            }elseif ($cekPm->num_rows() <= 0) {
-                echo $this->session->set_flashdata('msg','Username atau Password Tidak Terdaftar !');
-                redirect('Auth', 'refresh');
-            }else{
-                echo $this->session->set_flashdata('msg','Username atau Password Tidak Sesuai !');
-                redirect('Auth', 'refresh');
             }
             $cekMar = $this->auth->cekMar($k,$p);
             if ($cekMar->num_rows() > 0) {
@@ -113,9 +101,6 @@ class Auth extends CI_Controller
                 }
                 echo $this->session->set_flashdata('msg','success-login');
                 redirect('Home/marketing', 'refresh');
-            }elseif ($cekMar->num_rows() <= 0) {
-                echo $this->session->set_flashdata('msg','Username atau Password Tidak Terdaftar !');
-                redirect('Auth', 'refresh');
             }else{
                 echo $this->session->set_flashdata('msg','Username atau Password Tidak Sesuai !');
                 redirect('Auth', 'refresh');
