@@ -35,7 +35,6 @@
                 </div>
                 <div class="login-form">
                     <form action="<?= base_url('Auth/registration'); ?>" method="post">
-                        <div class="flash-data" data-flashdata="<?= $this->session->flashdata('msg'); ?>"></div>
                         <div class="form-group">
                             <label>Nomor KTP</label>
                             <input type="text" id="ktp" name="ktp" class="form-control" placeholder="No KTP">
@@ -53,7 +52,7 @@
                             <input type="text" id="no_tlp" name="no_tlp" class="form-control" placeholder="No Telepon">
                         </div>
                         <div class="form-group">
-                            <label> Jabatan // can jalan</label>
+                            <label> Jabatan </label>
                             <select class="form-control" name="jabatan" id="jabatan">
                                 <option value="Select">Select</option>
                                 <option value="akun_marketing" id="akun_marketing" name="akun_marketing">Marketing</option>
