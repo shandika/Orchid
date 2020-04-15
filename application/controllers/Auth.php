@@ -16,8 +16,6 @@ class Auth extends CI_Controller
             } elseif ($level == 3) {
                 redirect('Home/marketing', 'refresh');
             } elseif ($level == 4) {
-                redirect('Home/keuangan', 'refresh');
-            } elseif ($level == 5) {
                 $title = 'REGISTATION';
                 $data = array(
                     'title' => $title,
@@ -109,23 +107,6 @@ class Auth extends CI_Controller
                 }
                 echo $this->session->set_flashdata('msg', 'success-login');
                 redirect('Home/marketing', 'refresh');
-            }
-            $cekKeuangan = $this->auth->cekKeuangan($k, $p);
-            if ($cekKeuangan->num_rows() > 0) {
-                //login berhasil, buat session
-                foreach ($cekKeuangan->result() as $login) {
-                    $sesi = array(
-                        'ktp'       => $login->ktp,
-                        'nama'      => $login->nama,
-                        'alamat'    => $login->alamat,
-                        'password'  => $login->password,
-                        'level'     => 4,
-                    );
-                    $this->session->set_userdata('masuk', TRUE);
-                    $this->session->set_userdata($sesi);
-                }
-                echo $this->session->set_flashdata('msg', 'success-login');
-                redirect('Home/keuangan', 'refresh');
             } else {
                 echo $this->session->set_flashdata('msg', 'Username atau Password Tidak Sesuai !');
                 redirect('Auth', 'refresh');
@@ -194,7 +175,7 @@ class Auth extends CI_Controller
     }
     public function move_registration()
     {
-        $sesi['level'] = 5;
+        $sesi['level'] = 4;
         $this->session->set_userdata($sesi);
         $url = base_url('Auth');
         redirect($url, 'refresh');

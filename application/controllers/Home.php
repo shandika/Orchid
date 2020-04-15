@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') or exit('No direct script access allowed');
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
  * Class Auth
@@ -7,16 +7,16 @@
  */
 class Home extends CI_Controller
 {
-
+	
 	public function __construct()
 	{
 		parent::__construct();
 		$this->load->model('Marketing_model', 'marketing');
-		$this->load->model('Keuangan_model', 'keuangan');
 		if ($this->session->userdata('masuk') != TRUE) {
-			echo $this->session->set_flashdata('msg', 'Anda Harus Login Terlebih Dahulu !');
-			redirect('Auth');
-		}
+		 	echo $this->session->set_flashdata('msg','Anda Harus Login Terlebih Dahulu !');
+		 	redirect('Auth');
+		 }
+		
 	}
 
 	/**
@@ -24,31 +24,31 @@ class Home extends CI_Controller
 	 */
 	public function index()
 	{
-
+		
 		$level = $this->session->userdata('level');
-		if (!empty($level)) {
-			if ($level == 1) {
-				redirect('Home/customer', 'refresh');
-			} elseif ($level == 2) {
-				redirect('Home/pm', 'refresh');
-			} else {
-				redirect('Home/marketing', 'refresh');
-			}
-		} else {
-			$title = 'Home';
+        if (!empty($level)) {
+            if ($level == 1) {
+                redirect('Home/customer', 'refresh');
+            }elseif ($level == 2) {
+                redirect('Home/pm', 'refresh');
+            }else {
+                redirect('Home/marketing', 'refresh');
+            }
+        }else {
+        	$title = 'Home';
 			$data = array(
-				'title' => $title,
-			);
+	            'title' => $title,
+	        );
 			$this->template->load('layout/template_v', 'dashboard/dashboard_v', $data);
-		}
+        }
 	}
 
 	public function customer()
 	{
 		$title = 'Home';
 		$data = array(
-			'title' => $title,
-		);
+            'title' => $title,
+        );
 		$this->template->load('layout/template_v', 'customer/dashboard_v', $data);
 	}
 
@@ -56,27 +56,22 @@ class Home extends CI_Controller
 	{
 		$title = 'Home';
 		$data = array(
-			'title' => $title,
-			'query' => $this->marketing->tampilDataPelanggan(),
-		);
+            'title' => $title,
+            'query' => $this->marketing->tampilDataPelanggan(),
+        );
 		$this->template->load('layout/template_v', 'marketing/dashboard_v', $data);
-	}
-	public function keuangan()
-	{
-		$title = 'Home';
-		$data = array(
-			'title' => $title,
-			'query' => $this->keuangan->tampilDataGL(),
-		);
-		$this->template->load('layout/template_v', 'keuangan/dashboard_v', $data);
 	}
 
 	public function pm()
 	{
 		$title = 'Home';
 		$data = array(
-			'title' => $title,
-		);
+            'title' => $title,
+        );
 		$this->template->load('layout/template_v', 'pm/dashboard_v', $data);
 	}
+
+	
+
+
 }
