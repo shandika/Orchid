@@ -123,6 +123,14 @@
             type: 'warning'
         });
     </script>
+<?php elseif ($this->session->flashdata('msg') == 'success-add-data') : ?>
+    <script type="text/javascript">
+        Swal.fire({
+            title: 'Terimakasih',
+            text: 'Data sudah tersimpan',
+            type: 'success'
+        });
+    </script>
 <?php else : ?>
 
 <?php endif; ?>

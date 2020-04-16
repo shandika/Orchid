@@ -68,7 +68,7 @@ class Home extends CI_Controller
 			'title' => $title,
 			'query' => $this->keuangan->tampilDataGL(),
 		);
-		$this->template->load('layout/template_v', 'keuangan/dashboard_v', $data);
+		$this->template->load('layout/template_v', 'keuangan/general_ledger', $data);
 	}
 
 	public function pm()

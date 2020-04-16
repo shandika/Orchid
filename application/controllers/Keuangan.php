@@ -21,7 +21,7 @@ class Keuangan extends CI_Controller
                 'title' => $title,
                 'query' => $this->keuangan->tampilDataGL(),
             );
-            $this->template->load('layout/template_v', 'keuagnan/dashboard_v', $data);
+            $this->template->load('layout/template_v', 'keuangan/general_ledger', $data);
         }
     }
 
@@ -32,14 +32,24 @@ class Keuangan extends CI_Controller
     {
     }
 
-    public function tambahdatagl()
+    public function tambahgl()
     {
-        $this->form_validation->set_rules('nomor', 'Nomor', 'require|trim');
-        $this->form_validation->set_rules('nama', 'Nama', 'require|trim');
-        $this->form_validation->set_rules('nominal', 'Nominal', 'require|trim');
+        $this->form_validation->set_rules('nomor', 'Nomor', 'required|trim|is_unique[general_ledger.nomor]');
+        $this->form_validation->set_rules('nama', 'Nama', 'required|trim');
+        $this->form_validation->set_rules('nominal', 'Nominal', 'required|trim');
+
         if ($this->form_validation->run() == false) {
-            echo $this->session->set_flashdata('msg', 'Anda Harus Login Terlebih Dahulu !');
+            echo $this->session->set_flashdata('msg', 'error-register');
+            redirect('Home/keuangan', 'refresh');
         } else {
+            $data = [
+                'nomor' => $this->input->post('nomor'),
+                'nama' => $this->input->post('nama'),
+                'nominal' => $this->input->post('nominal')
+            ];
+            $this->keuangan->simpanDataGL($data);
+            echo $this->session->set_flashdata('msg', 'success-add-data');
+            redirect('Home/keuangan');
         }
     }
 }

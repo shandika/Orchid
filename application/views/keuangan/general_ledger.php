@@ -16,7 +16,7 @@
         </div>
     </div>
 </div>
-<form class="col-sm-8" action="<?= base_url('Keuangan/tambahdatagl'); ?>" method="post">
+<form class="col-sm-8" action="<?= base_url('Keuangan/tambahgl'); ?>" method="post">
     <br>
     <div class="form-row">
         <div class="form-group col-md-2">
@@ -49,7 +49,7 @@
                         <strong class="card-title">Data Pelanggan</strong>
                     </div>
                     <div class="card-body">
-                        <table id="tabelpelanggan" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+                        <table id="tabelgl" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
                             <thead>
                                 <tr>
                                     <th>Nomor GL</th>
