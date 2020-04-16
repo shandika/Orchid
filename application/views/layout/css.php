@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="<?php echo base_url()?>assets/dist/css/smart_wizard_theme_arrows.min.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" href="<?php echo base_url()?>assets/dist/css/smart_wizard_theme_circles.min.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" href="<?php echo base_url()?>assets/dist/css/smart_wizard_theme_dots.min.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="<?php echo base_url()?>assets/assets/css/jquery-ui.min.css">
 <link rel="stylesheet" href="<?php echo base_url()?>assets/assets/css/style.css">
 <!-- Datatables -->
 <link rel="stylesheet" href="<?php echo base_url()?>assets/plugins/datatables/jquery.dataTables.min.css">
