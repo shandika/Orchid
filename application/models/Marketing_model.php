@@ -20,4 +20,12 @@ class Marketing_model extends CI_Model
         return $query;
     }
 
+    function search_cust($nama){
+        $this->db->like('nama', $nama , 'BOTH');
+        $this->db->order_by('nama', 'ASC');
+        $this->db->limit(20);
+        return $this->db->get('customer')->result();
+    }
+
+
 }
