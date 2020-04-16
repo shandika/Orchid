@@ -150,7 +150,7 @@ class Auth extends CI_Controller
         $this->form_validation->set_rules('nama', 'nama', 'required|trim|xss_clean');
         $this->form_validation->set_rules('alamat', 'alamat', 'required|trim|xss_clean');
         $this->form_validation->set_rules('no_telp', 'no_telp', 'trim|xss_clean');
-        $this->form_validation->set_rules('password1', 'password1', 'required|trim|matches[password2]',);
+        $this->form_validation->set_rules('password1', 'password1', 'required|trim|matches[password2]');
         $this->form_validation->set_rules('password2', 'password2', 'required|trim|matches[password1]');
 
         $db = $this->input->post('jabatan');
