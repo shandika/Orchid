@@ -168,4 +168,17 @@ class Marketing extends CI_Controller
 			echo "Gagal";
 		}
 	}
+
+	public function akad()
+	{
+		$title = 'Akad';
+		$data = array(
+			'title' => $title,
+		);
+		$this->template->load('layout/template_v', 'marketing/akad', $data);
+	}
+
+	public function tambahakad()
+	{
+	}
 }

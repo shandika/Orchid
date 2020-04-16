@@ -46,12 +46,12 @@
             <?php } ?>
             <?php if ($this->session->userdata('level') == 3) { ?>
                 <li class="">
-                    <a href="<?php echo base_url('Marketing'); ?>"> <i class="menu-icon fa fa-id-badge"></i>DATA PEBMELI</a>
+                    <a href="<?php echo base_url('Marketing'); ?>"> <i class="menu-icon fa fa-id-badge"></i>DATA PEMBELI</a>
                 </li>
             <?php } ?>
-            <?php if ($this->session->userdata('level') == 4) { ?>
+            <?php if ($this->session->userdata('level') == 3) { ?>
                 <li class="">
-                    <a href="<?php echo base_url('Keuangan'); ?>"> <i class="menu-icon fa fa-id-badge"></i>LAPORAN</a>
+                    <a href="<?php echo base_url('Marketing/akad'); ?>"> <i class="menu-icon fa fa-id-badge"></i>AKAD</a>
                 </li>
             <?php } ?>
             <?php if ($this->session->userdata('level') == 3) { ?>
