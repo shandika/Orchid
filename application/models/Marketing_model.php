@@ -8,12 +8,16 @@ class Marketing_model extends CI_Model
         parent::__construct();
     }
 
-    function simpanDataPelanggan($data) {
+    function simpanDataPelanggan($data, $gambar, $result) {
         $this->db->insert('customer', $data);
+        $this->db->insert('dokumen_pelengkap',$gambar);
+        $this->db->insert_batch('angsuran_lain', $result);
+        
     }
 
     function tampilDataPelanggan() {
         $query = $this->db->get('customer');
         return $query;
     }
+
 }

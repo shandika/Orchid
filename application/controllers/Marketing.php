@@ -33,6 +33,49 @@ class Marketing extends CI_Controller
 
 	public function simpanDataPelanggan()
 	{
+		$this->load->library('upload');
+	    $dataInfo = array();
+	    $files = $_FILES;
+	    $cpt = count($_FILES['userfile']['name']);
+	    for($i=0; $i<$cpt; $i++)
+	    {           
+	        $_FILES['userfile']['name']= $files['userfile']['name'][$i];
+	        $_FILES['userfile']['type']= $files['userfile']['type'][$i];
+	        $_FILES['userfile']['tmp_name']= $files['userfile']['tmp_name'][$i];
+	        $_FILES['userfile']['error']= $files['userfile']['error'][$i];
+	        $_FILES['userfile']['size']= $files['userfile']['size'][$i];
+
+	        //upload an image options
+		    $config = array();
+		    $config['upload_path'] = './assets/images/dokumen_pelengkap/';
+		    $config['allowed_types'] = 'gif|jpg|png';
+		    $config['max_size']      = '0';
+		    $config['overwrite']     = FALSE;
+		    $new_filename = time().$_FILES['userfile']['name'][$i];
+			$config['file_name'] = $new_filename;    
+
+	        $this->upload->initialize($config);
+	        $this->upload->do_upload();
+	        $dataInfo[] = $this->upload->data();
+	    }
+
+	    $gambar = array(
+	        'no_ktp'					=> strip_tags($this->input->post('noktp')),
+	        'fc_ktp' 								=> $dataInfo[0]['file_name'],
+	        'fc_kk' 								=> $dataInfo[1]['file_name'],
+	        'slip_gaji' 							=> $dataInfo[2]['file_name'],
+	        'laporan_keuangan_usaha' 				=> $dataInfo[3]['file_name'],
+	        'laporan_rekening' 						=> $dataInfo[4]['file_name'],
+	        'surat_persetujuan_suami_istri' 		=> $dataInfo[5]['file_name'],
+	        'surat_persetujuan_pembayaran_kredit' 	=> $dataInfo[6]['file_name'],
+	        'surat_rekomendasi' 					=> $dataInfo[7]['file_name'],
+	        'surat_perjanjian_agunan_barang' 		=> $dataInfo[8]['file_name'],
+	        'surat_perjanjian_penjaminan_personal' 	=> $dataInfo[9]['file_name'],
+	        'slip_gaji_penjamin_personal' 			=> $dataInfo[10]['file_name']
+	        
+	     );
+
+
 		$data = array(
 			'no_ktp'					=> strip_tags($this->input->post('noktp')),
 			'nama'						=> strip_tags($this->input->post('nama')),
@@ -55,8 +98,6 @@ class Marketing extends CI_Controller
 			'alamat_kontak_darurat'		=> strip_tags($this->input->post('alktdarurat')),
 			'nomor_kontak_darurat'		=> strip_tags($this->input->post('noktdarurat'))
 		);
-
-
 		$config['upload_path'] = './assets/images/dokumen_pelengkap/';
 		$config['allowed_types'] = 'gif|jpg|png|jpeg|bmp'; //type yang dapat diakses bisa anda sesuaikan
 		$config['encrypt_name'] = TRUE; //nama yang terupload nantinya
@@ -69,9 +110,23 @@ class Marketing extends CI_Controller
 					echo "Foto berhasil di upload";
 			}
 		}
-
 		$this->form_validation->set_rules('noktp', 'noktp', 'required');
 		$this->marketing->simpanDataPelanggan($data);
+		$nama_angsuran = $this->input->post('nama_angsuran');
+		$result = array();
+		foreach ($nama_angsuran as $key => $val) {
+			$result[] = array(
+				"ID_angsuran_lain"  	=> random_string('alnum', 6),
+				"no_ktp"				=> $_POST['noktp'],
+				"nama_angsuran"			=> $_POST['nama_angsuran'][$key],
+				"angsuranke"	 		=> $_POST['angsuranke'][$key],
+				"nominal_angsuran_lain" => $_POST['nominal_angsuran_lain'][$key]
+			);
+		}
+		
+
+		$this->form_validation->set_rules('noktp','noktp','required');
+		$this->marketing->simpanDataPelanggan($data, $gambar, $result);
 		if ($this->form_validation->run() != false) {
 			echo $this->session->set_flashdata('msg', 'success');
 			redirect('Marketing', 'refresh');
@@ -83,5 +138,32 @@ class Marketing extends CI_Controller
 
 	public function tampilPelanggan()
 	{
+  
+	public function upload() {
+		$title = 'HALAMAN BARU';
+		$data = array(
+            'title' => $title,
+        );
+		$this->template->load('layout/template_v', 'marketing/upload', $data);
+	}
+
+	public function kirim() {
+		$nama_angsuran = $this->input->post('nama_angsuran');
+		$result = array();
+		foreach ($nama_angsuran as $key => $val) {
+			$result[] = array(
+				"Id_angsuran_lain"  	=> random_string('alnum', 6),
+				"nama_angsuran"			=> $_POST['nama_angsuran'][$key],
+				"angsuranke"	 		=> $_POST['angsuranke'][$key],
+				"nominal_angsuran_lain" => $_POST['nominal_angsuran_lain'][$key],
+				"ktp"					=> $_POST['no_ktp'][$key]
+			);
+		}
+		$test = $this->db->insert_batch('angsuran_lain', $result);
+		if ($test) {
+			echo "Berhasil";
+		} else {
+			echo "Gagal";
+		}
 	}
 }
