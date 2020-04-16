@@ -30,7 +30,7 @@
             <div class="login-content">
                 <div class="login-logo">
                     <a href="index.html">
-                        <img class="align-content" src="<?php base_url() ?>assets/images/logo.png" alt="">
+                        <img class="align-content" src="<?php base_url() ?>assets/images/logo3.png" alt="" height="150px">
                     </a>
                 </div>
                 <div class="login-form">
