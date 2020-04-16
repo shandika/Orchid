@@ -6,6 +6,7 @@
 <script src="<?php echo base_url()?>assets/vendors/chart.js/dist/Chart.bundle.min.js"></script>
 <script src="<?php echo base_url()?>assets/assets/js/dashboard.js"></script>
 <script src="<?php echo base_url()?>assets/assets/js/jquery-3.4.1.min.js"></script>
+<script src="<?php echo base_url()?>assets/assets/js/jquery-ui.min.js"></script>
 <script src="<?php echo base_url()?>assets/assets/js/widgets.js"></script>
 <script src="<?php echo base_url()?>assets/vendors/jqvmap/dist/jquery.vmap.min.js"></script>
 <script src="<?php echo base_url()?>assets/vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
@@ -305,4 +306,16 @@ $(document).ready(function(){ // Ketika halaman sudah diload dan siap
     $("#jumlah-form").val("1"); // Ubah kembali value jumlah form menjadi 1
   });
 });
+</script>
+<script type="text/javascript">
+    $(document).ready(function(){
+            $( "#nama" ).autocomplete({
+              source: "<?php echo site_url('Marketing/get_autocomplete/?');?>",
+
+              select: function (event, ui) {
+                    $('[name="nama"]').val(ui.item.label); 
+                    $('[name="no_ktp"]').val(ui.item.no_ktp); 
+                }
+            });
+        });
 </script>
