@@ -2,7 +2,7 @@
     <div class="col-sm-6">
         <div class="page-header float-left">
             <div class="page-title">
-                <h1>Dashboard</h1>
+                <h1>Akad</h1>
             </div>
         </div>
     </div>
@@ -21,7 +21,7 @@
         </div>
         <div class="form-group">
             <label for="inputAddress">Nomor KTP</label>
-            <input class="form-control" type="text" placeholder="no ktp muncul otomatis setelah input nama" readonly id="no_ktp" name="no_ktp">
+            <input class="form-control" type="text" placeholder="no ktp muncul otomatis setelah input nama" readonly name="no_ktp">
         </div>
         <div class="form-row">
             <div class="form-group col-6">
