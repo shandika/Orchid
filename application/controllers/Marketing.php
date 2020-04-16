@@ -135,39 +135,20 @@ class Marketing extends CI_Controller
 		}
 	}
 
-	public function tampilPelanggan()
-	{
+	function get_autocomplete(){
+		if (isset($_GET['term'])) {
+            $result = $this->marketing->search_cust($_GET['term']);
+            if (count($result) > 0) {
+            foreach ($result as $row)
+                $arr_result[] = array(
+					'label' => $row->nama,
+					'no_ktp' => $row->no_ktp,
+				);
+                echo json_encode($arr_result);
+            }
+        }
 	}
 
-	public function upload()
-	{
-		$title = 'HALAMAN BARU';
-		$data = array(
-			'title' => $title,
-		);
-		$this->template->load('layout/template_v', 'marketing/upload', $data);
-	}
-
-	public function kirim()
-	{
-		$nama_angsuran = $this->input->post('nama_angsuran');
-		$result = array();
-		foreach ($nama_angsuran as $key => $val) {
-			$result[] = array(
-				"Id_angsuran_lain"  	=> random_string('alnum', 6),
-				"nama_angsuran"			=> $_POST['nama_angsuran'][$key],
-				"angsuranke"	 		=> $_POST['angsuranke'][$key],
-				"nominal_angsuran_lain" => $_POST['nominal_angsuran_lain'][$key],
-				"ktp"					=> $_POST['no_ktp'][$key]
-			);
-		}
-		$test = $this->db->insert_batch('angsuran_lain', $result);
-		if ($test) {
-			echo "Berhasil";
-		} else {
-			echo "Gagal";
-		}
-	}
 
 	public function akad()
 	{
