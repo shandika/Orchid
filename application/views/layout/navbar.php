@@ -10,42 +10,55 @@
         </div>
 
         <div id="main-menu" class="main-menu collapse navbar-collapse">
-            <ul class="nav navbar-nav"
-                <?php if($this->session->userdata('level') == 1) { ?>
-                <li class="active">
-                    <a href="index.html"> <i class="menu-icon fa fa-dashboard"></i>PROJECT </a>
+            <ul class="nav navbar-nav" <?php if ($this->session->userdata('level') == 2) { ?> <li class="active">
+                <a href="index.html"> <i class="menu-icon fa fa-dashboard"></i>PROJECT </a>
                 </li>
-                <?php } ?>
-                <?php if($this->session->userdata('level') == 1) { ?>
+            <?php } ?>
+            <?php if ($this->session->userdata('level') == 4) { ?>
                 <li class="">
-                    <a href="index.html"> <i class="menu-icon fa fa-id-badge"></i>DATA PEMBELI </a>
+                    <a href=""> <i class="menu-icon fa fa-id-badge"></i>JOURNAL </a>
                 </li>
-                <?php } ?>
-                <?php if($this->session->userdata('level') == 1) { ?>
+            <?php } ?>
+            <?php if ($this->session->userdata('level') == 2) { ?>
                 <li class="">
-                    <a href="index.html"> <i class="menu-icon fa fa-id-badge"></i>JOURNAL </a>
+                    <a href="index.html"> <i class="menu-icon fa fa-id-badge"></i>PURCHASING REQUEST </a>
                 </li>
-                <?php } ?>
-                <?php if($this->session->userdata('level') == 1) { ?>
+            <?php } ?>
+            <?php if ($this->session->userdata('level') == 4) { ?>
                 <li class="">
-                    <a href="index.html"> <i class="menu-icon fa fa-id-badge"></i>GENERAL LEDGER </a>
+                    <a href=" <?php echo base_url('Keuangan'); ?>"> <i class="menu-icon fa fa-id-badge"></i>GENERAL LEDGER </a>
                 </li>
-                <?php } ?>
-                <?php if($this->session->userdata('level') == 1) { ?>
+            <?php } ?>
+            <?php if ($this->session->userdata('level') == 1) { ?>
                 <li class="">
-                    <a href="index.html"> <i class="menu-icon fa fa-id-badge"></i>LAPORAN </a>
+                    <a href="index.html"> <i class="menu-icon fa fa-id-badge"></i>PREORDER BARANG </a>
                 </li>
-                <?php } ?>
-                <?php if($this->session->userdata('level') == 3) { ?>
+            <?php } ?>
+            <?php if ($this->session->userdata('level') == 1) { ?>
                 <li class="">
-                    <a href="<?php echo base_url('Marketing');?>"> <i class="menu-icon fa fa-id-badge"></i>DATA PELANGGAN </a>
+                    <a href="index.html"> <i class="menu-icon fa fa-id-badge"></i>PURCHASING REQUEST </a>
                 </li>
-                <?php } ?>
-                <?php if($this->session->userdata('level') == 3) { ?>
+            <?php } ?>
+            <?php if ($this->session->userdata('level') == 1) { ?>
                 <li class="">
-                    <a href="<?php echo base_url('Marketing/upload');?>"> <i class="menu-icon fa fa-id-badge"></i>LAPORAN </a>
+                    <a href="index.html"> <i class="menu-icon fa fa-id-badge"></i>BEAUTY CONTEST</a>
                 </li>
-                <?php } ?>
+            <?php } ?>
+            <?php if ($this->session->userdata('level') == 3) { ?>
+                <li class="">
+                    <a href="<?php echo base_url('Marketing'); ?>"> <i class="menu-icon fa fa-id-badge"></i>DATA PEBMELI</a>
+                </li>
+            <?php } ?>
+            <?php if ($this->session->userdata('level') == 4) { ?>
+                <li class="">
+                    <a href="<?php echo base_url('Keuangan'); ?>"> <i class="menu-icon fa fa-id-badge"></i>LAPORAN</a>
+                </li>
+            <?php } ?>
+            <?php if ($this->session->userdata('level') == 3) { ?>
+                <li class="">
+                    <a href="<?php echo base_url('Marketing/upload'); ?>"> <i class="menu-icon fa fa-id-badge"></i>LAPORAN</a>
+                </li>
+            <?php } ?>
             </ul>
         </div><!-- /.navbar-collapse -->
     </nav>
