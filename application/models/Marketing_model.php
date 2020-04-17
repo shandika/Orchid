@@ -29,6 +29,22 @@ class Marketing_model extends CI_Model
         return $this->db->get('customer')->result();
     }
 
+ 
+    function get_unit($id_project){
+        $this->db->where('ID_project', $id_project);
+        $this->db->where('status', 0);
+        $result = $this->db->get('unit')->result();
+        
+        return $result;
+    }
+
+    function cekidunitdipesan()
+    {
+        $query = $this->db->query("SELECT MAX(ID_unit_dipesan) as idunitdipesan from unit_dipesan");
+        $hasil = $query->row();
+        return $hasil->idunitdipesan;
+    }
+
     function simpanUnitDipilih($isi)
     {
         $this->db->insert('unit_dupesan', $isi);
