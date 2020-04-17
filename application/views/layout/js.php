@@ -319,3 +319,32 @@ $(document).ready(function(){ // Ketika halaman sudah diload dan siap
             });
         });
 </script>
+<script type="text/javascript">
+    $(document).ready(function(){ // Ketika halaman sudah siap (sudah selesai di load)
+        
+        $("#project").change(function(){ // Ketika user mengganti atau memilih data project
+        $("#unit").hide(); // Sembunyikan dulu combobox unit nya
+        
+        $.ajax({
+            type: "POST", // Method pengiriman data bisa dengan GET atau POST
+            url: "<?php echo base_url("Marketing/get_unit"); ?>", // Isi dengan url/path file php yang dituju
+            data: {id_project : $("#project").val()}, // data yang akan dikirim ke file yang dituju
+            dataType: "json",
+            beforeSend: function(e) {
+            if(e && e.overrideMimeType) {
+                e.overrideMimeType("application/json;charset=UTF-8");
+            }
+            },
+            success: function(response){ // Ketika proses pengiriman berhasil
+
+            // set isi dari combobox unit
+            // lalu munculkan kembali combobox unit
+            $("#unit").html(response.list_unit).show();
+            },
+            error: function (xhr, ajaxOptions, thrownError) { // Ketika ada error
+            alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError); // Munculkan alert error
+            }
+        });
+        });
+    });
+</script>
