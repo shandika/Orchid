@@ -150,15 +150,38 @@ class Marketing extends CI_Controller
 		}
 	}
 
+	function get_unit(){
+        // Ambil data ID Provinsi yang dikirim via ajax post
+		$id_project = $this->input->post('id_project');
+		
+		$unit = $this->marketing->get_unit($id_project);
+		
+		// Buat variabel untuk menampung tag-tag option nya
+		// Set defaultnya dengan tag option Pilih
+		$lists = "<option value=''>Pilih</option>";
+		
+		foreach($unit as $data){
+		$lists .= "<option value='".$data->ID_unit."'>".'Nomor : '.$data->nomor.' / '.'Type : '.$data->type."</option>"; // Tambahkan tag option ke variabel $lists
+		}
+		
+		$callback = array('list_unit'=>$lists); // Masukan variabel lists tadi ke dalam array $callback dengan index array : list_kota
+
+		echo json_encode($callback); // konversi varibael $callback menjadi JSON
+    }
+
 
 	public function akad()
 	{
 
 		$title = 'Akad';
+		$dariDB = $this->marketing->cekidunitdipesan();
+        $nourut = substr($dariDB, 3, 4);
+        $kode = $nourut + 1;
+        
 		$data = array(
 			'title' => $title,
 			'query1' => $this->db->get('project')->result(),
-			'query2' => $this->db->get('unit')->result()
+			'idunitdipesan' 	=> $kode
 
 		);
 		$this->template->load('layout/template_v', 'marketing/akad', $data);
