@@ -17,7 +17,7 @@
 
         <div class="form-group">
             <label for="inputAddress">ID</label>
-            <input type="text" class="form-control col-1" id="id" name="id" placeholder="UD001" readonly>
+            <input type="text" class="form-control col-1" id="id" name="id" value="UD<?php echo sprintf("%04s", $idunitdipesan) ?>" readonly>
         </div>
         <div class="form-group">
             <label for="inputAddress">Nama</label>
@@ -70,7 +70,7 @@
         <div class="form-group row">
             <label for="inputEmail3" class="col-sm-1 col-form-label">Pilih Project</label>
             <div class="col-sm-11">
-                <select class="custom-select my-1 mr-sm-2" id="pilih_project" name="pilih_project">
+                <select class="custom-select my-1 mr-sm-2" id="project" name="project">
                     <option selected>Pilih Project</option>
                     <?php foreach ($query1 as $key) : ?>
                         <option value="<?= $key->ID_project; ?>"><?= $key->nama; ?></option>
@@ -81,11 +81,9 @@
         <div class="form-group row">
             <label for="inputEmail3" class="col-sm-1 col-form-label">Pilih Unit</label>
             <div class="col-sm-11">
-                <select class="custom-select my-1 mr-sm-2" id="pilih_unit" name="pilih_unit">
+                <select class="custom-select my-1 mr-sm-2" id="unit" name="unit">
                     <option selected>Pilh Unit</option>
-                    <?php foreach ($query2 as $key) : ?>
-                        <option value="<?= $key->ID_unit; ?>">Nomor : <?= $key->nomor; ?> / Type : <?= $key->type; ?></option>
-                    <?php endforeach; ?>
+                    
                 </select>
             </div>
         </div>
