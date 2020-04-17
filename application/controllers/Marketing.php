@@ -135,31 +135,48 @@ class Marketing extends CI_Controller
 		}
 	}
 
-	function get_autocomplete(){
+	function get_autocomplete()
+	{
 		if (isset($_GET['term'])) {
-            $result = $this->marketing->search_cust($_GET['term']);
-            if (count($result) > 0) {
-            foreach ($result as $row)
-                $arr_result[] = array(
-					'label' => $row->nama,
-					'no_ktp' => $row->no_ktp,
-				);
-                echo json_encode($arr_result);
-            }
-        }
+			$result = $this->marketing->search_cust($_GET['term']);
+			if (count($result) > 0) {
+				foreach ($result as $row)
+					$arr_result[] = array(
+						'label' => $row->nama,
+						'no_ktp' => $row->no_ktp,
+					);
+				echo json_encode($arr_result);
+			}
+		}
 	}
 
 
 	public function akad()
 	{
+
 		$title = 'Akad';
 		$data = array(
 			'title' => $title,
+			'query1' => $this->db->get('project')->result(),
+			'query2' => $this->db->get('unit')->result()
+
 		);
 		$this->template->load('layout/template_v', 'marketing/akad', $data);
 	}
 
 	public function tambahakad()
 	{
+		$this->form_validation->set_rules('nama', 'Name', 'required|trim');
+		$this->form_validation->set_rules('no_ktp', 'No_ktp', 'required');
+		$this->form_validation->set_rules('dp', 'Dp', 'required');
+		$this->form_validation->set_rules('lama_angsuran_dp', 'Lama_angsuran_dp', 'required');
+		$this->form_validation->set_rules('angsuran_bulanan', 'Angsuran_bulanan', 'required');
+
+		if ($this->form_validation->run() == false) {
+			echo $this->session->set_flashdata('msg', 'error-reset');
+			redirect('Marketing/akad', 'refresh');
+		} else {
+			$data = [];
+		}
 	}
 }

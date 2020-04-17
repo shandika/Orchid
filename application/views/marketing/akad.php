@@ -16,6 +16,10 @@
     <form action="<?= base_url('Marketing/tambahakad') ?>"" method=" POST">
 
         <div class="form-group">
+            <label for="inputAddress">ID</label>
+            <input type="text" class="form-control col-1" id="id" name="id" placeholder="UD001" readonly>
+        </div>
+        <div class="form-group">
             <label for="inputAddress">Nama</label>
             <input type="text" class="form-control" id="nama" name="nama" placeholder="Nama Otomatis reference tabel customer">
         </div>
@@ -32,7 +36,7 @@
                 <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Lama Angsuran DP</label>
                 <select class="custom-select my-1 mr-sm-2" id="lama_angsuran_dp" name="lama_angsuran_dp">
                     <option selected>Choose...</option>
-                    <option value="1">Cash</option>
+                    <option value="0">Cash</option>
                     <option value="3">3 bulan</option>
                     <option value="6">6 bulan</option>
                     <option value="10">10 bulan</option>
@@ -49,7 +53,7 @@
                 <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Lama Angsuran </label>
                 <select class="custom-select my-1 mr-sm-2" id="lama_angsuran_bulanan" name="lama_angsuran_bulanan">
                     <option selected>Choose...</option>
-                    <option value="1">Cash</option>
+                    <option value="0">Cash</option>
                     <option value="12">12 bulan / 1 tahun</option>
                     <option value="24">24 bulan / 2 tahun</option>
                     <option value="36">36 bulan / 3 tahun</option>
@@ -63,12 +67,29 @@
                 </select>
             </div>
         </div>
-        <div class="form-row">
-            <div class="form-group">
-                <label for="inputAddress">Unit Yang Dipilih : </label>
-                <button type="button" class="btn btn-primary form-control" data-toggle="modal" data-target=".bd-example-modal-lg">Pilih Project</button>
+        <div class="form-group row">
+            <label for="inputEmail3" class="col-sm-1 col-form-label">Pilih Project</label>
+            <div class="col-sm-11">
+                <select class="custom-select my-1 mr-sm-2" id="pilih_project" name="pilih_project">
+                    <option selected>Pilih Project</option>
+                    <?php foreach ($query1 as $key) : ?>
+                        <option value="<?= $key->ID_project; ?>"><?= $key->nama; ?></option>
+                    <?php endforeach; ?>
+                </select>
             </div>
-            <button type="submit" class="btn btn-primary btn-lg btn-block">SIMPAN</button>
+        </div>
+        <div class="form-group row">
+            <label for="inputEmail3" class="col-sm-1 col-form-label">Pilih Unit</label>
+            <div class="col-sm-11">
+                <select class="custom-select my-1 mr-sm-2" id="pilih_unit" name="pilih_unit">
+                    <option selected>Pilh Unit</option>
+                    <?php foreach ($query2 as $key) : ?>
+                        <option value="<?= $key->ID_unit; ?>">Nomor : <?= $key->nomor; ?> / Type : <?= $key->type; ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-lg btn-block">SIMPAN</button>
     </form>
 </div>
 <!-- Bootstap modal -->
