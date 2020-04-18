@@ -46,7 +46,7 @@ class Marketing_model extends CI_Model
         return $hasil->idunitdipesan;
     }
 
-    function simpanUnitDipilih($id, $no_ktp, $dp, $lama_angsuran_dp, $angsuran_bulanan, $lama_angsuran_bulanan, $total_harga, $ktp_marketing, $id_unit)
+    function simpanUnitDipilih($id, $no_ktp, $dp, $lama_angsuran_dp, $angsuran_bulanan, $lama_angsuran_bulanan, $total_harga, $ktp_marketing, $id_unit, $id_project)
     {
         $data = [
             'ID_unit_dipesan' => $id,
@@ -61,6 +61,8 @@ class Marketing_model extends CI_Model
         ];
         $this->db->insert('unit_dipesan', $data);
         $this->marketing->update_unit($id_unit);
+        $query = $this->db->query("UPDATE project SET unit_kosong = unit_kosong - 1, unit_isi = unit_isi + 1 WHERE ID_project='$id_project'");
+        return $query;
     }
 
     public function update_unit($id_unit)
