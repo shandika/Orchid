@@ -13,11 +13,15 @@
     <br>
     <br>
 
-    <form action="<?= base_url('Marketing/tambahakad') ?>"" method=" POST">
+    <form action="<?= base_url('Marketing/tambahakad') ?>" method="post">
 
-        <div class="form-group">
+        <div class="form-group d-none">
             <label for="inputAddress">ID</label>
-            <input type="text" class="form-control col-1" id="id" name="id" value="UD<?php echo sprintf("%04s", $idunitdipesan) ?>" readonly>
+            <input type="text" class="form-control col-1" id="id_unit_dipesan" name="id_unit_dipesan" value="UD<?php echo sprintf("%04s", $idunitdipesan) ?>" readonly>
+        </div>
+        <div class="form-group d-none">
+            <label for="inputAddress">ktp Admin</label>
+            <input type="text" class="form-control col-1" id="ktp_marketing" name="ktp_marketing" value="<?= $this->session->userdata('ktp'); ?>" readonly>
         </div>
         <div class="form-group">
             <label for="inputAddress">Nama</label>
@@ -25,12 +29,16 @@
         </div>
         <div class="form-group">
             <label for="inputAddress">Nomor KTP</label>
-            <input class="form-control" type="text" placeholder="no ktp muncul otomatis setelah input nama" readonly name="no_ktp">
+            <input class="form-control" type="text" placeholder="no ktp muncul otomatis setelah input nama" name="no_ktp" id="no_ktp" readonly>
+        </div>
+        <div class="form-group">
+            <label for="inputAddress">Harga</label>
+            <input type="number" class="form-control" id="harga" name="harga" placeholder="Masukan Harga">
         </div>
         <div class="form-row">
             <div class="form-group col-6">
                 <label for="inputAddress">DP</label>
-                <input type="text" class="form-control" id="dp" placeholder="Nominal DP" name="dp">
+                <input type="number" class="form-control" id="dp" placeholder="Nominal DP" name="dp">
             </div>
             <div class="form-group col-6">
                 <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Lama Angsuran DP</label>
@@ -47,7 +55,7 @@
         <div class="form-row">
             <div class="form-group col-6">
                 <label for="inputAddress">Angsuran perbulan yang harus dibayar</label>
-                <input type="text" class="form-control" id="angsuran_bulanan" placeholder="Nominal angsuran per bulan">
+                <input type="number" class="form-control" id="angsuran_bulanan" name="angsuran_bulanan" placeholder="Nominal angsuran per bulan">
             </div>
             <div class="form-group col-6">
                 <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Lama Angsuran </label>
@@ -83,189 +91,10 @@
             <div class="col-sm-11">
                 <select class="custom-select my-1 mr-sm-2" id="unit" name="unit">
                     <option selected>Pilh Unit</option>
-                    
+
                 </select>
             </div>
         </div>
         <button type="submit" class="btn btn-primary btn-lg btn-block">SIMPAN</button>
     </form>
 </div>
-<!-- Bootstap modal -->
-<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">List Project</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-lg-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <!-- Credit Card -->
-                                <div id="pay-invoice">
-                                    <div class="card-body">
-                                        <div class="card-title">
-                                            <center><img src="<?php echo base_url() . 'assets/images/admin.jpg'; ?>" width="200px"></center>
-                                        </div>
-                                        <div class="card-title">
-                                            <h3 class="text-center">Project 1</h3>
-                                        </div>
-                                        <hr>
-                                        <div class="table-responsive">
-                                            <table border="0">
-                                                <tr>
-                                                    <td>
-                                                        <h6>DEBIT</h6>
-                                                    </td>
-                                                    <td>
-                                                        <h6>:</h6>
-                                                    </td>
-                                                    <td>
-                                                        <h6>300.000.000</h6>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="width:70px">
-                                                        <h6 id="nip">KREDIT</h6>
-                                                    </td>
-                                                    <td style="width:20px">
-                                                        <h6>:</h6>
-                                                    </td>
-                                                    <td>
-                                                        <h6>300.000.000</h6>
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                        </div>
-                                        <hr>
-                                        <div>
-                                            <button id="payment-button" type="submit" class="btn btn-lg btn-info btn-block">
-                                                <i class="fa fa-lock fa-lg"></i>&nbsp;
-                                                <span id="payment-button-amount">PILIH</span>
-                                                <span id="payment-button-sending" style="display:none;">Sending…</span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> <!-- .card -->
-                    </div>
-                    <!--/.col-->
-                    <div class="col-lg-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <!-- Credit Card -->
-                                <div id="pay-invoice">
-                                    <div class="card-body">
-                                        <div class="card-title">
-                                            <center><img src="<?php echo base_url() . 'assets/images/admin.jpg'; ?>" width="200px"></center>
-                                        </div>
-                                        <div class="card-title">
-                                            <h3 class="text-center">Project 2</h3>
-                                        </div>
-                                        <hr>
-                                        <div class="table-responsive">
-                                            <table border="0">
-                                                <tr>
-                                                    <td>
-                                                        <h6>DEBIT</h6>
-                                                    </td>
-                                                    <td>
-                                                        <h6>:</h6>
-                                                    </td>
-                                                    <td>
-                                                        <h6>250.000.000</h6>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="width:70px">
-                                                        <h6 id="nip">KREDIT</h6>
-                                                    </td>
-                                                    <td style="width:20px">
-                                                        <h6>:</h6>
-                                                    </td>
-                                                    <td>
-                                                        <h6>300.000.000</h6>
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                        </div>
-                                        <hr>
-                                        <div>
-                                            <button id="payment-button" type="submit" class="btn btn-lg btn-info btn-block">
-                                                <i class="fa fa-lock fa-lg"></i>&nbsp;
-                                                <span id="payment-button-amount">PILIH</span>
-                                                <span id="payment-button-sending" style="display:none;">Sending…</span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> <!-- .card -->
-                    </div>
-                    <!--/.col-->
-                    <div class="col-lg-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <!-- Credit Card -->
-                                <div id="pay-invoice">
-                                    <div class="card-body">
-                                        <div class="card-title">
-                                            <center><img src="<?php echo base_url() . 'assets/images/admin.jpg'; ?>" width="200px"></center>
-                                        </div>
-                                        <div class="card-title">
-                                            <h3 class="text-center">Project 3</h3>
-                                        </div>
-                                        <hr>
-                                        <div class="table-responsive">
-                                            <table border="0">
-                                                <tr>
-                                                    <td>
-                                                        <h6>DEBIT</h6>
-                                                    </td>
-                                                    <td>
-                                                        <h6>:</h6>
-                                                    </td>
-                                                    <td>
-                                                        <h6>350.000.000</h6>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="width:70px">
-                                                        <h6 id="nip">KREDIT</h6>
-                                                    </td>
-                                                    <td style="width:20px">
-                                                        <h6>:</h6>
-                                                    </td>
-                                                    <td>
-                                                        <h6>350.000.000</h6>
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                        </div>
-                                        <hr>
-                                        <div>
-                                            <button id="payment-button" type="submit" class="btn btn-lg btn-info btn-block">
-                                                <i class="fa fa-lock fa-lg"></i>&nbsp;
-                                                <span id="payment-button-amount">PILIH</span>
-                                                <span id="payment-button-sending" style="display:none;">Sending…</span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> <!-- .card -->
-                    </div>
-                    <!--/.col-->
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-        </div>
-    </div>
