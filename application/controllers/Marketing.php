@@ -150,24 +150,25 @@ class Marketing extends CI_Controller
 		}
 	}
 
-	function get_unit(){
-        // Ambil data ID Provinsi yang dikirim via ajax post
+	function get_unit()
+	{
+		// Ambil data ID Provinsi yang dikirim via ajax post
 		$id_project = $this->input->post('id_project');
-		
+
 		$unit = $this->marketing->get_unit($id_project);
-		
+
 		// Buat variabel untuk menampung tag-tag option nya
 		// Set defaultnya dengan tag option Pilih
 		$lists = "<option value=''>Pilih</option>";
-		
-		foreach($unit as $data){
-		$lists .= "<option value='".$data->ID_unit."'>".'Nomor : '.$data->nomor.' / '.'Type : '.$data->type."</option>"; // Tambahkan tag option ke variabel $lists
+
+		foreach ($unit as $data) {
+			$lists .= "<option value='" . $data->ID_unit . "'>" . 'Nomor : ' . $data->nomor . ' / ' . 'Type : ' . $data->type . "</option>"; // Tambahkan tag option ke variabel $lists
 		}
-		
-		$callback = array('list_unit'=>$lists); // Masukan variabel lists tadi ke dalam array $callback dengan index array : list_kota
+
+		$callback = array('list_unit' => $lists); // Masukan variabel lists tadi ke dalam array $callback dengan index array : list_kota
 
 		echo json_encode($callback); // konversi varibael $callback menjadi JSON
-    }
+	}
 
 
 	public function akad()
@@ -175,9 +176,9 @@ class Marketing extends CI_Controller
 
 		$title = 'Akad';
 		$dariDB = $this->marketing->cekidunitdipesan();
-        $nourut = substr($dariDB, 3, 4);
-        $kode = $nourut + 1;
-        
+		$nourut = substr($dariDB, 3, 4);
+		$kode = $nourut + 1;
+
 		$data = array(
 			'title' => $title,
 			'query1' => $this->db->get('project')->result(),
@@ -189,17 +190,26 @@ class Marketing extends CI_Controller
 
 	public function tambahakad()
 	{
-		$this->form_validation->set_rules('nama', 'Name', 'required|trim');
-		$this->form_validation->set_rules('no_ktp', 'No_ktp', 'required');
-		$this->form_validation->set_rules('dp', 'Dp', 'required');
-		$this->form_validation->set_rules('lama_angsuran_dp', 'Lama_angsuran_dp', 'required');
-		$this->form_validation->set_rules('angsuran_bulanan', 'Angsuran_bulanan', 'required');
+		$this->form_validation->set_rules('harga', 'harga', 'required');
+		$this->form_validation->set_rules('dp', 'dp', 'required');
+		$this->form_validation->set_rules('angsuran_bulanan', 'angsuran_bulanan', 'required');
 
 		if ($this->form_validation->run() == false) {
-			echo $this->session->set_flashdata('msg', 'error-reset');
+			echo $this->session->set_flashdata('msg', 'error-register');
 			redirect('Marketing/akad', 'refresh');
 		} else {
-			$data = [];
+			$id_akad = $this->input->post('id_unit_dipesan');
+			$no_ktp = $this->input->post('no_ktp');
+			$dp = $this->input->post('dp');
+			$lama_dp = $this->input->post('lama_angsuran_dp');
+			$bulanan = $this->input->post('angsuran_bulanan');
+			$lama_bulanan = $this->input->post('lama_angsuran_bulanan');
+			$harga = $this->input->post('harga');
+			$ktp_marketing = $this->input->post('ktp_marketing');
+			$unit = $this->input->post('unit');
+			$tambah = $this->marketing->simpanUnitDipilih($id_akad, $no_ktp, $dp, $lama_dp, $bulanan, $lama_bulanan, $harga, $ktp_marketing, $unit);
+			echo $this->session->set_flashdata('msg', 'success-add-data');
+			redirect('Marketing/akad', 'refresh');
 		}
 	}
 }
