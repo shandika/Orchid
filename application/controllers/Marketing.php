@@ -207,7 +207,8 @@ class Marketing extends CI_Controller
 			$harga = $this->input->post('harga');
 			$ktp_marketing = $this->input->post('ktp_marketing');
 			$unit = $this->input->post('unit');
-			$tambah = $this->marketing->simpanUnitDipilih($id_akad, $no_ktp, $dp, $lama_dp, $bulanan, $lama_bulanan, $harga, $ktp_marketing, $unit);
+			$project = $this->input->post('project');
+			$tambah = $this->marketing->simpanUnitDipilih($id_akad, $no_ktp, $dp, $lama_dp, $bulanan, $lama_bulanan, $harga, $ktp_marketing, $unit, $project);
 			echo $this->session->set_flashdata('msg', 'success-add-data');
 			redirect('Marketing/akad', 'refresh');
 		}
