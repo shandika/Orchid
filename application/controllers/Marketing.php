@@ -226,9 +226,8 @@ class Marketing extends CI_Controller
 		$nominal_angsuran_bulanan = $this->input->post('angsuran_bulanan');
 		$harganya = $this->input->post('harga');
 		$status = 0;
-
+		//looping menurut lama angsuran bulanan
 		for ($i = 1; $i <= $lama_bulanan; $i++) {
-
 			//penentuan ID_angsuran_bulanan + Invoice otomatis
 			$kode1 =  $nourut + 1;
 			$kodenya = sprintf("%04s", $kode1);
