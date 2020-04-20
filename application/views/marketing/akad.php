@@ -57,15 +57,18 @@
 
         </div>
         <div class="form-row">
-            <div class="form-group col-6">
+            <div class="form-group col-4">
                 <label for="inputAddress">Injeksi</label>
                 <input type="number" class="form-control" id="injeksi" placeholder="Nominal Injek" name="injeksi">
             </div>
-            <div class="form-group col-6">
+            <div class="form-group col-4">
                 <label for="inputAddress">Lama Injeksi (Tahun)</label>
                 <input type="number" class="form-control" id="lama_injeksi" placeholder="5 Tahun" name="lama_injeksi">
             </div>
-            <input type="hidden" name="total_injeksi" id="total_injeksi">
+            <div class="form-group col-4">
+                <label for="inputAddress">Total Injeksi</label>
+                <input type="number" name="total_injeksi" id="total_injeksi" class="form-control">
+            </div>
         </div>
         <div class="form-row">
             <div class="form-group col-4">

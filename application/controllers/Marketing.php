@@ -218,13 +218,29 @@ class Marketing extends CI_Controller
 		//mengambil data invoice terbesar
 		$dariDB2 = $this->marketing->cekidinvoicebulanan();
 		$nourut2 = substr($dariDB2, 3, 4);
+		//ambil ID data angsuran DP
+		$dariDB3 = $this->marketing->cekidangsuranbulanandp();
+		$nourut3 = substr($dariDB3, 3, 4);
+		//mengambil data invoice terbesar DP
+		$dariDB4 = $this->marketing->cekidinvoicebulanandp();
+		$nourut4 = substr($dariDB4, 3, 4);
+		//ambil ID data angsuran injek
+		$dariDB5 = $this->marketing->cekidinjek();
+		$nourut5 = substr($dariDB5, 3, 4);
+		//mengambil data invoice terbesar injek
+		$dariDB6 = $this->marketing->cekidinvoiceinjek();
+		$nourut6 = substr($dariDB6, 3, 4);
 		//menentukan tanggal sekarang bulan dan tahun
 		$tanggal = 	date('d');
 		$bulan = date('m');
 		$tahun = date('y');
+		$lama_injek = $this->input->post('lama_injeksi');
 		$no_ktp = $this->input->post('no_ktp');
+		$injek = $this->input->post('injeksi');
+		$nominal_injek = $this->input->post('total_injeksi');
 		$nominal_angsuran_bulanan = $this->input->post('angsuran_bulanan');
-		$harganya = $this->input->post('harga');
+		$nominal_angsuran_dp = $this->input->post('angsuran_dp');
+		$harganya = $this->input->post('harga') - $injek - $dp;
 		$status = 0;
 		//looping menurut lama angsuran bulanan
 		for ($i = 1; $i <= $lama_bulanan; $i++) {
@@ -243,12 +259,72 @@ class Marketing extends CI_Controller
 				$tahun = $tahun + 1; // tahun bertambah jika bulan mencapai 12 dan balik menjadi 1
 			}
 			$sisa_angsuran = $harganya - $nominal_angsuran_bulanan;		//pengurangan sisa angsuran
-			$harganya = $sisa_angsuran;									//sisa angsuran menjadi harga acuan untuk di kurangai angsuran
+
+			if ($sisa_angsuran < $nominal_angsuran_bulanan) {
+				$nominal_angsuran_bulanan = $harganya;
+				$sisa_angsuran = $harganya - $nominal_angsuran_bulanan;
+			} else {
+				$harganya = $sisa_angsuran;
+			}
+			//sisa angsuran menjadi harga acuan untuk di kurangai angsuran
 			$bulan = $sesudah;				//merubah bulan menjadi bulan yang sudah di tambah
 			$nourut = $kode1;				//merubah nomor urut menjadi yang sudah di tambah
 			$nourut2 = $kodeinvoice;		//merubah invoice  menjadi yang sudah di tambah
 			$this->marketing->proyeksi_angsuran($strkodenya, $no_ktp, $angsuran_ke, $tanggal, $bulan, $tahun, $nominal_angsuran_bulanan, $sisa_angsuran, $status, $strkodeinvoice);
 		}
+		$tahun = date('y');
+		for ($i = 1; $i <= $lama_dp; $i++) {
+			//penentuan ID_angsuran_bulanan + Invoice otomatis
+
+			$kode1 =  $nourut3 + 1;
+			$kodenya = sprintf("%04s", $kode1);
+			$strkodenya = 'ADP' . $kodenya;
+			$kodeinvoice = $nourut4 + 1;
+			$kodenyainvoice = sprintf("%04s", $kodeinvoice);
+			$strkodeinvoice = "IDP" . $kodenyainvoice;
+			//akhir penentuan ID_angsuran_bulanan + Invoice otomatis
+			$angsuran_ke = $i;		//angsuran ke---
+			$sesudah = $bulan + 1;
+			if ($sesudah > 12) { //jika bulan sudah lebih dari 12 , maka balik lagi menjadi 1
+				$sesudah = 1;
+				$tahun = $tahun + 1; // tahun bertambah jika bulan mencapai 12 dan balik menjadi 1
+			}
+			$sisa_angsuran = $dp - $nominal_angsuran_dp;		//pengurangan sisa angsuran
+
+			if ($sisa_angsuran < $nominal_angsuran_dp) {
+				$nominal_angsuran_dp = $dp;
+				$sisa_angsuran = $dp - $nominal_angsuran_dp;
+			} else {
+				$dp = $sisa_angsuran;
+			}
+			//sisa angsuran menjadi harga acuan untuk di kurangai angsuran
+			$bulan = $sesudah;				//merubah bulan menjadi bulan yang sudah di tambah
+			$nourut3 = $kode1;				//merubah nomor urut menjadi yang sudah di tambah
+			$nourut4 = $kodeinvoice;		//merubah invoice  menjadi yang sudah di tambah
+			$this->marketing->proyeksi_angsuran_dp($strkodenya, $no_ktp, $angsuran_ke, $tanggal, $bulan, $tahun, $nominal_angsuran_dp, $sisa_angsuran, $status, $strkodeinvoice);
+		}
+		$tahun = date('y');
+		//injeksi
+		for ($i = 1; $i <= $lama_injek; $i++) {
+			//penentuan ID_angsuran_bulanan + Invoice otomatis
+
+			$kode1 =  $nourut5 + 1;
+			$kodenya = sprintf("%04s", $kode1);
+			$strkodenya = 'AIJ' . $kodenya;
+			$kodeinvoice = $nourut6 + 1;
+			$kodenyainvoice = sprintf("%04s", $kodeinvoice);
+			$strkodeinvoice = "IIJ" . $kodenyainvoice;
+			$nourut5 = $kode1;				//merubah nomor urut menjadi yang sudah di tambah
+			$nourut6 = $kodeinvoice;		//merubah invoice  menjadi yang sudah di tambah
+			$angsuran_ke = $i;
+
+			$sisa_angsuran = $nominal_injek - $injek;
+			$nominal_injek = $sisa_angsuran;
+			$tahunnya = $tahun + 1;
+			$tahun = $tahunnya;
+			$this->marketing->proyeksi_angsuran_injek($strkodenya, $no_ktp, $angsuran_ke, $tanggal, $bulan, $tahunnya, $nominal_injek, $sisa_angsuran, $status, $strkodeinvoice);
+		}
+
 		echo $this->session->set_flashdata('msg', 'success-add-data');
 		redirect('Marketing/akad', 'refresh');
 	}
