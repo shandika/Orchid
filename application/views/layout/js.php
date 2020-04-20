@@ -348,3 +348,37 @@ $(document).ready(function(){ // Ketika halaman sudah diload dan siap
         });
     });
 </script>
+<script>
+    $(document).ready(function(){
+        $("#lama_angsuran_dp").change(function(){ 
+        var dp = parseInt($("#dp").val());
+        var l_a_d = parseInt($("#lama_angsuran_dp").val());
+        
+        if (l_a_d == 0) {
+            $("#angsuran_dp").val(dp);
+        }else{
+            var total = (dp/l_a_d);
+            $("#angsuran_dp").val(total);
+        }
+ 
+        });
+
+        $("#lama_injeksi").keyup(function(){ 
+        var injeksi = parseInt($("#injeksi").val());
+        var lama_injeksi = parseInt($("#lama_injeksi").val());
+        var total = (injeksi/lama_injeksi);
+        $("#total_injeksi").val(total);
+ 
+        });
+
+        $("#lama_angsuran_bulanan").change(function(){ 
+        var harga = parseInt($("#harga").val());
+        var l_a_b = parseInt($("#lama_angsuran_bulanan").val());
+        var t_injek = parseInt($("#total_injeksi").val());
+        var dp = parseInt($("#dp").val());
+        var total = (harga-dp-t_injek)/l_a_b;
+        $("#angsuran_bulanan").val(total);
+ 
+        }); 
+    });
+</script> <!-- Menghitung otomatis -->
