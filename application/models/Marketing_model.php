@@ -57,6 +57,30 @@ class Marketing_model extends CI_Model
         $hasil = $query->row();
         return $hasil->idinvoiceangsuranbulanan;
     }
+    function cekidangsuranbulanandp()
+    {
+        $query = $this->db->query("SELECT MAX(ID_dp) as idangsurandp from angsuran_dp");
+        $hasil = $query->row();
+        return $hasil->idangsurandp;
+    }
+    function cekidinvoicebulanandp()
+    {
+        $query = $this->db->query("SELECT MAX(ID_invoice_dp) as idinvoiceangsurandp from angsuran_dp");
+        $hasil = $query->row();
+        return $hasil->idinvoiceangsurandp;
+    }
+    function cekidinjek()
+    {
+        $query = $this->db->query("SELECT MAX(ID_injek) as idinjek from angsuran_injek");
+        $hasil = $query->row();
+        return $hasil->idinjek;
+    }
+    function cekidinvoiceinjek()
+    {
+        $query = $this->db->query("SELECT MAX(ID_invoice_injek) as idinvoiceinjek from angsuran_injek");
+        $hasil = $query->row();
+        return $hasil->idinvoiceinjek;
+    }
 
     function simpanUnitDipilih($id, $no_ktp, $dp, $lama_angsuran_dp, $angsuran_bulanan, $lama_angsuran_bulanan, $total_harga, $ktp_marketing, $id_unit, $id_project)
     {
@@ -101,5 +125,37 @@ class Marketing_model extends CI_Model
             'ID_invoice_angsuran_bulanan' => $invoice
         ];
         $this->db->insert('angsuran_bulanan', $data);
+    }
+    function proyeksi_angsuran_dp($id, $ktp, $ke, $tanggal, $bulan, $tahun, $nominal, $sisa, $status, $invoice)
+    {
+        $data = [
+            'ID_dp' => $id,
+            'no_ktp' => $ktp,
+            'angsuran_ke' => $ke,
+            'tanggal' => $tanggal,
+            'bulan' => $bulan,
+            'tahun' => $tahun,
+            'nominal_angsuran_dp' => $nominal,
+            'sisa_angsuran' => $sisa,
+            'status' => $status,
+            'ID_invoice_dp' => $invoice
+        ];
+        $this->db->insert('angsuran_dp', $data);
+    }
+    function proyeksi_angsuran_injek($id, $ktp, $ke, $tanggal, $bulan, $tahun, $nominal, $sisa, $status, $invoice)
+    {
+        $data = [
+            'ID_injek' => $id,
+            'no_ktp' => $ktp,
+            'angsuran_ke' => $ke,
+            'tanggal' => $tanggal,
+            'bulan' => $bulan,
+            'tahun' => $tahun,
+            'nominal_injek' => $nominal,
+            'sisa_angsuran' => $sisa,
+            'status' => $status,
+            'ID_invoice_injek' => $invoice
+        ];
+        $this->db->insert('angsuran_injek', $data);
     }
 }
