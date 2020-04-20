@@ -45,6 +45,18 @@ class Marketing_model extends CI_Model
         $hasil = $query->row();
         return $hasil->idunitdipesan;
     }
+    function cekidangsuranbulanan()
+    {
+        $query = $this->db->query("SELECT MAX(ID_angsuran_bulanan) as idangsuranbulanan from angsuran_bulanan");
+        $hasil = $query->row();
+        return $hasil->idangsuranbulanan;
+    }
+    function cekidinvoicebulanan()
+    {
+        $query = $this->db->query("SELECT MAX(ID_invoice_angsuran_bulanan) as idinvoiceangsuranbulanan from angsuran_bulanan");
+        $hasil = $query->row();
+        return $hasil->idinvoiceangsuranbulanan;
+    }
 
     function simpanUnitDipilih($id, $no_ktp, $dp, $lama_angsuran_dp, $angsuran_bulanan, $lama_angsuran_bulanan, $total_harga, $ktp_marketing, $id_unit, $id_project)
     {
@@ -72,5 +84,22 @@ class Marketing_model extends CI_Model
         ];
         $this->db->where('ID_unit', $id_unit);
         $this->db->update('unit', $data);
+    }
+
+    function proyeksi_angsuran($id, $ktp, $ke, $tanggal, $bulan, $tahun, $nominal, $sisa, $status, $invoice)
+    {
+        $data = [
+            'ID_angsuran_bulanan' => $id,
+            'no_ktp' => $ktp,
+            'angsuran_ke' => $ke,
+            'tanggal' => $tanggal,
+            'bulan' => $bulan,
+            'tahun' => $tahun,
+            'nominal_angsuran_bulanan' => $nominal,
+            'sisa_angsuran' => $sisa,
+            'status' => $status,
+            'ID_invoice_angsuran_bulanan' => $invoice
+        ];
+        $this->db->insert('angsuran_bulanan', $data);
     }
 }

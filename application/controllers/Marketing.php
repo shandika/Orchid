@@ -198,6 +198,7 @@ class Marketing extends CI_Controller
 			echo $this->session->set_flashdata('msg', 'error-register');
 			redirect('Marketing/akad', 'refresh');
 		} else {
+			//input data akad
 			$id_akad = $this->input->post('id_unit_dipesan');
 			$no_ktp = $this->input->post('no_ktp');
 			$dp = $this->input->post('dp');
@@ -207,10 +208,48 @@ class Marketing extends CI_Controller
 			$harga = $this->input->post('harga');
 			$ktp_marketing = $this->input->post('ktp_marketing');
 			$unit = $this->input->post('unit');
-			$project = $this->input->post('project');
-			$tambah = $this->marketing->simpanUnitDipilih($id_akad, $no_ktp, $dp, $lama_dp, $bulanan, $lama_bulanan, $harga, $ktp_marketing, $unit, $project);
-			echo $this->session->set_flashdata('msg', 'success-add-data');
-			redirect('Marketing/akad', 'refresh');
+			$id_project = $this->input->post('project');
+			$tambah = $this->marketing->simpanUnitDipilih($id_akad, $no_ktp, $dp, $lama_dp, $bulanan, $lama_bulanan, $harga, $ktp_marketing, $unit, $id_project);
 		}
+		// input proyeksi cicilan
+		//ambil ID data angsuran terbesar
+		$dariDB = $this->marketing->cekidangsuranbulanan();
+		$nourut = substr($dariDB, 3, 4);
+		//mengambil data invoice terbesar
+		$dariDB2 = $this->marketing->cekidinvoicebulanan();
+		$nourut2 = substr($dariDB2, 3, 4);
+		//menentukan tanggal sekarang bulan dan tahun
+		$tanggal = 	date('d');
+		$bulan = date('m');
+		$tahun = date('y');
+		$no_ktp = $this->input->post('no_ktp');
+		$nominal_angsuran_bulanan = $this->input->post('angsuran_bulanan');
+		$harganya = $this->input->post('harga');
+		$status = 0;
+		//looping menurut lama angsuran bulanan
+		for ($i = 1; $i <= $lama_bulanan; $i++) {
+			//penentuan ID_angsuran_bulanan + Invoice otomatis
+			$kode1 =  $nourut + 1;
+			$kodenya = sprintf("%04s", $kode1);
+			$strkodenya = 'AB' . $kodenya;
+			$kodeinvoice = $nourut2 + 1;
+			$kodenyainvoice = sprintf("%04s", $kodeinvoice);
+			$strkodeinvoice = "IAB" . $kodenyainvoice;
+			//akhir penentuan ID_angsuran_bulanan + Invoice otomatis
+			$angsuran_ke = $i;		//angsuran ke---
+			$sesudah = $bulan + 1;
+			if ($sesudah > 12) { //jika bulan sudah lebih dari 12 , maka balik lagi menjadi 1
+				$sesudah = 1;
+				$tahun = $tahun + 1; // tahun bertambah jika bulan mencapai 12 dan balik menjadi 1
+			}
+			$sisa_angsuran = $harganya - $nominal_angsuran_bulanan;		//pengurangan sisa angsuran
+			$harganya = $sisa_angsuran;									//sisa angsuran menjadi harga acuan untuk di kurangai angsuran
+			$bulan = $sesudah;				//merubah bulan menjadi bulan yang sudah di tambah
+			$nourut = $kode1;				//merubah nomor urut menjadi yang sudah di tambah
+			$nourut2 = $kodeinvoice;		//merubah invoice  menjadi yang sudah di tambah
+			$this->marketing->proyeksi_angsuran($strkodenya, $no_ktp, $angsuran_ke, $tanggal, $bulan, $tahun, $nominal_angsuran_bulanan, $sisa_angsuran, $status, $strkodeinvoice);
+		}
+		echo $this->session->set_flashdata('msg', 'success-add-data');
+		redirect('Marketing/akad', 'refresh');
 	}
 }
