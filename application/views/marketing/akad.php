@@ -13,7 +13,7 @@
     <br>
     <br>
 
-    <form action="<?= base_url('Marketing/tambahakad') ?>" method="post">
+    <form name="form-akad" action="<?= base_url('Marketing/tambahakad') ?>" method="post">
 
         <div class="form-group d-none">
             <label for="inputAddress">ID</label>
@@ -65,6 +65,7 @@
                 <label for="inputAddress">Lama Injeksi (Tahun)</label>
                 <input type="number" class="form-control" id="lama_injeksi" placeholder="5 Tahun" name="lama_injeksi">
             </div>
+            <input type="hidden" name="total_injeksi" id="total_injeksi">
         </div>
         <div class="form-row">
             <div class="form-group col-4">
