@@ -240,7 +240,7 @@ class Marketing extends CI_Controller
 		$nominal_injek = $this->input->post('total_injeksi');
 		$nominal_angsuran_bulanan = $this->input->post('angsuran_bulanan');
 		$nominal_angsuran_dp = $this->input->post('angsuran_dp');
-		$harganya = $this->input->post('harga') - $injek - $dp;
+		$harganya = $this->input->post('harga') - $nominal_injek - $dp;
 		$status = 0;
 		//looping menurut lama angsuran bulanan
 		for ($i = 1; $i <= $lama_bulanan; $i++) {
@@ -319,10 +319,10 @@ class Marketing extends CI_Controller
 			$angsuran_ke = $i;
 
 			$sisa_angsuran = $nominal_injek - $injek;
-			$nominal_injek = $sisa_angsuran;
 			$tahunnya = $tahun + 1;
 			$tahun = $tahunnya;
-			$this->marketing->proyeksi_angsuran_injek($strkodenya, $no_ktp, $angsuran_ke, $tanggal, $bulan, $tahunnya, $nominal_injek, $sisa_angsuran, $status, $strkodeinvoice);
+			$this->marketing->proyeksi_angsuran_injek($strkodenya, $no_ktp, $angsuran_ke, $tanggal, $bulan, $tahunnya, $injek, $sisa_angsuran, $status, $strkodeinvoice);
+			$nominal_injek = $sisa_angsuran;
 		}
 
 		echo $this->session->set_flashdata('msg', 'success-add-data');
