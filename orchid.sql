@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 15, 2020 at 03:08 PM
+-- Generation Time: Apr 21, 2020 at 10:40 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.4
 
@@ -20,110 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `orchid`
 --
-
--- --------------------------------------------------------
-
---
--- Table structure for table `akun_keuangan`
---
-
-CREATE TABLE `akun_keuangan` (
-  `ktp` varchar(16) NOT NULL,
-  `nama` varchar(100) DEFAULT NULL,
-  `alamat` varchar(100) DEFAULT NULL,
-  `password` varchar(50) DEFAULT NULL,
-  `status` tinyint(1) DEFAULT NULL,
-  `no_tlp` varchar(15) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `akun_keuangan`
---
-
-INSERT INTO `akun_keuangan` (`ktp`, `nama`, `alamat`, `password`, `status`, `no_tlp`) VALUES
-('admin_keuangan', 'Octavian', 'bebas', 'd033e22ae348aeb5660fc2140aec35850c4da997', 1, NULL);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `akun_marketing`
---
-
-CREATE TABLE `akun_marketing` (
-  `ktp` varchar(16) NOT NULL,
-  `nama` varchar(100) DEFAULT NULL,
-  `alamat` varchar(100) DEFAULT NULL,
-  `password` varchar(50) DEFAULT NULL,
-  `status` tinyint(1) DEFAULT NULL,
-  `no_tlp` varchar(15) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `akun_marketing`
---
-
-INSERT INTO `akun_marketing` (`ktp`, `nama`, `alamat`, `password`, `status`, `no_tlp`) VALUES
-('admin_marketing', 'Octavian', 'bebas', 'd033e22ae348aeb5660fc2140aec35850c4da997', 1, '085923192389');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `akun_project_manager`
---
-
-CREATE TABLE `akun_project_manager` (
-  `ktp` varchar(16) NOT NULL,
-  `nama` varchar(100) DEFAULT NULL,
-  `alamat` varchar(100) DEFAULT NULL,
-  `password` varchar(50) DEFAULT NULL,
-  `status` tinyint(1) DEFAULT NULL,
-  `no_tlp` varchar(15) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `akun_project_manager`
---
-
-INSERT INTO `akun_project_manager` (`ktp`, `nama`, `alamat`, `password`, `status`, `no_tlp`) VALUES
-('admin_pm', 'Octavian', 'teuing', 'd033e22ae348aeb5660fc2140aec35850c4da997', 1, NULL);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `akun_purchasing`
---
-
-CREATE TABLE `akun_purchasing` (
-  `ktp` varchar(16) NOT NULL,
-  `nama` varchar(100) DEFAULT NULL,
-  `alamat` varchar(100) DEFAULT NULL,
-  `password` varchar(50) DEFAULT NULL,
-  `status` tinyint(1) DEFAULT NULL,
-  `no_tlp` varchar(15) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `akun_purchasing`
---
-
-INSERT INTO `akun_purchasing` (`ktp`, `nama`, `alamat`, `password`, `status`, `no_tlp`) VALUES
-('123', '123', '123', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 1, NULL),
-('admin_purchasing', 'Octavian', 'bebas', 'd033e22ae348aeb5660fc2140aec35850c4da997', 1, NULL);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `angsuran_barang_pr`
---
-
-CREATE TABLE `angsuran_barang_pr` (
-  `ID_angsuran_bayar_pr` varchar(10) NOT NULL,
-  `angsuranke` int(11) NOT NULL,
-  `jumlah_pembayaran` int(11) NOT NULL,
-  `sisa_pembayaran` int(11) NOT NULL,
-  `status` tinyint(1) NOT NULL,
-  `ID_barang_pr` varchar(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -149,44 +45,18 @@ CREATE TABLE `angsuran_bulanan` (
 --
 
 INSERT INTO `angsuran_bulanan` (`ID_angsuran_bulanan`, `no_ktp`, `angsuran_ke`, `tanggal`, `bulan`, `tahun`, `nominal_angsuran_bulanan`, `sisa_angsuran`, `status`, `ID_invoice_angsuran_bulanan`) VALUES
-('AB001', '3273172510970001', 1, 10, 10, 2010, 6000000, 189000000, 0, 'IAB001');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `angsuran_dp`
---
-
-CREATE TABLE `angsuran_dp` (
-  `ID_dp` varchar(10) NOT NULL,
-  `no_ktp` varchar(20) NOT NULL,
-  `angsuran_ke` int(11) NOT NULL,
-  `tanggal` int(11) NOT NULL,
-  `bulan` int(11) NOT NULL,
-  `tahun` int(11) NOT NULL,
-  `nominal_angsuran_dp` int(11) NOT NULL,
-  `sisa_angsuran` int(11) NOT NULL,
-  `ID_invoice_dp` varchar(10) NOT NULL,
-  `status` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `angsuran_injek`
---
-
-CREATE TABLE `angsuran_injek` (
-  `ID_injek` varchar(10) NOT NULL,
-  `no_ktp` varchar(20) NOT NULL,
-  `tanggal` int(11) NOT NULL,
-  `bulan` int(11) NOT NULL,
-  `tahun` int(11) NOT NULL,
-  `nominal_injek` int(11) NOT NULL,
-  `sisa` int(11) NOT NULL,
-  `ID_invoice_injek` varchar(10) NOT NULL,
-  `status` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+('AB0001', '3273172510970002', 1, 21, 5, 20, 5833000, 64167000, 0, 'IAB0001'),
+('AB0002', '3273172510970002', 2, 21, 6, 20, 5833000, 58334000, 0, 'IAB0002'),
+('AB0003', '3273172510970002', 3, 21, 7, 20, 5833000, 52501000, 0, 'IAB0003'),
+('AB0004', '3273172510970002', 4, 21, 8, 20, 5833000, 46668000, 0, 'IAB0004'),
+('AB0005', '3273172510970002', 5, 21, 9, 20, 5833000, 40835000, 0, 'IAB0005'),
+('AB0006', '3273172510970002', 6, 21, 10, 20, 5833000, 35002000, 0, 'IAB0006'),
+('AB0007', '3273172510970002', 7, 21, 11, 20, 5833000, 29169000, 0, 'IAB0007'),
+('AB0008', '3273172510970002', 8, 21, 12, 20, 5833000, 23336000, 0, 'IAB0008'),
+('AB0009', '3273172510970002', 9, 21, 1, 21, 5833000, 17503000, 0, 'IAB0009'),
+('AB0010', '3273172510970002', 10, 21, 2, 21, 5833000, 11670000, 0, 'IAB0010'),
+('AB0011', '3273172510970002', 11, 21, 3, 21, 5833000, 5837000, 0, 'IAB0011'),
+('AB0012', '3273172510970002', 12, 21, 4, 21, 5837000, 0, 0, 'IAB0012');
 
 -- --------------------------------------------------------
 
@@ -236,19 +106,6 @@ CREATE TABLE `barang_pr` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `catatan_keuangan_project`
---
-
-CREATE TABLE `catatan_keuangan_project` (
-  `ID_catatan_keuangan_project` varchar(10) NOT NULL,
-  `ID_project` varchar(10) NOT NULL,
-  `debit` int(11) NOT NULL,
-  `kredit` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `customer`
 --
 
@@ -281,7 +138,8 @@ CREATE TABLE `customer` (
 --
 
 INSERT INTO `customer` (`no_ktp`, `nama`, `pekerjaan_sesuai_ktp`, `tempat_tanggal_lahir`, `status`, `jumlah_tanggungan`, `alamat`, `no_telepon`, `status_rumah`, `lama_menetap`, `pekerjaan`, `lama_bekerja`, `nama_tempat_bekerja`, `alamat_tempat_bekerja`, `income_bulanan`, `income_bulanan_pasangan`, `no_rekening`, `nama_kontak_darurat`, `alamat_kontak_darurat`, `nomor_kontak_darurat`, `status_pembangunan`) VALUES
-('3273172510970001', 'octavian', '', '', '', 0, '', '', '', 0, '', 0, '', '', 0, 0, '', '', '', '', 0);
+('3273172510970001', 'octavian', '', '', '', 0, '', '', '', 0, '', 0, '', '', 0, 0, '', '', '', '', 0),
+('3273172510970002', 'Octavian', 'gak ada', 'gak punya', 'lajang', 0, 'kebon lega 1', '08492389182', 'tinggal bersama orang tua', 23, 'gak ada', 0, 'gak ada', 'gak ada', 5000000, 5000000, '8100067242', 'gak ada', 'gak ada', '06421354', 0);
 
 -- --------------------------------------------------------
 
@@ -316,18 +174,6 @@ CREATE TABLE `fee_marketing` (
   `total` int(11) NOT NULL,
   `ID_unit_dipesan` varchar(10) NOT NULL,
   `ID_angsuran_bulanan` varchar(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `general_ledger`
---
-
-CREATE TABLE `general_ledger` (
-  `nomor` varchar(10) NOT NULL,
-  `nama` varchar(100) NOT NULL,
-  `nominal` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -381,19 +227,6 @@ CREATE TABLE `invoice_injek` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `journal`
---
-
-CREATE TABLE `journal` (
-  `id_journal` varchar(10) NOT NULL,
-  `nomor_gl` varchar(10) NOT NULL,
-  `debit` int(11) NOT NULL,
-  `kredit` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `pembayaran_po`
 --
 
@@ -439,6 +272,14 @@ CREATE TABLE `project` (
   `ID_catatan_keuangan_project` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `project`
+--
+
+INSERT INTO `project` (`ID_project`, `nama`, `alamat`, `deskripsi`, `foto`, `jumlah_unit`, `unit_kosong`, `unit_isi`, `ID_catatan_keuangan_project`) VALUES
+('PJ001', 'Mekar Wangi', 'Jalan Mekar Utama', 'Tempat Luas, enak dan bersih, dekat dengan jalan tol dan tempat perbelanjaan', '', 100, 93, 7, 'CKPJ001'),
+('PJ002', 'Muara Sari', 'muara ', 'tidak ada', '', 100, 100, 0, 'CKPJ002');
+
 -- --------------------------------------------------------
 
 --
@@ -465,8 +306,18 @@ CREATE TABLE `unit` (
   `nomor` varchar(5) NOT NULL,
   `type` int(11) NOT NULL,
   `luas_bangunan` int(11) NOT NULL,
-  `luas_tanah` int(11) NOT NULL
+  `luas_tanah` int(11) NOT NULL,
+  `status` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `unit`
+--
+
+INSERT INTO `unit` (`ID_unit`, `ID_project`, `nomor`, `type`, `luas_bangunan`, `luas_tanah`, `status`) VALUES
+('UN001', 'PJ001', 'A1', 40, 5000, 5000, 1),
+('UN002', 'PJ001', 'A2', 60, 7000, 7000, 0),
+('UN003', 'PJ002', 'A1', 60, 8000, 8000, 0);
 
 -- --------------------------------------------------------
 
@@ -476,50 +327,26 @@ CREATE TABLE `unit` (
 
 CREATE TABLE `unit_dipesan` (
   `ID_unit_dipesan` varchar(10) NOT NULL,
-  `no_ktp` varchar(2) NOT NULL,
+  `no_ktp` varchar(20) NOT NULL,
   `DP` int(11) NOT NULL,
   `lama_angsuran_dp` int(11) NOT NULL,
   `angsuran_bulanan` int(11) NOT NULL,
   `lama_angsuran` int(11) NOT NULL,
   `total_harga` int(11) NOT NULL,
-  `ID_marketing` varchar(10) NOT NULL,
+  `ktp_marketing` varchar(16) NOT NULL,
   `ID_unit` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
+-- Dumping data for table `unit_dipesan`
+--
+
+INSERT INTO `unit_dipesan` (`ID_unit_dipesan`, `no_ktp`, `DP`, `lama_angsuran_dp`, `angsuran_bulanan`, `lama_angsuran`, `total_harga`, `ktp_marketing`, `ID_unit`) VALUES
+('UD0001', '3273172510970002', 30000000, 6, 5833000, 12, 110000000, 'admin_marketing', 'UN001');
+
+--
 -- Indexes for dumped tables
 --
-
---
--- Indexes for table `akun_keuangan`
---
-ALTER TABLE `akun_keuangan`
-  ADD PRIMARY KEY (`ktp`);
-
---
--- Indexes for table `akun_marketing`
---
-ALTER TABLE `akun_marketing`
-  ADD PRIMARY KEY (`ktp`);
-
---
--- Indexes for table `akun_project_manager`
---
-ALTER TABLE `akun_project_manager`
-  ADD PRIMARY KEY (`ktp`);
-
---
--- Indexes for table `akun_purchasing`
---
-ALTER TABLE `akun_purchasing`
-  ADD PRIMARY KEY (`ktp`);
-
---
--- Indexes for table `angsuran_barang_pr`
---
-ALTER TABLE `angsuran_barang_pr`
-  ADD PRIMARY KEY (`ID_angsuran_bayar_pr`),
-  ADD KEY `ID_barang_pr` (`ID_barang_pr`);
 
 --
 -- Indexes for table `angsuran_bulanan`
@@ -527,22 +354,6 @@ ALTER TABLE `angsuran_barang_pr`
 ALTER TABLE `angsuran_bulanan`
   ADD PRIMARY KEY (`ID_angsuran_bulanan`),
   ADD KEY `ID_invoice_angsuran_bulanan` (`ID_invoice_angsuran_bulanan`),
-  ADD KEY `no_ktp` (`no_ktp`);
-
---
--- Indexes for table `angsuran_dp`
---
-ALTER TABLE `angsuran_dp`
-  ADD PRIMARY KEY (`ID_dp`),
-  ADD KEY `ID_invoice_dp` (`ID_invoice_dp`),
-  ADD KEY `no_ktp` (`no_ktp`);
-
---
--- Indexes for table `angsuran_injek`
---
-ALTER TABLE `angsuran_injek`
-  ADD PRIMARY KEY (`ID_injek`),
-  ADD KEY `ID_invoice_injek` (`ID_invoice_injek`),
   ADD KEY `no_ktp` (`no_ktp`);
 
 --
@@ -562,13 +373,6 @@ ALTER TABLE `barang_pr`
   ADD KEY `ID_pr` (`ID_pr`),
   ADD KEY `ID_pm` (`ID_pm`),
   ADD KEY `ID_unit_dipesan` (`ID_unit_dipesan`);
-
---
--- Indexes for table `catatan_keuangan_project`
---
-ALTER TABLE `catatan_keuangan_project`
-  ADD PRIMARY KEY (`ID_catatan_keuangan_project`),
-  ADD KEY `ID_project` (`ID_project`);
 
 --
 -- Indexes for table `customer`
@@ -592,12 +396,6 @@ ALTER TABLE `fee_marketing`
   ADD KEY `ID_unit_dipesan` (`ID_unit_dipesan`);
 
 --
--- Indexes for table `general_ledger`
---
-ALTER TABLE `general_ledger`
-  ADD PRIMARY KEY (`nomor`);
-
---
 -- Indexes for table `invoice_angsuran_bulanan`
 --
 ALTER TABLE `invoice_angsuran_bulanan`
@@ -617,13 +415,6 @@ ALTER TABLE `invoice_dp`
 ALTER TABLE `invoice_injek`
   ADD PRIMARY KEY (`ID_invoice_injek`),
   ADD KEY `ID_injek` (`ID_injek`);
-
---
--- Indexes for table `journal`
---
-ALTER TABLE `journal`
-  ADD PRIMARY KEY (`id_journal`),
-  ADD KEY `nomor_gl` (`nomor_gl`);
 
 --
 -- Indexes for table `pembayaran_po`
@@ -671,7 +462,7 @@ ALTER TABLE `unit`
 ALTER TABLE `unit_dipesan`
   ADD PRIMARY KEY (`ID_unit_dipesan`),
   ADD KEY `ID_unit` (`ID_unit`),
-  ADD KEY `ID_marketing` (`ID_marketing`),
+  ADD KEY `ID_marketing` (`ktp_marketing`),
   ADD KEY `no_ktp` (`no_ktp`);
 
 --
@@ -685,18 +476,6 @@ ALTER TABLE `angsuran_bulanan`
   ADD CONSTRAINT `angsuran_bulanan_ibfk_2` FOREIGN KEY (`no_ktp`) REFERENCES `customer` (`no_ktp`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `angsuran_dp`
---
-ALTER TABLE `angsuran_dp`
-  ADD CONSTRAINT `angsuran_dp_ibfk_2` FOREIGN KEY (`no_ktp`) REFERENCES `customer` (`no_ktp`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `angsuran_injek`
---
-ALTER TABLE `angsuran_injek`
-  ADD CONSTRAINT `angsuran_injek_ibfk_2` FOREIGN KEY (`no_ktp`) REFERENCES `customer` (`no_ktp`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
 -- Constraints for table `angsuran_lain`
 --
 ALTER TABLE `angsuran_lain`
@@ -707,12 +486,6 @@ ALTER TABLE `angsuran_lain`
 --
 ALTER TABLE `barang_pr`
   ADD CONSTRAINT `barang_pr_ibfk_1` FOREIGN KEY (`ID_unit_dipesan`) REFERENCES `unit_dipesan` (`ID_unit_dipesan`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `catatan_keuangan_project`
---
-ALTER TABLE `catatan_keuangan_project`
-  ADD CONSTRAINT `catatan_keuangan_project_ibfk_1` FOREIGN KEY (`ID_project`) REFERENCES `project` (`ID_project`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `dokumen_pelengkap`
@@ -749,12 +522,6 @@ ALTER TABLE `invoice_injek`
   ADD CONSTRAINT `invoice_injek_ibfk_2` FOREIGN KEY (`ID_invoice_injek`) REFERENCES `angsuran_injek` (`ID_invoice_injek`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `journal`
---
-ALTER TABLE `journal`
-  ADD CONSTRAINT `journal_ibfk_1` FOREIGN KEY (`id_journal`) REFERENCES `general_ledger` (`nomor`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
 -- Constraints for table `pembayaran_po`
 --
 ALTER TABLE `pembayaran_po`
@@ -776,8 +543,9 @@ ALTER TABLE `unit`
 -- Constraints for table `unit_dipesan`
 --
 ALTER TABLE `unit_dipesan`
-  ADD CONSTRAINT `unit_dipesan_ibfk_1` FOREIGN KEY (`ID_unit`) REFERENCES `unit` (`ID_unit`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `unit_dipesan_ibfk_2` FOREIGN KEY (`no_ktp`) REFERENCES `customer` (`no_ktp`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `unit_dipesan_ibfk_1` FOREIGN KEY (`no_ktp`) REFERENCES `customer` (`no_ktp`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `unit_dipesan_ibfk_2` FOREIGN KEY (`ID_unit`) REFERENCES `unit` (`ID_unit`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `unit_dipesan_ibfk_3` FOREIGN KEY (`ktp_marketing`) REFERENCES `akun_marketing` (`ktp`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
