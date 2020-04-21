@@ -321,6 +321,18 @@
     });
 </script>
 <script type="text/javascript">
+    $(document).ready(function() {
+        $("#nama_gl").autocomplete({
+            source: "<?php echo site_url('Keuangan/get_autocomplete_gl/?'); ?>",
+
+            select: function(event, ui) {
+                $('[name="nama"]').val(ui.item.nama_gl);
+                $('[name="nomor"]').val(ui.item.nomor_gl);
+            }
+        });
+    });
+</script>
+<script type="text/javascript">
     $(document).ready(function() { // Ketika halaman sudah siap (sudah selesai di load)
 
         $("#project").change(function() { // Ketika user mengganti atau memilih data project
@@ -391,3 +403,31 @@
         });
     });
 </script> <!-- Menghitung otomatis -->
+
+<script>
+    $(document).ready(function() {
+
+        $("#type_bayar_angsuran").change(function() {
+            var typenya = ($("#type_bayar_angsuran").val());
+
+            switch (typenya) {
+                case "cash":
+                    document.getElementById('nama_bank_angsuran').setAttribute('readonly', true);
+                    document.getElementById('nomor_bank_angsuran').setAttribute('readonly', true);
+                    break;
+                case "debit":
+                    document.getElementById('nama_bank_angsuran').removeAttribute('readonly');
+                    document.getElementById('nomor_bank_angsuran').removeAttribute('readonly');
+                    break;
+                default:
+                    document.getElementById('nama_bank_angsuran').removeAttribute('readonly');
+                    document.getElementById('nomor_bank_angsuran').removeAttribute('readonly');
+                    break;
+            }
+
+        });
+
+
+
+    });
+</script>

@@ -18,4 +18,11 @@ class Keuangan_model extends CI_Model
         $query = $this->db->get('general_ledger');
         return $query;
     }
+    function search_gl($nama)
+    {
+        $this->db->like('nama', $nama, 'BOTH');
+        $this->db->order_by('nama', 'ASC');
+        $this->db->limit(20);
+        return $this->db->get('general_ledger')->result();
+    }
 }

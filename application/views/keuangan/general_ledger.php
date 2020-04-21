@@ -1,8 +1,8 @@
-<div class="breadcrumbs">
+<!-- <div class="breadcrumbs">
     <div class="col-sm-4">
         <div class="page-header float-left">
             <div class="page-title">
-                <h1>Dashboard</h1>
+                <h1>Keuagnan</h1>
             </div>
         </div>
     </div>
@@ -15,7 +15,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 <form class="col-sm-8" action="<?= base_url('Keuangan/tambahgl'); ?>" method="post">
     <br>
     <div class="form-row">
@@ -46,7 +46,7 @@
             <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="card">
                     <div class="card-header">
-                        <strong class="card-title">Data Pelanggan</strong>
+                        <strong class="card-title">General Ledger</strong>
                     </div>
                     <div class="card-body">
                         <table id="tabelgl" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
