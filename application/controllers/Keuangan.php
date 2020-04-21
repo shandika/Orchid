@@ -15,13 +15,6 @@ class Keuangan extends CI_Controller
         if ($this->session->userdata('masuk') != TRUE) {
             echo $this->session->set_flashdata('msg', 'Anda Harus Login Terlebih Dahulu !');
             redirect('Auth', 'refresh');
-        } else {
-            $title = 'Keuangan';
-            $data = array(
-                'title' => $title,
-                'query' => $this->keuangan->tampilDataGL(),
-            );
-            $this->template->load('layout/template_v', 'keuangan/general_ledger', $data);
         }
     }
 
@@ -30,6 +23,29 @@ class Keuangan extends CI_Controller
      */
     public function index()
     {
+        $title = 'Keuangan - General Ledger';
+        $data = array(
+            'title' => $title,
+            'query' => $this->keuangan->tampilDataGL(),
+        );
+        $this->template->load('layout/template_v', 'keuangan/general_ledger', $data);
+    }
+
+    public function journal()
+    {
+        $title = 'Keuangan - Journal';
+        $data = array(
+            'title' => $title,
+        );
+        $this->template->load('layout/template_v', 'keuangan/journal', $data);
+    }
+    public function angsuran()
+    {
+        $title = 'Keuangan - Angsuran';
+        $data = array(
+            'title' => $title,
+        );
+        $this->template->load('layout/template_v', 'keuangan/angsuran', $data);
     }
 
     public function tambahgl()
@@ -50,6 +66,20 @@ class Keuangan extends CI_Controller
             $this->keuangan->simpanDataGL($data);
             echo $this->session->set_flashdata('msg', 'success-add-data');
             redirect('Home/keuangan');
+        }
+    }
+    function get_autocomplete_gl()
+    {
+        if (isset($_GET['term'])) {
+            $result = $this->keuangan->search_gl($_GET['term']);
+            if (count($result) > 0) {
+                foreach ($result as $row)
+                    $arr_result[] = array(
+                        'nama' => $row->nama,
+                        'nomor' => $row->nomor,
+                    );
+                echo json_encode($arr_result);
+            }
         }
     }
 }

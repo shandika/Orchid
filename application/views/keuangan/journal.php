@@ -16,26 +16,27 @@
         </div>
     </div>
 </div>
-<form class="col-sm-8" action="<?= base_url('Keuangan/tambahgl'); ?>" method="post">
-    <br>
-    <div class="form-row">
-        <div class="form-group col-md-2">
-            <label for="formGroupExampleInput">Nomor</label>
-            <input type="text" class="form-control" id="nomor" name="nomor" placeholder="nomor gl">
-        </div>
-        <br>
-        <div class="form-group col-md-4">
-            <label for="formGroupExampleInput2">Nama</label>
-            <input type="text" class="form-control" id="nama" name="nama" placeholder="nama gl">
-        </div>
-        <div class="form-group col-md-4">
-            <label for="formGroupExampleInput2">Nominal</label>
-            <input type="number" class="form-control" id="nominal" name="nominal" placeholder="nominal">
-        </div>
-        <div class="form-group col-md-2">
-            <label for="formGroupExampleInput2">Tambah</label>
-            <br>
-            <button type="submit" class="btn btn-success btn-flat m-b-30 m-t-30">Tambah</button>
-        </div>
+
+<form method="POST" action="<?= base_url() ?>">
+    <div class="form-group col-3">
+        <label for="formGroupExampleInput">Kode GL</label>
+        <input type="text" class="form-control" id="nomor_gl" name="nomor_gl" placeholder="Kode GL" readonly>
     </div>
+    <div class="form-group col-3">
+        <label for="formGroupExampleInput2">Nama GL</label>
+        <input type="text" class="form-control" id="nama_gl" name="nama_gl" placeholder="Nama GL">
+    </div>
+    <div class="form-group col-3">
+        <label for="formGroupExampleInput2">Debit</label>
+        <input type="text" class="form-control" id="debit_journal" name="debit_journal" placeholder="0">
+    </div>
+    <div class="form-group col-3">
+        <label for="formGroupExampleInput2">Kredit</label>
+        <input type="text" class="form-control" id="kredit_journal" name="kredit_journal" placeholder="0">
+    </div>
+    <div class="form-group">
+        <label for="formGroupExampleInput2">Keterangan</label>
+        <input type="text" class="form-control" id="keterangan_journal" name="keterangan_journal" placeholder="masukan keterangan tambahan">
+    </div>
+    <button type="submit" class="btn btn-success col-md-12">Input</button>
 </form>
