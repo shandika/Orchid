@@ -1,11 +1,11 @@
 <form method="POST">
     <div class="form-group col-6">
         <label for="formGroupExampleInput">Nama</label>
-        <input type="text" class="form-control" id="nama" name="nama" placeholder="Masukan nama">
+        <input type="text" class="form-control" id="nama_angsuran" name="nama_angsuran" placeholder="Masukan nama">
     </div>
     <div class="form-group col-6">
         <label for="formGroupExampleInput">Nomor KTP</label>
-        <input type="text" class="form-control" id="no_ktp_angsuran" name="no_ktp_angsuran" placeholder="Otomatis Terisi">
+        <input type="text" class="form-control" id="no_ktp_angsuran" name="no_ktp_angsuran" placeholder="Otomatis Terisi" readonly>
     </div>
     <div class="form-group col-3">
         <label for="formGroupExampleInput2">ID Invoice</label>

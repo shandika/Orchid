@@ -322,12 +322,12 @@
 </script>
 <script type="text/javascript">
     $(document).ready(function() {
-        $("#nama_gl").autocomplete({
-            source: "<?php echo site_url('Keuangan/get_autocomplete_gl/?'); ?>",
+        $("#nama_angsuran").autocomplete({
+            source: "<?php echo site_url('Marketing/get_autocomplete/?'); ?>",
 
             select: function(event, ui) {
-                $('[name="nama"]').val(ui.item.nama_gl);
-                $('[name="nomor"]').val(ui.item.nomor_gl);
+                $('[name="nama_angsuran"]').val(ui.item.label);
+                $('[name="no_ktp_angsuran"]').val(ui.item.no_ktp);
             }
         });
     });
