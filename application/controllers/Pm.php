@@ -20,10 +20,21 @@ class Pm extends CI_Controller
 
     public function index()
     {
+        // id project
+        $kode = $this->model->getIdProject();
+        $norut = substr($kode, 1, 4);
+        $idP = $norut + 1;
+        // id catatan keaungan projek
+        $kode = $this->model->getIdCKP();
+        $norut = substr($kode, 3, 4);
+        $idCKP = $norut + 1;
+
         $title = 'Home';
         $data = array(
             'title' => $title,
-            'project' => $this->model->getAll()
+            'project' => $this->model->getAll(),
+            'idP' => $idP,
+            'idCKP' => $idCKP
         );
 
         $this->template->load('layout/template_v', 'pm/dashboard_v', $data);
@@ -57,7 +68,7 @@ class Pm extends CI_Controller
                 $config['maintain_ratio'] = FALSE;
                 $config['quality'] = '50%';
                 $config['width'] = 600;
-                $config['height'] = 400;
+                $config['height'] = 500;
                 $config['new_image'] = './assets/images/project/' . $gbr['file_name'];
                 $this->load->library('image_lib', $config);
                 $this->image_lib->resize();
@@ -109,8 +120,6 @@ class Pm extends CI_Controller
     }
     public function update()
     {
-        $data['project'] = $this->model->getAll();
-
 
         $idProject = $this->input->post('ID_project');
         $nama = $this->input->post('nama');
@@ -142,7 +151,7 @@ class Pm extends CI_Controller
                     $config['maintain_ratio'] = FALSE;
                     $config['quality'] = '50%';
                     $config['width'] = 600;
-                    $config['height'] = 400;
+                    $config['height'] = 500;
                     $config['new_image'] = './assets/images/project/' . $gbr['file_name'];
                     $this->load->library('image_lib', $config);
                     $this->image_lib->resize();

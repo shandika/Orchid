@@ -18,6 +18,19 @@ class Pm_model extends CI_Model
         return $query->result();
     }
 
+    public function getIdProject()
+    {
+        $query = $this->db->query("SELECT MAX(ID_project) as id from project");
+        $hasil = $query->row();
+        return $hasil->id;
+    }
+    public function getIdCKP()
+    {
+        $query = $this->db->query("SELECT MAX(ID_catatan_keuangan_project) as id from catatan_keuangan_project");
+        $hasil = $query->row();
+        return $hasil->id;
+    }
+
     public function delete($id)
     {
         $this->db->where('ID_project', $id);
