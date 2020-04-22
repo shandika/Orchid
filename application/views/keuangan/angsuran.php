@@ -9,19 +9,19 @@
     </div>
     <div class="form-group col-3">
         <label for="formGroupExampleInput2">ID Invoice</label>
-        <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Otomatis Terisi Saat memasukan nama">
+        <input type="text" class="form-control" id="id_invoice" name="id_invoice" placeholder="Otomatis Terisi Saat memasukan nama">
     </div>
     <div class="form-group col-3">
         <label for="formGroupExampleInput2">ID Angsuran</label>
-        <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Otomatis Terisi Saat memasukan nama">
+        <input type="text" class="form-control" id="id_angsuran" name="id_angsuran" placeholder="Otomatis Terisi Saat memasukan nama">
     </div>
     <div class="form-group col-3">
         <label for="formGroupExampleInput2">Nominal Pembayaran</label>
-        <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Otomatis Terisi Saat memasukan nama">
+        <input type="text" class="form-control" id="nominal_pembayaran" name="nominal_pembayaran" placeholder="Otomatis Terisi Saat memasukan nama">
     </div>
     <div class="form-group col-3">
         <label for="formGroupExampleInput2">Tanggal Pembayaran</label>
-        <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Otomatis Terisi dengan fungsi get date">
+        <input type="text" value="<?php echo date('d-m-Y'); ?>" class="form-control" id="formGroupExampleInput2" placeholder="Otomatis Terisi dengan fungsi get date">
     </div>
     <div class="form-group col-2">
         <label for="formGroupExampleInput2">Type Pembayaran</label>
