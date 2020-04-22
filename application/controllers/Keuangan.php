@@ -71,7 +71,7 @@ class Keuangan extends CI_Controller
     function get_autocomplete()
 	{
 		if (isset($_GET['term'])) { 
-			$result = $this->keuangan->search_cust($_GET['term']);
+            $result = $this->keuangan->search_cust($_GET['term']);
 			if (count($result) > 0) {
 				foreach ($result as $row)
 					$arr_result[] = array(
@@ -83,15 +83,15 @@ class Keuangan extends CI_Controller
 					);
 				echo json_encode($arr_result);
 			}else{
-                $result = $this->keuangan->search_cust($_GET['term']);
-                if (count($result) > 0) {
-                    foreach ($result as $row)
+                $res = $this->keuangan->search_bulanan($_GET['term']);
+                if (count($res) > 0) {
+                    foreach ($res as $row)
 					$arr_result[] = array(
 						'label' => $row->nama,
                         'no_ktp' => $row->no_ktp,
-                        'id_invoice' => $row->ID_invoice_dp,
-                        'id_angsuran' => $row->ID_dp,
-                        'nominal_pembayaran' => $row->nominal_angsuran_dp,
+                        'id_invoice' => $row->ID_invoice_angsuran_bulanan,
+                        'id_angsuran' => $row->ID_angsuran_bulanan,
+                        'nominal_pembayaran' => $row->nominal_angsuran_bulanan,
 					);
 				echo json_encode($arr_result);
                 }

@@ -27,12 +27,12 @@ class Keuangan_model extends CI_Model
     }
     function search_cust($nama)
     {
-        $hsl = $this->db->query("SELECT COUNT(customer.no_ktp) AS total , ID_dp, ID_invoice_dp, nominal_angsuran_dp, angsuran_dp.status, customer.nama, customer.no_ktp FROM customer JOIN angsuran_dp ON customer.no_ktp = angsuran_dp.no_ktp WHERE customer.nama LIKE '$nama%' AND angsuran_dp.status = 0")->result();
+        $hsl = $this->db->query("SELECT ID_dp, ID_invoice_dp, nominal_angsuran_dp, angsuran_dp.status, customer.nama, customer.no_ktp FROM customer JOIN angsuran_dp ON customer.no_ktp = angsuran_dp.no_ktp WHERE customer.nama LIKE '$nama%' AND angsuran_dp.status = 0 LIMIT 1")->result();
         return $hsl;
     }
     function search_bulanan($nama)
     {
-        $hsl = $this->db->query("SELECT COUNT(customer.no_ktp) AS total , ID_angsuran_bulanan, ID_invoice_angsuran_bulanan, nominal_angsuran_bulanan, angsuran_bulanan.status, customer.nama, customer.no_ktp FROM customer JOIN angsuran_bulanan ON customer.no_ktp = angsuran_bulanan.no_ktp WHERE customer.nama LIKE '$nama%' AND angsuran_bulanan.status = 0")->result();
+        $hsl = $this->db->query("SELECT ID_angsuran_bulanan, ID_invoice_angsuran_bulanan, nominal_angsuran_bulanan, angsuran_bulanan.status, customer.nama, customer.no_ktp FROM customer JOIN angsuran_bulanan ON customer.no_ktp = angsuran_bulanan.no_ktp WHERE customer.nama LIKE '$nama%' AND angsuran_bulanan.status = 0 LIMIT 1")->result();
         return $hsl;
     }
     function get_invoice($no_ktp)
