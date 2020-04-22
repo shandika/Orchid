@@ -13,6 +13,7 @@ class Home extends CI_Controller
 		parent::__construct();
 		$this->load->model('Marketing_model', 'marketing');
 		$this->load->model('Keuangan_model', 'keuangan');
+		$this->load->model('Pm_model', 'pm');
 		if ($this->session->userdata('masuk') != TRUE) {
 			echo $this->session->set_flashdata('msg', 'Anda Harus Login Terlebih Dahulu !');
 			redirect('Auth');
@@ -76,6 +77,7 @@ class Home extends CI_Controller
 		$title = 'Home';
 		$data = array(
 			'title' => $title,
+			'project' => $this->pm->getAll()
 		);
 		$this->template->load('layout/template_v', 'pm/dashboard_v', $data);
 	}
