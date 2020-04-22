@@ -323,13 +323,30 @@
 <script type="text/javascript">
     $(document).ready(function() {
         $("#nama_angsuran").autocomplete({
-            source: "<?php echo site_url('Marketing/get_autocomplete/?'); ?>",
+            source: "<?php echo site_url('Keuangan/get_autocomplete/?'); ?>",
 
             select: function(event, ui) {
                 $('[name="nama_angsuran"]').val(ui.item.label);
                 $('[name="no_ktp_angsuran"]').val(ui.item.no_ktp);
+                $('[name="id_invoice"]').val(ui.item.id_invoice);
+                $('[name="id_angsuran"]').val(ui.item.id_angsuran);
+                $('[name="nominal_pembayaran"]').val(ui.item.nominal_pembayaran);
             }
         });
+
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#nama_gl").autocomplete({
+            source: "<?php echo site_url('Keuangan/get_gl/?'); ?>",
+
+            select: function(event, ui) {
+                $('[name="nama_gl"]').val(ui.item.label);
+                $('[name="nomor_gl"]').val(ui.item.nomor);
+            }
+        });
+
     });
 </script>
 <script type="text/javascript">

@@ -68,18 +68,50 @@ class Keuangan extends CI_Controller
             redirect('Home/keuangan');
         }
     }
-    function get_autocomplete_gl()
-    {
-        if (isset($_GET['term'])) {
-            $result = $this->keuangan->search_gl($_GET['term']);
-            if (count($result) > 0) {
-                foreach ($result as $row)
-                    $arr_result[] = array(
-                        'nama' => $row->nama,
-                        'nomor' => $row->nomor,
-                    );
-                echo json_encode($arr_result);
+    function get_autocomplete()
+	{
+		if (isset($_GET['term'])) { 
+			$result = $this->keuangan->search_cust($_GET['term']);
+			if (count($result) > 0) {
+				foreach ($result as $row)
+					$arr_result[] = array(
+						'label' => $row->nama,
+                        'no_ktp' => $row->no_ktp,
+                        'id_invoice' => $row->ID_invoice_dp,
+                        'id_angsuran' => $row->ID_dp,
+                        'nominal_pembayaran' => $row->nominal_angsuran_dp,
+					);
+				echo json_encode($arr_result);
+			}else{
+                $result = $this->keuangan->search_cust($_GET['term']);
+                if (count($result) > 0) {
+                    foreach ($result as $row)
+					$arr_result[] = array(
+						'label' => $row->nama,
+                        'no_ktp' => $row->no_ktp,
+                        'id_invoice' => $row->ID_invoice_dp,
+                        'id_angsuran' => $row->ID_dp,
+                        'nominal_pembayaran' => $row->nominal_angsuran_dp,
+					);
+				echo json_encode($arr_result);
+                }
             }
-        }
+		}
     }
+    
+    function get_gl()
+	{
+		if (isset($_GET['term'])) {
+			$result = $this->keuangan->search_gl($_GET['term']);
+			if (count($result) > 0) {
+				foreach ($result as $row)
+					$arr_result[] = array(
+						'label' => $row->nama,
+						'nomor' => $row->nomor,
+					);
+				echo json_encode($arr_result);
+			}
+		}
+	}
+
 }
