@@ -14,8 +14,8 @@
             <?= $this->session->flashdata('message'); ?>
         </div>
     </div>
-    <div class="navbar-form float-right mb-2">
-        <div class="col-sm ">
+    <div class="navbar-form float-right mb-1">
+        <div class="col-sm">
             <button class=" btn btn btn-primary" data-toggle="modal" data-target="#tambahModal"><i class="fa fa-fw fa-plus"></i>Tambah Project</button>
         </div>
     </div>
@@ -26,17 +26,17 @@
             <div class="col-sm-4 ">
                 <input class="form-control" type="text" placeholder="Search" placeholder="Search">
             </div>
-            <button type="submit" class="btn btn-success mb-2">Cari</button>
+            <button type="submit" class="btn btn-success mb-1">Cari</button>
         </div>
         <?= form_close(); ?>
     </div>
 </div>
-<div class="row mx-1 mt-4">
+<div class="row mt-5">
     <?php foreach ($project as $data) : ?>
         <div class="col-sm-12 col-lg-4 col-md-6">
             <div class="card" style="width: 20rem;">
-                <div class="text-center">
-                    <img src=" <?= base_url('assets/images/project/') . $data->foto; ?>" class="card-img py-2 px-2">
+                <div class="text-center mx-auto" style="width: 18rem;">
+                    <img src=" <?= base_url('assets/images/project/') . $data->foto; ?>" class="card-img pt-3 px-2">
                 </div>
 
                 <div class="card-body">
@@ -127,8 +127,7 @@
 
                 <div class="modal-body">
                     <div class=" form-group mt-2">
-                        <input type="text" class="form-control" id="ID_project" name="ID_project" placeholder="ID project" required>
-                        <div class="help-block with-errors"></div>
+                        <input type="text" class="form-control" id="ID_project" name="ID_project" placeholder="ID project" value="P<?= sprintf("%04s", $idP); ?>" readonly>
                     </div>
                     <div class="form-group">
                         <input type="text" class="form-control" id="nama" name="nama" placeholder="Nama project" required>
