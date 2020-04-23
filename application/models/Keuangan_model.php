@@ -18,11 +18,16 @@ class Keuangan_model extends CI_Model
         $query = $this->db->get('general_ledger');
         return $query;
     }
+    function tampilDataproject()
+    {
+        $query = $this->db->get('project');
+        return $query;
+    }
     function search_gl($nama)
     {
         $this->db->like('nama', $nama, 'BOTH');
         $this->db->order_by('nama', 'ASC');
-        
+
         return $this->db->get('general_ledger')->result();
     }
     function search_cust($nama)
@@ -42,5 +47,41 @@ class Keuangan_model extends CI_Model
         $result = $this->db->get('angsuran_dp')->result();
 
         return $result;
+    }
+
+    function tambahjournal($id, $nomor, $nama, $debit, $kredit, $ket, $tanggal, $id_project, $debithasil)
+    {
+        $data = [
+            'id_journal' => $id,
+            'nomor_gl' => $nomor,
+            'nama_gl' => $nama,
+            'debit' => $debit,
+            'kredit' => $kredit,
+            'keterangan' => $ket,
+            'tanggal_input' => $tanggal,
+            'ID_project' => $id_project,
+        ];
+        $this->db->insert('journal', $data);
+        $this->keuangan->update_gl($nomor, $debithasil);
+    }
+    function cekidjournal()
+    {
+        $query = $this->db->query("SELECT MAX(id_journal) as idjournal from journal");
+        $hasil = $query->row();
+        return $hasil->idjournal;
+    }
+    function ceksaldo($nomor)
+    {
+        $query = $this->db->query("SELECT nominal  from general_ledger WHERE nomor='$nomor'");
+        $hasil = $query->row();
+        return $hasil->nominal;
+    }
+    public function update_gl($nomor, $debit)
+    {
+        $data = [
+            'nominal' => $debit,
+        ];
+        $this->db->where('nomor', $nomor);
+        $this->db->update('general_ledger', $data);
     }
 }

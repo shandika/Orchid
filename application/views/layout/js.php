@@ -346,7 +346,18 @@
                 $('[name="nomor_gl"]').val(ui.item.nomor);
             }
         });
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#nama_gl2").autocomplete({
+            source: "<?php echo site_url('Keuangan/get_gl/?'); ?>",
 
+            select: function(event, ui) {
+                $('[name="nama_gl2"]').val(ui.item.label);
+                $('[name="nomor_gl2"]').val(ui.item.nomor);
+            }
+        });
     });
 </script>
 <script type="text/javascript">
@@ -403,8 +414,12 @@
             var lama_injeksi = parseInt($("#lama_injeksi").val());
             var total = (injeksi * lama_injeksi);
             $("#total_injeksi").val(total);
-
         });
+        $("#debit_journal").keyup(function() {
+            var debit = $("#debit_journal").val();
+            $("#kredit_journal").val(debit);
+        });
+
 
         $("#lama_angsuran_bulanan").change(function() {
             var harga = parseInt($("#harga").val());
