@@ -158,9 +158,6 @@
                         <input type="number" class="form-control" id="unit_isi" name="unit_isi" placeholder="Unit isi" required>
                         <div class="help-block with-errors"></div>
                     </div>
-                    <div class="form-group">
-                        <input type="text" class="form-control" id="ID_catatan_keuangan_project" name="ID_catatan_keuangan_project" placeholder="ID Catatan Keuangan Project" value="CKP<?= sprintf("%04s", $idCKP); ?>" readonly>
-                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="reset" class="btn btn-danger">Reset</button>

@@ -24,12 +24,6 @@ class Pm_model extends CI_Model
         $hasil = $query->row();
         return $hasil->id;
     }
-    public function getIdCKP()
-    {
-        $query = $this->db->query("SELECT MAX(ID_catatan_keuangan_project) as id from catatan_keuangan_project");
-        $hasil = $query->row();
-        return $hasil->id;
-    }
 
     public function delete($id)
     {

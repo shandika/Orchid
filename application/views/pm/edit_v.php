@@ -61,7 +61,6 @@
                         <input type="number" class="form-control" id="unit_isi" name="unit_isi" placeholder="Unit isi" value="<?= $data->unit_isi; ?>" required>
                         <div class="help-block with-errors"></div>
                     </div>
-                    <input type="hidden" class="form-control" id="ID_catatan_keuangan_project" name="idCKP" value="<?= $data->ID_catatan_keuangan_project; ?>">
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class=" btn btn-primary" name="edit">Simpan</button>
