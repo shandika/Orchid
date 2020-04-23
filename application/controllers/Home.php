@@ -74,10 +74,21 @@ class Home extends CI_Controller
 
 	public function pm()
 	{
+		// id project
+		$kode = $this->pm->getIdProject();
+		$norut = substr($kode, 1, 4);
+		$idP = $norut + 1;
+		// id catatan keaungan projek
+		$kode = $this->pm->getIdCKP();
+		$norut = substr($kode, 3, 4);
+		$idCKP = $norut + 1;
+
 		$title = 'Home';
 		$data = array(
 			'title' => $title,
-			'project' => $this->pm->getAll()
+			'project' => $this->pm->getAll(),
+			'idP' => $idP,
+			'idCKP' => $idCKP
 		);
 		$this->template->load('layout/template_v', 'pm/dashboard_v', $data);
 	}
