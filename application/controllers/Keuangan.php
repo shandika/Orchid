@@ -27,6 +27,7 @@ class Keuangan extends CI_Controller
         $data = array(
             'title' => $title,
             'query' => $this->keuangan->tampilDataGL(),
+            'query2' => $this->db->get('project')->result(),
         );
         $this->template->load('layout/template_v', 'keuangan/general_ledger', $data);
     }

@@ -483,3 +483,9 @@
 
     });
 </script>
+
+<script language="javascript" type="text/javascript">
+    function removeSpaces(string) {
+        return string.split(' ').join('');
+    }
+</script>

@@ -12,7 +12,7 @@
         <div id="main-menu" class="main-menu collapse navbar-collapse">
             <ul class="nav navbar-nav"> <?php if ($this->session->userdata('level') == 2) { ?>
                     <li class="active">
-                        <a href="index.html"> <i class="menu-icon fa fa-dashboard"></i>PROJECT </a>
+                        <a href="<?php echo base_url('Pm'); ?>"> <i class="menu-icon fa fa-dashboard"></i>PROJECT </a>
                     </li>
                 <?php } ?>
                 <?php if ($this->session->userdata('level') == 4) { ?>

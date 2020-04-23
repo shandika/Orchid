@@ -18,6 +18,15 @@
 </div> -->
 <form class="col-sm-8" action="<?= base_url('Keuangan/tambahgl'); ?>" method="post">
     <br>
+    <div class="form-group">
+        <label for="formGroupExampleInput">Pilih Project</label>
+        <select class="custom-select my-1 mr-sm-2" id="project_GL" name="project_GL">
+            <option selected>Pilih Project</option>
+            <?php foreach ($query2 as $key) : ?>
+                <option value="<?= $key->ID_project; ?>"><?= $key->ID_project; ?> / <?= $key->nama; ?></option>
+            <?php endforeach; ?>
+        </select>
+    </div>
     <div class="form-row">
         <div class="form-group col-md-2">
             <label for="formGroupExampleInput">Nomor</label>
