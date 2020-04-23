@@ -51,7 +51,6 @@ class Pm_model extends CI_Model
         $this->db->or_like('jumlah_unit', $keywoard);
         $this->db->or_like('unit_kosong', $keywoard);
         $this->db->or_like('unit_isi', $keywoard);
-        $this->db->or_like('ID_catatan_keuangan_project', $keywoard);
         return $this->db->get()->result();
     }
 }

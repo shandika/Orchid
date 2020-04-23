@@ -415,10 +415,6 @@
             var total = (injeksi * lama_injeksi);
             $("#total_injeksi").val(total);
         });
-        $("#debit_journal").keyup(function() {
-            var debit = $("#debit_journal").val();
-            $("#kredit_journal").val(debit);
-        });
 
 
         $("#lama_angsuran_bulanan").change(function() {
@@ -486,4 +482,10 @@
         });
 
     });
+</script>
+
+<script language="javascript" type="text/javascript">
+    function removeSpaces(string) {
+        return string.split(' ').join('');
+    }
 </script>
