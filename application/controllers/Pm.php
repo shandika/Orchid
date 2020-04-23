@@ -24,17 +24,12 @@ class Pm extends CI_Controller
         $kode = $this->model->getIdProject();
         $norut = substr($kode, 1, 4);
         $idP = $norut + 1;
-        // id catatan keaungan projek
-        $kode = $this->model->getIdCKP();
-        $norut = substr($kode, 3, 4);
-        $idCKP = $norut + 1;
 
         $title = 'Home';
         $data = array(
             'title' => $title,
             'project' => $this->model->getAll(),
-            'idP' => $idP,
-            'idCKP' => $idCKP
+            'idP' => $idP
         );
 
         $this->template->load('layout/template_v', 'pm/dashboard_v', $data);
@@ -83,7 +78,6 @@ class Pm extends CI_Controller
                 $jmlUnit            = strip_tags($this->input->post('jumlah_unit'));
                 $unitKosong         = strip_tags($this->input->post('unit_kosong'));
                 $unitIsi            = strip_tags($this->input->post('unit_isi'));
-                $idCKP              = strip_tags($this->input->post('ID_catatan_keuangan_project'));
                 $data = array(
                     'ID_project'    => $idprojct,
                     'nama'          => $nama,
@@ -92,8 +86,7 @@ class Pm extends CI_Controller
                     'foto'          => $foto,
                     'jumlah_unit'   => $jmlUnit,
                     'unit_kosong'   => $unitKosong,
-                    'unit_isi'     => $unitIsi,
-                    'ID_catatan_keuangan_project' => $idCKP
+                    'unit_isi'     => $unitIsi
                 );
                 $this->form_validation->set_rules('ID_project', 'ID_project', 'required');
                 $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Data berhasil ditambah</div>');
