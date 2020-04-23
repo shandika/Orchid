@@ -72,8 +72,7 @@ class Pm extends CI_Controller
                 $jmlUnit            = strip_tags($this->input->post('jumlah_unit'));
                 $unitKosong         = strip_tags($this->input->post('unit_kosong'));
                 $unitIsi            = strip_tags($this->input->post('unit_isi'));
-                $idCKP              = strip_tags($this->input->post('ID_catatan_keuangan_project'));
-                $data = array(
+                $data = [
                     'ID_project'    => $idprojct,
                     'nama'          => $nama,
                     'alamat'        => $alamat,
@@ -82,16 +81,15 @@ class Pm extends CI_Controller
                     'jumlah_unit'   => $jmlUnit,
                     'unit_kosong'   => $unitKosong,
                     'unit_isi'     => $unitIsi,
-                    'ID_catatan_keuangan_project' => $idCKP
-                );
+                ];
                 $this->form_validation->set_rules('ID_project', 'ID_project', 'required');
                 $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Data berhasil ditambah</div>');
-                $this->model->tambahDataProject($data, 'project');
+                $this->model->tambahDataProject($data);
                 redirect('Home/pm');
             }
         } else {
-            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Data gagal ditambahkan</div>');
-            redirect('Pm', 'refresh');
+            // $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Data gagal ditambahkan</div>');
+            // redirect('Pm', 'refresh');
         }
     }
 
