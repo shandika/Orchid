@@ -20,21 +20,36 @@ class Pm extends CI_Controller
 
     public function index()
     {
-        // id project
-        $kode = $this->model->getIdProject();
-        $norut = substr($kode, 1, 4);
-        $idP = $norut + 1;
-
-        $title = 'Home';
+        $title = 'Project Manager - Project';
         $data = array(
             'title' => $title,
             'project' => $this->model->getAll(),
-            'idP' => $idP
         );
 
         $this->template->load('layout/template_v', 'pm/dashboard_v', $data);
     }
 
+    public function PR()
+    {
+        $sql = "SELECT unit_dipesan.ID_unit_dipesan, unit_dipesan.ID_unit, unit_dipesan.no_ktp, customer.nama, 
+        unit.ID_project, project.nama, project.alamat, project.deskripsi FROM unit_dipesan JOIN customer ON unit_dipesan.no_ktp = customer.no_ktp 
+        JOIN unit ON unit_dipesan.ID_unit = unit.ID_unit JOIN project ON unit.ID_project = project.ID_project";
+
+        $this->db->select('unit_dipesan.ID_unit_dipesan, unit_dipesan.ID_unit, unit_dipesan.no_ktp, customer.nama AS namanya, 
+        unit.ID_project, project.nama, project.alamat, project.deskripsi');
+        $this->db->from('unit_dipesan');
+        $this->db->join('customer', 'unit_dipesan.no_ktp = customer.no_ktp ');
+        $this->db->join('unit', 'unit_dipesan.ID_unit = unit.ID_unit');
+        $this->db->join('project', 'unit.ID_project = project.ID_project');
+
+        $title = 'Project Manager - Purchasing Request';
+        $data = array(
+            'title' => $title,
+            'query1' => $this->db->get()->result(),
+        );
+
+        $this->template->load('layout/template_v', 'pm/pr', $data);
+    }
     public function delete()
     {
         $id = $this->input->post('ID_project');
@@ -87,7 +102,7 @@ class Pm extends CI_Controller
                     'jumlah_unit'   => $jmlUnit,
                     'unit_kosong'   => $unitKosong,
                     'unit_isi'     => $unitIsi,
-                );
+                ];
                 $this->form_validation->set_rules('ID_project', 'ID_project', 'required');
                 $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Data berhasil ditambah</div>');
                 $sql = "CREATE TABLE general_ledger_" . $nama . "(

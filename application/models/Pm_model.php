@@ -18,11 +18,11 @@ class Pm_model extends CI_Model
         return $query->result();
     }
 
-    public function getIdProject()
+    function cekidproject()
     {
-        $query = $this->db->query("SELECT MAX(ID_project) as id from project");
+        $query = $this->db->query("SELECT MAX(ID_project) as idproject from project");
         $hasil = $query->row();
-        return $hasil->id;
+        return $hasil->idproject;
     }
 
     public function delete($id)
