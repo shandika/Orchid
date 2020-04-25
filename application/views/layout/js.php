@@ -504,28 +504,25 @@
     });
 </script>
 <script type="text/javascript">
-function loadgl()
-{
-    var project=$("#project_GL").val();
-    
-    if (project == "general_ledger") {
-        $.ajax({
-        url:"<?php echo base_url();?>Keuangan/sort_gl_utama",
-        data:"project_GL=" + project,
-        success: function(html)
-        {
-            $("#tabelgl").html(html);
+    function loadgl() {
+        var project = $("#project_GL").val();
+
+        if (project == "general_ledger") {
+            $.ajax({
+                url: "<?php echo base_url(); ?>Keuangan/sort_gl_utama",
+                data: "project_GL=" + project,
+                success: function(html) {
+                    $("#tabelgl").html(html);
+                }
+            });
+        } else {
+            $.ajax({
+                url: "<?php echo base_url(); ?>Keuangan/sort_gl",
+                data: "project_GL=" + project,
+                success: function(html) {
+                    $("#tabelgl").html(html);
+                }
+            });
         }
-        });
-    }else{
-        $.ajax({
-        url:"<?php echo base_url();?>Keuangan/sort_gl",
-        data:"project_GL=" + project,
-        success: function(html)
-        {
-            $("#tabelgl").html(html);
-        }
-        });
     }
-}
 </script>

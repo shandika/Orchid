@@ -113,7 +113,7 @@ class Pm extends CI_Controller
                 $jmlUnit            = strip_tags($this->input->post('jumlah_unit'));
                 $unitKosong         = strip_tags($this->input->post('unit_kosong'));
                 $unitIsi            = strip_tags($this->input->post('unit_isi'));
-                $nama_gl            = "general_ledger_ $namagl2";
+                $nama_gl            = "general_ledger_$namagl2";
                 $data = [
                     'ID_project'    => $idprojct,
                     'nama'          => $nama,
@@ -223,11 +223,11 @@ class Pm extends CI_Controller
                  ('35g','Biaya Pembuatan Taman Halaman Depan','0'),
                  ('35h','Pagar pembatas kavling','0'),
                  ('35i','Peningkatan hak AJB ke SHM','0');";
-                
+
                 $this->model->tambahDataProject($data);
                 $this->db->query($sql);
                 $this->db->query($sql_insert);
-                
+
                 redirect('Home/pm');
             }
         } else {
