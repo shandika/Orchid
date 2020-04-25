@@ -20,20 +20,20 @@ class Pm extends CI_Controller
 
     public function index()
     {
-        $dariDB = $this->model->getIdProject();
-        $nourut = substr($dariDB, 3, 4);
-        $kode1 =  $nourut + 1;
-        $kodenya = sprintf("%04s", $kode1);
-        $strkodenya = 'P' . $kodenya;
+        // id project
+		$dariDB = $this->model->cekidproject();
+		$nourut = substr($dariDB, 3, 4);
+		$kode1 =  $nourut + 1;
+		$kodenya = sprintf("%04s", $kode1);
+		$strkodenya = 'PJ' . $kodenya;
 
-        $title = 'Project Manager - Project';
-        $data = array(
-            'title' => $title,
-            'project' => $this->model->getAll(),
-            'idP' => $strkodenya
-        );
-
-        $this->template->load('layout/template_v', 'pm/dashboard_v', $data);
+		$title = 'Project Manager - Project';
+		$data = array(
+			'title' => $title,
+			'project' => $this->model->getAll(),
+			'idP' => $strkodenya
+		);
+		$this->template->load('layout/template_v', 'pm/dashboard_v', $data);
     }
 
     public function PR()
@@ -309,8 +309,8 @@ class Pm extends CI_Controller
     }
     public function search()
     {
-        $title = 'Home';
-        $keywoard = $this->input->post('keywoard');
+        $title = 'Home - Project';
+        $keywoard = $this->input->post('key');
         $data = array(
             'title' => $title,
             'project' => $this->model->get_keywoard($keywoard)
