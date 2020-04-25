@@ -24,7 +24,7 @@
         <?= form_open('Pm/search'); ?>
         <div>
             <div class="col-sm-4 ">
-                <input class="form-control" type="text" placeholder="Search" placeholder="Search">
+                <input class="form-control" name="key" type="text" placeholder="Search" placeholder="Search">
             </div>
             <button type="submit" class="btn btn-success mb-1">Cari</button>
         </div>
