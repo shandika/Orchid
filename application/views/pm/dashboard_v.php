@@ -127,7 +127,7 @@
 
                 <div class="modal-body">
                     <div class=" form-group mt-2">
-                        <input type="text" class="form-control" id="ID_project" name="ID_project" placeholder="ID project" value="<?= $idP ?>" readonly>
+                        <input type="text" class="form-control" id="ID_project" name="ID_project" placeholder="ID project" value="<?= ($idP) ?>" readonly>
                     </div>
                     <div class="form-group">
                         <input type="text" class="form-control" id="nama" name="nama" placeholder="Nama project" required>

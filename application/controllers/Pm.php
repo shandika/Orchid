@@ -26,7 +26,7 @@ class Pm extends CI_Controller
         $kodenya = sprintf("%04s", $kode1);
         $strkodenya = 'P' . $kodenya;
 
-        $title = 'Home';
+        $title = 'Project Manager - Project';
         $data = array(
             'title' => $title,
             'project' => $this->model->getAll(),
@@ -36,6 +36,38 @@ class Pm extends CI_Controller
         $this->template->load('layout/template_v', 'pm/dashboard_v', $data);
     }
 
+    public function PR()
+    {
+        // $sql = "SELECT unit_dipesan.ID_unit_dipesan, unit_dipesan.ID_unit, unit_dipesan.no_ktp, customer.nama, 
+        // unit.ID_project, project.nama, project.alamat, project.deskripsi FROM unit_dipesan JOIN customer ON unit_dipesan.no_ktp = customer.no_ktp 
+        // JOIN unit ON unit_dipesan.ID_unit = unit.ID_unit JOIN project ON unit.ID_project = project.ID_project";
+
+        //tampil ID_unit_dipesan
+        $this->db->select('unit_dipesan.ID_unit_dipesan, unit_dipesan.ID_unit, unit_dipesan.no_ktp, customer.nama AS namanya, 
+        unit.ID_project, project.nama, project.alamat, project.deskripsi');
+        $this->db->from('unit_dipesan');
+        $this->db->join('customer', 'unit_dipesan.no_ktp = customer.no_ktp ');
+        $this->db->join('unit', 'unit_dipesan.ID_unit = unit.ID_unit');
+        $this->db->join('project', 'unit.ID_project = project.ID_project');
+
+
+        //ID_PR otomatis
+        //ID_PR OTOMATIS
+        $dariDB = $this->model->cekidpr();
+        $nourut = substr($dariDB, 3, 4);
+        $kode1 =  $nourut + 1;
+        $kodenya = sprintf("%04s", $kode1);
+        $strkodenya = 'PR' . $kodenya;
+
+        $title = 'Project Manager - Purchasing Request';
+        $data = array(
+            'title' => $title,
+            'query1' => $this->db->get()->result(),
+            'idpr'     => $strkodenya,
+        );
+
+        $this->template->load('layout/template_v', 'pm/pr', $data);
+    }
     public function delete()
     {
         $id = $this->input->post('ID_project');
@@ -90,6 +122,7 @@ class Pm extends CI_Controller
                     'foto'          => $foto,
                     'jumlah_unit'   => $jmlUnit,
                     'unit_kosong'   => $unitKosong,
+                    'unit_isi'     => $unitIsi,
                     'unit_isi'      => $unitIsi,
                     'nama_gl'       => $nama_gl,
                 ];
@@ -284,5 +317,37 @@ class Pm extends CI_Controller
         );
 
         $this->template->load('layout/template_v', 'pm/dashboard_v', $data);
+    }
+
+    public function tambahpr()
+    {
+
+
+        // ID_ANGSURAN_BARANG_OTOMATIS
+        $dariDB = $this->model->cekidangsuranbarangpr();
+        $nourut1 = substr($dariDB, 3, 4);
+        $kode2 =  $nourut1 + 1;
+        $kodenya1 = sprintf("%04s", $kode2);
+        $strkodenya1 = 'APR' . $kodenya1;
+
+
+        $id_pr = $this->input->post('ID_pr');
+        $id_ud = $this->input->post('ID_unit_dipesan_pr');
+        $nama_barang = $this->input->post('nama_barang_pr');
+        $harga_barang = $this->input->post('harga_barang_pr');
+        $jumlah_barang_pr = $this->input->post('jumlah_barang_pr');
+        $total_harga = $harga_barang * $jumlah_barang_pr;
+        $nama_supplier_pr = $this->input->post('nama_supplier_pr');
+        $jenis_bayar_pr = $this->input->post('jenis_bayar_pr');
+        $lama_bayar_pr = $this->input->post('lama_bayar_pr');
+        $id_angsuran_barang_pr = $strkodenya1;
+        $waktu_tunggu_pr = $this->input->post('waktu_tunggu_pr');
+        $status = 0;
+        $tanggal = date('d-m-Y');
+        $id_pm = $this->session->userdata('ktp');
+
+        $this->model->simpanpr($id_pr, $id_ud, $nama_barang, $harga_barang, $jumlah_barang_pr, $total_harga, $nama_supplier_pr, $jenis_bayar_pr, $lama_bayar_pr, $id_angsuran_barang_pr, $waktu_tunggu_pr, $status, $tanggal, $id_pm);
+        echo $this->session->set_flashdata('msg', 'success-add-data');
+        redirect('Pm/PR', 'refresh');
     }
 }

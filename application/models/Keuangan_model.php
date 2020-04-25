@@ -85,9 +85,61 @@ class Keuangan_model extends CI_Model
         $this->db->where('nomor', $nomor);
         $this->db->update('general_ledger', $data);
     }
+
+    public function bayarangsuran($idinvoice, $idangsuran, $tanggal, $nominal, $typebayar, $namabank, $nomorbank)
+    {
+        $data_angsuran_bulanan = [
+            'ID_invoice_angsuran_bulanan' => $idinvoice,
+            'ID_angsuran_bulanan' => $idangsuran,
+            'tanggal_bayar' => $tanggal,
+            'nominal' => $nominal,
+            'type_pembayaran' => $typebayar,
+            'nama_bank' => $namabank,
+            'nomor_bank' => $nomorbank,
+        ];
+        $data_angsuran_dp = [
+            'ID_invoice_dp' => $idinvoice,
+            'ID_dp' => $idangsuran,
+            'tanggal_bayar' => $tanggal,
+            'nominal' => $nominal,
+            'type_pembayaran' => $typebayar,
+            'nama_bank' => $namabank,
+            'nomor_bank' => $nomorbank,
+        ];
+        $data_angsuran_injek = [
+            'ID_invoice_injek' => $idinvoice,
+            'ID_injek' => $idangsuran,
+            'tanggal_bayar' => $tanggal,
+            'nominal' => $nominal,
+            'type_pembayaran' => $typebayar,
+            'nama_bank' => $namabank,
+            'nomor_bank' => $nomorbank,
+        ];
+
+        if (stripos($idinvoice, 'IDP') !== false) {
+            $this->db->insert('invoice_dp', $data_angsuran_dp);
+            $this->keuangan->update_angsuran($idangsuran, "ID_dp", "angsuran_dp");
+        } elseif (stripos($idinvoice, 'IAB') !== false) {
+            $this->db->insert('invoice_angsuran_bulanan', $data_angsuran_bulanan);
+            $this->keuangan->update_angsuran($idangsuran, "ID_angsuran_bulanan", "angsuran_bulanan");
+        } elseif (stripos($idinvoice, 'IIJ') !== false) {
+            $this->db->insert('invoice_injek', $data_angsuran_injek);
+            $this->keuangan->update_angsuran($idangsuran, "ID_injek", "angsuran_injek");
+        }
+    }
+    public function update_angsuran($idbayar, $nama_bayar, $database)
+    {
+        $data = [
+            'status' => '1',
+        ];
+        $this->db->where($nama_bayar, $idbayar);
+        $this->db->update($database, $data);
+    }
+
     public function view_data($id_project){
         $query = $this->db->get($id_project);
         return $query;
     }
     
+
 }

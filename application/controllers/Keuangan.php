@@ -43,7 +43,7 @@ class Keuangan extends CI_Controller
     }
     public function angsuran()
     {
-        $title = 'Keuangan - Angsuran';
+        $title = 'Keuangan - Bayar Angsuran';
         $data = array(
             'title' => $title,
         );
@@ -163,6 +163,21 @@ class Keuangan extends CI_Controller
         $this->keuangan->tambahjournal($strkodenya, $nomor_gl2, $nama_gl2, "0", $kredit, $keterangan, $tanggal, $id_project, $kreditnya);
         echo $this->session->set_flashdata('msg', 'success-add-data');
         redirect('Keuangan/journal');
+    }
+
+    function tambahangsuran()
+    {
+        $idinvoice = $this->input->post('id_invoice_angsuran');
+        $idbayar = $this->input->post('id_angsuran');
+        $tanggal_bayar = date('d-m-Y');
+        $nominal = $this->input->post('nominal_pembayaran');
+        $type = $this->input->post('type_bayar_angsuran');
+        $nama_bank = $this->input->post('nama_bank_angsuran');
+        $nomor_bank = $this->input->post('nomor_bank_angsuran');
+
+        $this->keuangan->bayarangsuran($idinvoice, $idbayar, $tanggal_bayar, $nominal, $type, $nama_bank, $nomor_bank);
+        echo $this->session->set_flashdata('msg', 'success-add-data');
+        redirect('Keuangan/angsuran');
     }
 
     function sort_gl() {

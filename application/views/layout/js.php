@@ -328,7 +328,7 @@
             select: function(event, ui) {
                 $('[name="nama_angsuran"]').val(ui.item.label);
                 $('[name="no_ktp_angsuran"]').val(ui.item.no_ktp);
-                $('[name="id_invoice"]').val(ui.item.id_invoice);
+                $('[name="id_invoice_angsuran"]').val(ui.item.id_invoice);
                 $('[name="id_angsuran"]').val(ui.item.id_angsuran);
                 $('[name="nominal_pembayaran"]').val(ui.item.nominal_pembayaran);
             }
