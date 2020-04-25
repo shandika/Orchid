@@ -489,3 +489,43 @@
         return string.split(' ').join('');
     }
 </script>
+
+<script>
+    // var debit = document.getElementById("debit_journal");
+    // var kredit = document.getElementById("kredit_journal");
+    // kredit.value = debit;
+</script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#tabelgl').DataTable({
+            dom: 'Bfrtip',
+            buttons: ['copy', 'csv', 'excel', 'pdf', 'print']
+        });
+    });
+</script>
+<script type="text/javascript">
+function loadgl()
+{
+    var project=$("#project_GL").val();
+    
+    if (project == "general_ledger") {
+        $.ajax({
+        url:"<?php echo base_url();?>Keuangan/sort_gl_utama",
+        data:"project_GL=" + project,
+        success: function(html)
+        {
+            $("#tabelgl").html(html);
+        }
+        });
+    }else{
+        $.ajax({
+        url:"<?php echo base_url();?>Keuangan/sort_gl",
+        data:"project_GL=" + project,
+        success: function(html)
+        {
+            $("#tabelgl").html(html);
+        }
+        });
+    }
+}
+</script>
