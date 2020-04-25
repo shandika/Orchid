@@ -20,10 +20,11 @@
     <br>
     <div class="form-group">
         <label for="formGroupExampleInput">Pilih Project</label>
-        <select class="custom-select my-1 mr-sm-2" id="project_GL" name="project_GL">
+        <select class="custom-select my-1 mr-sm-2" id="project_GL" name="project_GL" onchange="loadgl()">
             <option selected>Pilih Project</option>
+            <option value="general_ledger">General Ledger</option>
             <?php foreach ($query2 as $key) : ?>
-                <option value="<?= $key->ID_project; ?>"><?= $key->ID_project; ?> / <?= $key->nama; ?></option>
+                <option value="<?= $key->nama_gl; ?>"><?= $key->ID_project; ?> / <?= $key->nama; ?></option>
             <?php endforeach; ?>
         </select>
     </div>
@@ -68,18 +69,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php
-                                foreach ($query->result() as $baris) :
-                                    $ktp            = $baris->nomor;
-                                    $nama           = $baris->nama;
-                                    $pekerjaan      = $baris->nominal;
-                                ?>
-                                    <tr>
-                                        <td><?php echo $ktp; ?></td>
-                                        <td><?php echo $nama; ?></td>
-                                        <td><?php echo $pekerjaan; ?></td>
-                                    </tr>
-                                <?php endforeach; ?>
+                               
                             </tbody>
                         </table>
                     </div>

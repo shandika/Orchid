@@ -65,12 +65,14 @@ class Home extends CI_Controller
 	public function keuangan()
 	{
 		$title = 'Keuangan - General Ledger';
+
 		$data = array(
 			'title' => $title,
 			'query' => $this->keuangan->tampilDataGL(),
 			'query2' => $this->db->get('project')->result(),
 		);
 		$this->template->load('layout/template_v', 'keuangan/general_ledger', $data);
+
 	}
 
 	public function pm()
@@ -86,7 +88,7 @@ class Home extends CI_Controller
 		$data = array(
 			'title' => $title,
 			'project' => $this->pm->getAll(),
-			'idP' => $strkodenya,
+			'idP' => $strkodenya
 		);
 		$this->template->load('layout/template_v', 'pm/dashboard_v', $data);
 	}

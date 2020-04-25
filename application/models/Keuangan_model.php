@@ -70,11 +70,12 @@ class Keuangan_model extends CI_Model
         $hasil = $query->row();
         return $hasil->idjournal;
     }
-    function ceksaldo($nomor)
+    function ceksaldo($nomor_gl2)
     {
-        $query = $this->db->query("SELECT nominal  from general_ledger WHERE nomor='$nomor'");
-        $hasil = $query->row();
-        return $hasil->nominal;
+        // $query = $this->db->query("SELECT nominal  from general_ledger WHERE nomor='$nomor'");
+        // $hasil = $query->row();
+        // return $hasil->nominal;
+        return $this->db->query("SELECT nominal  from general_ledger WHERE nomor='$nomor_gl2'")->row();
     }
     public function update_gl($nomor, $debit)
     {
@@ -134,4 +135,11 @@ class Keuangan_model extends CI_Model
         $this->db->where($nama_bayar, $idbayar);
         $this->db->update($database, $data);
     }
+
+    public function view_data($id_project){
+        $query = $this->db->get($id_project);
+        return $query;
+    }
+    
+
 }
