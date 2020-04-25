@@ -10,9 +10,10 @@
         </div>
 
         <div id="main-menu" class="main-menu collapse navbar-collapse">
-            <ul class="nav navbar-nav"> <?php if ($this->session->userdata('level') == 2) { ?>
-                    <li class="active">
-                        <a href="<?php echo base_url('Home/pm'); ?>"> <i class="menu-icon fa fa-dashboard"></i>PROJECT </a>
+            <ul class="nav navbar-nav">
+                <?php if ($this->session->userdata('level') == 2) { ?>
+                    <li class="">
+                        <a href="<?php echo base_url('Home/pm'); ?>"> <i class="menu-icon fa fa-dashboard"></i>Poject</a>
                     </li>
                 <?php } ?>
                 <?php if ($this->session->userdata('level') == 4) { ?>
@@ -22,7 +23,7 @@
                 <?php } ?>
                 <?php if ($this->session->userdata('level') == 2) { ?>
                     <li class="">
-                        <a href="<?php echo base_url('pm/pr'); ?>"> <i class="menu-icon fa fa-id-badge"></i>PURCHASING REQUEST </a>
+                        <a href="<?php echo base_url('pm/pr'); ?>"> <i class="menu-icon fa fa-id-badge"></i>Purchasing Request </a>
                     </li>
                 <?php } ?>
                 <?php if ($this->session->userdata('level') == 4) { ?>
