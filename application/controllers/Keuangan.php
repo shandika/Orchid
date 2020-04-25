@@ -164,4 +164,39 @@ class Keuangan extends CI_Controller
         echo $this->session->set_flashdata('msg', 'success-add-data');
         redirect('Keuangan/journal');
     }
+
+    function sort_gl() {
+        $project    =   $_GET['project_GL'];
+        
+        $data           =   $this->db->get($project)->result();
+        echo "<tr><th width='5'>Nomor GL</th><th width='70'>Nama GL</th><th>Nominal GL</th>";
+        foreach ($data as $r)
+        {
+            
+            echo "<tr>
+                <td>".  strtoupper($r->nomor)."</td>
+                <td>".  strtoupper($r->nama)."</td>
+                <td>".  strtoupper($r->nominal)."</td>";
+                
+                echo"</tr>";
+            
+        }
+        
+    }
+    function sort_gl_utama() {
+        $data = $this->db->get('general_ledger')->result();
+        echo "<tr><th width='5'>Nomor GL</th><th width='70'>Nama GL</th><th>Nominal GL</th>";
+        foreach ($data as $r)
+        {
+            
+            echo "<tr>
+                <td>".  strtoupper($r->nomor)."</td>
+                <td>".  strtoupper($r->nama)."</td>
+                <td>".  strtoupper($r->nominal)."</td>";
+                
+                echo"</tr>";
+            
+        }
+        
+    }
 }
