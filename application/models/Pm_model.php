@@ -24,7 +24,18 @@ class Pm_model extends CI_Model
         $hasil = $query->row();
         return $hasil->idproject;
     }
-
+    function cekidpr()
+    {
+        $query = $this->db->query("SELECT MAX(ID_pr) as idpr from barang_pr");
+        $hasil = $query->row();
+        return $hasil->idpr;
+    }
+    function cekidangsuranbarangpr()
+    {
+        $query = $this->db->query("SELECT MAX(ID_angsuran_barang_pr) as idangsuranbarangpr from barang_pr");
+        $hasil = $query->row();
+        return $hasil->idangsuranbarangpr;
+    }
     public function delete($id)
     {
         $this->db->where('ID_project', $id);
@@ -52,5 +63,27 @@ class Pm_model extends CI_Model
         $this->db->or_like('unit_kosong', $keywoard);
         $this->db->or_like('unit_isi', $keywoard);
         return $this->db->get()->result();
+    }
+
+    public function simpanpr($id_pr, $id_ud, $nama, $harga, $jumlah, $total_harga,  $supplier, $jenis_bayar, $lama_cicilan, $ID_angsuran_barang_pr, $waktu_tunggu, $status, $tanggal_pr, $id_pm)
+    {
+        $data = [
+            'ID_pr' => $id_pr,
+            'ID_unit_dipesan' => $id_ud,
+            'nama_barang' => $nama,
+            'harga_barang' => $harga,
+            'jumlah' => $jumlah,
+            'total_harga' => $total_harga,
+            'nama_supplier' => $supplier,
+            'jenis_pembayaran' => $jenis_bayar,
+            'lama_cicilan' => $lama_cicilan,
+            'ID_angsuran_barang_pr' => $ID_angsuran_barang_pr,
+            'waktu_tunggu' => $waktu_tunggu,
+            'status' => $status,
+            'tanggal_pr' => $tanggal_pr,
+            'ID_pm' => $id_pm,
+        ];
+
+        $this->db->insert('barang_pr', $data);
     }
 }
