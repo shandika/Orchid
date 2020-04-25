@@ -60,12 +60,13 @@ class Keuangan extends CI_Controller
             echo $this->session->set_flashdata('msg', 'error-register');
             redirect('Home/keuangan', 'refresh');
         } else {
+            $namagl = $this->input->post('project_GL');
             $data = [
                 'nomor' => $this->input->post('nomor'),
                 'nama' => $this->input->post('nama'),
                 'nominal' => $this->input->post('nominal')
             ];
-            $this->keuangan->simpanDataGL($data);
+            $this->keuangan->simpanDataGL($data, $namagl);
             echo $this->session->set_flashdata('msg', 'success-add-data');
             redirect('Home/keuangan');
         }
@@ -181,10 +182,9 @@ class Keuangan extends CI_Controller
     }
 
     function sort_gl() {
-        $project    =   $_GET['project_GL'];
-        
-        $data           =   $this->db->get($project)->result();
-        echo "<tr><th width='5'>Nomor GL</th><th width='70'>Nama GL</th><th>Nominal GL</th>";
+        $project        =  $_GET['project_GL'];
+        $data           =  $this->db->get($project)->result();
+        echo "<tr><th>Nomor GL</th><th>Nama GL</th><th>Nominal GL</th>";
         foreach ($data as $r)
         {
             
@@ -200,7 +200,7 @@ class Keuangan extends CI_Controller
     }
     function sort_gl_utama() {
         $data = $this->db->get('general_ledger')->result();
-        echo "<tr><th width='5'>Nomor GL</th><th width='70'>Nama GL</th><th>Nominal GL</th>";
+        echo "<tr><th>Nomor GL</th><th>Nama GL</th><th>Nominal GL</th>";
         foreach ($data as $r)
         {
             
