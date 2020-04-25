@@ -20,16 +20,17 @@ class Pm extends CI_Controller
 
     public function index()
     {
-        // id project
-        $kode = $this->model->getIdProject();
-        $norut = substr($kode, 1, 4);
-        $idP = $norut + 1;
+        $dariDB = $this->model->getIdProject();
+        $nourut = substr($dariDB, 3, 4);
+        $kode1 =  $nourut + 1;
+        $kodenya = sprintf("%04s", $kode1);
+        $strkodenya = 'P' . $kodenya;
 
         $title = 'Home';
         $data = array(
             'title' => $title,
             'project' => $this->model->getAll(),
-            'idP' => $idP
+            'idP' => $strkodenya
         );
 
         $this->template->load('layout/template_v', 'pm/dashboard_v', $data);
@@ -72,12 +73,15 @@ class Pm extends CI_Controller
 
                 $idprojct           = strip_tags($this->input->post('ID_project'));
                 $nama               = strip_tags($this->input->post('nama'));
+                $namagl             = str_replace(' ', '', $nama);
+                $namagl2            = strtolower($namagl);
                 $alamat             = strip_tags($this->input->post('alamat'));
                 $deskripsi          = strip_tags($this->input->post('deskripsi'));
                 $foto               = $gambar;
                 $jmlUnit            = strip_tags($this->input->post('jumlah_unit'));
                 $unitKosong         = strip_tags($this->input->post('unit_kosong'));
                 $unitIsi            = strip_tags($this->input->post('unit_isi'));
+                $nama_gl            = "general_ledger_ $namagl2";
                 $data = [
                     'ID_project'    => $idprojct,
                     'nama'          => $nama,
@@ -86,16 +90,17 @@ class Pm extends CI_Controller
                     'foto'          => $foto,
                     'jumlah_unit'   => $jmlUnit,
                     'unit_kosong'   => $unitKosong,
-                    'unit_isi'     => $unitIsi,
-                );
+                    'unit_isi'      => $unitIsi,
+                    'nama_gl'       => $nama_gl,
+                ];
                 $this->form_validation->set_rules('ID_project', 'ID_project', 'required');
                 $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Data berhasil ditambah</div>');
-                $sql = "CREATE TABLE general_ledger_" . $nama . "(
+                $sql = "CREATE TABLE general_ledger_" . $namagl2 . "(
                     nomor   VARCHAR(5) NOT NULL PRIMARY KEY
                    ,nama    VARCHAR(46)
                    ,nominal VARCHAR(17) NOT NULL
                  );";
-                $sql_insert = "INSERT INTO general_ledger_" . $nama . "(nomor,nama,nominal) VALUES ('1','Kas kecil','0'),
+                $sql_insert = "INSERT INTO general_ledger_" . $namagl2 . "(nomor,nama,nominal) VALUES ('1','Kas kecil','0'),
                  ('2','Bank','0'),
                  ('3','Piutang Usaha','0'),
                  ('4','Piutang Usaha kredit rumah','0'),
@@ -185,9 +190,11 @@ class Pm extends CI_Controller
                  ('35g','Biaya Pembuatan Taman Halaman Depan','0'),
                  ('35h','Pagar pembatas kavling','0'),
                  ('35i','Peningkatan hak AJB ke SHM','0');";
+                
                 $this->model->tambahDataProject($data);
                 $this->db->query($sql);
                 $this->db->query($sql_insert);
+                
                 redirect('Home/pm');
             }
         } else {
