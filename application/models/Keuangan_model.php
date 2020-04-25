@@ -8,9 +8,9 @@ class Keuangan_model extends CI_Model
         parent::__construct();
     }
 
-    function simpanDataGL($data)
+    function simpanDataGL($data,$namagl)
     {
-        $this->db->insert('general_ledger', $data);
+        $this->db->insert($namagl, $data);
     }
 
     function tampilDataGL()
