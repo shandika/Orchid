@@ -1,10 +1,5 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed');
 
-/**
- * Class Auth
- * @property Ion_auth|Ion_auth_model $ion_auth        The ION Auth spark
- * @property CI_Form_validation      $form_validation The form validation library
- */
 class Keuangan extends CI_Controller
 {
 
@@ -139,10 +134,23 @@ class Keuangan extends CI_Controller
         $strkodenya = 'IJN' . $kodenya;
 
         //ceksaldo
-        $dariDB2 = $this->keuangan->ceksaldo($nomor_gl);
-        $debitnya = $dariDB2 + $debit;
-
-        $this->keuangan->tambahjournal($strkodenya, $nomor_gl, $nama_gl, $debit, "0", $keterangan, $tanggal, $id_project, $debitnya);
+        if ($this->form_validation->run() == false) {
+            echo $this->session->set_flashdata('msg', 'error-register');
+            redirect('Keuangan/journal');
+            
+        }else{
+            $dariDB2 = $this->keuangan->ceksaldo($nomor_gl);
+            $debitnya = $dariDB2 + $debit;
+        }
+        
+        if ($this->form_validation->run() == false) {
+            echo $this->session->set_flashdata('msg', 'error-register');
+            redirect('Keuangan/journal');
+            
+        }else{
+            $this->keuangan->tambahjournal($strkodenya, $nomor_gl, $nama_gl, $debit, "0", $keterangan, $tanggal, $id_project, $debitnya);
+        }
+        
         //ambil ID data journal terbesar
         $dariDB = $this->keuangan->cekidjournal();
         $nourut = substr($dariDB, 3, 4);
@@ -161,24 +169,58 @@ class Keuangan extends CI_Controller
         //ceksaldo
         // $dariDB2 = $this->keuangan->ceksaldo($nomor_gl2);
         // $debitnya = $dariDB2 + $kredit;
-        $this->keuangan->tambahjournal($strkodenya, $nomor_gl2, $nama_gl2, "0", $kredit, $keterangan, $tanggal, $id_project, $kreditnya);
-        echo $this->session->set_flashdata('msg', 'success-add-data');
-        redirect('Keuangan/journal');
+        $this->form_validation->set_rules('project_journal', 'Project Journal', 'required|trim');
+        $this->form_validation->set_rules('nomor_gl', 'Nomor General Ledger', 'required|trim');
+        $this->form_validation->set_rules('nomor_gl2', 'Nomor General Ledger 2', 'required|trim');
+        $this->form_validation->set_rules('nama_gl', 'Nama General Ledger', 'required|trim');
+        $this->form_validation->set_rules('nama_gl2', 'Nama General Ledger 2', 'required|trim');
+        $this->form_validation->set_rules('debit_journal', 'Debit Journal', 'required|trim');
+        $this->form_validation->set_rules('kredit_journal', 'Kredit Journal', 'required|trim');
+        $this->form_validation->set_rules('keterangan_journal', 'Keterangan Journal', 'required|trim');
+        
+        if ($this->form_validation->run() == false) {
+            echo $this->session->set_flashdata('msg', 'error-register');
+            redirect('Keuangan/journal');
+            
+        }else{
+            $query = $this->keuangan->tambahjournal($strkodenya, $nomor_gl2, $nama_gl2, "0", $kredit, $keterangan, $tanggal, $id_project, $kreditnya);
+            if (isset($query)) {
+                echo $this->session->set_flashdata('msg', 'success-add-data');
+                redirect('Keuangan/journal');
+            }else{
+                echo $this->session->set_flashdata('msg', 'error-simpan');
+                redirect('Keuangan/journal');
+            }
+            
+        }
+        
     }
 
     function tambahangsuran()
     {
-        $idinvoice = $this->input->post('id_invoice_angsuran');
+        $idinvoice = $this->input->post('id_invoice');
         $idbayar = $this->input->post('id_angsuran');
         $tanggal_bayar = date('d-m-Y');
         $nominal = $this->input->post('nominal_pembayaran');
         $type = $this->input->post('type_bayar_angsuran');
         $nama_bank = $this->input->post('nama_bank_angsuran');
         $nomor_bank = $this->input->post('nomor_bank_angsuran');
-
-        $this->keuangan->bayarangsuran($idinvoice, $idbayar, $tanggal_bayar, $nominal, $type, $nama_bank, $nomor_bank);
-        echo $this->session->set_flashdata('msg', 'success-add-data');
-        redirect('Keuangan/angsuran');
+    
+        $this->form_validation->set_rules('id_invoice', 'ID Invoice Angsuran', 'required|trim');
+        $this->form_validation->set_rules('id_angsuran', 'ID Angsuran', 'required|trim');
+        $this->form_validation->set_rules('nominal_pembayaran', 'Nominal Pembayran', 'required|trim');
+        $this->form_validation->set_rules('type_bayar_angsuran', 'Type Bayar Angsuran', 'required|trim');
+        // $this->form_validation->set_rules('nama_bank_angsuran', 'Nama BANK Angsuran', 'required|trim');
+        // $this->form_validation->set_rules('nomor_bank_angsuran', 'Nomor BANK Angsuran', 'required|trim');
+        if ($this->form_validation->run() == false) {
+            echo $this->session->set_flashdata('msg', 'error-register');
+            redirect('Keuangan/angsuran');
+            
+        }else{
+            $query = $this->keuangan->bayarangsuran($idinvoice, $idbayar, $tanggal_bayar, $nominal, $type, $nama_bank, $nomor_bank);
+            echo $this->session->set_flashdata('msg', 'success-add-data');
+            redirect('Keuangan/angsuran');
+        }  
     }
 
     function sort_gl() {
