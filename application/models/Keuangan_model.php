@@ -86,14 +86,14 @@ class Keuangan_model extends CI_Model
         $this->db->update('general_ledger', $data);
     }
 
-    public function bayarangsuran($idinvoice, $idangsuran, $tanggal, $nominal, $typebayar, $namabank, $nomorbank)
+    public function bayarangsuran($idinvoice, $idangsuran, $tanggal, $nominal, $type, $namabank, $nomorbank)
     {
         $data_angsuran_bulanan = [
             'ID_invoice_angsuran_bulanan' => $idinvoice,
             'ID_angsuran_bulanan' => $idangsuran,
-            'tanggal_bayar' => $tanggal,
+            'tanggal_pembayaran' => $tanggal,
             'nominal' => $nominal,
-            'type_pembayaran' => $typebayar,
+            'type_pembayaran' => $type,
             'nama_bank' => $namabank,
             'nomor_bank' => $nomorbank,
         ];
@@ -102,7 +102,7 @@ class Keuangan_model extends CI_Model
             'ID_dp' => $idangsuran,
             'tanggal_bayar' => $tanggal,
             'nominal' => $nominal,
-            'type_pembayaran' => $typebayar,
+            'type_pembayaran' => $type,
             'nama_bank' => $namabank,
             'nomor_bank' => $nomorbank,
         ];
@@ -111,7 +111,7 @@ class Keuangan_model extends CI_Model
             'ID_injek' => $idangsuran,
             'tanggal_bayar' => $tanggal,
             'nominal' => $nominal,
-            'type_pembayaran' => $typebayar,
+            'type_pembayaran' => $type,
             'nama_bank' => $namabank,
             'nomor_bank' => $nomorbank,
         ];
