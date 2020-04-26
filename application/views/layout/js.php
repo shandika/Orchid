@@ -54,19 +54,11 @@
             type: 'success'
         });
     </script>
-<?php elseif ($this->session->flashdata('msg') == 'success-finish') : ?>
+<?php elseif ($this->session->flashdata('msg') == 'success-update') : ?>
     <script type="text/javascript">
         Swal.fire({
             title: 'Terimakasih',
-            text: 'Data Sudah Finish',
-            type: 'success'
-        });
-    </script>
-<?php elseif ($this->session->flashdata('msg') == 'success-reset') : ?>
-    <script type="text/javascript">
-        Swal.fire({
-            title: 'Terimakasih',
-            text: 'Waktu Sudah Direset',
+            text: 'Data Berhasil Di Update',
             type: 'success'
         });
     </script>
@@ -78,14 +70,6 @@
             type: 'warning'
         });
     </script>
-<?php elseif ($this->session->flashdata('msg') == 'error-reset') : ?>
-    <script type="text/javascript">
-        Swal.fire({
-            title: 'Perhatian !',
-            text: 'Anda Tidak Dapat Mereset Di Waktu Weekend',
-            type: 'warning'
-        });
-    </script>
 <?php elseif ($this->session->flashdata('msg') == 'success') : ?>
     <script type="text/javascript">
         $.toast({
@@ -93,8 +77,9 @@
             text: "Data Berhasil disimpan ke database.",
             showHideTransition: 'slide',
             icon: 'success',
-            hideAfter: false,
-            position: 'bottom-right',
+            allowToastClose : false,
+            hideAfter : 5000,
+            position: 'top-right',
             bgColor: '#7EC857'
         });
     </script>
@@ -116,13 +101,30 @@
     </script>
 <?php elseif ($this->session->flashdata('msg') == 'error-register') : ?>
     <script type="text/javascript">
-        Swal.fire({
-            title: 'Perhatian !',
-            text: 'Field Masih ada yang kosong, silahkan isi terlebih dahulu',
-            type: 'warning'
+        $.toast({
+            heading: 'Perhatian !',
+            text: "Field Masih ada yang kosong, silahkan isi terlebih dahulu",
+            showHideTransition: 'slide',
+            icon: 'warning',
+            allowToastClose : false,
+            hideAfter : 5000,
+            position: 'top-right',
+            bgColor: 'orange'
         });
     </script>
-
+<?php elseif ($this->session->flashdata('msg') == 'error-simpan') : ?>
+    <script type="text/javascript">
+        $.toast({
+            heading: 'Perhatian !',
+            text: "Gagal Menyimpan Data",
+            showHideTransition: 'slide',
+            icon: 'error',
+            allowToastClose : false,
+            hideAfter : 5000,
+            position: 'top-right',
+            bgColor: 'orange'
+        });
+    </script>
 <?php elseif ($this->session->flashdata('msg') == 'success-add-data') : ?>
     <script type="text/javascript">
         Swal.fire({
@@ -328,7 +330,7 @@
             select: function(event, ui) {
                 $('[name="nama_angsuran"]').val(ui.item.label);
                 $('[name="no_ktp_angsuran"]').val(ui.item.no_ktp);
-                $('[name="id_invoice_angsuran"]').val(ui.item.id_invoice);
+                $('[name="id_invoice"]').val(ui.item.id_invoice);
                 $('[name="id_angsuran"]').val(ui.item.id_angsuran);
                 $('[name="nominal_pembayaran"]').val(ui.item.nominal_pembayaran);
             }
@@ -498,8 +500,7 @@
 <script type="text/javascript">
     $(document).ready(function() {
         $('#tabelgl').DataTable({
-            dom: 'Bfrtip',
-            buttons: ['copy', 'csv', 'excel', 'pdf', 'print']
+            
         });
     });
 </script>
