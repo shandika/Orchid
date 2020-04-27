@@ -8,7 +8,7 @@ class Keuangan_model extends CI_Model
         parent::__construct();
     }
 
-    function simpanDataGL($data,$namagl)
+    function simpanDataGL($data, $namagl)
     {
         $this->db->insert($namagl, $data);
     }
@@ -49,7 +49,7 @@ class Keuangan_model extends CI_Model
         return $result;
     }
 
-    function tambahjournal($id, $nomor, $nama, $debit, $kredit, $ket, $tanggal, $id_project, $debithasil)
+    function tambahjournal($id, $nomor, $nama, $debit, $kredit, $ket, $tanggal, $id_project, $debithasil, $dbnya)
     {
         $data = [
             'id_journal' => $id,
@@ -62,7 +62,7 @@ class Keuangan_model extends CI_Model
             'ID_project' => $id_project,
         ];
         $this->db->insert('journal', $data);
-        $this->keuangan->update_gl($nomor, $debithasil);
+        $this->keuangan->update_gl($nomor, $debithasil, $dbnya);
     }
     function cekidjournal()
     {
@@ -70,20 +70,26 @@ class Keuangan_model extends CI_Model
         $hasil = $query->row();
         return $hasil->idjournal;
     }
-    function ceksaldo($nomor_gl2)
+
+    function ceknamagl($idproject)
     {
-        // $query = $this->db->query("SELECT nominal  from general_ledger WHERE nomor='$nomor'");
-        // $hasil = $query->row();
-        // return $hasil->nominal;
-        return $this->db->query("SELECT nominal  from general_ledger WHERE nomor='$nomor_gl2'")->row();
+        $query = $this->db->query("SELECT nama_gl  from project WHERE ID_project='$idproject'");
+        $hasil = $query->row();
+        return $hasil->nama_gl;
     }
-    public function update_gl($nomor, $debit)
+    function ceksaldo($nomor, $namadbnya)
+    {
+        $query = $this->db->query("SELECT nominal  from $namadbnya WHERE nomor='$nomor'");
+        $hasil = $query->row();
+        return $hasil->nominal;
+    }
+    public function update_gl($nomor, $debit, $dbnya)
     {
         $data = [
             'nominal' => $debit,
         ];
         $this->db->where('nomor', $nomor);
-        $this->db->update('general_ledger', $data);
+        $this->db->update($dbnya, $data);
     }
 
     public function bayarangsuran($idinvoice, $idangsuran, $tanggal, $nominal, $type, $namabank, $nomorbank)
@@ -136,10 +142,9 @@ class Keuangan_model extends CI_Model
         $this->db->update($database, $data);
     }
 
-    public function view_data($id_project){
+    public function view_data($id_project)
+    {
         $query = $this->db->get($id_project);
         return $query;
     }
-    
-
 }
