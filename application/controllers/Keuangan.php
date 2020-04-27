@@ -115,6 +115,7 @@ class Keuangan extends CI_Controller
     function tambahjournal()
     {
 
+
         $id_project = $this->input->post('project_journal');
         $nomor_gl = $this->input->post('nomor_gl');
         $nomor_gl2 = $this->input->post('nomor_gl2');
@@ -126,6 +127,9 @@ class Keuangan extends CI_Controller
         $tanggal = date("d/m/Y");
         $pembanding = 2;
 
+        //get nama gl
+        $dbnya = $this->keuangan->ceknamagl($id_project);
+
         //ambil ID data journal terbesar
         $dariDB = $this->keuangan->cekidjournal();
         $nourut = substr($dariDB, 3, 4);
@@ -134,23 +138,10 @@ class Keuangan extends CI_Controller
         $strkodenya = 'IJN' . $kodenya;
 
         //ceksaldo
-        if ($this->form_validation->run() == false) {
-            echo $this->session->set_flashdata('msg', 'error-register');
-            redirect('Keuangan/journal');
-            
-        }else{
-            $dariDB2 = $this->keuangan->ceksaldo($nomor_gl);
-            $debitnya = $dariDB2 + $debit;
-        }
-        
-        if ($this->form_validation->run() == false) {
-            echo $this->session->set_flashdata('msg', 'error-register');
-            redirect('Keuangan/journal');
-            
-        }else{
-            $this->keuangan->tambahjournal($strkodenya, $nomor_gl, $nama_gl, $debit, "0", $keterangan, $tanggal, $id_project, $debitnya);
-        }
-        
+        $dariDB2 = $this->keuangan->ceksaldo($nomor_gl, $dbnya);
+        $debitnya = intval($dariDB2) + $debit;
+        $this->keuangan->tambahjournal($strkodenya, $nomor_gl, $nama_gl, $debit, "0", $keterangan, $tanggal, $id_project, $debitnya, $dbnya);
+
         //ambil ID data journal terbesar
         $dariDB = $this->keuangan->cekidjournal();
         $nourut = substr($dariDB, 3, 4);
@@ -160,15 +151,13 @@ class Keuangan extends CI_Controller
 
 
         if ($nama_gl2 == "Bank") {
-            $dariDB2 = $this->keuangan->ceksaldo($nomor_gl2);
-            $kreditnya = $dariDB2 - $kredit;
+            $dariDB2 = $this->keuangan->ceksaldo($nomor_gl2, $dbnya);
+            $kreditnya = intval($dariDB2) - $kredit;
         } else {
-            $dariDB2 = $this->keuangan->ceksaldo($nomor_gl2);
-            $kreditnya = $dariDB2 + $kredit;
+            $dariDB2 = $this->keuangan->ceksaldo($nomor_gl2, $dbnya);
+            $kreditnya = intval($dariDB2) + $kredit;
         }
-        //ceksaldo
-        // $dariDB2 = $this->keuangan->ceksaldo($nomor_gl2);
-        // $debitnya = $dariDB2 + $kredit;
+
         $this->form_validation->set_rules('project_journal', 'Project Journal', 'required|trim');
         $this->form_validation->set_rules('nomor_gl', 'Nomor General Ledger', 'required|trim');
         $this->form_validation->set_rules('nomor_gl2', 'Nomor General Ledger 2', 'required|trim');
@@ -177,23 +166,12 @@ class Keuangan extends CI_Controller
         $this->form_validation->set_rules('debit_journal', 'Debit Journal', 'required|trim');
         $this->form_validation->set_rules('kredit_journal', 'Kredit Journal', 'required|trim');
         $this->form_validation->set_rules('keterangan_journal', 'Keterangan Journal', 'required|trim');
-        
-        if ($this->form_validation->run() == false) {
-            echo $this->session->set_flashdata('msg', 'error-register');
-            redirect('Keuangan/journal');
-            
-        }else{
-            $query = $this->keuangan->tambahjournal($strkodenya, $nomor_gl2, $nama_gl2, "0", $kredit, $keterangan, $tanggal, $id_project, $kreditnya);
-            if (isset($query)) {
-                echo $this->session->set_flashdata('msg', 'success-add-data');
-                redirect('Keuangan/journal');
-            }else{
-                echo $this->session->set_flashdata('msg', 'error-simpan');
-                redirect('Keuangan/journal');
-            }
-            
-        }
-        
+
+
+        $query = $this->keuangan->tambahjournal($strkodenya, $nomor_gl2, $nama_gl2, "0", $kredit, $keterangan, $tanggal, $id_project, $kreditnya, $dbnya);
+
+        echo $this->session->set_flashdata('msg', 'success-add-data');
+        redirect('Keuangan/journal');
     }
 
     function tambahangsuran()
@@ -205,7 +183,7 @@ class Keuangan extends CI_Controller
         $type = $this->input->post('type_bayar_angsuran');
         $nama_bank = $this->input->post('nama_bank_angsuran');
         $nomor_bank = $this->input->post('nomor_bank_angsuran');
-    
+
         $this->form_validation->set_rules('id_invoice', 'ID Invoice Angsuran', 'required|trim');
         $this->form_validation->set_rules('id_angsuran', 'ID Angsuran', 'required|trim');
         $this->form_validation->set_rules('nominal_pembayaran', 'Nominal Pembayran', 'required|trim');
@@ -215,45 +193,40 @@ class Keuangan extends CI_Controller
         if ($this->form_validation->run() == false) {
             echo $this->session->set_flashdata('msg', 'error-register');
             redirect('Keuangan/angsuran');
-            
-        }else{
+        } else {
             $query = $this->keuangan->bayarangsuran($idinvoice, $idbayar, $tanggal_bayar, $nominal, $type, $nama_bank, $nomor_bank);
             echo $this->session->set_flashdata('msg', 'success-add-data');
             redirect('Keuangan/angsuran');
-        }  
+        }
     }
 
-    function sort_gl() {
+    function sort_gl()
+    {
         $project        =  $_GET['project_GL'];
         $data           =  $this->db->get($project)->result();
         echo "<tr><th>Nomor GL</th><th>Nama GL</th><th>Nominal GL</th>";
-        foreach ($data as $r)
-        {
-            
+        foreach ($data as $r) {
+
             echo "<tr>
-                <td>".  strtoupper($r->nomor)."</td>
-                <td>".  strtoupper($r->nama)."</td>
-                <td>".  strtoupper($r->nominal)."</td>";
-                
-                echo"</tr>";
-            
+                <td>" .  strtoupper($r->nomor) . "</td>
+                <td>" .  strtoupper($r->nama) . "</td>
+                <td>" .  strtoupper($r->nominal) . "</td>";
+
+            echo "</tr>";
         }
-        
     }
-    function sort_gl_utama() {
+    function sort_gl_utama()
+    {
         $data = $this->db->get('general_ledger')->result();
         echo "<tr><th>Nomor GL</th><th>Nama GL</th><th>Nominal GL</th>";
-        foreach ($data as $r)
-        {
-            
+        foreach ($data as $r) {
+
             echo "<tr>
-                <td>".  strtoupper($r->nomor)."</td>
-                <td>".  strtoupper($r->nama)."</td>
-                <td>".  strtoupper($r->nominal)."</td>";
-                
-                echo"</tr>";
-            
+                <td>" .  strtoupper($r->nomor) . "</td>
+                <td>" .  strtoupper($r->nama) . "</td>
+                <td>" .  strtoupper($r->nominal) . "</td>";
+
+            echo "</tr>";
         }
-        
     }
 }
