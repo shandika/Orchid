@@ -109,8 +109,6 @@ class Marketing extends CI_Controller
 					echo "Foto berhasil di upload";
 			}
 		}
-		$this->form_validation->set_rules('noktp', 'noktp', 'required');
-		$this->marketing->simpanDataPelanggan($data);
 		$nama_angsuran = $this->input->post('nama_angsuran');
 		$result = array();
 		foreach ($nama_angsuran as $key => $val) {
@@ -122,8 +120,6 @@ class Marketing extends CI_Controller
 				"nominal_angsuran_lain" => $_POST['nominal_angsuran_lain'][$key]
 			);
 		}
-
-
 		$this->form_validation->set_rules('noktp', 'noktp', 'required');
 		$this->marketing->simpanDataPelanggan($data, $gambar, $result);
 		if ($this->form_validation->run() != false) {
