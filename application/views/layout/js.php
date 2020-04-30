@@ -77,8 +77,8 @@
             text: "Data Berhasil disimpan ke database.",
             showHideTransition: 'slide',
             icon: 'success',
-            allowToastClose : false,
-            hideAfter : 5000,
+            allowToastClose: false,
+            hideAfter: 5000,
             position: 'top-right',
             bgColor: '#7EC857'
         });
@@ -106,8 +106,8 @@
             text: "Field Masih ada yang kosong, silahkan isi terlebih dahulu",
             showHideTransition: 'slide',
             icon: 'warning',
-            allowToastClose : false,
-            hideAfter : 5000,
+            allowToastClose: false,
+            hideAfter: 5000,
             position: 'top-right',
             bgColor: 'orange'
         });
@@ -119,8 +119,8 @@
             text: "Gagal Menyimpan Data",
             showHideTransition: 'slide',
             icon: 'error',
-            allowToastClose : false,
-            hideAfter : 5000,
+            allowToastClose: false,
+            hideAfter: 5000,
             position: 'top-right',
             bgColor: 'orange'
         });
@@ -324,6 +324,18 @@
 </script>
 <script type="text/javascript">
     $(document).ready(function() {
+        $("#nama_pemohon_addendum").autocomplete({
+            source: "<?php echo site_url('Marketing/get_autocomplete/?'); ?>",
+
+            select: function(event, ui) {
+                $('[name="nama_pemohon_addendum"]').val(ui.item.label);
+                $('[name="no_ktp_addendum"]').val(ui.item.no_ktp);
+            }
+        });
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function() {
         $("#nama_angsuran").autocomplete({
             source: "<?php echo site_url('Keuangan/get_autocomplete/?'); ?>",
 
@@ -462,6 +474,63 @@
     });
 </script>
 
+<!-- Addendum optional -->
+<script>
+    $(document).ready(function() {
+
+        $("#jenis_addendum").change(function() {
+            var typenya = ($("#jenis_addendum").val());
+            var no_ktp = $('#sisa_angsuran_sebelumnya_addendum').val();
+
+            switch (typenya) {
+                case "rubah_angsuran":
+                    document.getElementById('form_rubah_angsuran').style.display = '';
+                    document.getElementById('form_rubah_injek').style.display = 'none';
+                    document.getElementById('form_rubah_unit').style.display = 'none';
+                    document.getElementById('form_rubah_project').style.display = 'none';
+                    document.getElementById('titlenya').style.display = '';
+                    document.getElementById('titlenya').innerHTML = "PERUBAHAN DATA ANGSURAN";
+                    break;
+                case "rubah_injek":
+                    document.getElementById('form_rubah_angsuran').style.display = 'none';
+                    document.getElementById('form_rubah_injek').style.display = '';
+                    document.getElementById('form_rubah_unit').style.display = 'none';
+                    document.getElementById('form_rubah_project').style.display = 'none';
+                    document.getElementById('titlenya').style.display = '';
+                    document.getElementById('titlenya').innerHTML = "PERUBAHAN DATA INJEK";
+                    break;
+                case "rubah_unit":
+                    document.getElementById('form_rubah_angsuran').style.display = 'none';
+                    document.getElementById('form_rubah_injek').style.display = 'none';
+                    document.getElementById('form_rubah_unit').style.display = '';
+                    document.getElementById('form_rubah_project').style.display = 'none';
+                    document.getElementById('titlenya').style.display = '';
+                    document.getElementById('titlenya').innerHTML = "PERUBAHAN DATA UNIT";
+                    break;
+                case "rubah_project":
+                    document.getElementById('form_rubah_angsuran').style.display = 'none';
+                    document.getElementById('form_rubah_injek').style.display = 'none';
+                    document.getElementById('form_rubah_unit').style.display = 'none';
+                    document.getElementById('form_rubah_project').style.display = '';
+                    document.getElementById('titlenya').style.display = '';
+                    document.getElementById('titlenya').innerHTML = "PERUBAHAN DATA PROJECT";
+                    break;
+                default:
+                    document.getElementById('form_rubah_angsuran').style.display = 'none';
+                    document.getElementById('form_rubah_injek').style.display = 'none';
+                    document.getElementById('form_rubah_unit').style.display = 'none';
+                    document.getElementById('form_rubah_project').style.display = 'none';
+                    document.getElementById('titlenya').style.display = 'none';
+                    break;
+            }
+
+        });
+
+
+
+    });
+</script>
+
 <!-- Details Pm Dashboard -->
 <script type="text/javascript">
     $(document).ready(function() {
@@ -500,7 +569,7 @@
 <script type="text/javascript">
     $(document).ready(function() {
         $('#tabelgl').DataTable({
-            
+
         });
     });
 </script>
