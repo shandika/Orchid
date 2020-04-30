@@ -36,6 +36,15 @@ class Keuangan extends CI_Controller
         );
         $this->template->load('layout/template_v', 'keuangan/journal', $data);
     }
+    public function addendum()
+    {
+        $title = 'Keuangan - Addendum';
+        $data = array(
+            'title' => $title,
+            'query1' => $this->db->get('project')->result(),
+        );
+        $this->template->load('layout/template_v', 'keuangan/addendum', $data);
+    }
     public function angsuran()
     {
         $title = 'Keuangan - Bayar Angsuran';
