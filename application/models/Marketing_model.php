@@ -93,7 +93,8 @@ class Marketing_model extends CI_Model
             'lama_angsuran' => $lama_angsuran_bulanan,
             'total_harga' =>  $total_harga,
             'ktp_marketing' => $ktp_marketing,
-            'ID_unit' => $id_unit
+            'ID_unit' => $id_unit,
+            'ID_project' => $id_project,
         ];
         $this->db->insert('unit_dipesan', $data);
         $this->marketing->update_unit($id_unit);
