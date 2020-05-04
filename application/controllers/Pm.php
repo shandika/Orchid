@@ -21,19 +21,19 @@ class Pm extends CI_Controller
     public function index()
     {
         // id project
-		$dariDB = $this->model->cekidproject();
-		$nourut = substr($dariDB, 3, 4);
-		$kode1 =  $nourut + 1;
-		$kodenya = sprintf("%04s", $kode1);
-		$strkodenya = 'PJ' . $kodenya;
+        $dariDB = $this->model->cekidproject();
+        $nourut = substr($dariDB, 3, 4);
+        $kode1 =  $nourut + 1;
+        $kodenya = sprintf("%04s", $kode1);
+        $strkodenya = 'PJ' . $kodenya;
 
-		$title = 'Project Manager - Project';
-		$data = array(
-			'title' => $title,
-			'project' => $this->model->getAll(),
-			'idP' => $strkodenya
-		);
-		$this->template->load('layout/template_v', 'pm/dashboard_v', $data);
+        $title = 'Project Manager - Project';
+        $data = array(
+            'title' => $title,
+            'project' => $this->model->getAll(),
+            'idP' => $strkodenya
+        );
+        $this->template->load('layout/template_v', 'pm/dashboard_v', $data);
     }
 
     public function PR()
@@ -321,16 +321,6 @@ class Pm extends CI_Controller
 
     public function tambahpr()
     {
-
-
-        // ID_ANGSURAN_BARANG_OTOMATIS
-        $dariDB = $this->model->cekidangsuranbarangpr();
-        $nourut1 = substr($dariDB, 3, 4);
-        $kode2 =  $nourut1 + 1;
-        $kodenya1 = sprintf("%04s", $kode2);
-        $strkodenya1 = 'APR' . $kodenya1;
-
-
         $id_pr = $this->input->post('ID_pr');
         $id_ud = $this->input->post('ID_unit_dipesan_pr');
         $nama_barang = $this->input->post('nama_barang_pr');
@@ -340,13 +330,44 @@ class Pm extends CI_Controller
         $nama_supplier_pr = $this->input->post('nama_supplier_pr');
         $jenis_bayar_pr = $this->input->post('jenis_bayar_pr');
         $lama_bayar_pr = $this->input->post('lama_bayar_pr');
-        $id_angsuran_barang_pr = $strkodenya1;
         $waktu_tunggu_pr = $this->input->post('waktu_tunggu_pr');
+        $waktu2 = $this->input->post('satuan_waktu_tunggu_pr');
+        $waktu_tunggunya = $waktu_tunggu_pr . " " . $waktu2;
         $status = 0;
         $tanggal = date('d-m-Y');
         $id_pm = $this->session->userdata('ktp');
+        if ($lama_bayar_pr == null) {
+            $lama_bayar_pr = 0;
+        }
+        $cicil = intval($lama_bayar_pr);
+        if ($lama_bayar_pr > 0) {
+            $cicilannya = $total_harga / 3;
+            $dibagi = $cicilannya / 1000;
+            $dibulatkan = floor($dibagi);
+            $hasilnya = $dibulatkan * 1000;
+            for ($i = 1; $i <= $lama_bayar_pr; $i++) {
+                // ID_ANGSURAN_BARANG_OTOMATIS
+                $dariDB = $this->model->cekidangsuranbarangpr();
+                $nourut1 = substr($dariDB, 3, 4);
+                $kode2 =  $nourut1 + 1;
+                $kodenya1 = sprintf("%04s", $kode2);
+                $strkodenya1 = 'APR' . $kodenya1;
 
-        $this->model->simpanpr($id_pr, $id_ud, $nama_barang, $harga_barang, $jumlah_barang_pr, $total_harga, $nama_supplier_pr, $jenis_bayar_pr, $lama_bayar_pr, $id_angsuran_barang_pr, $waktu_tunggu_pr, $status, $tanggal, $id_pm);
+
+
+                $sisanya = $total_harga - $hasilnya;
+                if ($sisanya < $hasilnya) {
+                    $hasilnya = $total_harga;
+                    $sisanya = $total_harga - $hasilnya;
+                } else {
+                    $total_harga = $sisanya;
+                }
+                $nourut1 = $kode2;
+                $this->model->cicilanpr($strkodenya1, $i, $hasilnya, $sisanya, 0, $id_pr);
+            }
+        }
+
+        $this->model->simpanpr($id_pr, $id_ud, $nama_barang, $harga_barang, $jumlah_barang_pr, $total_harga, $nama_supplier_pr, $jenis_bayar_pr, $lama_bayar_pr, $waktu_tunggunya, $status, $tanggal, $id_pm);
         echo $this->session->set_flashdata('msg', 'success-add-data');
         redirect('Pm/PR', 'refresh');
     }

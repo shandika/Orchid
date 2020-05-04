@@ -17,17 +17,12 @@ $jum_pesan = $query->num_rows();
             <ul class="nav navbar-nav">
                 <?php if ($this->session->userdata('level') == 1) { ?>
                     <li class="">
-                        <a href="index.html"> <i class="menu-icon fa fa-id-badge"></i>PREORDER BARANG </a>
+                        <a href="index.html"> <i class="menu-icon fa fa-id-badge"></i>Preorder Barang</a>
                     </li>
                 <?php } ?>
                 <?php if ($this->session->userdata('level') == 1) { ?>
                     <li class="">
-                        <a href="index.html"> <i class="menu-icon fa fa-id-badge"></i>PURCHASING REQUEST </a>
-                    </li>
-                <?php } ?>
-                <?php if ($this->session->userdata('level') == 1) { ?>
-                    <li class="">
-                        <a href="index.html"> <i class="menu-icon fa fa-id-badge"></i>BEAUTY CONTEST</a>
+                        <a href="index.html"> <i class="menu-icon fa fa-id-badge"></i>Beauty Contest</a>
                     </li>
                 <?php } ?>
                 <?php if ($this->session->userdata('level') == 2) { ?>

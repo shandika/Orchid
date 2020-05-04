@@ -14,6 +14,7 @@ class Home extends CI_Controller
 		$this->load->model('Marketing_model', 'marketing');
 		$this->load->model('Keuangan_model', 'keuangan');
 		$this->load->model('Pm_model', 'pm');
+		$this->load->model('purchasing_model', 'purchasing');
 		if ($this->session->userdata('masuk') != TRUE) {
 			echo $this->session->set_flashdata('msg', 'Anda Harus Login Terlebih Dahulu !');
 			redirect('Auth');
@@ -49,8 +50,9 @@ class Home extends CI_Controller
 		$title = 'Home';
 		$data = array(
 			'title' => $title,
+			'query' => $this->purchasing->tampilDataPR()
 		);
-		$this->template->load('layout/template_v', 'customer/dashboard_v', $data);
+		$this->template->load('layout/template_v', 'purchasing/preorder', $data);
 	}
 
 	public function marketing()
@@ -72,7 +74,6 @@ class Home extends CI_Controller
 			'query2' => $this->db->get('project')->result(),
 		);
 		$this->template->load('layout/template_v', 'keuangan/general_ledger', $data);
-
 	}
 
 	public function pm()

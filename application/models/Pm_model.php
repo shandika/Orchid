@@ -30,9 +30,10 @@ class Pm_model extends CI_Model
         $hasil = $query->row();
         return $hasil->idpr;
     }
+
     function cekidangsuranbarangpr()
     {
-        $query = $this->db->query("SELECT MAX(ID_angsuran_barang_pr) as idangsuranbarangpr from barang_pr");
+        $query = $this->db->query("SELECT MAX(ID_angsuran_barang_pr) as idangsuranbarangpr from angsuran_barang_pr");
         $hasil = $query->row();
         return $hasil->idangsuranbarangpr;
     }
@@ -65,7 +66,7 @@ class Pm_model extends CI_Model
         return $this->db->get()->result();
     }
 
-    public function simpanpr($id_pr, $id_ud, $nama, $harga, $jumlah, $total_harga,  $supplier, $jenis_bayar, $lama_cicilan, $ID_angsuran_barang_pr, $waktu_tunggu, $status, $tanggal_pr, $id_pm)
+    public function simpanpr($id_pr, $id_ud, $nama, $harga, $jumlah, $total_harga,  $supplier, $jenis_bayar, $lama_cicilan, $waktu_tunggu, $status, $tanggal_pr, $id_pm)
     {
         $data = [
             'ID_pr' => $id_pr,
@@ -77,7 +78,6 @@ class Pm_model extends CI_Model
             'nama_supplier' => $supplier,
             'jenis_pembayaran' => $jenis_bayar,
             'lama_cicilan' => $lama_cicilan,
-            'ID_angsuran_barang_pr' => $ID_angsuran_barang_pr,
             'waktu_tunggu' => $waktu_tunggu,
             'status' => $status,
             'tanggal_pr' => $tanggal_pr,
@@ -85,5 +85,20 @@ class Pm_model extends CI_Model
         ];
 
         $this->db->insert('barang_pr', $data);
+    }
+
+    public function cicilanpr($id, $angsuranke, $jumlah, $sisa, $status, $id_barang_pr)
+    {
+
+        $data = [
+            'ID_angsuran_barang_pr' => $id,
+            'angsuranke' => $angsuranke,
+            'jumlah_pembayaran' => $jumlah,
+            'sisa_pembayaran' => $sisa,
+            'status' => $status,
+            'ID_barang_pr' => $id_barang_pr,
+        ];
+
+        $this->db->insert('angsuran_barang_pr', $data);
     }
 }

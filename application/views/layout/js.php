@@ -478,6 +478,29 @@
 <script>
     $(document).ready(function() {
 
+        $("#jenis_bayar_pr").change(function() {
+            var typenya = ($("#jenis_bayar_pr").val());
+
+            switch (typenya) {
+                case "cash":
+                    document.getElementById("lama_bayar_pr").disabled = true;
+                    break;
+                case "cicil":
+                    document.getElementById("lama_bayar_pr").disabled = false;
+                    break;
+            }
+
+        });
+
+
+
+    });
+</script>
+
+<!-- Addendum optional -->
+<script>
+    $(document).ready(function() {
+
         $("#jenis_addendum").change(function() {
             var typenya = ($("#jenis_addendum").val());
             var no_ktp = $('#sisa_angsuran_sebelumnya_addendum').val();
