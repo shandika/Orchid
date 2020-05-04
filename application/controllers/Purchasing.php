@@ -25,4 +25,22 @@ class Purchasing extends CI_Controller
         );
         $this->template->load('layout/template_v', 'purchasing/preorder', $data);
     }
+    public function change_status()
+    {
+        $idPr = $this->input->post('ID_pr');
+        $status = 1;
+        $this->purchasing->change_status($idPr, $status);
+
+        redirect('Purchasing', 'refresh');
+    }
+
+    public function delete()
+    {
+        $id = $this->input->post('ID_pr');
+        $this->purchasing->delete($id);
+        if ($this->db->affected_rows() > 0) {
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Data berhasil dihapus</div>');
+        }
+        redirect('Purchasing', 'refresh');
+    }
 }
