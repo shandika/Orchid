@@ -6,7 +6,7 @@ class Purchasing extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('purchasing_model', 'purchasing');
+        $this->load->model('Purchasing_model', 'purchasing');
         if ($this->session->userdata('masuk') != TRUE) {
             echo $this->session->set_flashdata('msg', 'Anda Harus Login Terlebih Dahulu !');
             redirect('Auth', 'refresh');
