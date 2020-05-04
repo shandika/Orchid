@@ -39,8 +39,15 @@ class Pm_model extends CI_Model
     }
     public function delete($id)
     {
+        // $row = $this->db->where('nama_gl', $namaGl)->get($namaGl)->row();
+        // $this->db->where('nama_gl', $namaGl);
+        // $this->db->delete($namaGl);
+
+        $row = $this->db->where('ID_project', $id)->get('project')->row();
+        unlink('./assets/images/project/' . $row->foto);
         $this->db->where('ID_project', $id);
         $this->db->delete($this->_table);
+        return true;
     }
 
     function tambahDataProject($data)
@@ -100,5 +107,17 @@ class Pm_model extends CI_Model
         ];
 
         $this->db->insert('angsuran_barang_pr', $data);
+    }
+
+    function cekIdUnit()
+    {
+        $query = $this->db->query("SELECT MAX(ID_unit) as idunit from unit");
+        $hasil = $query->row();
+        return $hasil->idunit;
+    }
+
+    public function simpanDataUnit($data)
+    {
+        $this->db->insert_batch('unit', $data);
     }
 }

@@ -22,7 +22,7 @@ $jum_pesan = $query->num_rows();
                 <?php } ?>
                 <?php if ($this->session->userdata('level') == 1) { ?>
                     <li class="">
-                        <a href="index.html"> <i class="menu-icon fa fa-id-badge"></i>Beauty Contest</a>
+                        <a href="<?= base_url('Purchasing') ?>"> <i class="menu-icon fa fa-id-badge"></i>Beauty Contest</a>
                     </li>
                 <?php } ?>
                 <?php if ($this->session->userdata('level') == 2) { ?>
