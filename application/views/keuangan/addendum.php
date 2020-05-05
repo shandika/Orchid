@@ -7,7 +7,7 @@
         </div>
     </div>
 </div>
-
+<form>
 <form method="POST" action="<?= base_url('Keuangan/tambahjournal') ?>">
     <div class="form-group col-6">
         <label for="exampleFormControlInput1">Nama Pemohon</label>
@@ -19,7 +19,7 @@
     </div>
     <div class="form-group">
         <label for="formGroupExampleInput">Pilih Addendum</label>
-        <select class="custom-select my-1 mr-sm-2" id="jenis_addendum" name="jenis_addendum">
+        <select class="custom-select my-1 mr-sm-2" id="jenis_addendum" name="jenis_addendum" onchange="loadAddendum()">
             <option value="kosong" selected>Pilih Addendum</option>
             <option value="rubah_angsuran">Rubah Angsuran</option>
             <option value="rubah_injek">Rubah Injek</option>
@@ -33,7 +33,8 @@
     <div id="form_rubah_angsuran" style="display: none">
         <div class="form-group col-4">
             <label for="exampleFormControlInput1">Sisa Angsuran sebelumnya</label>
-            <input type="text" class="form-control" id="sisa_angsuran_sebelumnya_addendum" name="sisa_angsuran_sebelumnya_addendum" placeholder="total" readonly>
+            <!-- <input type="text" class="form-control" id="sisa_angsuran_sebelumnya_addendum" name="sisa_angsuran_sebelumnya_addendum" readonly> -->
+            <div id="sisa_angsuran"></div>
         </div>
         <div class="form-group col-4">
             <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Lama Angsuran </label>
@@ -60,14 +61,15 @@
     <!-- Akhir Form Rubah Angsuran -->
     <!-- Form Rubah Injek -->
     <div id="form_rubah_injek" style="display: none">
-        <div class="form-group col-3">
+        <!-- <div class="form-group col-3">
             <label for="exampleFormControlInput1">Sisa Angsuran Injek</label>
             <input type="text" class="form-control" id="sisa_angsuran_injek_addendum" name="sisa_angsuran_injek_addendum" placeholder="total" readonly>
         </div>
         <div class="form-group col-3">
             <label for="exampleFormControlInput1">Sisa Angsuran Pokok</label>
             <input type="text" class="form-control" id="sisa_angsuran_pokok_addendum" name="sisa_angsuran_injek_addendum" placeholder="total" readonly>
-        </div>
+        </div> -->
+        <div id="sisa_injek"></div>
         <div class="form-group col-3">
             <label for="exampleFormControlInput1">Nominal Injek Baru</label>
             <input type="text" class="form-control" id="injek_baru_addendum" name="injek_baru_addendum" placeholder="Masukan Nominal injek">
@@ -82,13 +84,12 @@
     <div id="form_rubah_unit" style="display: none">
         <div class="form-group col-6">
             <label for="exampleFormControlInput1">Unit Sebelumnya</label>
-            <input type="text" class="form-control" id="unit_sebelumnya_addendum" name="unit_sebelumnya_addendum" placeholder="Nomor Unit" readonly>
+            <!-- <input type="text" class="form-control" id="unit_sebelumnya_addendum" name="unit_sebelumnya_addendum" placeholder="Nomor Unit" readonly> -->
+            <div id="unit_sebelumnya"></div>
         </div>
         <div class="form-group col-6">
             <label for="exampleFormControlInput1">Unit Baru</label>
-            <select class="custom-select my-1 mr-sm-2" id="unit_baru_addendum" name="unit_baru_addendum">
-                <option selected>Pilih Project</option>
-            </select>
+            <div id="pilih_unit"></div>
         </div>
     </div>
     <!-- Akhir Form Rubah Unit -->
@@ -96,12 +97,16 @@
     <div id="form_rubah_project" style="display: none">
         <div class="form-group col-4">
             <label for="exampleFormControlInput1">Project sebelumnya</label>
-            <input type="text" class="form-control" id="project_sebelumnya_addendum" name="project_sebelumnya_addendum" placeholder="Nama Project" readonly>
+            <!-- <input type="text" class="form-control" id="project_sebelumnya_addendum" name="project_sebelumnya_addendum" placeholder="Nama Project" readonly> -->
+            <div id="project_sebelumnya"></div>
         </div>
         <div class="form-group col-4">
             <label for="exampleFormControlInput1">Project baru</label>
             <select class="custom-select my-1 mr-sm-2" id="project_baru_addendum" name="project_baru_addendum">
                 <option selected>Pilih Project</option>
+                <?php foreach ($query1 as $key) : ?>
+                <option value="<?= $key->ID_project; ?>"><?= $key->nama; ?></option>
+                <?php endforeach; ?>
             </select>
         </div>
         <div class="form-group col-4">
