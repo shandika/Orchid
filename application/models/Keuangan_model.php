@@ -23,6 +23,11 @@ class Keuangan_model extends CI_Model
         $query = $this->db->get('project');
         return $query;
     }
+    function cek_project_gl($id){
+        $query = $this->db->query("SELECT nama_gl from project WHERE ID_project='$id'");
+        $hasil = $query->row();
+        return $hasil;
+    }
     function search_gl($nama)
     {
         $this->db->like('nama', $nama, 'BOTH');
@@ -146,5 +151,38 @@ class Keuangan_model extends CI_Model
     {
         $query = $this->db->get($id_project);
         return $query;
+    }
+    public function rubah_angsuran($ktp) {
+        $query = $this->db->query("SELECT SUM(nominal_angsuran_bulanan) as nominal FROM angsuran_bulanan WHERE status = '0' AND no_ktp = '$ktp'");
+        return $query;
+        
+    }
+    public function rubah_injek($ktp) {
+        $query= $this->db->query("SELECT SUM(nominal_injek) as nominal FROM angsuran_injek WHERE status = '0' AND no_ktp = '$ktp'");
+        return $query;
+        
+    }
+    public function rubah_unit($ktp) {
+        $query= $this->db->query("SELECT ID_unit FROM unit_dipesan WHERE no_ktp ='$ktp'");
+        return $query;
+        
+    }
+    public function pilih_unit() {
+        $query= $this->db->query("SELECT unit.ID_unit FROM unit JOIN unit_dipesan ON unit_dipesan.ID_project = unit.ID_project");
+        return $query;
+        
+    }
+    public function rubah_project($ktp) {
+        $query= $this->db->query("SELECT unit_dipesan.ID_project FROM unit_dipesan JOIN unit ON unit_dipesan.ID_unit = unit.ID_unit WHERE unit_dipesan.no_ktp = '$ktp'");
+        return $query;
+        
+    }
+    function get_unit($id_project)
+    {
+        $this->db->where('ID_project', $id_project);
+        $this->db->where('status', 0);
+        $result = $this->db->get('unit')->result();
+
+        return $result;
     }
 }
