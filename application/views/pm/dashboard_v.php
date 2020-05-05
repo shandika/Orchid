@@ -57,16 +57,19 @@
                     </div>
                     <hr>
                     <div class="row">
-                        <div class="col-sm-5 ml-3 ">
-                            <button id="detailProject" class="btn btn-sm btn-info float-right detail" data-toggle="modal" data-target="#projectModal" data-id="<?= $data->ID_project; ?>" data-foto="<?= $data->foto; ?>" data-nama="<?= $data->nama; ?>" data-jmlunit="<?= $data->jumlah_unit; ?>" data-unitIsi="<?= $data->unit_isi; ?>" data-unitKosong="<?= $data->unit_kosong; ?>" data-alamat="<?= $data->alamat; ?>" data-deskripsi="<?= $data->deskripsi; ?>"><i class="fa fa-eye pr-2"></i>Lihat details</button>
+                        <div class="col-sm-6">
+                            <button id="detailProject" class="btn btn-sm btn-info float-left detail" data-toggle="modal" data-target="#projectModal" data-id="<?= $data->ID_project; ?>" data-foto="<?= $data->foto; ?>" data-nama="<?= $data->nama; ?>" data-jmlunit="<?= $data->jumlah_unit; ?>" data-unitIsi="<?= $data->unit_isi; ?>" data-unitKosong="<?= $data->unit_kosong; ?>" data-alamat="<?= $data->alamat; ?>" data-deskripsi="<?= $data->deskripsi; ?>"><i class="fa fa-eye pr-2"></i>Lihat details</button>
                         </div>
-                        <div class="col-sm-6 float-right ml-1">
+                        <div class="col-sm-6 float-right  ">
                             <form action="<?= base_url('Pm/delete') ?>" method="POST">
                                 <input type="hidden" name="ID_project" value="<?= $data->ID_project ?>">
                                 <button onclick="return confirm ('Anda yakin ingin hapus data ini ?')" class="btn btn-sm btn-danger float-right"><i class="fa fa-trash"></i>
                                 </button>
                             </form>
-                            <?= anchor('Pm/edit/' . $data->ID_project, '<button class="btn btn-sm btn-warning float-right mr-1 "><i class="fa fa-edit"></i>Edit</button>') ?>
+                            <?= anchor('Pm/edit/' . $data->ID_project, '<button class="btn btn-sm btn-warning float-right mr-1"><i class="fa fa-edit pr-1"></i>Edit</button>') ?>
+                        </div>
+                        <div class="col-sm-12 mt-1">
+                            <?= anchor('Pm/tambahUnitView/' . $data->ID_project, '<button id="tambahUnit" class="btn btn-sm btn-success float-right"><i class="fa fa-plus pr-1"></i>Tambah Unit</button>') ?>
                         </div>
                     </div>
                 </div>

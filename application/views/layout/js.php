@@ -619,3 +619,49 @@
         }
     }
 </script>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#btn-tambah-formUnit").click(function() {
+            let idProjecet = $(this).attr('data-id');
+            var jumlah = parseInt($("#jumlah-formUnit").val());
+            var nextform = jumlah + 1;
+            $("#insert-formUnit").append("<div class='col-sm-12 mb-3 ml-4'>" +
+                "<b>Data ke " + nextform + ":</b>" +
+                "</div>" +
+                "<input type='hidden' class='form-control' id='idProject' name='idProject[]' value='" + idProjecet + "'>" +
+                "<div class='col-sm-2 ml-4'>" +
+                "<div class='form-group'>" +
+                "<input type='text' class='form-control' id='nomor' name='nomor[]' data-toggle='validator' placeholder='Nomor Unit'> required" +
+                "<div class='help-block with-errors'></div>" +
+                "</div>" +
+                "</div>" +
+                "<div class='col-sm-2  ml-4'>" +
+                "<div class='form-group'>" +
+                "<input type='number' class='form-control' id='type' name='type[]' data-toggle='validator' placeholder='Type Unit'> required" +
+                "<div class='help-block with-errors'></div>" +
+                "</div>" +
+                "</div>" +
+                "<div class='col-sm-2  ml-4'>" +
+                "<div class='form-group'>" +
+                "<input type='number' class='form-control' id='luasBangunan' name='luasBangunan[]' data-toggle='validator' placeholder='Luas Bangunan'> required" +
+                "<div class='help-block with-errors'></div>" +
+                "</div>" +
+                "</div>" +
+                "<div class='col-sm-2  ml-4'>" +
+                "<div class='form-group'>" +
+                "<input type='number' class='form-control' id='luasTanah' name='luasTanah[]' data-toggle='validator' placeholder='Luas Tanah'> required" +
+                "<div class='help-block with-errors'></div>" +
+                "</div>" +
+                "</div>" +
+                "<br>");
+
+            $("#jumlah-formUnit").val(nextform);
+        });
+
+        $("#btn-reset-formUnit").click(function() {
+            $("#insert-formUnit").html(""); // Kita kosongkan isi dari div insert-form
+            $("#jumlah-formUnit").val("1"); // Ubah kembali value jumlah form menjadi 1
+        });
+    });
+</script>

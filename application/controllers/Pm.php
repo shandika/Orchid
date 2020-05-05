@@ -71,7 +71,9 @@ class Pm extends CI_Controller
     public function delete()
     {
         $id = $this->input->post('ID_project');
+        // $namaGl = $this->input->post('nama_gl');
         $this->model->delete($id);
+
         if ($this->db->affected_rows() > 0) {
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Data berhasil dihapus</div>');
         }
@@ -307,6 +309,17 @@ class Pm extends CI_Controller
         $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Data berhasil diubah</div>');
         redirect('Pm', 'refresh');
     }
+
+    public function backPm()
+    {
+        $title = 'Project Manager - Project';
+        $data = array(
+            'title' => $title,
+            'project' => $this->model->getAll()
+        );
+        $this->template->load('layout/template_v', 'pm/dashboard_v', $data);
+    }
+
     public function search()
     {
         $title = 'Home - Project';
@@ -370,5 +383,51 @@ class Pm extends CI_Controller
         $this->model->simpanpr($id_pr, $id_ud, $nama_barang, $harga_barang, $jumlah_barang_pr, $total_harga, $nama_supplier_pr, $jenis_bayar_pr, $lama_bayar_pr, $waktu_tunggunya, $status, $tanggal, $id_pm);
         echo $this->session->set_flashdata('msg', 'success-add-data');
         redirect('Pm/PR', 'refresh');
+    }
+
+    public function tambahUnitView($id)
+    {
+        $where = array('ID_project' => $id);
+        $title = 'Tambah Unit';
+        $data = array(
+            'title' => $title,
+            'project' => $this->model->edit_data($where, 'project')->result()
+        );
+        $this->template->load('layout/template_v', 'pm/tambahUnit_v', $data);
+    }
+
+    public function simpanDataUnit()
+    {
+        $dariDB = $this->model->cekIdUnit();
+        $nourut = substr($dariDB, 3, 4);
+        $kode1 =  $nourut + 1;
+        $kodenya = sprintf("%04s", $kode1);
+        $strkodenya = 'UN' . $kodenya;
+
+        $idUnit = $strkodenya;
+        $idProject = $_POST['idProject'];
+        $nomor = $_POST['nomor'];
+        $type = $_POST['type'];
+        $luasB = $_POST['luasBangunan'];
+        $luasT = $_POST['luasTanah'];
+        $data = array();
+
+
+        $i = 0;
+        foreach ($idProject as $idP) {
+            array_push($data, array(
+                'ID_unit' => $idUnit,
+                'ID_project' => $idP,
+                'nomor'     => $nomor[$i],
+                'type'      => $type[$i],
+                'luas_bangunan' => $luasB[$i],
+                'luas_tanah'    => $luasT[$i]
+            ));
+            $idUnit++;
+            $i++;
+        }
+        $this->model->simpanDataUnit($data);
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Data berhasil Disimpan</div>');
+        redirect('Pm', 'refresh');
     }
 }

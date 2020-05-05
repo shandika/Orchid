@@ -62,8 +62,13 @@
                         <div class="help-block with-errors"></div>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="submit" class=" btn btn-primary" name="edit">Simpan</button>
+                <div class="modal-footer mb-5">
+                    <div>
+                        <a href="<?= base_url('pm/backPm') ?>" class=" btn btn-danger" name="edit">Batal</a>
+                    </div>
+                    <div>
+                        <button type="submit" class=" btn btn-primary" name="edit">Simpan</button>
+                    </div>
                 </div>
             </form>
         <?php endforeach; ?>

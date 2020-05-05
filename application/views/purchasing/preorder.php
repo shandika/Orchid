@@ -42,8 +42,16 @@
                                         <td><?php echo $lama_pembayaran; ?></td>
                                         <td><?php echo $waktu_tunggu; ?></td>
                                         <td>
-                                            <button type="button" class="btn btn-success" id="accept_pr" name="accept_pr"><i class="fa fa-check"></i></button>
-                                            <button type="button" class="btn btn-danger" id="decline_pr" name="decline_pr"><i class="fa fa-times"></i></button>
+                                            <form action="Purchasing/change_status" method="POST">
+                                                <input type="hidden" name="ID_pr" value="<?= $baris->ID_pr; ?>">
+                                                <button type="submit" class="btn btn-success"><i class="fa fa-check"></i></button>
+                                            </form>
+                                        </td>
+                                        <td>
+                                            <form action="Purchasing/delete" method="POST">
+                                                <input type="hidden" name="ID_pr" value="<?= $baris->ID_pr; ?>">
+                                                <button onclick="return confirm ('Anda yakin ingin hapus data ini ?')" class="btn btn-danger"><i class="fa fa-times"></i></button>
+                                            </form>
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>
