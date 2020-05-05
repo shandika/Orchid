@@ -10,7 +10,7 @@ class Auth extends CI_Controller
         $level = $this->session->userdata('level');
         if (!empty($level)) {
             if ($level == 1) {
-                redirect('Home/customer', 'refresh');
+                redirect('Home/purchasing', 'refresh');
             } elseif ($level == 2) {
                 redirect('Home/pm', 'refresh');
             } elseif ($level == 3) {
@@ -74,7 +74,7 @@ class Auth extends CI_Controller
                     $this->session->set_userdata($sesi);
                 }
                 echo $this->session->set_flashdata('msg', 'success-login');
-                redirect('Home/customer', 'refresh');
+                redirect('Home/purchasing', 'refresh');
             }
             $cekProjectManager = $this->auth->cekProjectManager($k, $p);
             if ($cekProjectManager->num_rows() > 0) {

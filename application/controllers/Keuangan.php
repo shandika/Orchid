@@ -54,6 +54,16 @@ class Keuangan extends CI_Controller
         $this->template->load('layout/template_v', 'keuangan/angsuran', $data);
     }
 
+    public function bayar_po()
+    {
+        $title = 'Keuangan - Bayar PO';
+        $data = array(
+            'title' => $title,
+            'query1' => $this->db->get('project')->result(),
+        );
+        $this->template->load('layout/template_v', 'keuangan/bayar_po', $data);
+    }
+
     public function tambahgl()
     {
         $this->form_validation->set_rules('nomor', 'Nomor', 'required|trim|is_unique[general_ledger.nomor]');
