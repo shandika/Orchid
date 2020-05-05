@@ -238,4 +238,81 @@ class Keuangan extends CI_Controller
             echo "</tr>";
         }
     }
+    function rubah_angsuran()
+    {
+        $ktp        = $_GET['no_ktp_addendum'];
+        $data = $this->keuangan->rubah_angsuran($ktp)->result();
+       
+        foreach ($data as $r) {
+
+            echo "<input type='text' class='form-control' value='$r->nominal' readonly>";
+        }
+    }
+    function rubah_injek()
+    {
+        $ktp        = $_GET['no_ktp_addendum'];
+        $data = $this->keuangan->rubah_injek($ktp)->result();
+        $bulan = $this->keuangan->rubah_angsuran($ktp)->result();
+       
+        foreach ($data as $r) {
+            echo "<div class='form-group col-3'>";
+            echo "<label for='exampleFormControlInput1'>Sisa Angsuran Injek</label>";
+            echo "<input type='text' class='form-control' id='sisa_angsuran_injek_addendum' name='sisa_angsuran_injek_addendum' value='$r->nominal' readonly>";
+            echo "</div>";
+        }
+        foreach ($bulan as $b) {
+            echo "<div class='form-group col-3'>";
+            echo "<label for='exampleFormControlInput1'>Sisa Angsuran Pokok</label>";
+            echo "<input type='text' class='form-control' id='sisa_angsuran_pokok_addendum' name='sisa_angsuran_injek_addendum' value='$b->nominal' readonly>";
+            echo "</div>";
+        }
+    }
+    function rubah_unit()
+    {
+        $ktp        = $_GET['no_ktp_addendum'];
+        $data = $this->keuangan->rubah_unit($ktp)->result();
+    
+        foreach ($data as $r) {
+            echo "<input type='text' class='form-control' id='unit_sebelumnya_addendum' name='unit_sebelumnya_addendum' value='$r->ID_unit' readonly>";
+        }
+    }
+    function pilih_unit()
+    {
+        $data = $this->keuangan->pilih_unit()->result();
+        echo "<select class='custom-select my-1 mr-sm-2' id='unit_baru_addendum' name='unit_baru_addendum'>";
+        echo "<option selected>Pilih Project</option>";
+        foreach ($data as $r) {
+            echo "<option value='$r->ID_unit'>$r->ID_unit</option>";
+        }
+        echo "</select>";
+    }
+    function rubah_project()
+    {
+        $ktp        = $_GET['no_ktp_addendum'];
+        $data = $this->keuangan->rubah_project($ktp)->result();
+        
+        foreach ($data as $r) {
+            echo "<input type='text' class='form-control' id='project_sebelumnya_addendum' name='project_sebelumnya_addendum' value='$r->ID_project' readonly>";
+        }
+
+    }
+    function get_unit()
+	{
+		// Ambil data ID Project yang dikirim via ajax post
+		$id_project = $this->input->post('id_project');
+
+		$unit = $this->keuangan->get_unit($id_project);
+
+		// Buat variabel untuk menampung tag-tag option nya
+		// Set defaultnya dengan tag option Pilih
+		$lists = "<option value=''>Pilih Unit</option>";
+
+		foreach ($unit as $data) {
+			$lists .= "<option value='" . $data->ID_unit . "'>" . 'Nomor : ' . $data->nomor . ' / ' . 'Type : ' . $data->type . "</option>"; // Tambahkan tag option ke variabel $lists
+		}
+
+		$callback = array('list_unit' => $lists); // Masukan variabel lists tadi ke dalam array $callback dengan index array : list_kota
+
+		echo json_encode($callback); // konversi varibael $callback menjadi JSON
+	}
 }
