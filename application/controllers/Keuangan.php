@@ -7,6 +7,7 @@ class Keuangan extends CI_Controller
     {
         parent::__construct();
         $this->load->model('Keuangan_model', 'keuangan');
+        $this->load->model('Marketing_model', 'marketing');
         if ($this->session->userdata('masuk') != TRUE) {
             echo $this->session->set_flashdata('msg', 'Anda Harus Login Terlebih Dahulu !');
             redirect('Auth', 'refresh');
@@ -52,6 +53,16 @@ class Keuangan extends CI_Controller
             'title' => $title,
         );
         $this->template->load('layout/template_v', 'keuangan/angsuran', $data);
+    }
+
+    public function bayar_po()
+    {
+        $title = 'Keuangan - Bayar PO';
+        $data = array(
+            'title' => $title,
+            'query1' => $this->db->get('project')->result(),
+        );
+        $this->template->load('layout/template_v', 'keuangan/bayar_po', $data);
     }
 
     public function tambahgl()
@@ -123,8 +134,6 @@ class Keuangan extends CI_Controller
 
     function tambahjournal()
     {
-
-
         $id_project = $this->input->post('project_journal');
         $nomor_gl = $this->input->post('nomor_gl');
         $nomor_gl2 = $this->input->post('nomor_gl2');
@@ -242,10 +251,18 @@ class Keuangan extends CI_Controller
     {
         $ktp        = $_GET['no_ktp_addendum'];
         $data = $this->keuangan->rubah_angsuran($ktp)->result();
-       
+        $injek = $this->keuangan->rubah_injek($ktp)->result();
+        // foreach ($injek as $i) {
+        //     echo "<div class='form-group col-3'>";
+        //     echo "<label for='exampleFormControlInput1'>Sisa Angsuran Injek</label>";
+        //     echo "<input type='text' class='form-control' id='sisa_angsuran_injek_addendum_angsuran' name='sisa_angsuran_injek_addendum_angsuran' value='$i->nominal' readonly>";
+        //     echo "</div>";
+        // }
         foreach ($data as $r) {
-
-            echo "<input type='text' class='form-control' value='$r->nominal' readonly>";
+            echo "<div class='form-group col-3'>";
+            echo "<label for='exampleFormControlInput1'>Sisa Angsuran Sebelumnya</label>";
+            echo "<input type='text' class='form-control' value='$r->nominal'  id='sisa_angsuran_sebelumnya_addendum' name='sisa_angsuran_sebelumnya_addendum' readonly>";
+            echo "</div>";
         }
     }
     function rubah_injek()
@@ -253,7 +270,7 @@ class Keuangan extends CI_Controller
         $ktp        = $_GET['no_ktp_addendum'];
         $data = $this->keuangan->rubah_injek($ktp)->result();
         $bulan = $this->keuangan->rubah_angsuran($ktp)->result();
-       
+
         foreach ($data as $r) {
             echo "<div class='form-group col-3'>";
             echo "<label for='exampleFormControlInput1'>Sisa Angsuran Injek</label>";
@@ -263,7 +280,7 @@ class Keuangan extends CI_Controller
         foreach ($bulan as $b) {
             echo "<div class='form-group col-3'>";
             echo "<label for='exampleFormControlInput1'>Sisa Angsuran Pokok</label>";
-            echo "<input type='text' class='form-control' id='sisa_angsuran_pokok_addendum' name='sisa_angsuran_injek_addendum' value='$b->nominal' readonly>";
+            echo "<input type='text' class='form-control' id='sisa_angsuran_pokok_addendum' name='sisa_angsuran_pokok_addendum' value='$b->nominal' readonly>";
             echo "</div>";
         }
     }
@@ -271,14 +288,15 @@ class Keuangan extends CI_Controller
     {
         $ktp        = $_GET['no_ktp_addendum'];
         $data = $this->keuangan->rubah_unit($ktp)->result();
-    
+
         foreach ($data as $r) {
             echo "<input type='text' class='form-control' id='unit_sebelumnya_addendum' name='unit_sebelumnya_addendum' value='$r->ID_unit' readonly>";
         }
     }
     function pilih_unit()
     {
-        $data = $this->keuangan->pilih_unit()->result();
+        $ktp        = $_GET['no_ktp_addendum'];
+        $data = $this->keuangan->pilih_unit($ktp)->result();
         echo "<select class='custom-select my-1 mr-sm-2' id='unit_baru_addendum' name='unit_baru_addendum'>";
         echo "<option selected>Pilih Project</option>";
         foreach ($data as $r) {
@@ -290,29 +308,94 @@ class Keuangan extends CI_Controller
     {
         $ktp        = $_GET['no_ktp_addendum'];
         $data = $this->keuangan->rubah_project($ktp)->result();
-        
+
         foreach ($data as $r) {
             echo "<input type='text' class='form-control' id='project_sebelumnya_addendum' name='project_sebelumnya_addendum' value='$r->ID_project' readonly>";
         }
-
     }
     function get_unit()
-	{
-		// Ambil data ID Project yang dikirim via ajax post
-		$id_project = $this->input->post('id_project');
+    {
+        // Ambil data ID Project yang dikirim via ajax post
+        $id_project = $this->input->post('id_project');
 
-		$unit = $this->keuangan->get_unit($id_project);
+        $unit = $this->keuangan->get_unit($id_project);
 
-		// Buat variabel untuk menampung tag-tag option nya
-		// Set defaultnya dengan tag option Pilih
-		$lists = "<option value=''>Pilih Unit</option>";
+        // Buat variabel untuk menampung tag-tag option nya
+        // Set defaultnya dengan tag option Pilih
+        $lists = "<option value=''>Pilih Unit</option>";
 
-		foreach ($unit as $data) {
-			$lists .= "<option value='" . $data->ID_unit . "'>" . 'Nomor : ' . $data->nomor . ' / ' . 'Type : ' . $data->type . "</option>"; // Tambahkan tag option ke variabel $lists
-		}
+        foreach ($unit as $data) {
+            $lists .= "<option value='" . $data->ID_unit . "'>" . 'Nomor : ' . $data->nomor . ' / ' . 'Type : ' . $data->type . "</option>"; // Tambahkan tag option ke variabel $lists
+        }
 
-		$callback = array('list_unit' => $lists); // Masukan variabel lists tadi ke dalam array $callback dengan index array : list_kota
+        $callback = array('list_unit' => $lists); // Masukan variabel lists tadi ke dalam array $callback dengan index array : list_kota
 
-		echo json_encode($callback); // konversi varibael $callback menjadi JSON
-	}
+        echo json_encode($callback); // konversi varibael $callback menjadi JSON
+    }
+
+    function tambah_addendum()
+    {
+        $opsinya = $this->input->post('jenis_addendum');
+        $no_ktp = $this->input->post('no_ktp_addendum');
+        $unit_baru = $this->input->post('unit_baru_addendum');
+        $unit_lama = $this->input->post('unit_sebelumnya_addendum');
+        switch ($opsinya) {
+            case 'rubah_angsuran':
+                //ambil ID data angsuran terbesar
+                $dariDB = $this->marketing->cekidangsuranbulanan();
+                $nourut = substr($dariDB, 3, 4);
+                //mengambil data invoice terbesar
+                $dariDB2 = $this->marketing->cekidinvoicebulanan();
+                $nourut2 = substr($dariDB2, 3, 4);
+                $lama_bulanan = $this->input->post('lama_angsuran_bulanan_addendum');
+                $tanggal =     date('d');
+                $bulan = date('m');
+                $tahun = date('y');
+                $nominal_angsuran_bulanan = $this->input->post('angsuran_baru_addendum');
+                $sisa_angsuran_sebelumnya = $this->input->post('sisa_angsuran_sebelumnya_addendum');
+                $harganya = $sisa_angsuran_sebelumnya;
+                $status = 0;
+                $this->keuangan->update_addendum_angsuran($no_ktp);
+                for ($i = 1; $i <= $lama_bulanan; $i++) {
+                    //penentuan ID_angsuran_bulanan + Invoice otomatis
+                    $kode1 =  $nourut + 1;
+                    $kodenya = sprintf("%04s", $kode1);
+                    $strkodenya = 'AB' . $kodenya;
+                    $kodeinvoice = $nourut2 + 1;
+                    $kodenyainvoice = sprintf("%04s", $kodeinvoice);
+                    $strkodeinvoice = "IAB" . $kodenyainvoice;
+                    //akhir penentuan ID_angsuran_bulanan + Invoice otomatis
+                    $angsuran_ke = $i;        //angsuran ke---
+                    $sesudah = $bulan + 1;
+                    if ($sesudah > 12) { //jika bulan sudah lebih dari 12 , maka balik lagi menjadi 1
+                        $sesudah = 1;
+                        $tahun = $tahun + 1; //tahun bertambah jika bulan mencapai 12 dan balik menjadi 1
+                    }
+                    $sisa_angsuran = $harganya - $nominal_angsuran_bulanan;        //pengurangan sisa angsuran
+
+                    if ($sisa_angsuran < $nominal_angsuran_bulanan) {
+                        $nominal_angsuran_bulanan = $harganya;
+                        $sisa_angsuran = $harganya - $nominal_angsuran_bulanan;
+                    } else {
+                        $harganya = $sisa_angsuran;
+                    }
+                    //sisa angsuran menjadi harga acuan untuk di kurangai angsuran
+                    $bulan = $sesudah;                //merubah bulan menjadi bulan yang sudah di tambah
+                    $nourut = $kode1;                //merubah nomor urut menjadi yang sudah di tambah
+                    $nourut2 = $kodeinvoice;        //merubah invoice  menjadi yang sudah di tambah
+                    $this->marketing->proyeksi_angsuran($strkodenya, $no_ktp, $angsuran_ke, $tanggal, $bulan, $tahun, $nominal_angsuran_bulanan, $sisa_angsuran, $status, $strkodeinvoice);
+                }
+                echo $this->session->set_flashdata('msg', 'success-add-data');
+                redirect('Keuangan/addendum');
+                break;
+
+            case 'rubah_unit':
+                $this->keuangan->update_addendum_unit_dipesan($no_ktp, $unit_baru);
+                $this->keuangan->update_addendum_unit($unit_lama);
+                $this->keuangan->update_addendum_unit_tambah($unit_baru);
+                echo $this->session->set_flashdata('msg', 'success-add-data');
+                redirect('Keuangan/addendum');
+                break;
+        }
+    }
 }

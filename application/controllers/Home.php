@@ -30,7 +30,7 @@ class Home extends CI_Controller
 		$level = $this->session->userdata('level');
 		if (!empty($level)) {
 			if ($level == 1) {
-				redirect('Home/customer', 'refresh');
+				redirect('Home/purchasing', 'refresh');
 			} elseif ($level == 2) {
 				redirect('Home/pm', 'refresh');
 			} else {
@@ -45,7 +45,7 @@ class Home extends CI_Controller
 		}
 	}
 
-	public function customer()
+	public function purchasing()
 	{
 		$title = 'Home';
 		$data = array(

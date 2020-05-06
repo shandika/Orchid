@@ -27,7 +27,7 @@ $jum_pesan = $query->num_rows();
                 <?php } ?>
                 <?php if ($this->session->userdata('level') == 2) { ?>
                     <li class="">
-                        <a href="<?php echo base_url('Home/pm'); ?>"> <i class="menu-icon fa fa-tags"></i>Poject</a>
+                        <a href="<?php echo base_url('Home/pm'); ?>"> <i class="menu-icon fa fa-tags"></i>Project</a>
                     </li>
                 <?php } ?>
                 <?php if ($this->session->userdata('level') == 2) { ?>
@@ -43,11 +43,6 @@ $jum_pesan = $query->num_rows();
                 <?php if ($this->session->userdata('level') == 3) { ?>
                     <li class="">
                         <a href="<?php echo base_url('Marketing/akad'); ?>"> <i class="menu-icon fa fa-id-badge"></i>AKAD</a>
-                    </li>
-                <?php } ?>
-                <?php if ($this->session->userdata('level') == 3) { ?>
-                    <li class="">
-                        <a href="<?php echo base_url('Marketing/upload'); ?>"> <i class="menu-icon fa fa-id-badge"></i>LAPORAN</a>
                     </li>
                 <?php } ?>
                 <?php if ($this->session->userdata('level') == 4) { ?>
@@ -70,6 +65,11 @@ $jum_pesan = $query->num_rows();
                         <a href="<?php echo base_url('Keuangan/addendum'); ?>"> <i class="menu-icon fa fa-id-badge"></i>Addendum</a>
                     </li>
                 <?php } ?>
+                <?php if ($this->session->userdata('level') == 4) { ?>
+                    <li class="">
+                        <a href="<?php echo base_url('Keuangan/bayar_po'); ?>"> <i class="menu-icon fa fa-id-badge"></i>Bayar PO</a>
+                    </li>
+                <?php } ?>
             </ul>
         </div><!-- /.navbar-collapse --><br><br><br><br><br><br><br>
         <?php if ($this->session->userdata('level') == 2) { ?>
@@ -83,10 +83,10 @@ $jum_pesan = $query->num_rows();
                             echo "Tidak Ada Pemberitahuan</p>";
                         }
                         ?>
-                        <small><span class="badge badge-success float-right mt-1">Notif</span></small></strong>
+                        <small><span class="badge badge-success float-right mt-1">Notification</span></small></strong>
                 </div>
                 <?php
-                $inbox = $this->db->query("SELECT ID_dp, ID_invoice_dp, nominal_angsuran_dp, angsuran_dp.status, customer.nama, customer.no_ktp FROM customer JOIN angsuran_dp ON customer.no_ktp = angsuran_dp.no_ktp WHERE angsuran_dp.status = 1 AND angsuran_dp.sisa_angsuran='0' ORDER BY angsuran_dp.ID_dp DESC LIMIT 1");
+                $inbox = $this->db->query("SELECT ID_dp, ID_invoice_dp, nominal_angsuran_dp, angsuran_dp.status, customer.nama, customer.no_ktp FROM customer JOIN angsuran_dp ON customer.no_ktp = angsuran_dp.no_ktp WHERE angsuran_dp.status = 1 AND angsuran_dp.sisa_angsuran='0' ORDER BY angsuran_dp.ID_dp DESC LIMIT 5");
                 foreach ($inbox->result_array() as $in) :
                     $nama = $in['nama'];
 

@@ -21,7 +21,7 @@ class Purchasing extends CI_Controller
         $title = 'Keuangan - General Ledger';
         $data = array(
             'title' => $title,
-            'query' => $this->db->get('barang_pr'),
+            'query' => $this->db->get_where('barang_pr', array('status' => 0)),
         );
         $this->template->load('layout/template_v', 'purchasing/preorder', $data);
     }
@@ -30,14 +30,14 @@ class Purchasing extends CI_Controller
         $idPr = $this->input->post('ID_pr');
         $status = 1;
         $this->purchasing->change_status($idPr, $status);
-
         redirect('Purchasing', 'refresh');
     }
 
     public function delete()
     {
-        $id = $this->input->post('ID_pr');
-        $this->purchasing->delete($id);
+        $idPr = $this->input->post('ID_pr');
+        $status = 2;
+        $this->purchasing->change_status($idPr, $status);
         if ($this->db->affected_rows() > 0) {
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Data berhasil dihapus</div>');
         }

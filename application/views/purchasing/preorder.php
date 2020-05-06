@@ -5,7 +5,7 @@
             <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="card">
                     <div class="card-header">
-                        <strong class="card-title">Purchasing request</strong>
+                        <strong class="card-title">Beauty Contest</strong>
                     </div>
                     <div class="card-body">
                         <table id="tabelgl" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
@@ -42,7 +42,7 @@
                                         <td><?php echo $lama_pembayaran; ?></td>
                                         <td><?php echo $waktu_tunggu; ?></td>
                                         <td>
-                                            <form action="Purchasing/change_status" method="POST">
+                                            <form action="<?= base_url('Purchasing/change_status') ?>" method="POST">
                                                 <input type="hidden" name="ID_pr" value="<?= $baris->ID_pr; ?>">
                                                 <button type="submit" class="btn btn-success"><i class="fa fa-check"></i></button>
                                             </form>
