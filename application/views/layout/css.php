@@ -1,5 +1,4 @@
-<link rel="apple-touch-icon" href="<?php echo base_url()?>assets/apple-icon.png">
-<link rel="shortcut icon" href="<?php echo base_url()?>assets/favicon.ico">
+<link rel="shortcut icon" href="<?php echo base_url()?>assets/images/logo4.png">
 
 <link rel="stylesheet" href="<?php echo base_url()?>assets/vendors/bootstrap/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="<?php echo base_url()?>assets/vendors/font-awesome/css/font-awesome.min.css">
