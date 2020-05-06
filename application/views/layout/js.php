@@ -78,8 +78,8 @@
             text: "Data Berhasil disimpan ke database.",
             showHideTransition: 'slide',
             icon: 'success',
-            allowToastClose : false,
-            hideAfter : 5000,
+            allowToastClose: false,
+            hideAfter: 5000,
             position: 'top-right',
             bgColor: '#7EC857'
         });
@@ -107,8 +107,8 @@
             text: "Field Masih ada yang kosong, silahkan isi terlebih dahulu",
             showHideTransition: 'slide',
             icon: 'warning',
-            allowToastClose : false,
-            hideAfter : 5000,
+            allowToastClose: false,
+            hideAfter: 5000,
             position: 'top-right',
             bgColor: 'orange'
         });
@@ -120,8 +120,8 @@
             text: "Gagal Menyimpan Data",
             showHideTransition: 'slide',
             icon: 'error',
-            allowToastClose : false,
-            hideAfter : 5000,
+            allowToastClose: false,
+            hideAfter: 5000,
             position: 'top-right',
             bgColor: 'orange'
         });
@@ -325,10 +325,10 @@
 </script>
 <script type="text/javascript">
     $(document).ready(function() {
-        
+
         $("#nama_angsuran").autocomplete({
             source: "<?php echo site_url('Keuangan/get_autocomplete/?'); ?>",
-            
+
             select: function(event, ui) {
                 $('[name="nama_angsuran"]').val(ui.item.label);
                 $('[name="no_ktp_angsuran"]').val(ui.item.no_ktp);
@@ -862,8 +862,9 @@
                 $('[name="nama_pemohon_addendum"]').val(ui.item.label);
                 $('[name="no_ktp_addendum"]').val(ui.item.no_ktp);
             }
-        });    
+        });
     });
+
     function loadAddendum() {
         var addendum = $("#jenis_addendum").val();
         var ktp = $("#no_ktp_addendum").val();
@@ -876,7 +877,7 @@
                     $("#sisa_angsuran").html(html);
                 }
             });
-        } else if(addendum == "rubah_injek") {
+        } else if (addendum == "rubah_injek") {
             $.ajax({
                 url: "<?php echo base_url(); ?>Keuangan/rubah_injek",
                 data: "no_ktp_addendum=" + ktp,
@@ -884,7 +885,7 @@
                     $("#sisa_injek").html(html);
                 }
             });
-        }else if(addendum == "rubah_unit") {
+        } else if (addendum == "rubah_unit") {
             $.ajax({
                 url: "<?php echo base_url(); ?>Keuangan/rubah_unit",
                 data: "no_ktp_addendum=" + ktp,
@@ -899,7 +900,7 @@
                     $("#pilih_unit").html(html);
                 }
             });
-        }else if(addendum == "rubah_project"){
+        } else if (addendum == "rubah_project") {
             $.ajax({
                 url: "<?php echo base_url(); ?>Keuangan/rubah_project",
                 data: "no_ktp_addendum=" + ktp,
@@ -909,6 +910,7 @@
             });
         }
     }
+
     function loadProject() {
         var addendum = $("#jenis_addendum").val();
         var ktp = $("#no_ktp_addendum").val();
@@ -1092,7 +1094,23 @@
 
     });
 </script>
+<!-- Proyeksi Angsuran baru addendum -->
+<script>
+    $(document).ready(function() {
 
+        $("#lama_angsuran_bulanan_addendum").change(function() {
+            var harga = parseInt($("#sisa_angsuran_sebelumnya_addendum").val());
+            var l_a_b = parseInt($("#lama_angsuran_bulanan_addendum").val());
+            var total = harga / l_a_b;
+            var bagi = total / 1000;
+            var dibulatkan = Math.floor(bagi);
+            var hasilnya = dibulatkan * 1000;
+            $("#angsuran_baru_addendum").val(hasilnya);
+
+
+        });
+    });
+</script>
 <!-- Addendum optional -->
 <script>
     $(document).ready(function() {
@@ -1271,11 +1289,11 @@
     channel.bind('my-event', function(data) {
         // alert(JSON.stringify(data));
         xhr = $.ajax({
-              method : "POST",
-              url : "<?= base_url('Pm/list_notifikasi')?>",
-              success : function(response){
+            method: "POST",
+            url: "<?= base_url('Pm/list_notifikasi') ?>",
+            success: function(response) {
                 $('.list-notifikasi').html(response);
-              }
+            }
         });
     });
 </script>

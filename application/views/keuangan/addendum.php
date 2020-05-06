@@ -7,8 +7,7 @@
         </div>
     </div>
 </div>
-<form>
-<form method="POST" action="<?= base_url('Keuangan/tambahjournal') ?>">
+<form method="POST" action="<?= base_url('Keuangan/tambah_addendum') ?>">
     <div class="form-group col-6">
         <label for="exampleFormControlInput1">Nama Pemohon</label>
         <input type="text" class="form-control" id="nama_pemohon_addendum" name="nama_pemohon_addendum" placeholder="Masukan Nama Pemohon">
@@ -31,12 +30,12 @@
     <br>
     <!-- Form Rubah Angsuran -->
     <div id="form_rubah_angsuran" style="display: none">
-        <div class="form-group col-4">
-            <label for="exampleFormControlInput1">Sisa Angsuran sebelumnya</label>
-            <!-- <input type="text" class="form-control" id="sisa_angsuran_sebelumnya_addendum" name="sisa_angsuran_sebelumnya_addendum" readonly> -->
-            <div id="sisa_angsuran"></div>
-        </div>
-        <div class="form-group col-4">
+        <!-- <div class="form-group col-3">
+                <label for="exampleFormControlInput1">Sisa Angsuran sebelumnya</label> -->
+        <!-- <input type="text" class="form-control" id="sisa_angsuran_sebelumnya_addendum" name="sisa_angsuran_sebelumnya_addendum" readonly>  -->
+        <div id="sisa_angsuran"></div>
+        <!-- </div> -->
+        <div class="form-group col-3">
             <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Lama Angsuran </label>
             <select class="custom-select my-1 mr-sm-2" id="lama_angsuran_bulanan_addendum" name="lama_angsuran_bulanan_addendum">
                 <option selected>Pilih lama</option>
@@ -53,7 +52,7 @@
                 <option value="120">120 bulan / 10 tahun</option>
             </select>
         </div>
-        <div class="form-group col-4">
+        <div class="form-group col-3">
             <label for="exampleFormControlInput1">Angsuran Baru</label>
             <input type="text" class="form-control" id="angsuran_baru_addendum" name="angsuran_baru_addendum" placeholder="" readonly>
         </div>
@@ -105,7 +104,7 @@
             <select class="custom-select my-1 mr-sm-2" id="project_baru_addendum" name="project_baru_addendum">
                 <option selected>Pilih Project</option>
                 <?php foreach ($query1 as $key) : ?>
-                <option value="<?= $key->ID_project; ?>"><?= $key->nama; ?></option>
+                    <option value="<?= $key->ID_project; ?>"><?= $key->nama; ?></option>
                 <?php endforeach; ?>
             </select>
         </div>
