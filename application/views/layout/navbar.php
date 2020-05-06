@@ -47,12 +47,12 @@ $jum_pesan = $query->num_rows();
                 <?php } ?>
                 <?php if ($this->session->userdata('level') == 4) { ?>
                     <li class="">
-                        <a href="<?php echo base_url('Keuangan/journal'); ?>"> <i class="menu-icon fa fa-id-badge"></i>Journal</a>
+                        <a href=" <?php echo base_url('Keuangan/index'); ?>"> <i class="menu-icon fa fa-id-badge"></i>General Ledger</a>
                     </li>
                 <?php } ?>
                 <?php if ($this->session->userdata('level') == 4) { ?>
                     <li class="">
-                        <a href=" <?php echo base_url('Keuangan/index'); ?>"> <i class="menu-icon fa fa-id-badge"></i>General Ledger</a>
+                        <a href="<?php echo base_url('Keuangan/journal'); ?>"> <i class="menu-icon fa fa-id-badge"></i>Journal</a>
                     </li>
                 <?php } ?>
                 <?php if ($this->session->userdata('level') == 4) { ?>
