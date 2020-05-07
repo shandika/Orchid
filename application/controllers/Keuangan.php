@@ -60,9 +60,17 @@ class Keuangan extends CI_Controller
         $title = 'Keuangan - Bayar PO';
         $data = array(
             'title' => $title,
-            'query1' => $this->db->get('project')->result(),
+            'query' => $this->keuangan->bayarPO(),
         );
         $this->template->load('layout/template_v', 'keuangan/bayar_po', $data);
+    }
+
+    function updatePO()
+    {
+        $idPr = $this->input->post('ID_po');
+        $this->keuangan->updatePO($idPr);
+        echo $this->session->set_flashdata('msg', 'success-add-data');
+        redirect('Keuangan/bayar_po');
     }
 
     public function tambahgl()

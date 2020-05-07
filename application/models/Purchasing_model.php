@@ -33,6 +33,9 @@ class Purchasing_model extends CI_Model
             'ID_purchasing' => $id_purchasing,
             'tanggal_approve' => $tanggal_approve,
             'ID_pembayaran_po' => $id_pembayaran_po,
+            'dibayar' => "",
+            'bukti_bayar' => "",
+            'ID_keuangan' => "admin_keuangan",
         ];
         $this->db->insert('po', $data);
     }
