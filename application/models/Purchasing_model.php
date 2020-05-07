@@ -25,4 +25,27 @@ class Purchasing_model extends CI_Model
         $this->db->where('ID_pr', $id);
         $this->db->delete('barang_pr');
     }
+    function tambahPO($id_po, $id_barang_pr, $id_purchasing, $tanggal_approve, $id_pembayaran_po)
+    {
+        $data = [
+            'ID_po' => $id_po,
+            'ID_barang_pr' => $id_barang_pr,
+            'ID_purchasing' => $id_purchasing,
+            'tanggal_approve' => $tanggal_approve,
+            'ID_pembayaran_po' => $id_pembayaran_po,
+        ];
+        $this->db->insert('po', $data);
+    }
+    function cekidpr()
+    {
+        $query = $this->db->query("SELECT MAX(ID_po) as idpr from po");
+        $hasil = $query->row();
+        return $hasil->idpr;
+    }
+    function cekidbayarpo()
+    {
+        $query = $this->db->query("SELECT MAX(ID_pembayaran_po) as idpembayaranpo from po");
+        $hasil = $query->row();
+        return $hasil->idpembayaranpo;
+    }
 }

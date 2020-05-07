@@ -27,9 +27,24 @@ class Purchasing extends CI_Controller
     }
     public function change_status()
     {
+        $dariDB = $this->purchasing->cekidpr();
+        $nourut = substr($dariDB, 3, 4);
+        $kode1 =  $nourut + 1;
+        $kodenya = sprintf("%04s", $kode1);
+        $strkodenya = 'PO' . $kodenya;
+
+        $dariDB1 = $this->purchasing->cekidbayarpo();
+        $nourut1 = substr($dariDB1, 3, 4);
+        $kode2 =  $nourut1 + 1;
+        $kodenya1 = sprintf("%04s", $kode2);
+        $strkodenya1 = 'BPO' . $kodenya1;
+        $id_purchasing = $this->session->userdata('ktp');
+        $tanggal = date('d-m-Y');
         $idPr = $this->input->post('ID_pr');
         $status = 1;
         $this->purchasing->change_status($idPr, $status);
+        $this->purchasing->tambahPO($strkodenya, $idPr, $id_purchasing, $tanggal, $strkodenya1);
+        echo $this->session->set_flashdata('msg', 'success-add-data');
         redirect('Purchasing', 'refresh');
     }
 
