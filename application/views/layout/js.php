@@ -26,7 +26,8 @@
 <script src="<?php echo base_url() ?>assets/plugins/datatables/buttons.print.min.js"></script>
 <!-- Toast -->
 <script type="text/javascript" src="<?php echo base_url() . 'assets/plugins/toast/jquery.toast.min.js' ?>"></script>
-
+<!-- Pusher -->
+<script src="https://js.pusher.com/6.0/pusher.min.js"></script>
 <script>
     (function($) {
         "use strict";
@@ -331,9 +332,8 @@
                 $('[name="nama_pemohon_addendum"]').val(ui.item.label);
                 $('[name="no_ktp_addendum"]').val(ui.item.no_ktp);
             }
-        });
+        });    
     });
-
     function loadAddendum() {
         var addendum = $("#jenis_addendum").val();
         var ktp = $("#no_ktp_addendum").val();
@@ -346,7 +346,7 @@
                     $("#sisa_angsuran").html(html);
                 }
             });
-        } else if (addendum == "rubah_injek") {
+        } else if(addendum == "rubah_injek") {
             $.ajax({
                 url: "<?php echo base_url(); ?>Keuangan/rubah_injek",
                 data: "no_ktp_addendum=" + ktp,
@@ -354,7 +354,7 @@
                     $("#sisa_injek").html(html);
                 }
             });
-        } else if (addendum == "rubah_unit") {
+        }else if(addendum == "rubah_unit") {
             $.ajax({
                 url: "<?php echo base_url(); ?>Keuangan/rubah_unit",
                 data: "no_ktp_addendum=" + ktp,
@@ -369,7 +369,7 @@
                     $("#pilih_unit").html(html);
                 }
             });
-        } else if (addendum == "rubah_project") {
+        }else if(addendum == "rubah_project"){
             $.ajax({
                 url: "<?php echo base_url(); ?>Keuangan/rubah_project",
                 data: "no_ktp_addendum=" + ktp,
@@ -379,7 +379,6 @@
             });
         }
     }
-
     function loadProject() {
         var addendum = $("#jenis_addendum").val();
         var ktp = $("#no_ktp_addendum").val();
@@ -563,23 +562,7 @@
 
     });
 </script>
-<!-- Proyeksi Angsuran baru addendum -->
-<script>
-    $(document).ready(function() {
 
-        $("#lama_angsuran_bulanan_addendum").change(function() {
-            var harga = parseInt($("#sisa_angsuran_sebelumnya_addendum").val());
-            var l_a_b = parseInt($("#lama_angsuran_bulanan_addendum").val());
-            var total = harga / l_a_b;
-            var bagi = total / 1000;
-            var dibulatkan = Math.floor(bagi);
-            var hasilnya = dibulatkan * 1000;
-            $("#angsuran_baru_addendum").val(hasilnya);
-
-
-        });
-    });
-</script>
 <!-- Addendum optional -->
 <script>
     $(document).ready(function() {
@@ -666,11 +649,17 @@
         return string.split(' ').join('');
     }
 </script>
+
+<script>
+    // var debit = document.getElementById("debit_journal");
+    // var kredit = document.getElementById("kredit_journal");
+    // kredit.value = debit;
 </script>
 <script type="text/javascript">
     $(document).ready(function() {
         $('#tabelgl').DataTable({
-
+            dom: 'Bfrtip',
+            buttons: ['copy', 'csv', 'excel', 'pdf', 'print']
         });
     });
 </script>
@@ -758,11 +747,11 @@
     channel.bind('my-event', function(data) {
         // alert(JSON.stringify(data));
         xhr = $.ajax({
-            method: "POST",
-            url: "<?= base_url('Pm/list_notifikasi') ?>",
-            success: function(response) {
+              method : "POST",
+              url : "<?= base_url('Pm/list_notifikasi')?>",
+              success : function(response){
                 $('.list-notifikasi').html(response);
-            }
+              }
         });
     });
 </script>
@@ -830,6 +819,23 @@
         $("#btn-reset-formUnit").click(function() {
             $("#insert-formUnit").html(""); // Kita kosongkan isi dari div insert-form
             $("#jumlah-formUnit").val("1"); // Ubah kembali value jumlah form menjadi 1
+        });
+    });
+</script>
+<!-- Proyeksi Angsuran baru addendum -->
+<script>
+    $(document).ready(function() {
+
+        $("#lama_angsuran_bulanan_addendum").change(function() {
+            var harga = parseInt($("#sisa_angsuran_sebelumnya_addendum").val());
+            var l_a_b = parseInt($("#lama_angsuran_bulanan_addendum").val());
+            var total = harga / l_a_b;
+            var bagi = total / 1000;
+            var dibulatkan = Math.floor(bagi);
+            var hasilnya = dibulatkan * 1000;
+            $("#angsuran_baru_addendum").val(hasilnya);
+
+
         });
     });
 </script>
