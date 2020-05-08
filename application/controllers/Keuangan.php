@@ -68,10 +68,12 @@ class Keuangan extends CI_Controller
     function updatePO()
     {
         $idPr = $this->input->post('ID_po');
-        $this->keuangan->updatePO($idPr);
+        $id_keuangan = $this->session->userdata('ktp');
+        $this->keuangan->updatePO($idPr, $id_keuangan);
         echo $this->session->set_flashdata('msg', 'success-add-data');
         redirect('Keuangan/bayar_po');
     }
+
 
     public function tambahgl()
     {

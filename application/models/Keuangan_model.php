@@ -18,9 +18,10 @@ class Keuangan_model extends CI_Model
         $query = $this->db->query("SELECT po.ID_po, po.ID_barang_pr, po.ID_purchasing, po.tanggal_approve, barang_pr.nama_barang, barang_pr.harga_barang, barang_pr.jumlah, barang_pr.total_harga, barang_pr.nama_supplier, barang_pr.waktu_tunggu, barang_pr.jenis_pembayaran, barang_pr.lama_cicilan FROM po JOIN barang_pr ON po.ID_barang_pr=barang_pr.ID_pr");
         return $query;
     }
-    function updatePO($ID_po)
+    function updatePO($ID_po, $ID_keuangan)
     {
         $this->db->set('dibayar', 'dibayar');
+        $this->db->set('ID_keuangan', $ID_keuangan);
         $this->db->where('ID_po', $ID_po);
         $this->db->update('po');
     }

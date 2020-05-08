@@ -58,12 +58,12 @@
                                                 <button type="submit" class="btn btn-success"><i class="fa fa-check"></i></button>
                                             </form>
                                         </td>
-                                        <td>
+                                        <!-- <td>
                                             <form action="<?= base_url() ?>" method="POST">
                                                 <input type="hidden" name="ID_po" value="<?= $baris->ID_po; ?>">
                                                 <button onclick="return confirm ('Anda yakin ingin hapus data ini ?')" class="btn btn-info"><i class="fa fa-cloud-upload"></i></button>
                                             </form>
-                                        </td>
+                                        </td> -->
                                         <td>
                                             <form action="<?= base_url() ?>" method="POST">
                                                 <input type="hidden" name="ID_po" value="<?= $baris->ID_po; ?>">
