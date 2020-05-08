@@ -332,8 +332,9 @@
                 $('[name="nama_pemohon_addendum"]').val(ui.item.label);
                 $('[name="no_ktp_addendum"]').val(ui.item.no_ktp);
             }
-        });    
+        });
     });
+
     function loadAddendum() {
         var addendum = $("#jenis_addendum").val();
         var ktp = $("#no_ktp_addendum").val();
@@ -346,7 +347,7 @@
                     $("#sisa_angsuran").html(html);
                 }
             });
-        } else if(addendum == "rubah_injek") {
+        } else if (addendum == "rubah_injek") {
             $.ajax({
                 url: "<?php echo base_url(); ?>Keuangan/rubah_injek",
                 data: "no_ktp_addendum=" + ktp,
@@ -354,7 +355,7 @@
                     $("#sisa_injek").html(html);
                 }
             });
-        }else if(addendum == "rubah_unit") {
+        } else if (addendum == "rubah_unit") {
             $.ajax({
                 url: "<?php echo base_url(); ?>Keuangan/rubah_unit",
                 data: "no_ktp_addendum=" + ktp,
@@ -369,7 +370,7 @@
                     $("#pilih_unit").html(html);
                 }
             });
-        }else if(addendum == "rubah_project"){
+        } else if (addendum == "rubah_project") {
             $.ajax({
                 url: "<?php echo base_url(); ?>Keuangan/rubah_project",
                 data: "no_ktp_addendum=" + ktp,
@@ -379,6 +380,7 @@
             });
         }
     }
+
     function loadProject() {
         var addendum = $("#jenis_addendum").val();
         var ktp = $("#no_ktp_addendum").val();
@@ -614,9 +616,6 @@
             }
 
         });
-
-
-
     });
 </script>
 
@@ -747,11 +746,11 @@
     channel.bind('my-event', function(data) {
         // alert(JSON.stringify(data));
         xhr = $.ajax({
-              method : "POST",
-              url : "<?= base_url('Pm/list_notifikasi')?>",
-              success : function(response){
+            method: "POST",
+            url: "<?= base_url('Pm/list_notifikasi') ?>",
+            success: function(response) {
                 $('.list-notifikasi').html(response);
-              }
+            }
         });
     });
 </script>
@@ -837,5 +836,13 @@
 
 
         });
+    });
+</script>
+
+<!-- Update PO -->
+<script>
+    $(document).on("click", ".buktiBayar", function() {
+        var idPO = $(this).data('id');
+        $("#idPO").val(idPO);
     });
 </script>

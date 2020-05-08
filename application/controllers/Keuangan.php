@@ -103,9 +103,22 @@ class Keuangan extends CI_Controller
     }
     function updatePO()
     {
-        $idPr = $this->input->post('ID_po');
+        $config['upload_path'] = './assets/images/bukti_pembayaran/'; //path folder
+        $config['allowed_types'] = 'gif|jpg|png|jpeg|bmp'; //type yang dapat diakses bisa anda sesuaikan
+        $config['encrypt_name'] = TRUE; //Enkripsi nama yang terupload
+        $this->load->library('upload', $config);
+        $this->upload->initialize($config);
+        if (!empty($_FILES['bukti_bayar']['name'])) {
+
+            if ($this->upload->do_upload('bukti_bayar')) {
+                $gbr = $this->upload->data();
+                $gambar             = $gbr['file_name'];
+            }
+        }
+        $bukti = $gambar;
         $id_keuangan = $this->session->userdata('ktp');
-        $this->keuangan->updatePO($idPr, $id_keuangan);
+        $id = $this->input->post('idPO');
+        $this->keuangan->updatePO($id, $id_keuangan, $bukti);
         echo $this->session->set_flashdata('msg', 'success-add-data');
         redirect('Keuangan/bayar_po');
     }
