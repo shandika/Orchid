@@ -53,10 +53,7 @@
                                         <td><?php echo $id_purchasing; ?></td>
 
                                         <td>
-                                            <form action="<?= base_url('Keuangan/updatePO') ?>" method="POST">
-                                                <input type="hidden" name="ID_po" value="<?= $baris->ID_po; ?>">
-                                                <button type="submit" class="btn btn-success"><i class="fa fa-check"></i></button>
-                                            </form>
+                                            <button data-toggle="modal" data-target="#buktiModal" data-id="<?= $baris->ID_po ?>" class="buktiBayar btn btn-success"><i class="fa fa-check"></i></button>
                                         </td>
                                         <!-- <td>
                                             <form action="<?= base_url() ?>" method="POST">
@@ -77,8 +74,34 @@
                     </div>
                 </div>
             </div>
-
-
         </div>
     </div><!-- .animated -->
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="buktiModal" tabindex="-1" role="dialog" aria-labelledby="buktiModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="buktiModalLabel">Konfirmasi Bukti Pembayaran</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="<?= base_url('Keuangan/updatePO') ?>" class="mx-4" role="form" data-toggle="validator" method="POST" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <input type="hidden" name="idPO" id="idPO" value="">
+                    <div class="form-group">
+                        <label for="bukti_bayar">Upload foto bukti pembayaran :</label>
+                        <input type="file" class="form-control" id="bukti_bayar" name="bukti_bayar" rows="2" required=""></input>
+                        <div class="help-block with-errors"></div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
