@@ -48,7 +48,7 @@
                                             </form>
                                         </td>
                                         <td>
-                                            <form action="Purchasing/delete" method="POST">
+                                            <form action="<?= base_url('Purchasing/delete') ?>" method="POST">
                                                 <input type="hidden" name="ID_pr" value="<?= $baris->ID_pr; ?>">
                                                 <button onclick="return confirm ('Anda yakin ingin hapus data ini ?')" class="btn btn-danger"><i class="fa fa-times"></i></button>
                                             </form>

@@ -13,6 +13,18 @@ class Keuangan_model extends CI_Model
         $this->db->insert($namagl, $data);
     }
 
+    function bayarPO()
+    {
+        $query = $this->db->query("SELECT po.ID_po, po.ID_barang_pr, po.ID_purchasing, po.tanggal_approve, barang_pr.nama_barang, barang_pr.harga_barang, barang_pr.jumlah, barang_pr.total_harga, barang_pr.nama_supplier, barang_pr.waktu_tunggu, barang_pr.jenis_pembayaran, barang_pr.lama_cicilan FROM po JOIN barang_pr ON po.ID_barang_pr=barang_pr.ID_pr");
+        return $query;
+    }
+    function updatePO($ID_po, $ID_keuangan)
+    {
+        $this->db->set('dibayar', 'dibayar');
+        $this->db->set('ID_keuangan', $ID_keuangan);
+        $this->db->where('ID_po', $ID_po);
+        $this->db->update('po');
+    }
     function tampilDataGL()
     {
         $query = $this->db->get('general_ledger');
@@ -194,6 +206,14 @@ class Keuangan_model extends CI_Model
         $this->db->where('no_ktp', $no_ktp);
         $this->db->update('angsuran_bulanan', $data);
     }
+    function update_addendum_injek($no_ktp)
+    {
+        $data = [
+            'status' => '2',
+        ];
+        $this->db->where('no_ktp', $no_ktp);
+        $this->db->update('angsuran_injek', $data);
+    }
     function update_addendum_unit_dipesan($no_ktp, $id_unit)
     {
         $data = [
@@ -201,6 +221,20 @@ class Keuangan_model extends CI_Model
         ];
         $this->db->where('no_ktp', $no_ktp);
         $this->db->update('unit_dipesan', $data);
+    }
+    function update_addendum_project($no_ktp, $id_unit, $id_project, $id_project_sebelumnya)
+    {
+        $data = [
+            'ID_unit' => $id_unit,
+            'ID_project' => $id_project,
+        ];
+        $this->db->where('no_ktp', $no_ktp);
+        $this->db->update('unit_dipesan', $data);
+        $this->db->trans_start();
+        $query = $this->db->query("UPDATE project SET unit_kosong = unit_kosong - 1, unit_isi = unit_isi + 1 WHERE ID_project='$id_project'");
+        $query = $this->db->query("UPDATE project SET unit_kosong = unit_kosong + 1, unit_isi = unit_isi - 1 WHERE ID_project='$id_project_sebelumnya'");
+        $this->db->trans_complete();
+        return $query;
     }
     function update_addendum_unit($id_unit)
     {
@@ -217,5 +251,10 @@ class Keuangan_model extends CI_Model
         ];
         $this->db->where('ID_unit', $id_unit);
         $this->db->update('unit', $data);
+    }
+    function update_injek($no_ktp)
+    {
+        $query = $this->db->query("SELECT COUNT(angsuran_ke) as sisa_angsuran FROM angsuran_bulanan WHERE no_ktp='$no_ktp' AND status='0'");
+        return $query;
     }
 }

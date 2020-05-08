@@ -60,10 +60,20 @@ class Keuangan extends CI_Controller
         $title = 'Keuangan - Bayar PO';
         $data = array(
             'title' => $title,
-            'query1' => $this->db->get('project')->result(),
+            'query' => $this->keuangan->bayarPO(),
         );
         $this->template->load('layout/template_v', 'keuangan/bayar_po', $data);
     }
+
+    function updatePO()
+    {
+        $idPr = $this->input->post('ID_po');
+        $id_keuangan = $this->session->userdata('ktp');
+        $this->keuangan->updatePO($idPr, $id_keuangan);
+        echo $this->session->set_flashdata('msg', 'success-add-data');
+        redirect('Keuangan/bayar_po');
+    }
+
 
     public function tambahgl()
     {
@@ -270,17 +280,24 @@ class Keuangan extends CI_Controller
         $ktp        = $_GET['no_ktp_addendum'];
         $data = $this->keuangan->rubah_injek($ktp)->result();
         $bulan = $this->keuangan->rubah_angsuran($ktp)->result();
+        $lama = $this->keuangan->update_injek($ktp)->result();
 
         foreach ($data as $r) {
-            echo "<div class='form-group col-3'>";
+            echo "<div class='form-group col-2'>";
             echo "<label for='exampleFormControlInput1'>Sisa Angsuran Injek</label>";
             echo "<input type='text' class='form-control' id='sisa_angsuran_injek_addendum' name='sisa_angsuran_injek_addendum' value='$r->nominal' readonly>";
             echo "</div>";
         }
         foreach ($bulan as $b) {
-            echo "<div class='form-group col-3'>";
+            echo "<div class='form-group col-2'>";
             echo "<label for='exampleFormControlInput1'>Sisa Angsuran Pokok</label>";
             echo "<input type='text' class='form-control' id='sisa_angsuran_pokok_addendum' name='sisa_angsuran_pokok_addendum' value='$b->nominal' readonly>";
+            echo "</div>";
+        }
+        foreach ($lama as $l) {
+            echo "<div class='form-group col-2'>";
+            echo "<label for='exampleFormControlInput1'>Lama angsuran</label>";
+            echo "<input type='text' class='form-control' id='lama_angsuran_pokok_addendum' name='lama_angsuran_pokok_addendum' value='$l->sisa_angsuran' readonly>";
             echo "</div>";
         }
     }
@@ -335,10 +352,29 @@ class Keuangan extends CI_Controller
 
     function tambah_addendum()
     {
+
         $opsinya = $this->input->post('jenis_addendum');
         $no_ktp = $this->input->post('no_ktp_addendum');
         $unit_baru = $this->input->post('unit_baru_addendum');
         $unit_lama = $this->input->post('unit_sebelumnya_addendum');
+        $unit_dipilih_project = $this->input->post('unit_baru_project_addendum');
+        $project_baru = $this->input->post('project_baru_addendum');
+        $project_sebelumnya = $this->input->post('project_sebelumnya_addendum');
+        $sisa_angsuran_injek = intval($this->input->post('sisa_angsuran_injek_addendum'));
+        $sisa_angsuran_bulanan = intval($this->input->post('sisa_angsuran_pokok_addendum'));
+        $sisa_total = $sisa_angsuran_bulanan + $sisa_angsuran_injek;
+        $injek_baru = intval($this->input->post('injek_baru_addendum'));
+        $lama_injek_baru = intval($this->input->post('lama_injek_baru_addendum'));
+        $totalnya = $sisa_total - ($injek_baru * $lama_injek_baru);
+        $total_injek = $injek_baru * $lama_injek_baru;
+
+        $lamanya_angsuran = $this->input->post('lama_angsuran_pokok_addendum');
+        $total = $totalnya / $lamanya_angsuran;
+        $bagi = $total / 1000;
+        $dibulatkan = floor($bagi);
+        $hasilnya = $dibulatkan * 1000;
+
+
         switch ($opsinya) {
             case 'rubah_angsuran':
                 //ambil ID data angsuran terbesar
@@ -356,6 +392,7 @@ class Keuangan extends CI_Controller
                 $harganya = $sisa_angsuran_sebelumnya;
                 $status = 0;
                 $this->keuangan->update_addendum_angsuran($no_ktp);
+
                 for ($i = 1; $i <= $lama_bulanan; $i++) {
                     //penentuan ID_angsuran_bulanan + Invoice otomatis
                     $kode1 =  $nourut + 1;
@@ -393,6 +430,82 @@ class Keuangan extends CI_Controller
                 $this->keuangan->update_addendum_unit_dipesan($no_ktp, $unit_baru);
                 $this->keuangan->update_addendum_unit($unit_lama);
                 $this->keuangan->update_addendum_unit_tambah($unit_baru);
+                echo $this->session->set_flashdata('msg', 'success-add-data');
+                redirect('Keuangan/addendum');
+                break;
+            case 'rubah_project':
+                $this->keuangan->update_addendum_project($no_ktp, $unit_dipilih_project, $project_baru, $project_sebelumnya);
+                echo $this->session->set_flashdata('msg', 'success-add-data');
+                redirect('Keuangan/addendum');
+                break;
+
+            case 'rubah_injek':
+                //ambil ID data angsuran injek
+                $dariDB5 = $this->marketing->cekidinjek();
+                $nourut5 = substr($dariDB5, 3, 4);
+                //mengambil data invoice terbesar injek
+                $dariDB6 = $this->marketing->cekidinvoiceinjek();
+                $nourut6 = substr($dariDB6, 3, 4);
+                $this->keuangan->update_addendum_angsuran($no_ktp);
+                $this->keuangan->update_addendum_injek($no_ktp);
+                $tanggal =     date('d');
+                $bulan = date('m');
+                $tahun = date('y');
+                $status = 0;
+                for ($i = 1; $i <= $lama_injek_baru; $i++) {
+                    //penentuan ID_angsuran_bulanan + Invoice otomatis
+
+                    $kode1 =  $nourut5 + 1;
+                    $kodenya = sprintf("%04s", $kode1);
+                    $strkodenya = 'AIJ' . $kodenya;
+                    $kodeinvoice = $nourut6 + 1;
+                    $kodenyainvoice = sprintf("%04s", $kodeinvoice);
+                    $strkodeinvoice = "IIJ" . $kodenyainvoice;
+                    $nourut5 = $kode1;                //merubah nomor urut menjadi yang sudah di tambah
+                    $nourut6 = $kodeinvoice;        //merubah invoice  menjadi yang sudah di tambah
+                    $angsuran_ke = $i;
+
+                    $sisa_angsuran = $total_injek - $injek_baru;
+                    $tahunnya = $tahun + 1;
+                    $tahun = $tahunnya;
+                    $this->marketing->proyeksi_angsuran_injek($strkodenya, $no_ktp, $angsuran_ke, $tanggal, $bulan, $tahunnya, $injek_baru, $sisa_angsuran, $status, $strkodeinvoice);
+                    $total_injek = $sisa_angsuran;
+                }
+                for ($i = 1; $i <= $lamanya_angsuran; $i++) {
+                    //ambil ID data angsuran terbesar
+                    $dariDB = $this->marketing->cekidangsuranbulanan();
+                    $nourut = substr($dariDB, 3, 4);
+                    //mengambil data invoice terbesar
+                    $dariDB2 = $this->marketing->cekidinvoicebulanan();
+                    $nourut2 = substr($dariDB2, 3, 4);
+                    //penentuan ID_angsuran_bulanan + Invoice otomatis
+                    $kode1 =  $nourut + 1;
+                    $kodenya = sprintf("%04s", $kode1);
+                    $strkodenya = 'AB' . $kodenya;
+                    $kodeinvoice = $nourut2 + 1;
+                    $kodenyainvoice = sprintf("%04s", $kodeinvoice);
+                    $strkodeinvoice = "IAB" . $kodenyainvoice;
+                    //akhir penentuan ID_angsuran_bulanan + Invoice otomatis
+                    $angsuran_ke = $i;        //angsuran ke---
+                    $sesudah = $bulan + 1;
+                    if ($sesudah > 12) { //jika bulan sudah lebih dari 12 , maka balik lagi menjadi 1
+                        $sesudah = 1;
+                        $tahun = $tahun + 1; //tahun bertambah jika bulan mencapai 12 dan balik menjadi 1
+                    }
+                    $sisa_angsuran = $totalnya - $hasilnya;        //pengurangan sisa angsuran
+
+                    if ($sisa_angsuran < $hasilnya) {
+                        $hasilnya = $totalnya;
+                        $sisa_angsuran = $totalnya - $hasilnya;
+                    } else {
+                        $totalnya = $sisa_angsuran;
+                    }
+                    //sisa angsuran menjadi harga acuan untuk di kurangai angsuran
+                    $bulan = $sesudah;                //merubah bulan menjadi bulan yang sudah di tambah
+                    $nourut = $kode1;                //merubah nomor urut menjadi yang sudah di tambah
+                    $nourut2 = $kodeinvoice;        //merubah invoice  menjadi yang sudah di tambah
+                    $this->marketing->proyeksi_angsuran($strkodenya, $no_ktp, $angsuran_ke, $tanggal, $bulan, $tahun, $hasilnya, $sisa_angsuran, $status, $strkodeinvoice);
+                }
                 echo $this->session->set_flashdata('msg', 'success-add-data');
                 redirect('Keuangan/addendum');
                 break;
