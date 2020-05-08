@@ -581,17 +581,6 @@
     });
 </script>
 <!-- Addendum optional -->
-
-<!-- Addendum injek -->
-<script>
-    $(document).ready(function() {
-        $("#injek_baru_addendum").keyup(function() {
-
-        });
-
-    });
-</script>
-<!-- Akhir Addendum injek -->
 <script>
     $(document).ready(function() {
 

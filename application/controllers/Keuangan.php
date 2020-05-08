@@ -64,7 +64,43 @@ class Keuangan extends CI_Controller
         );
         $this->template->load('layout/template_v', 'keuangan/bayar_po', $data);
     }
+    public function laporan_laba_rugi()
+    {
+        $title = 'Keuangan - Laporan Keuangan';
+        $data = array(
+            'title' => $title,
+            'query' => $this->db->get('project')->result(),
+        );
+        $this->template->load('layout/template_v', 'keuangan/laba_rugi', $data);
+    }
+    public function laporan_neraca()
+    {
+        $title = 'Keuangan - Laporan Keuangan';
+        $data = array(
+            'title' => $title,
+            'query' => $this->db->get('project')->result(),
+        );
+        $this->template->load('layout/template_v', 'keuangan/neraca', $data);
+    }
 
+    public function laporan_pasiva()
+    {
+        $title = 'Keuangan - Laporan Keuangan';
+        $data = array(
+            'title' => $title,
+            'query' => $this->db->get('project')->result(),
+        );
+        $this->template->load('layout/template_v', 'keuangan/pasiva', $data);
+    }
+    public function laporan_cashflow()
+    {
+        $title = 'Keuangan - Laporan Keuangan';
+        $data = array(
+            'title' => $title,
+            'query' => $this->db->get('project')->result(),
+        );
+        $this->template->load('layout/template_v', 'keuangan/cashflow', $data);
+    }
     function updatePO()
     {
         $idPr = $this->input->post('ID_po');
