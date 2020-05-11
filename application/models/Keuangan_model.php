@@ -258,4 +258,14 @@ class Keuangan_model extends CI_Model
         $query = $this->db->query("SELECT COUNT(angsuran_ke) as sisa_angsuran FROM angsuran_bulanan WHERE no_ktp='$no_ktp' AND status='0'");
         return $query;
     }
+    public function pilih_penjualan($project)
+    {
+        $query = $this->db->query("SELECT * FROM $project WHERE nama='Penjualan' ");
+        return $query;
+    }
+    public function pilih_hp($project)
+    {
+        $query = $this->db->query("SELECT * FROM $project WHERE nama='Biaya pokok penjualan' ");
+        return $query;
+    }
 }
