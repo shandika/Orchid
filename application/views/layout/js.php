@@ -872,6 +872,7 @@
         });
     }
 </script>
+<!-- Neraca -->
 <script type="text/javascript">
     function loadnrc() {
         var project = $("#project_nrc").val();
@@ -884,3 +885,5 @@
         });
     }
 </script>
+
+
