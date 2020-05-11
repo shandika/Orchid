@@ -857,3 +857,16 @@
         $("#idPO").val(idPO);
     });
 </script>
+<!-- Laba Rugi -->
+<script type="text/javascript">
+    function loadlr() {
+        var project = $("#project_LR").val();
+            $.ajax({
+                url: "<?php echo base_url(); ?>Keuangan/sort_lr",
+                data: "project_LR=" + project,
+                success: function(html) {
+                    $("#lr").html(html);
+                }
+            });
+        }
+</script>
