@@ -560,4 +560,25 @@ class Keuangan extends CI_Controller
                 break;
         }
     }
+    function sort_lr()
+    {
+        $project        =  $_GET['project_LR'];
+        $penjualan      =  $this->keuangan->pilih_penjualan($project)->result();
+        $harga_pokok    =  $this->keuangan->pilih_hp($project)->result();
+        
+        foreach ($penjualan as $p) {
+
+            echo "<div class='form-group col-4'>";
+            echo "<label for='formGroupExampleInput'>Penjualan</label>";
+            echo "<input type='text' class='form-control' id='penjualan_LR' name='penjualan_LR' value='$p->nominal' readonly>";
+            echo "</div>";
+
+        }
+        foreach ($harga_pokok as $h) {
+            echo "<div class='form-group col-4'>";
+            echo "<label for='formGroupExampleInput'>Penjualan</label>";
+            echo "<input type='text' class='form-control' id='harga_pokok_LR' name='harga_pokok_LR' value='$h->nominal' readonly>";
+            echo "</div>";
+        }
+    }
 }
