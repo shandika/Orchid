@@ -7,14 +7,15 @@
         <?php endforeach; ?>
     </select>
 </div>
-<div class="form-group col-4">
+<!-- <div class="form-group col-4">
     <label for="formGroupExampleInput">Penjualan</label>
     <input type="text" class="form-control" id="penjualan_LR" name="penjualan_LR" placeholder="Otomatis Terisi" readonly>
 </div>
 <div class="form-group col-4">
     <label for="formGroupExampleInput">Harga Pokok Penjualan</label>
     <input type="text" class="form-control" id="harga_pokok_LR" name="harga_pokok_LR" placeholder="Otomatis Terisi" readonly>
-</div>
+</div> -->
+<div id="lr"></div>
 <div class="form-group col-4">
     <label for="formGroupExampleInput">Laba Bruto</label>
     <input type="text" class="form-control" id="laba_bruto_LR" name="no_ktp_angsuran" placeholder="Otomatis Terisi" readonly>
