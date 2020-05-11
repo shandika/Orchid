@@ -260,12 +260,158 @@ class Keuangan_model extends CI_Model
     }
     public function pilih_penjualan($project)
     {
-        $query = $this->db->query("SELECT * FROM $project WHERE nama='Penjualan' ");
+        $query = $this->db->query("SELECT nominal FROM $project WHERE nomor LIKE '14%'");
         return $query;
     }
     public function pilih_hp($project)
     {
-        $query = $this->db->query("SELECT * FROM $project WHERE nama='Biaya pokok penjualan' ");
+        $query = $this->db->query("SELECT * FROM $project WHERE nomor LIKE '15%' ");
+        return $query;
+    }
+    public function pilih_biaya_operasional($project)
+    {
+        $query = $this->db->query("SELECT SUM(nominal) as nominal FROM $project WHERE nomor LIKE '16%'");
+        return $query;
+    }
+    public function pilih_biaya_promo_marketing($project)
+    {
+        $query = $this->db->query("SELECT * FROM $project WHERE nomor LIKE '17%'");
+        return $query;
+    }
+    public function pilih_biaya_sewa_kantor($project)
+    {
+        $query = $this->db->query("SELECT * FROM $project WHERE nomor LIKE '18%'");
+        return $query;
+    }
+    public function pilih_biaya_marketing_fee($project)
+    {
+        $query = $this->db->query("SELECT * FROM $project WHERE nomor LIKE '19%'");
+        return $query;
+    }
+    public function pilih_biaya_listrik($project)
+    {
+        $query = $this->db->query("SELECT * FROM $project WHERE nomor LIKE '20%'");
+        return $query;
+    }
+    public function pilih_biaya_kurir($project)
+    {
+        $query = $this->db->query("SELECT * FROM $project WHERE nomor LIKE '21%'");
+        return $query;
+    }
+    public function pilih_biaya_gaji_karyawan($project)
+    {
+        $query = $this->db->query("SELECT * FROM $project WHERE nomor LIKE '22%'");
+        return $query;
+    }
+
+    public function pilih_biaya_perijinan($project)
+    {
+        $query = $this->db->query("SELECT SUM(nominal) as nominal FROM $project WHERE nomor LIKE '23%'");
+        return $query;
+    }
+    public function pilih_biaya_tukang($project)
+    {
+        $query = $this->db->query("SELECT * FROM $project WHERE nomor LIKE '24%'");
+        return $query;
+    }
+    public function pilih_biaya_sewa_mobil($project)
+    {
+        $query = $this->db->query("SELECT * FROM $project WHERE nomor LIKE '25%'");
+        return $query;
+    }
+    public function pilih_biaya_bensin($project)
+    {
+        $query = $this->db->query("SELECT * FROM $project WHERE nomor LIKE '26%'");
+        return $query;
+    }
+    public function pilih_biaya_admin_bank($project)
+    {
+        $query = $this->db->query("SELECT * FROM $project WHERE nomor LIKE '28%'");
+        return $query;
+    }
+    public function pilih_biaya_pendapatan_bunga($project)
+    {
+        $query = $this->db->query("SELECT * FROM $project WHERE nomor LIKE '29%'");
+        return $query;
+    }
+    public function pilih_biaya_entertaiment($project)
+    {
+        $query = $this->db->query("SELECT * FROM $project WHERE nomor LIKE '30%'");
+        return $query;
+    }
+    public function pilih_biaya_donasi($project)
+    {
+        $query = $this->db->query("SELECT * FROM $project WHERE nomor LIKE '31%'");
+        return $query;
+    }
+    public function pilih_biaya_pematangan_lahan($project)
+    {
+        $query = $this->db->query("SELECT SUM(nominal) as nominal FROM $project WHERE nomor LIKE '32%'");
+        return $query;
+    }
+    public function pilih_biaya_pembangunan($project)
+    {
+        $query = $this->db->query("SELECT * FROM $project WHERE nomor LIKE '33%'");
+        return $query;
+    }
+    public function pilih_biaya_pembebanan($project)
+    {
+        $query = $this->db->query("SELECT SUM(nominal) as nominal FROM $project WHERE nomor LIKE '35%'");
+        return $query;
+    }
+    public function pilih_biaya_pajak_penghasilan($project)
+    {
+        $query = $this->db->query("SELECT * FROM $project WHERE nomor LIKE '27%'");
+        return $query;
+    }
+    public function pilih_neraca_kas_kecil($project)
+    {
+        $query = $this->db->query("SELECT * FROM $project WHERE nama ='Kas kecil'");
+        return $query;
+    }
+    public function pilih_neraca_bank($project)
+    {
+        $query = $this->db->query("SELECT * FROM $project WHERE nama ='Bank'");
+        return $query;
+    }
+    public function pilih_neraca_piutang_usaha($project)
+    {
+        $query = $this->db->query("SELECT * FROM $project WHERE nama ='Piutang Usaha'");
+        return $query;
+    }
+    public function pilih_neraca_piutang_kredit_rumah($project)
+    {
+        $query = $this->db->query("SELECT SUM(nominal) as nominal FROM $project WHERE nama ='Piutang Usaha kredit rumah'");
+        return $query;
+    }
+    public function pilih_neraca_piutang_karyawan($project)
+    {
+        $query = $this->db->query("SELECT * FROM $project WHERE nama ='Piutang Karyawan'");
+        return $query;
+    }
+    public function pilih_neraca_uang_muka($project)
+    {
+        $query = $this->db->query("SELECT * FROM $project WHERE nomor LIKE '5%'");
+        return $query;
+    }
+    public function pilih_neraca_barang_jadi($project)
+    {
+        $query = $this->db->query("SELECT * FROM $project WHERE nama ='Barang jadi'");
+        return $query;
+    }
+    public function pilih_neraca_pekerjaan_dalam_progress($project)
+    {
+        $query = $this->db->query("SELECT * FROM $project WHERE nama ='Pekerjaan dalam progress'");
+        return $query;
+    }
+    public function pilih_neraca_tanah_dan_bangunan($project)
+    {
+        $query = $this->db->query("SELECT * FROM $project WHERE nomor LIKE '7%'");
+        return $query;
+    }
+    public function pilih_neraca_peralatan_kantor($project)
+    {
+        $query = $this->db->query("SELECT * FROM $project WHERE nomor LIKE '8%'");
         return $query;
     }
 }

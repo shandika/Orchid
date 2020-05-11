@@ -560,25 +560,320 @@ class Keuangan extends CI_Controller
                 break;
         }
     }
+    function sort_neraca()
+    {
+        $project        =  $_GET['project_nrc'];
+        $neraca_kas = $this->keuangan->pilih_neraca_kas_kecil($project)->result();
+        $neraca_bank = $this->keuangan->pilih_neraca_bank($project)->result();
+        $neraca_piutang_usaha = $this->keuangan->pilih_neraca_piutang_usaha($project)->result();
+        $neraca_piutang_kredit_rumah = $this->keuangan->pilih_neraca_piutang_kredit_rumah($project)->result();
+        $neraca_piutang_karyawan = $this->keuangan->pilih_neraca_piutang_karyawan($project)->result();
+        $neraca_uang_muka = $this->keuangan->pilih_neraca_uang_muka($project)->result();
+        $neraca_barang = $this->keuangan->pilih_neraca_barang_jadi($project)->result();
+        $neraca_pekerjaan = $this->keuangan->pilih_neraca_pekerjaan_dalam_progress($project)->result();
+        $neraca_tanah_dan_bangunan = $this->keuangan->pilih_neraca_tanah_dan_bangunan($project)->result();
+        $neraca_peralatan_kantor = $this->keuangan->pilih_biaya_sewa_kantor($project)->result();
+
+
+        //neraca
+        foreach ($neraca_kas as $na) {
+            echo "<div class='col-12'>";
+            echo "<h4 style='text-align: center' class='col-12'>Aktiva</h4>";
+            echo "<br>";
+            echo "</div>";
+            echo "<br>";
+            echo "<div>";
+            echo "<h6 class='col-12'>Aktiva Lancar</h6>";
+            echo "</div>";
+            echo "<br>";
+            echo "<div class='form-group col-4'>";
+            echo "<label for='formGroupExampleInput'>Kas Kecil</label>";
+            echo "<input type='text' class='form-control' id='neraca_kas_kecil' name='neraca_kas_kecil' value='$na->nominal' readonly>";
+            echo "</div>";
+            $tna = $na->nominal;
+        }
+        foreach ($neraca_bank as $nb) {
+            echo "<div class='form-group col-4'>";
+            echo "<label for='formGroupExampleInput'>Bank</label>";
+            echo "<input type='text' class='form-control' id='neraca_bank' name='neraca_bank' value='$nb->nominal' readonly>";
+            echo "</div>";
+            $tnb = $nb->nominal;
+        }
+        foreach ($neraca_piutang_usaha as $nc) {
+            echo "<div class='form-group col-4'>";
+            echo "<label for='formGroupExampleInput'>Piutang Usaha</label>";
+            echo "<input type='text' class='form-control' id='neraca_piutang_usaha' name='neraca_piutang_usaha' value='$nc->nominal' readonly>";
+            echo "</div>";
+            $tnc = $nc->nominal;
+        }
+        foreach ($neraca_piutang_kredit_rumah as $nd) {
+            echo "<div class='form-group col-4'>";
+            echo "<label for='formGroupExampleInput'>Piutang Usaha Kredit Rumah</label>";
+            echo "<input type='text' class='form-control' id='neraca_piutang_kredit_rumah' name='neraca_piutang_kredit_rumah' value='$nd->nominal' readonly>";
+            echo "</div>";
+            $tnd = $nd->nominal;
+        }
+        foreach ($neraca_piutang_karyawan as $ne) {
+            echo "<div class='form-group col-4'>";
+            echo "<label for='formGroupExampleInput'>Piutang karyawan</label>";
+            echo "<input type='text' class='form-control' id='neraca_piutang_karyawan' name='neraca_piutang_karyawan' value='$ne->nominal' readonly>";
+            echo "</div>";
+            $tne = $ne->nominal;
+        }
+        foreach ($neraca_uang_muka as $nf) {
+            echo "<div class='form-group col-4'>";
+            echo "<label for='formGroupExampleInput'>Uang Muka</label>";
+            echo "<input type='text' class='form-control' id='neraca_uang_muka' name='neraca_uang_muka' value='$nf->nominal' readonly>";
+            echo "</div>";
+            echo "<div class='col-12'>";
+            echo "<br>";
+            echo "<h6>Persediaan</h6>";
+            echo "<br>";
+            echo "</div>";
+            $tnf = $nf->nominal;
+        }
+        foreach ($neraca_barang as $ng) {
+            echo "<div class='form-group col-4'>";
+            echo "<label for='formGroupExampleInput'>Barang Jadi</label>";
+            echo "<input type='text' class='form-control' id='neraca_barang' name='neraca_barang' value='$ng->nominal' readonly>";
+            echo "</div>";
+            $tng = $ng->nominal;
+        }
+        foreach ($neraca_pekerjaan as $nh) {
+            echo "<div class='form-group col-4'>";
+            echo "<label for='formGroupExampleInput'>Pekerjaan dalam progress</label>";
+            echo "<input type='text' class='form-control' id='neraca_pekerjaan' name='neraca_pekerjaan' value='$nh->nominal' readonly>";
+            echo "</div>";
+            $tnh = $nh->nominal;
+            $tnz = $tna + $tnb + $tnc + $tnd + $tne + $tnf + $tng + $tnh;
+            echo "<div class='form-group col-12'>";
+            echo "<label for='formGroupExampleInput'>Total Aktiva Lancar</label>";
+            echo "<input type='text' class='form-control' id='neraca_pekerjaan' name='neraca_pekerjaan' value='$tnz' readonly>";
+            echo "</div>";
+            echo "<div class='col-12'>";
+            echo "<br>";
+            echo "</div>";
+            echo "<div class='col-12'>";
+            echo "<h6>Aktiva Tidak Lancar</h6>";
+            echo "<br>";
+            echo "</div>";
+        }
+        foreach ($neraca_tanah_dan_bangunan as $ni) {
+            echo "<div class='form-group col-4'>";
+            echo "<label for='formGroupExampleInput'>Tanah dan Bangunan</label>";
+            echo "<input type='text' class='form-control' id='neraca_tanah_dan_bangunan' name='neraca_tanah_dan_bangunan' value='$ni->nominal' readonly>";
+            echo "</div>";
+            $tni = $ni->nominal;
+        }
+        foreach ($neraca_peralatan_kantor as $nj) {
+            echo "<div class='form-group col-4'>";
+            echo "<label for='formGroupExampleInput'>Peralatan Kantor</label>";
+            echo "<input type='text' class='form-control' id='neraca_tanah_dan_bangunan' name='neraca_tanah_dan_bangunan' value='$nj->nominal' readonly>";
+            echo "</div>";
+            $tnj = $nj->nominal;
+            $tnx = $tni + $tnj;
+            echo "<div class='form-group col-12'>";
+            echo "<label for='formGroupExampleInput'>Total Aktiva Tidak Lancar</label>";
+            echo "<input type='text' class='form-control' id='neraca_pekerjaan' name='neraca_pekerjaan' value='$tnx' readonly>";
+        }
+    }
+
+
+
     function sort_lr()
     {
         $project        =  $_GET['project_LR'];
         $penjualan      =  $this->keuangan->pilih_penjualan($project)->result();
         $harga_pokok    =  $this->keuangan->pilih_hp($project)->result();
-        
-        foreach ($penjualan as $p) {
+        $biaya_oprasi = $this->keuangan->pilih_biaya_operasional($project)->result();
+        $biaya_promosi = $this->keuangan->pilih_biaya_promo_marketing($project)->result();
+        $biaya_sewa_kantor = $this->keuangan->pilih_biaya_sewa_kantor($project)->result();
+        $biaya_marketing_fee = $this->keuangan->pilih_biaya_marketing_fee($project)->result();
+        $biaya_kurir = $this->keuangan->pilih_biaya_kurir($project)->result();
+        $biaya_listrik = $this->keuangan->pilih_biaya_listrik($project)->result();
+        $biaya_gaji_karyawan = $this->keuangan->pilih_biaya_gaji_karyawan($project)->result();
+        $biaya_perijinan = $this->keuangan->pilih_biaya_perijinan($project)->result();
+        $biaya_tukang = $this->keuangan->pilih_biaya_tukang($project)->result();
+        $biaya_sewa_mobil = $this->keuangan->pilih_biaya_sewa_mobil($project)->result();
+        $biaya_bensin = $this->keuangan->pilih_biaya_bensin($project)->result();
+        $biaya_admin_bank = $this->keuangan->pilih_biaya_admin_bank($project)->result();
+        $biaya_pendaptan_bunga = $this->keuangan->pilih_biaya_pendapatan_bunga($project)->result();
+        $biaya_entertaiment = $this->keuangan->pilih_biaya_entertaiment($project)->result();
+        $biaya_donasi = $this->keuangan->pilih_biaya_donasi($project)->result();
+        $biaya_pematangan_lahan = $this->keuangan->pilih_biaya_pematangan_lahan($project)->result();
+        $biaya_pembebanan_unit = $this->keuangan->pilih_biaya_pembebanan($project)->result();
+        $biaya_pajak = $this->keuangan->pilih_biaya_pajak_penghasilan($project)->result();
+        $biaya_pembangunan = $this->keuangan->pilih_biaya_pembangunan($project)->result();
 
+        //Laba Rugi
+        foreach ($penjualan as $a) {
             echo "<div class='form-group col-4'>";
             echo "<label for='formGroupExampleInput'>Penjualan</label>";
-            echo "<input type='text' class='form-control' id='penjualan_LR' name='penjualan_LR' value='$p->nominal' readonly>";
+            echo "<input type='text' class='form-control' id='penjualan_LR' name='penjualan_LR' value='$a->nominal' readonly>";
             echo "</div>";
-
+            $harganya = $a->nominal;
         }
-        foreach ($harga_pokok as $h) {
+        foreach ($harga_pokok as $b) {
             echo "<div class='form-group col-4'>";
-            echo "<label for='formGroupExampleInput'>Penjualan</label>";
-            echo "<input type='text' class='form-control' id='harga_pokok_LR' name='harga_pokok_LR' value='$h->nominal' readonly>";
+            echo "<label for='formGroupExampleInput'>Harga pokok Penjualan</label>";
+            echo "<input type='text' class='form-control' id='harga_pokok_LR' name='harga_pokok_LR' value='$b->nominal' readonly>";
+            echo "</div>";
+            $pokoknya = $b->nominal;
+            $laba_bruto = $harganya - $pokoknya;
+            echo "<div class='form-group col-4'>";
+            echo "<label for='formGroupExampleInput'>Laba Bruto</label>";
+            echo "<input type='text' class='form-control' id='harga_pokok_LR' name='harga_pokok_LR' value='$laba_bruto' readonly>";
+            echo "</div>";
+            echo "<div class='col-12'>";
+            echo "<h5 style='text-align: center' class='col-12'>Biaya Operasional</h5>";
+            echo "<br>";
+            echo "</div>";
+            echo "<br>";
+        }
+        foreach ($biaya_oprasi as $c) {
+            echo "<div class='form-group col-3'>";
+            echo "<label for='formGroupExampleInput'>Biaya Operasional Kantor</label>";
+            echo "<input type='text' class='form-control' id='lr1' name='lr1' value='$c->nominal' readonly>";
+            echo "</div>";
+            $tc = $c->nominal;
+        }
+        foreach ($biaya_promosi as $d) {
+            echo "<div class='form-group col-3'>";
+            echo "<label for='formGroupExampleInput'>Biaya Promosi & Marketing</label>";
+            echo "<input type='text' class='form-control' id='lr2' name='lr2' value='$d->nominal' readonly>";
+            echo "</div>";
+            $td = $d->nominal;
+        }
+        foreach ($biaya_sewa_kantor as $e) {
+            echo "<div class='form-group col-3'>";
+            echo "<label for='formGroupExampleInput'>Biaya Sewa kantor</label>";
+            echo "<input type='text' class='form-control' id='lr3' name='lr3' value='$e->nominal' readonly>";
+            echo "</div>";
+            $te = $e->nominal;
+        }
+        foreach ($biaya_marketing_fee as $f) {
+            echo "<div class='form-group col-3'>";
+            echo "<label for='formGroupExampleInput'>Biaya Marketing Fee</label>";
+            echo "<input type='text' class='form-control' id='lr4' name='lr4' value='$f->nominal' readonly>";
+            echo "</div>";
+            $tf = $f->nominal;
+        }
+        foreach ($biaya_kurir as $g) {
+            echo "<div class='form-group col-3'>";
+            echo "<label for='formGroupExampleInput'>Biaya Kurir</label>";
+            echo "<input type='text' class='form-control' id='lr5' name='lr5' value='$g->nominal' readonly>";
+            echo "</div>";
+            $tg = $g->nominal;
+        }
+        foreach ($biaya_listrik as $h) {
+            echo "<div class='form-group col-3'>";
+            echo "<label for='formGroupExampleInput'>Biaya Bayar Listrik</label>";
+            echo "<input type='text' class='form-control' id='lr6' name='lr6' value='$h->nominal' readonly>";
+            echo "</div>";
+            $th = $h->nominal;
+        }
+        foreach ($biaya_gaji_karyawan as $i) {
+            echo "<div class='form-group col-3'>";
+            echo "<label for='formGroupExampleInput'>Biaya Gaji Karyawan</label>";
+            echo "<input type='text' class='form-control' id='lr7' name='lr7' value='$i->nominal' readonly>";
+            echo "</div>";
+            $ti = $i->nominal;
+        }
+        foreach ($biaya_perijinan as $j) {
+            echo "<div class='form-group col-3'>";
+            echo "<label for='formGroupExampleInput'>Biaya Perijinan</label>";
+            echo "<input type='text' class='form-control' id='lr8' name='lr8' value='$j->nominal' readonly>";
+            echo "</div>";
+            $tj = $j->nominal;
+        }
+        foreach ($biaya_tukang as $k) {
+            echo "<div class='form-group col-3'>";
+            echo "<label for='formGroupExampleInput'>Biaya Tukang</label>";
+            echo "<input type='text' class='form-control' id='lr9' name='lr9' value='$k->nominal' readonly>";
+            echo "</div>";
+            $tk = $k->nominal;
+        }
+        foreach ($biaya_sewa_mobil as $l) {
+            echo "<div class='form-group col-3'>";
+            echo "<label for='formGroupExampleInput'>Biaya Sewa Mobil</label>";
+            echo "<input type='text' class='form-control' id='lr10' name='lr10' value='$l->nominal' readonly>";
+            echo "</div>";
+            $tl = $l->nominal;
+        }
+        foreach ($biaya_bensin as $m) {
+            echo "<div class='form-group col-3'>";
+            echo "<label for='formGroupExampleInput'>Biaya Bensin, Toll dan Parkir</label>";
+            echo "<input type='text' class='form-control' id='lr11' name='lr11' value='$m->nominal' readonly>";
+            echo "</div>";
+            $tm = $m->nominal;
+        }
+        foreach ($biaya_admin_bank as $n) {
+            echo "<div class='form-group col-3'>";
+            echo "<label for='formGroupExampleInput'>Biaya Admin Bank</label>";
+            echo "<input type='text' class='form-control' id='lr12' name='lr12' value='$n->nominal' readonly>";
+            echo "</div>";
+            $tn = $n->nominal;
+        }
+        foreach ($biaya_pendaptan_bunga as $o) {
+            echo "<div class='form-group col-3'>";
+            echo "<label for='formGroupExampleInput'>Pendapatan Bunga</label>";
+            echo "<input type='text' class='form-control' id='lr13' name='lr13' value='$o->nominal' readonly>";
+            echo "</div>";
+            $to = $o->nominal;
+        }
+        foreach ($biaya_entertaiment as $p) {
+            echo "<div class='form-group col-3'>";
+            echo "<label for='formGroupExampleInput'>Biaya Entertaiment</label>";
+            echo "<input type='text' class='form-control' id='lr14' name='lr14' value='$p->nominal' readonly>";
+            echo "</div>";
+            $tp = $p->nominal;
+        }
+        foreach ($biaya_donasi as $q) {
+            echo "<div class='form-group col-3'>";
+            echo "<label for='formGroupExampleInput'>Biaya Donasi dan Sumbangan</label>";
+            echo "<input type='text' class='form-control' id='lr15' name='lr15' value='$q->nominal' readonly>";
+            echo "</div>";
+            $tq = $q->nominal;
+        }
+        foreach ($biaya_pembangunan as $t) {
+            $tt = $t->nominal;
+        }
+        foreach ($biaya_pematangan_lahan as $r) {
+            $tr = $r->nominal;
+            $trr = $tr + $tt;
+            echo "<div class='form-group col-3'>";
+            echo "<label for='formGroupExampleInput'>Biaya Pematangan Lahan & Pembangunan</label>";
+            echo "<input type='text' class='form-control' id='lr16' name='lr16' value='$trr' readonly>";
             echo "</div>";
         }
+        foreach ($biaya_pembebanan_unit as $s) {
+            echo "<div class='form-group col-3'>";
+            echo "<label for='formGroupExampleInput'>Biaya Pembebanan Per Unit</label>";
+            echo "<input type='text' class='form-control' id='lr17' name='lr17' value='$s->nominal' readonly>";
+            echo "</div>";
+            $ts = $s->nominal;
+            $laba_kotor = $tc + $td + $te + $tf + $tg + $th + $ti + $tj + $tk + $tl + $tm + $tn + $to + $tp + $tq + $ts + $trr + $laba_bruto;
+            echo " <div class='col-12'>";
+            echo "<br>";
+            echo "</div>";
+            echo "<div class='form-group col-4'>";
+            echo "<label for='formGroupExampleInput'>Laba Kotor Sebelum pajak</label>";
+            echo "<input type='text' class='form-control' id='lr17' name='lr17' value='$laba_kotor' readonly>";
+            echo "</div>";
+        }
+        foreach ($biaya_pajak as $u) {
+            echo "<div class='form-group col-4'>";
+            echo "<label for='formGroupExampleInput'>Pajak penghasilan</label>";
+            echo "<input type='text' class='form-control' id='lr17' name='lr17' value='$u->nominal' readonly>";
+            echo "</div>";
+            $tu = $u->nominal;
+            $tv = $laba_kotor - $tu;
+            echo "<div class='form-group col-4'>";
+            echo "<label for='formGroupExampleInput'>Laba Setelah Pajak</label>";
+            echo "<input type='text' class='form-control' id='lr17' name='lr17' value='$tv' readonly>";
+            echo "</div>";
+        }
+        //Akhir LAba Rugi
+
     }
 }
