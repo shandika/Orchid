@@ -887,6 +887,7 @@ class Keuangan extends CI_Controller
                 break;
         }
     }
+//awal neraca
     function sort_neraca()
     {
         $project        =  $_GET['project_nrc'];
@@ -1009,14 +1010,13 @@ class Keuangan extends CI_Controller
             echo "<input type='text' class='form-control' id='neraca_aktiva_tidak_lancar' name='neraca_aktiva_tidak_lancar' value='$tnv' readonly>";
         }
     }
-
-
-
+//akhir neraca
     function sort_lr()
     {
         $project        =  $_GET['project_LR'];
         $penjualan      =  $this->keuangan->pilih_penjualan($project)->result();
         $harga_pokok    =  $this->keuangan->pilih_hp($project)->result();
+
         $biaya_oprasi = $this->keuangan->pilih_biaya_operasional($project)->result();
         $biaya_promosi = $this->keuangan->pilih_biaya_promo_marketing($project)->result();
         $biaya_sewa_kantor = $this->keuangan->pilih_biaya_sewa_kantor($project)->result();
@@ -1206,6 +1206,5 @@ class Keuangan extends CI_Controller
             echo "</div>";
         }
         //Akhir LAba Rugi
-
     }
 }
