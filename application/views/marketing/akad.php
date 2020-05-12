@@ -1,16 +1,5 @@
-<div class="breadcrumbs">
-    <div class="col-sm-6">
-        <div class="page-header float-left">
-            <div class="page-title">
-                <h1>Akad</h1>
-            </div>
-        </div>
-    </div>
-</div>
-
 <div>
     <h3 class="text-center">Formulir Akad</h3>
-    <br>
     <br>
 
     <form name="form-akad" action="<?= base_url('Marketing/tambahakad') ?>" method="post">
@@ -34,7 +23,7 @@
         <div class="form-row">
             <div class="form-group col-4">
                 <label for="inputAddress">DP</label>
-                <input type="number" class="form-control" id="dp" placeholder="Nominal DP" name="dp">
+                <input type="text" class="form-control" id="dp" placeholder="Nominal DP" name="dp">
             </div>
             <div class="form-group col-4">
                 <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Lama Angsuran DP</label>
@@ -68,6 +57,18 @@
             <div class="form-group col-4">
                 <label for="inputAddress">Total Injeksi</label>
                 <input type="number" name="total_injeksi" id="total_injeksi" class="form-control">
+                <br>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="inputEmail3" class="col-sm-1 col-form-label">Voucher / Diskon</label>
+            <div class="col-sm-11">
+                <select class="custom-select my-1 mr-sm-2" id="project" name="project">
+                    <option selected>Pilih Project</option>
+                    <?php foreach ($query2 as $key) : ?>
+                        <option value="<?= $key->ID_voucher; ?>"><?= $key->nama; ?> ( Senilai : Rp.<?= $key->nominal; ?> )</option>
+                    <?php endforeach; ?>
+                </select>
             </div>
         </div>
         <div class="form-row">

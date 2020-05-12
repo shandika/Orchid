@@ -40,6 +40,11 @@ $jum_pesan = $query->num_rows();
                         <a href="<?php echo base_url('Marketing/akad'); ?>"> <i class="menu-icon fa fa-handshake-o"></i>Akad</a>
                     </li>
                 <?php } ?>
+                <?php if ($this->session->userdata('level') == 3) { ?>
+                    <li class="">
+                        <a href="<?php echo base_url('Marketing/voucher'); ?>"> <i class="menu-icon fa fa-ticket"></i>Voucher</a>
+                    </li>
+                <?php } ?>
                 <?php if ($this->session->userdata('level') == 4) { ?>
                     <li class="">
                         <a href="<?php echo base_url('Keuangan/journal'); ?>"> <i class="menu-icon fa fa-pencil"></i>Journal</a>

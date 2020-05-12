@@ -178,7 +178,8 @@ class Marketing extends CI_Controller
 		$data = array(
 			'title' => $title,
 			'query1' => $this->db->get('project')->result(),
-			'idunitdipesan' 	=> $kode
+			'idunitdipesan' 	=> $kode,
+			'query2' => $this->db->get('voucher')->result()
 
 		);
 		$this->template->load('layout/template_v', 'marketing/akad', $data);

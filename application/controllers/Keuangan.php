@@ -28,6 +28,333 @@ class Keuangan extends CI_Controller
         $this->template->load('layout/template_v', 'keuangan/general_ledger', $data);
     }
 
+    public function cetak_neraca()
+    {
+        $neraca_kas_kecil = $this->input->post('neraca_kas_kecil');
+        $neraca_bank = $this->input->post('neraca_bank');
+        $neraca_piutang_usaha = $this->input->post('neraca_piutang_usaha');
+        $neraca_piutang_kredit_rumah = $this->input->post('neraca_piutang_kredit_rumah');
+        $neraca_piutang_karyawan = $this->input->post('neraca_piutang_karyawan');
+        $neraca_uang_muka = $this->input->post('neraca_uang_muka');
+        $neraca_barang = $this->input->post('neraca_barang');
+        $neraca_pekerjaan = $this->input->post('neraca_pekerjaan');
+        $neraca_total_aktiva_lancar = $neraca_bank + $neraca_kas_kecil + $neraca_pekerjaan + $neraca_piutang_karyawan + $neraca_barang + $neraca_piutang_usaha + $neraca_piutang_kredit_rumah + $neraca_uang_muka;
+        $neraca_tanah_dan_bangunan = $this->input->post('neraca_tanah_dan_bangunan');
+        $neraca_peralatan_kantor = $this->input->post('neraca_peralatan_kantor');
+        $neraca_total_aktiva_tidak_lancar = $neraca_tanah_dan_bangunan + $neraca_peralatan_kantor;
+        $total_neraca = $neraca_total_aktiva_lancar + $neraca_total_aktiva_tidak_lancar;
+        $nama_gl = $this->input->post('project_nrc');
+        $bulan = date('m');
+        $tahun = date('Y');
+        $cetak = date('d/m/Y');
+        $nama_bulan = date("F", strtotime('00-' . $bulan . '-01'));
+        $nama_pdf = "Laporan_neraca_bulan_" . $nama_bulan;
+        $mpdf = new \Mpdf\Mpdf();
+        $html = '<!DOCTYPE html>
+        <html lang="en">
+        
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Document</title>
+            <style>
+                table {
+                    font-family: arial, sans-serif;
+                    border-collapse: collapse;
+                    width: 100%;
+                    margin-left: auto;
+                    margin-right: auto;
+                    margin-top: 30px;
+                }
+                
+                td,
+                th {
+                    border: 1px solid #dddddd;
+                    text-align: left;
+                    padding: 8px;
+                }
+            </style>
+        </head>
+        
+        <body>
+            <div style="text-align: center;">
+                <div style="float: right;vertical-align:top;margin-left: 40px;word-wrap: break-word;">
+                    <p style="line-height: 15px;font-size: 23px;font-weight: bold;">Laporan Neraca Royal Orchid Syariah</p>
+                    <p style="line-height: 10px;font-size: 18px;">' . $nama_gl . '</p>
+                    <p style="line-height: 10px;font-size: 18px;">Bulan ' . $nama_bulan . ' ' . $tahun . '</p>
+                    <p style="line-height: 10px;font-size: 15px;">Dicetak : ' . $cetak . '</p>
+                </div>
+            </div>
+        
+            <table>
+                <tr>
+                    <th colspan="3">Aktiva</th>
+                </tr>
+                <tr>
+                    <th colspan="3" style="text-align: center;">Aktiva Lancar</th>
+                </tr>
+                <tr>
+                    <td colspan="2">Kas Kecil</td>
+                    <td colspan="1">' . $neraca_kas_kecil . '</td>
+                </tr>
+                <tr>
+                    <td colspan="2">Bank</td>
+                    <td colspan="1">' . $neraca_bank . '</td>
+                </tr>
+                <tr>
+                    <td><br></td>
+                </tr>
+                <tr>
+                    <td colspan="2">Piutang Usaha</td>
+                    <td colspan="1">' . $neraca_piutang_usaha . '</td>
+                </tr>
+                <tr>
+                    <td colspan="2">Piutang Usaha Kredit Rumah</td>
+                    <td colspan="1">' . $neraca_piutang_kredit_rumah . '</td>
+                </tr>
+                <tr>
+                    <td colspan="2">Piutang Karyawan</td>
+                    <td colspan="1">' . $neraca_piutang_karyawan . '</td>
+                </tr>
+                <tr>
+                    <td colspan="2">Uang Muka</td>
+                    <td colspan="1">' . $neraca_uang_muka . '</td>
+                </tr>
+                <tr>
+                    <th colspan="3" style="text-align: center;">Persediaan</th>
+                </tr>
+                <tr>
+                    <td colspan="2">Barang Jadi</td>
+                    <td colspan="1">' . $neraca_barang . '</td>
+                </tr>
+                <tr>
+                    <td colspan="2">Pekerjaan dalam progress</td>
+                    <td colspan="1">' . $neraca_pekerjaan . '</td>
+                </tr>
+                <tr>
+                    <td><br></td>
+                </tr>
+                <tr>
+                    <td colspan="2">Total Aktiva Lancar</td>
+                    <td colspan="1">' . $neraca_total_aktiva_lancar . '</td>
+                </tr>
+                <tr>
+                    <td><br></td>
+                </tr>
+                <tr>
+                    <th colspan="3" style="text-align: center;">Aktiva Tidak Lancar</th>
+                </tr>
+                <tr>
+                    <td colspan="2">Tanah dan bangunan</td>
+                    <td colspan="1">' . $neraca_tanah_dan_bangunan . '</td>
+                </tr>
+                <tr>
+                    <td colspan="2">Peralatan Kantor</td>
+                    <td colspan="1">' . $neraca_peralatan_kantor . '</td>
+                </tr>
+                <tr>
+                    <td><br></td>
+                </tr>
+                <tr>
+                    <tr>
+                        <td colspan="2">Total Aktiva Tidak Lancar</td>
+                        <td colspan="1">' . $neraca_total_aktiva_tidak_lancar . '</td>
+                    </tr>
+                    <tr>
+                        <td><br></td>
+                    </tr>
+                    <tr>
+                        <tr>
+                            <td colspan="2">Total Aktiva</td>
+                            <td colspan="1">' . $total_neraca . '</td>
+                        </tr>
+            </table>
+        </body>
+        
+        </html>';
+        // Write some HTML code:
+        $mpdf->WriteHTML($html);
+
+        // Output a PDF file directly to the browser
+        $mpdf->Output($nama_pdf, \Mpdf\Output\Destination::INLINE);
+    }
+    public function cetak_laba()
+    {
+        $penjualan_LR = $this->input->post('penjualan_LR');
+        $harga_pokok_LR = $this->input->post('harga_pokok_LR');
+        $laba_bruto = $this->input->post('laba_bruto');
+        $lr1 = $this->input->post('lr1');
+        $lr2 = $this->input->post('lr2');
+        $lr3 = $this->input->post('lr3');
+        $lr4 = $this->input->post('lr4');
+        $lr5 = $this->input->post('lr5');
+        $lr6 = $this->input->post('lr6');
+        $lr7 = $this->input->post('lr7');
+        $lr8 = $this->input->post('lr8');
+        $lr9 = $this->input->post('lr9');
+        $lr10 = $this->input->post('lr10');
+        $lr11 = $this->input->post('lr11');
+        $lr12 = $this->input->post('lr12');
+        $lr13 = $this->input->post('lr13');
+        $lr14 = $this->input->post('lr14');
+        $lr15 = $this->input->post('lr15');
+        $lr16 = $this->input->post('lr16');
+        $lr17 = $this->input->post('lr17');
+        $laba_kotor = $this->input->post('laba_kotor');
+        $pajak_penghasilan = $this->input->post('pajak_penghasilan');
+        $laba_setelah_pajak = $this->input->post('laba_setelah_pajak');
+        $nama_gl = $this->input->post('project_LR');
+        $bulan = date('m');
+        $tahun = date('Y');
+        $cetak = date('d/m/Y');
+        $nama_bulan = date("F", strtotime('00-' . $bulan . '-01'));
+        $nama_pdf = "Laporan_Penjualan&Laba_bulan_" . $nama_bulan;
+        $mpdf = new \Mpdf\Mpdf();
+        $html = '<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 30px;
+        }
+        
+        td,
+        th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+    </style>
+</head>
+
+<body>
+    <div style="text-align: center;">
+        <div style="vertical-align:top;margin-left: 40px;word-wrap: break-word;">
+            <p style="line-height: 15px;font-size: 23px;font-weight: bold;">Laporan Penjualan dan Laba Royal Orchid Syariah
+            </p>
+            <p style="line-height: 10px;font-size: 18px;">' . $nama_gl . '</p>
+                    <p style="line-height: 10px;font-size: 18px;">Bulan ' . $nama_bulan . ' ' . $tahun . '</p>
+                    <p style="line-height: 10px;font-size: 15px;">Dicetak : ' . $cetak . '</p>
+        </div>
+    </div>
+    <table>
+        <tr>
+            <td colspan="2">Penjualan</td>
+            <td colspan="1">' . $penjualan_LR . '</td>
+        </tr>
+        <tr>
+            <td colspan="2">Harga Pokok Penjualan</td>
+            <td colspan="1">' . $harga_pokok_LR . '</td>
+        </tr>
+        <tr>
+            <td colspan="2">Laba Bruto</td>
+            <td colspan="1">' . $laba_bruto . '</td>
+        </tr>
+        <tr>
+            <th colspan="3" style="text-align: center;">Biaya Operasional</th>
+        </tr>
+        <tr>
+            <td colspan="2">Biaya Operasional Kantor</td>
+            <td colspan="1">' . $lr1 . '</td>
+        </tr>
+        <tr>
+            <td colspan="2">Biaya Promosi & Marketing</td>
+            <td colspan="1">' . $lr2 . '</td>
+        </tr>
+        <tr>
+            <td colspan="2">Biaya Sewa Kantor</td>
+            <td colspan="1">' . $lr3 . '</td>
+        </tr>
+        <tr>
+            <td colspan="2">Biaya marketing_fee</td>
+            <td colspan="1">' . $lr4 . '</td>
+        </tr>
+        <tr>
+            <td colspan="2">Biaya Kurir</td>
+            <td colspan="1">' . $lr5 . '</td>
+        </tr>
+        <tr>
+            <td colspan="2">Biaya Listrik</td>
+            <td colspan="1">' . $lr6 . '</td>
+        </tr>
+        <tr>
+            <td colspan="2">Biaya Gaji Karyawan</td>
+            <td colspan="1">' . $lr7 . '</td>
+        </tr>
+        <tr>
+            <td colspan="2">Biaya Perijinan</td>
+            <td colspan="1">' . $lr8 . '</td>
+        </tr>
+        <tr>
+            <td colspan="2">Biaya Tukang</td>
+            <td colspan="1">' . $lr9 . '</td>
+        </tr>
+        <tr>
+            <td colspan="2">Biaya Sewa Mobil</td>
+            <td colspan="1">' . $lr10 . '</td>
+        </tr>
+        <tr>
+            <td colspan="2">Biaya Bensin, Toll dan Parkir</td>
+            <td colspan="1">' . $lr11 . '</td>
+        </tr>
+        <tr>
+            <td colspan="2">Biaya Admin Bank</td>
+            <td colspan="1">' . $lr12 . '</td>
+        </tr>
+        <tr>
+            <td colspan="2">Pendapatan Bunga</td>
+            <td colspan="1">' . $lr13 . '</td>
+        </tr>
+        <tr>
+            <td colspan="2">Biaya Entertaiment</td>
+            <td colspan="1">' . $lr14 . '</td>
+        </tr>
+        <tr>
+            <td colspan="2">Biaya Donasi & Sumbangan</td>
+                <td colspan="1">' . $lr15 . '</td>
+        </tr>
+        <tr>
+            <td colspan="2">Biaya Pematagan Lahan & Pembangunan</td>
+            <td colspan="1">' . $lr16 . '</td>
+        </tr>
+        <tr>
+            <td colspan="2">Biaya Pembebanan Per Unit</td>
+            <td colspan="1">' . $lr17 . '</td>
+        </tr>
+        <tr>
+            <td colspan="3"><br></td>
+        </tr>
+        <tr>
+            <td colspan="2">Laba Kotor Sebelum Pajak</td>
+            <td colspan="1">' . $laba_kotor . '</td>
+        </tr>
+        <tr>
+            <td colspan="2">Pajak Penghasilan</td>
+            <td colspan="1">' . $pajak_penghasilan . '</td>
+        </tr>
+        <tr>
+            <td colspan="2">Laba Setelah Pajak</td>
+            <td colspan="1">' . $laba_setelah_pajak . '</td>
+        </tr>
+    </table>
+</body>
+
+</html>';
+        // Write some HTML code:
+        $mpdf->WriteHTML($html);
+
+        // Output a PDF file directly to the browser
+        $mpdf->Output($nama_pdf, \Mpdf\Output\Destination::INLINE);
+    }
     public function journal()
     {
         $title = 'Keuangan - Journal';
@@ -649,7 +976,7 @@ class Keuangan extends CI_Controller
             $tnz = $tna + $tnb + $tnc + $tnd + $tne + $tnf + $tng + $tnh;
             echo "<div class='form-group col-12'>";
             echo "<label for='formGroupExampleInput'>Total Aktiva Lancar</label>";
-            echo "<input type='text' class='form-control' id='neraca_pekerjaan' name='neraca_pekerjaan' value='$tnz' readonly>";
+            echo "<input type='text' class='form-control' id='neraca_total_aktiva_lancar' name='neraca_total_aktiva_lancar' value='$tnz' readonly>";
             echo "</div>";
             echo "<div class='col-12'>";
             echo "<br>";
@@ -669,13 +996,18 @@ class Keuangan extends CI_Controller
         foreach ($neraca_peralatan_kantor as $nj) {
             echo "<div class='form-group col-4'>";
             echo "<label for='formGroupExampleInput'>Peralatan Kantor</label>";
-            echo "<input type='text' class='form-control' id='neraca_tanah_dan_bangunan' name='neraca_tanah_dan_bangunan' value='$nj->nominal' readonly>";
+            echo "<input type='text' class='form-control' id='neraca_peralatan_kantor' name='neraca_peralatan_kantor' value='$nj->nominal' readonly>";
             echo "</div>";
             $tnj = $nj->nominal;
             $tnx = $tni + $tnj;
+            $tnv = $tnx + $tnz;
             echo "<div class='form-group col-12'>";
             echo "<label for='formGroupExampleInput'>Total Aktiva Tidak Lancar</label>";
-            echo "<input type='text' class='form-control' id='neraca_pekerjaan' name='neraca_pekerjaan' value='$tnx' readonly>";
+            echo "<input type='text' class='form-control' id='neraca_aktiva_tidak_lancar' name='neraca_aktiva_tidak_lancar' value='$tnx' readonly>";
+            echo "<div class='form-group col-12'>";
+            echo "<br>";
+            echo "<label for='formGroupExampleInput'>Total Aktiva</label>";
+            echo "<input type='text' class='form-control' id='neraca_aktiva_tidak_lancar' name='neraca_aktiva_tidak_lancar' value='$tnv' readonly>";
         }
     }
 //akhir neraca
@@ -722,7 +1054,7 @@ class Keuangan extends CI_Controller
             $laba_bruto = $harganya - $pokoknya;
             echo "<div class='form-group col-4'>";
             echo "<label for='formGroupExampleInput'>Laba Bruto</label>";
-            echo "<input type='text' class='form-control' id='harga_pokok_LR' name='harga_pokok_LR' value='$laba_bruto' readonly>";
+            echo "<input type='text' class='form-control' id='laba_bruto' name='laba_bruto' value='$laba_bruto' readonly>";
             echo "</div>";
             echo "<div class='col-12'>";
             echo "<h5 style='text-align: center' class='col-12'>Biaya Operasional</h5>";
@@ -858,19 +1190,19 @@ class Keuangan extends CI_Controller
             echo "</div>";
             echo "<div class='form-group col-4'>";
             echo "<label for='formGroupExampleInput'>Laba Kotor Sebelum pajak</label>";
-            echo "<input type='text' class='form-control' id='lr17' name='lr17' value='$laba_kotor' readonly>";
+            echo "<input type='text' class='form-control' id='laba_kotor' name='laba_kotor' value='$laba_kotor' readonly>";
             echo "</div>";
         }
         foreach ($biaya_pajak as $u) {
             echo "<div class='form-group col-4'>";
             echo "<label for='formGroupExampleInput'>Pajak penghasilan</label>";
-            echo "<input type='text' class='form-control' id='lr17' name='lr17' value='$u->nominal' readonly>";
+            echo "<input type='text' class='form-control' id='pajak_penghasilan' name='pajak_penghasilan' value='$u->nominal' readonly>";
             echo "</div>";
             $tu = $u->nominal;
             $tv = $laba_kotor - $tu;
             echo "<div class='form-group col-4'>";
             echo "<label for='formGroupExampleInput'>Laba Setelah Pajak</label>";
-            echo "<input type='text' class='form-control' id='lr17' name='lr17' value='$tv' readonly>";
+            echo "<input type='text' class='form-control' id='laba_setelah_pajak' name='laba_setelah_pajak' value='$tv' readonly>";
             echo "</div>";
         }
         //Akhir LAba Rugi

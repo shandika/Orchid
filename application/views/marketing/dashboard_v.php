@@ -124,14 +124,14 @@
                     <div id="form-step-0" role="form" data-toggle="validator">
                         <div class="form-group">
                             <label for="inbulanan">Income Bulanan:</label>
-                            <input type="number" class="form-control" name="inbulanan" id="inbulanan" placeholder="Masukan Jumlah Income Bulanan" required>
+                            <input type="text" class="form-control" name="inbulanan" id="inbulanan" placeholder="Masukan Jumlah Income Bulanan" required>
                             <div class="help-block with-errors"></div>
                         </div>
                     </div>
                     <div id="form-step-0" role="form" data-toggle="validator">
                         <div class="form-group">
                             <label for="inblnpasangan">Income Bulanan Pasangan:</label>
-                            <input type="number" class="form-control" name="inblnpasangan" id="inblnpasangan" placeholder="Masukan Jumlah Income Bulanan Pasangan" required>
+                            <input type="text" class="form-control" name="inblnpasangan" id="inblnpasangan" placeholder="Masukan Jumlah Income Bulanan Pasangan" required>
                             <div class="help-block with-errors"></div>
                         </div>
                     </div>
