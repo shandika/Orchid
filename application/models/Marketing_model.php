@@ -108,6 +108,19 @@ class Marketing_model extends CI_Model
         return $query;
     }
 
+    //simpan voucher
+    function tambahvoucher($id, $nama, $nominal, $expired, $max_used)
+    {
+        $data = [
+            'ID_voucher' => $id,
+            'nama' => $nama,
+            'nominal' => $nominal,
+            'expired' => $expired,
+            'max_used' => $max_used,
+        ];
+
+        $this->db->insert('voucher', $data);
+    }
     public function update_unit($id_unit)
     {
         $data = [

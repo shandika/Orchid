@@ -30,7 +30,6 @@ class Keuangan extends CI_Controller
 
     public function cetak_neraca()
     {
-        $this->load->view('keuangan/cetak');
         $neraca_kas_kecil = $this->input->post('neraca_kas_kecil');
         $neraca_bank = $this->input->post('neraca_bank');
         $neraca_piutang_usaha = $this->input->post('neraca_piutang_usaha');

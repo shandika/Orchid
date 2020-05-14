@@ -8,19 +8,19 @@
                         <strong class="card-title">Pembayaran Pre-Order (PO)</strong>
                     </div>
                     <div class="card-body">
-                        <table id="tabelgl" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+                        <table id="tabelbayarpo" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
                             <thead>
                                 <tr>
-                                    <th>Nama Barang</th>
-                                    <th>Harga Barang</th>
-                                    <th>Jumlah Barang</th>
-                                    <th>Total Harga</th>
-                                    <th>Nama Supplier</th>
-                                    <th>Jenis Bayar</th>
-                                    <th>Lama Cicilan</th>
-                                    <th>Waktu Tunggu</th>
-                                    <th>Tanggal PO</th>
-                                    <th>ID_purchasing</th>
+                                    <th style="font-size: 13px">Nama Barang</th>
+                                    <th style="font-size: 13px">Harga Barang</th>
+                                    <th style="font-size: 13px">Jumlah Barang</th>
+                                    <th style="font-size: 13px">Total Harga</th>
+                                    <th style="font-size: 13px">Nama Supplier</th>
+                                    <th style="font-size: 13px">Jenis Bayar</th>
+                                    <th style="font-size: 13px">Lama Cicilan</th>
+                                    <th style="font-size: 13px">Waktu Tunggu</th>
+                                    <th style="font-size: 13px">Tanggal PO</th>
+                                    <th style="font-size: 13px">ID_purchasing</th>
 
                                 </tr>
                             </thead>
@@ -30,13 +30,14 @@
                                     $nama_barang                  = $baris->nama_barang;
                                     $harga_barang                 = $baris->harga_barang;
                                     $jumlah             = $baris->jumlah;
-                                    $total = $baris->total_harga;
+                                    $total = "Rp. " . number_format($baris->total_harga, 2, ',', '.');
                                     $nama_supplier                  = $baris->nama_supplier;
                                     $jenis_pembayaran               = $baris->jenis_pembayaran;
                                     $lama_pembayaran        = $baris->lama_cicilan;
                                     $waktu_tunggu               = $baris->waktu_tunggu;
                                     $id_purchasing = $baris->ID_purchasing;
                                     $tanggal_approve = $baris->tanggal_approve;
+
 
                                 ?>
 

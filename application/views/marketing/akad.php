@@ -14,11 +14,11 @@
         </div>
         <div class="form-group">
             <label for="inputAddress">Nama</label>
-            <input type="text" class="form-control" id="nama" name="nama" placeholder="Nama Otomatis reference tabel customer">
+            <input type="text" class="form-control" id="nama" name="nama" placeholder="">
         </div>
         <div class="form-group">
             <label for="inputAddress">Nomor KTP</label>
-            <input class="form-control" type="text" placeholder="no ktp muncul otomatis setelah input nama" name="no_ktp" id="no_ktp" readonly>
+            <input class="form-control" type="text" placeholder="" name="no_ktp" id="no_ktp" readonly>
         </div>
         <div class="form-row">
             <div class="form-group col-4">
@@ -63,12 +63,15 @@
         <div class="form-group row">
             <label for="inputEmail3" class="col-sm-1 col-form-label">Voucher / Diskon</label>
             <div class="col-sm-11">
-                <select class="custom-select my-1 mr-sm-2" id="project" name="project">
-                    <option selected>Pilih Project</option>
+                <select class="custom-select my-1 mr-sm-2" id="voucher" name="voucher">
+                    <option selected>Pilih Voucher</option>
                     <?php foreach ($query2 as $key) : ?>
-                        <option value="<?= $key->ID_voucher; ?>"><?= $key->nama; ?> ( Senilai : Rp.<?= $key->nominal; ?> )</option>
+                        <option value="<?= $key->nominal; ?>"><?= $key->nama; ?> ( Senilai : <?= $key->nominal; ?> %)</option>
                     <?php endforeach; ?>
                 </select>
+                <small id="passwordHelpBlock" class="form-text text-muted">
+                    Diskon Akan dihitung berdasarkan harga utama, lalu nanti harga utama dikurangi DP, injek dan nominal diskon
+                </small>
             </div>
         </div>
         <div class="form-row">

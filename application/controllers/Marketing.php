@@ -197,7 +197,7 @@ class Marketing extends CI_Controller
 		$data = array(
 			'title' => $title,
 			'idvoucher' => $strkodenya,
-			'query2' => $this->db->get('voucher')->result()
+			'query2' => $this->db->get('voucher'),
 
 		);
 		$this->template->load('layout/template_v', 'marketing/voucher', $data);
@@ -255,8 +255,12 @@ class Marketing extends CI_Controller
 		$nominal_injek = $this->input->post('total_injeksi');
 		$nominal_angsuran_bulanan = $this->input->post('angsuran_bulanan');
 		$nominal_angsuran_dp = $this->input->post('angsuran_dp');
-		$harganya = $this->input->post('harga') - $nominal_injek - $dp;
+		$diskon = $this->input->post('voucher');
+		$persenan = $diskon / 100;
+		$nilai_diskon = $this->input->post('harga') * $persenan;
+		$harganya = $this->input->post('harga') - $nominal_injek - $dp - $nilai_diskon;
 		$status = 0;
+
 		//looping menurut lama angsuran bulanan
 		for ($i = 1; $i <= $lama_bulanan; $i++) {
 			//penentuan ID_angsuran_bulanan + Invoice otomatis
@@ -342,5 +346,18 @@ class Marketing extends CI_Controller
 
 		echo $this->session->set_flashdata('msg', 'success-add-data');
 		redirect('Marketing/akad', 'refresh');
+	}
+
+	function tambahvoucher()
+	{
+		$id = $this->input->post('id_voucher');
+		$nama_voucher = $this->input->post('nama_voucher');
+		$nominal = $this->input->post('nominal');
+		$expired = $this->input->post('expired');
+		$max_used = $this->input->post('max_used');
+
+		$this->marketing->tambahvoucher($id, $nama_voucher, $nominal, $expired, $max_used);
+		echo $this->session->set_flashdata('msg', 'success-add-data');
+		redirect('Marketing/voucher', 'refresh');
 	}
 }

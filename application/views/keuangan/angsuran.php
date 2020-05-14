@@ -15,9 +15,13 @@
         <label for="formGroupExampleInput2">ID Angsuran</label>
         <input type="text" class="form-control" id="id_angsuran" name="id_angsuran" placeholder="ID Angsuran" readonly>
     </div>
-    <div class="form-group col-3">
+    <div class="form-group col-3 d-none">
         <label for="formGroupExampleInput2">Nominal Pembayaran</label>
         <input type="text" class="form-control" id="nominal_pembayaran" name="nominal_pembayaran" placeholder="Nominal" readonly>
+    </div>
+    <div class="form-group col-3">
+        <label for="formGroupExampleInput2">Nominal Pembayaran</label>
+        <input type="text" class="form-control" id="tampil_nominal_pembayaran" name="tampil_nominal_pembayaran" placeholder="Nominal" readonly>
     </div>
     <div class="form-group col-3 " style="visibility: hidden">
         <label for="formGroupExampleInput2">Tanggal Pembayaran</label>
