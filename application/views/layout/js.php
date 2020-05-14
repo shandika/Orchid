@@ -26,6 +26,10 @@
 <script src="<?php echo base_url() ?>assets/plugins/datatables/buttons.print.min.js"></script>
 <!-- Toast -->
 <script type="text/javascript" src="<?php echo base_url() . 'assets/plugins/toast/jquery.toast.min.js' ?>"></script>
+
+<!-- magnific pop up -->
+<script src="<?php echo base_url() ?>assets/assets/js/jquery.magnific-popup.min.js"></script>
+
 <!-- Pusher -->
 <script src="https://js.pusher.com/6.0/pusher.min.js"></script>
 <script>
@@ -945,4 +949,40 @@
             }
         });
     }
+</script>
+</script>
+<!-- LK Pasiva -->
+<script type="text/javascript">
+    function loadpasiva() {
+        var project = $("#project_pasiva").val();
+        $.ajax({
+            url: "<?php echo base_url(); ?>Keuangan/sort_pasiva",
+            data: "project_pasiva=" + project,
+            success: function(html) {
+                $("#pasiva").html(html);
+            }
+        });
+    }
+</script>
+<!-- LK Cashflow -->
+<script type="text/javascript">
+    function loadcf() {
+        var project = $("#project_cf").val();
+        $.ajax({
+            url: "<?php echo base_url(); ?>Keuangan/sort_cf",
+            data: "project_cf=" + project,
+            success: function(html) {
+                $("#cf").html(html);
+            }
+        });
+    }
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('.test-popup-link').magnificPopup({
+            type: 'image'
+            // other options
+        });
+    })
 </script>
