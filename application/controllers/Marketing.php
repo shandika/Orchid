@@ -184,6 +184,24 @@ class Marketing extends CI_Controller
 		);
 		$this->template->load('layout/template_v', 'marketing/akad', $data);
 	}
+	public function voucher()
+	{
+
+		$title = 'Marketing - Voucher';
+		$dariDB = $this->marketing->cekidvoucher();
+		$nourut = substr($dariDB, 3, 4);
+		$kode = $nourut + 1;
+		$kodenya = sprintf("%04s", $kode);
+		$strkodenya = 'VC' . $kodenya;
+
+		$data = array(
+			'title' => $title,
+			'idvoucher' => $strkodenya,
+			'query2' => $this->db->get('voucher')->result()
+
+		);
+		$this->template->load('layout/template_v', 'marketing/voucher', $data);
+	}
 
 	public function tambahakad()
 	{

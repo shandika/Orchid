@@ -869,7 +869,6 @@
 <!-- Proyeksi Angsuran baru addendum -->
 <script>
     $(document).ready(function() {
-
         $("#lama_angsuran_bulanan_addendum").change(function() {
             var harga = parseInt($("#sisa_angsuran_sebelumnya_addendum").val());
             var l_a_b = parseInt($("#lama_angsuran_bulanan_addendum").val());
@@ -916,5 +915,3 @@
         });
     }
 </script>
-
-

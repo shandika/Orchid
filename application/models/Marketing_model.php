@@ -45,6 +45,12 @@ class Marketing_model extends CI_Model
         $hasil = $query->row();
         return $hasil->idunitdipesan;
     }
+    function cekidvoucher()
+    {
+        $query = $this->db->query("SELECT MAX(ID_voucher) as idvoucher from voucher");
+        $hasil = $query->row();
+        return $hasil->idvoucher;
+    }
     function cekidangsuranbulanan()
     {
         $query = $this->db->query("SELECT MAX(ID_angsuran_bulanan) as idangsuranbulanan from angsuran_bulanan");
