@@ -1,10 +1,5 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed');
 
-/**
- * Class Auth
- * @property Ion_auth|Ion_auth_model $ion_auth        The ION Auth spark
- * @property CI_Form_validation      $form_validation The form validation library
- */
 class Home extends CI_Controller
 {
 
@@ -92,5 +87,24 @@ class Home extends CI_Controller
 			'idP' => $strkodenya
 		);
 		$this->template->load('layout/template_v', 'pm/dashboard_v', $data);
+	}
+
+	public function notif_pm() {
+		$query = $this->db->query("SELECT ID_dp, ID_invoice_dp, nominal_angsuran_dp, angsuran_dp.status, customer.nama, customer.no_ktp FROM customer JOIN angsuran_dp ON customer.no_ktp = angsuran_dp.no_ktp WHERE angsuran_dp.status = 1 AND angsuran_dp.sisa_angsuran='0' ORDER BY angsuran_dp.ID_dp DESC")->result();
+		$output = '';
+		foreach ($query as $d) {
+			$output .='
+				<div class="card-body">
+                    <p class="card-text">Unit Atas Nama '.$d->nama.' Siap Dibangun</p>
+                    <hr />
+                </div>
+			';
+		}
+		echo $output;
+	}
+	public function jum_notif() {
+		$result = $this->pm->jum_msg();
+		$data['tot'] = $result;
+		echo json_encode($data);
 	}
 }
