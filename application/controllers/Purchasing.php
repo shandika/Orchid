@@ -18,13 +18,24 @@ class Purchasing extends CI_Controller
      */
     public function index()
     {
-        $title = 'Keuangan - General Ledger';
+        $title = 'Purchasing - Beauty Contest';
         $data = array(
             'title' => $title,
             'query' => $this->db->get_where('barang_pr', array('status' => 0)),
         );
         $this->template->load('layout/template_v', 'purchasing/preorder', $data);
     }
+
+    function status()
+    {
+        $title = 'Purchasing - Status Preorder';
+        $data = array(
+            'title' => $title,
+            'query' => $this->db->query("SELECT po.dibayar,po.bukti_bayar,po.ID_keuangan,po.ID_po, po.ID_barang_pr,po.status_barang, po.ID_purchasing, po.tanggal_approve, barang_pr.nama_barang, barang_pr.harga_barang, barang_pr.jumlah, barang_pr.total_harga, barang_pr.nama_supplier, barang_pr.waktu_tunggu, barang_pr.jenis_pembayaran, barang_pr.lama_cicilan FROM po JOIN barang_pr ON po.ID_barang_pr=barang_pr.ID_pr"),
+        );
+        $this->template->load('layout/template_v', 'purchasing/status', $data);
+    }
+
     public function change_status()
     {
         $dariDB = $this->purchasing->cekidpr();
@@ -33,17 +44,12 @@ class Purchasing extends CI_Controller
         $kodenya = sprintf("%04s", $kode1);
         $strkodenya = 'PO' . $kodenya;
 
-        $dariDB1 = $this->purchasing->cekidbayarpo();
-        $nourut1 = substr($dariDB1, 3, 4);
-        $kode2 =  $nourut1 + 1;
-        $kodenya1 = sprintf("%04s", $kode2);
-        $strkodenya1 = 'BPO' . $kodenya1;
         $id_purchasing = $this->session->userdata('ktp');
         $tanggal = date('d-m-Y');
         $idPr = $this->input->post('ID_pr');
         $status = 1;
         $this->purchasing->change_status($idPr, $status);
-        $this->purchasing->tambahPO($strkodenya, $idPr, $id_purchasing, $tanggal, $strkodenya1);
+        $this->purchasing->tambahPO($strkodenya, $idPr, $id_purchasing, $tanggal);
         echo $this->session->set_flashdata('msg', 'success-add-data');
         redirect('Purchasing', 'refresh');
     }
@@ -57,5 +63,16 @@ class Purchasing extends CI_Controller
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Data berhasil dihapus</div>');
         }
         redirect('Purchasing', 'refresh');
+    }
+
+    function terima_barang()
+    {
+        $idpo = $this->input->post('ID_po');
+        $status = "diterima";
+        $this->purchasing->terima_barang($idpo, $status);
+        redirect('Purchasing/status', 'refresh');
+    }
+    function return_barang()
+    {
     }
 }

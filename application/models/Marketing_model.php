@@ -45,6 +45,12 @@ class Marketing_model extends CI_Model
         $hasil = $query->row();
         return $hasil->idunitdipesan;
     }
+    function cekidvoucher()
+    {
+        $query = $this->db->query("SELECT MAX(ID_voucher) as idvoucher from voucher");
+        $hasil = $query->row();
+        return $hasil->idvoucher;
+    }
     function cekidangsuranbulanan()
     {
         $query = $this->db->query("SELECT MAX(ID_angsuran_bulanan) as idangsuranbulanan from angsuran_bulanan");
@@ -102,6 +108,19 @@ class Marketing_model extends CI_Model
         return $query;
     }
 
+    //simpan voucher
+    function tambahvoucher($id, $nama, $nominal, $expired, $max_used)
+    {
+        $data = [
+            'ID_voucher' => $id,
+            'nama' => $nama,
+            'nominal' => $nominal,
+            'expired' => $expired,
+            'max_used' => $max_used,
+        ];
+
+        $this->db->insert('voucher', $data);
+    }
     public function update_unit($id_unit)
     {
         $data = [

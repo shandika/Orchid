@@ -435,11 +435,31 @@
                 $('[name="no_ktp_angsuran"]').val(ui.item.no_ktp);
                 $('[name="id_invoice"]').val(ui.item.id_invoice);
                 $('[name="id_angsuran"]').val(ui.item.id_angsuran);
+                $nominalnya = formatRupiah(ui.item.nominal_pembayaran, 'Rp. ');
                 $('[name="nominal_pembayaran"]').val(ui.item.nominal_pembayaran);
+                $('[name="tampil_nominal_pembayaran"]').val($nominalnya);
             }
         });
 
     });
+    /* Fungsi formatRupiah */
+    function formatRupiah(angka, prefix) {
+        var number_string = angka.replace(/[^,\d]/g, '').toString(),
+            split = number_string.split(','),
+            sisa = split[0].length % 3,
+            rupiah = split[0].substr(0, sisa),
+            ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+
+        // tambahkan titik jika yang di input sudah menjadi angka ribuan
+        if (ribuan) {
+            separator = sisa ? '.' : '';
+            rupiah += separator + ribuan.join('.');
+        }
+
+        rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+        return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
+    }
+</script>
 </script>
 <script type="text/javascript">
     $(document).ready(function() {
@@ -526,8 +546,11 @@
             var harga = parseInt($("#harga").val());
             var l_a_b = parseInt($("#lama_angsuran_bulanan").val());
             var t_injek = parseInt($("#total_injeksi").val());
+            var diskon = parseInt($("#voucher").val());
+            var diskonnya = diskon / 100;
+            var nominal_diskon = diskonnya * harga;
             var dp = parseInt($("#dp").val());
-            var total = (harga - dp - t_injek) / l_a_b;
+            var total = (harga - dp - t_injek - nominal_diskon) / l_a_b;
             var bagi = total / 1000;
             var dibulatkan = Math.floor(bagi);
             var hasilnya = dibulatkan * 1000;
@@ -671,6 +694,14 @@
 <script type="text/javascript">
     $(document).ready(function() {
         $('#tabelgl').DataTable({
+            dom: 'Bfrtip',
+            buttons: ['copy', 'csv', 'excel', 'pdf', 'print']
+        });
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#tabelbayarpo').DataTable({
             dom: 'Bfrtip',
             buttons: ['copy', 'csv', 'excel', 'pdf', 'print']
         });
@@ -869,7 +900,6 @@
 <!-- Proyeksi Angsuran baru addendum -->
 <script>
     $(document).ready(function() {
-
         $("#lama_angsuran_bulanan_addendum").change(function() {
             var harga = parseInt($("#sisa_angsuran_sebelumnya_addendum").val());
             var l_a_b = parseInt($("#lama_angsuran_bulanan_addendum").val());
@@ -916,5 +946,3 @@
         });
     }
 </script>
-
-

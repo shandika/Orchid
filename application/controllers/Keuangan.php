@@ -211,147 +211,162 @@ class Keuangan extends CI_Controller
         $nama_pdf = "Laporan_Penjualan&Laba_bulan_" . $nama_bulan;
         $mpdf = new \Mpdf\Mpdf();
         $html = '<!DOCTYPE html>
-<html lang="en">
+            <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        table {
-            font-family: arial, sans-serif;
-            border-collapse: collapse;
-            width: 100%;
-            margin-left: auto;
-            margin-right: auto;
-            margin-top: 30px;
-        }
-        
-        td,
-        th {
-            border: 1px solid #dddddd;
-            text-align: left;
-            padding: 8px;
-        }
-    </style>
-</head>
+            <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Document</title>
+            <style>
+            table.tabel2 {
+                font-family: arial, sans-serif;
+                border-collapse: collapse;
+                width: 100%;
+                margin-left: auto;
+                margin-right: auto;
+                margin-top: 30px;
+            }
+            
+            table.table1 {
+                border-collapse: collapse;
+                width: 100%;
+            }
+            
+            table.tabel2 td,
+            th {
+                border: 1px solid #dddddd;
+                text-align: left;
+                padding: 5px;
+            }
+        </style>
+        </head>
 
-<body>
-    <div style="text-align: center;">
-        <div style="vertical-align:top;margin-left: 40px;word-wrap: break-word;">
-            <p style="line-height: 15px;font-size: 23px;font-weight: bold;">Laporan Penjualan dan Laba Royal Orchid Syariah
-            </p>
-            <p style="line-height: 10px;font-size: 18px;">' . $nama_gl . '</p>
-                    <p style="line-height: 10px;font-size: 18px;">Bulan ' . $nama_bulan . ' ' . $tahun . '</p>
-                    <p style="line-height: 10px;font-size: 15px;">Dicetak : ' . $cetak . '</p>
-        </div>
-    </div>
-    <table>
+        <body>
+        <table class="table1">
         <tr>
-            <td colspan="2">Penjualan</td>
-            <td colspan="1">' . $penjualan_LR . '</td>
-        </tr>
-        <tr>
-            <td colspan="2">Harga Pokok Penjualan</td>
-            <td colspan="1">' . $harga_pokok_LR . '</td>
-        </tr>
-        <tr>
-            <td colspan="2">Laba Bruto</td>
-            <td colspan="1">' . $laba_bruto . '</td>
-        </tr>
-        <tr>
-            <th colspan="3" style="text-align: center;">Biaya Operasional</th>
-        </tr>
-        <tr>
-            <td colspan="2">Biaya Operasional Kantor</td>
-            <td colspan="1">' . $lr1 . '</td>
-        </tr>
-        <tr>
-            <td colspan="2">Biaya Promosi & Marketing</td>
-            <td colspan="1">' . $lr2 . '</td>
-        </tr>
-        <tr>
-            <td colspan="2">Biaya Sewa Kantor</td>
-            <td colspan="1">' . $lr3 . '</td>
-        </tr>
-        <tr>
-            <td colspan="2">Biaya marketing_fee</td>
-            <td colspan="1">' . $lr4 . '</td>
-        </tr>
-        <tr>
-            <td colspan="2">Biaya Kurir</td>
-            <td colspan="1">' . $lr5 . '</td>
-        </tr>
-        <tr>
-            <td colspan="2">Biaya Listrik</td>
-            <td colspan="1">' . $lr6 . '</td>
-        </tr>
-        <tr>
-            <td colspan="2">Biaya Gaji Karyawan</td>
-            <td colspan="1">' . $lr7 . '</td>
-        </tr>
-        <tr>
-            <td colspan="2">Biaya Perijinan</td>
-            <td colspan="1">' . $lr8 . '</td>
-        </tr>
-        <tr>
-            <td colspan="2">Biaya Tukang</td>
-            <td colspan="1">' . $lr9 . '</td>
-        </tr>
-        <tr>
-            <td colspan="2">Biaya Sewa Mobil</td>
-            <td colspan="1">' . $lr10 . '</td>
-        </tr>
-        <tr>
-            <td colspan="2">Biaya Bensin, Toll dan Parkir</td>
-            <td colspan="1">' . $lr11 . '</td>
-        </tr>
-        <tr>
-            <td colspan="2">Biaya Admin Bank</td>
-            <td colspan="1">' . $lr12 . '</td>
-        </tr>
-        <tr>
-            <td colspan="2">Pendapatan Bunga</td>
-            <td colspan="1">' . $lr13 . '</td>
-        </tr>
-        <tr>
-            <td colspan="2">Biaya Entertaiment</td>
-            <td colspan="1">' . $lr14 . '</td>
-        </tr>
-        <tr>
-            <td colspan="2">Biaya Donasi & Sumbangan</td>
-                <td colspan="1">' . $lr15 . '</td>
-        </tr>
-        <tr>
-            <td colspan="2">Biaya Pematagan Lahan & Pembangunan</td>
-            <td colspan="1">' . $lr16 . '</td>
-        </tr>
-        <tr>
-            <td colspan="2">Biaya Pembebanan Per Unit</td>
-            <td colspan="1">' . $lr17 . '</td>
-        </tr>
-        <tr>
-            <td colspan="3"><br></td>
-        </tr>
-        <tr>
-            <td colspan="2">Laba Kotor Sebelum Pajak</td>
-            <td colspan="1">' . $laba_kotor . '</td>
-        </tr>
-        <tr>
-            <td colspan="2">Pajak Penghasilan</td>
-            <td colspan="1">' . $pajak_penghasilan . '</td>
-        </tr>
-        <tr>
-            <td colspan="2">Laba Setelah Pajak</td>
-            <td colspan="1">' . $laba_setelah_pajak . '</td>
+            <td width=15% style="text-align: start; vertical-align: middle;">
+                <div style="margin: 10px;">
+                    <img src="' . base_url('assets/images/logo3.png') . '" alt="LOGO" width="70px" height="100px">
+                </div>
+            </td>
+            <td>
+                <div style="text-align: start; vertical-align: middle;">
+                    <p style="line-height: 15px;font-size: 18px;font-weight: bold;">Laporan Penjualan dan Laba Royal Orchid Syariah
+                    </p>
+                    <p style="line-height: 10px;font-size: 16px;">' . $nama_gl . '</p>
+                    <p style="line-height: 10px;font-size: 13px;">Bulan ' . $nama_bulan . ' ' . $tahun . '</p>
+                    <p style="line-height: 10px;font-size: 12px;">Dicetak : ' . $cetak . '</p>
+                </div>
+            </td>
         </tr>
     </table>
-</body>
+        <table class="tabel2">
+        <tr>
+        <td colspan="2">Penjualan</td>
+        <td colspan="1">' . $penjualan_LR . '</td>
+        </tr>
+        <tr>
+        <td colspan="2">Harga Pokok Penjualan</td>
+        <td colspan="1">' . $harga_pokok_LR . '</td>
+        </tr>
+        <tr>
+        <td colspan="2">Laba Bruto</td>
+        <td colspan="1">' . $laba_bruto . '</td>
+        </tr>
+        <tr>
+        <th colspan="3" style="text-align: center;">Biaya Operasional</th>
+        </tr>
+        <tr>
+        <td colspan="2">Biaya Operasional Kantor</td>
+        <td colspan="1">' . $lr1 . '</td>
+        </tr>
+        <tr>
+        <td colspan="2">Biaya Promosi & Marketing</td>
+        <td colspan="1">' . $lr2 . '</td>
+        </tr>
+        <tr>
+        <td colspan="2">Biaya Sewa Kantor</td>
+        <td colspan="1">' . $lr3 . '</td>
+        </tr>
+        <tr>
+        <td colspan="2">Biaya marketing_fee</td>
+        <td colspan="1">' . $lr4 . '</td>
+        </tr>
+        <tr>
+        <td colspan="2">Biaya Kurir</td>
+        <td colspan="1">' . $lr5 . '</td>
+        </tr>
+        <tr>
+        <td colspan="2">Biaya Listrik</td>
+        <td colspan="1">' . $lr6 . '</td>
+        </tr>
+        <tr>
+        <td colspan="2">Biaya Gaji Karyawan</td>
+        <td colspan="1">' . $lr7 . '</td>
+        </tr>
+        <tr>
+        <td colspan="2">Biaya Perijinan</td>
+        <td colspan="1">' . $lr8 . '</td>
+        </tr>
+        <tr>
+        <td colspan="2">Biaya Tukang</td>
+        <td colspan="1">' . $lr9 . '</td>
+        </tr>
+        <tr>
+        <td colspan="2">Biaya Sewa Mobil</td>
+                <td colspan="1">' . $lr10 . '</td>
+                </tr>
+                <tr>
+                <td colspan="2">Biaya Bensin, Toll dan Parkir</td>
+                <td colspan="1">' . $lr11 . '</td>
+                </tr>
+                <tr>
+                <td colspan="2">Biaya Admin Bank</td>
+                <td colspan="1">' . $lr12 . '</td>
+                </tr>
+                <tr>
+                <td colspan="2">Pendapatan Bunga</td>
+                <td colspan="1">' . $lr13 . '</td>
+                </tr>
+                <tr>
+                <td colspan="2">Biaya Entertaiment</td>
+                <td colspan="1">' . $lr14 . '</td>
+                </tr>
+                <tr>
+                <td colspan="2">Biaya Donasi & Sumbangan</td>
+                <td colspan="1">' . $lr15 . '</td>
+                </tr>
+                <tr>
+                <td colspan="2">Biaya Pematagan Lahan & Pembangunan</td>
+                <td colspan="1">' . $lr16 . '</td>
+                </tr>
+                <tr>
+                <td colspan="2">Biaya Pembebanan Per Unit</td>
+                <td colspan="1">' . $lr17 . '</td>
+                </tr>
+                <tr>
+                <td colspan="3"><br></td>
+                </tr>
+                <tr>
+                <td colspan="2">Laba Kotor Sebelum Pajak</td>
+                <td colspan="1">' . $laba_kotor . '</td>
+                </tr>
+                <tr>
+                <td colspan="2">Pajak Penghasilan</td>
+                <td colspan="1">' . $pajak_penghasilan . '</td>
+                </tr>
+                <tr>
+                <td colspan="2">Laba Setelah Pajak</td>
+                <td colspan="1">' . $laba_setelah_pajak . '</td>
+                </tr>
+                </table>
+                </body>
 
-</html>';
+                </html>';
         // Write some HTML code:
-        $mpdf->WriteHTML($html);
 
+        $mpdf->SetHTMLFooter('');
+        $mpdf->WriteHTML($html);
         // Output a PDF file directly to the browser
         $mpdf->Output($nama_pdf, \Mpdf\Output\Destination::INLINE);
     }
@@ -580,6 +595,7 @@ class Keuangan extends CI_Controller
 
     function tambahangsuran()
     {
+        $nama = $this->input->post('nama_angsuran');
         $idinvoice = $this->input->post('id_invoice');
         $idbayar = $this->input->post('id_angsuran');
         $tanggal_bayar = date('d-m-Y');
@@ -587,18 +603,126 @@ class Keuangan extends CI_Controller
         $type = $this->input->post('type_bayar_angsuran');
         $nama_bank = $this->input->post('nama_bank_angsuran');
         $nomor_bank = $this->input->post('nomor_bank_angsuran');
-
+        $hasil_rupiah = number_format($nominal, 2, ',', '.');
         $this->form_validation->set_rules('id_invoice', 'ID Invoice Angsuran', 'required|trim');
         $this->form_validation->set_rules('id_angsuran', 'ID Angsuran', 'required|trim');
         $this->form_validation->set_rules('nominal_pembayaran', 'Nominal Pembayran', 'required|trim');
         $this->form_validation->set_rules('type_bayar_angsuran', 'Type Bayar Angsuran', 'required|trim');
         // $this->form_validation->set_rules('nama_bank_angsuran', 'Nama BANK Angsuran', 'required|trim');
         // $this->form_validation->set_rules('nomor_bank_angsuran', 'Nomor BANK Angsuran', 'required|trim');
+        $mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => [210, 148]]);
+        $nama_pdf = "Invoice_Pembayaran";
+        $html = '<!DOCTYPE html>
+        <html lang="en">
+        
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Document</title>
+            <style>
+                table.tabel2 {
+                    font-family: arial, sans-serif;
+                    border-collapse: collapse;
+                    width: 100%;
+                    margin-left: auto;
+                    margin-right: auto;
+                    margin-top: 10px;
+                }
+                
+                table.table1 {
+                    border-collapse: collapse;
+                    margin-bottom: 20px;
+                }
+                
+                table.tabel2 td,
+                th {
+                    border: 1px solid #dddddd;
+                    text-align: left;
+                    padding: 3px;
+                }
+            </style>
+        </head><body>
+        <table class="table1">
+        <tr>
+            <td width=13% style="text-align: start; vertical-align: middle;">
+                <div style="margin: 10px;">
+                <img src="' . base_url('assets/images/logo3.png') . '" alt="LOGO" width="60px" height="80px">
+                </div>
+            </td>
+            <td width=70% style="text-align: start; vertical-align: middle;">
+                <div style="text-align: start; vertical-align: middle;">
+                    <p style="line-height: 15px;font-size: 18px;font-weight: bold;">Royal Orchid Syariah
+                    </p>
+                    <p style="line-height: 10px;font-size: 13px;">JL. Reog No.17A</p>
+                    <p style="line-height: 10px;font-size: 13px;">Telp (022)87352781</p>
+                    <p style="line-height: 10px;font-size: 13px;">www.royalorchidsyariah.com</p>
+                </div>
+            </td>
+            <td width=20% style="text-align: start;">
+                <div style="text-align: start; vertical-align: middle;">
+                    <p style="line-height: 15px;font-size: 18px;font-weight: bold;">Invoice Pembayaran
+                    </p>
+                    <p style="line-height: 10px;font-size: 13px;">Nomor : ' . $idinvoice . '</p>
+                </div>
+            </td>
+        </tr>
+    </table>
+            <table class="tabel2" style:"margin-top:10px">
+                <tr>
+                    <td width=30%>Sudah diterima dari :</td>
+                    <td width=80%>' . $nama . '</td>
+                </tr>
+                <tr>
+                    <td width=30%>Banyaknya :</td>
+                    <td width=80%>1</td>
+                </tr>
+                <tr>
+                    <td width=30%> Untuk pembayaran :</td>
+                    <td width=80%>Pembayaran Angsuran</td>
+                </tr>
+                <tr>
+                    <td width=30% style="font-size: 18px; font-weight: bold;">Rp.</td>
+                    <td width=80% style="font-size: 18px; font-weight: bold;">' . $hasil_rupiah . '</td>
+                </tr>
+                <tr>
+                <td width=30%>Jenis bayar :</td>
+                <td width=80%>' . $type . '</td>
+                </tr>
+                <tr>
+                <td width=30%>Nama Bank :</td>
+                <td width=80%>' . $nama_bank . '</td>
+                </tr>
+                <tr>
+                <td width=30%> Nomor Rekening :</td>
+                <td width=80%>' . $nomor_bank . '</td>
+                </tr>
+            </table>
+            <table width="100%" style="vertical-align: bottom;margin-top:10px">
+    <tr>
+        <td width="33%"></td>
+        <td width="33%" align="center"></td>
+        <td width="33%" style="text-align: right;">
+        <div>
+            <p>Bandung, ' . $tanggal_bayar . '</p>
+            <br><br><br><br>
+            <p>(' . $nama . ')</p>
+        </div></td>
+    </tr>
+</table>
+        </body>
+        </html>
+            ';
+        // Write some HTML code:
+
+        $mpdf->WriteHTML($html);
+        $mpdf->Output($nama_pdf, \Mpdf\Output\Destination::INLINE);
+        // Output a PDF file directly to the browser
+
         if ($this->form_validation->run() == false) {
             echo $this->session->set_flashdata('msg', 'error-register');
             redirect('Keuangan/angsuran');
         } else {
-            $query = $this->keuangan->bayarangsuran($idinvoice, $idbayar, $tanggal_bayar, $nominal, $type, $nama_bank, $nomor_bank);
+            $this->keuangan->bayarangsuran($idinvoice, $idbayar, $tanggal_bayar, $nominal, $type, $nama_bank, $nomor_bank);
             echo $this->session->set_flashdata('msg', 'success-add-data');
             redirect('Keuangan/angsuran');
         }
@@ -887,7 +1011,7 @@ class Keuangan extends CI_Controller
                 break;
         }
     }
-//awal neraca
+    //awal neraca
     function sort_neraca()
     {
         $project        =  $_GET['project_nrc'];
@@ -1010,13 +1134,12 @@ class Keuangan extends CI_Controller
             echo "<input type='text' class='form-control' id='neraca_aktiva_tidak_lancar' name='neraca_aktiva_tidak_lancar' value='$tnv' readonly>";
         }
     }
-//akhir neraca
+    //akhir neraca
     function sort_lr()
     {
         $project        =  $_GET['project_LR'];
         $penjualan      =  $this->keuangan->pilih_penjualan($project)->result();
         $harga_pokok    =  $this->keuangan->pilih_hp($project)->result();
-
         $biaya_oprasi = $this->keuangan->pilih_biaya_operasional($project)->result();
         $biaya_promosi = $this->keuangan->pilih_biaya_promo_marketing($project)->result();
         $biaya_sewa_kantor = $this->keuangan->pilih_biaya_sewa_kantor($project)->result();
