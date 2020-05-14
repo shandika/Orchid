@@ -20,7 +20,7 @@
                                     <th style="font-size: 13px">Lama Cicilan</th>
                                     <th style="font-size: 13px">Waktu Tunggu</th>
                                     <th style="font-size: 13px">Tanggal PO</th>
-                                    <th style="font-size: 13px">ID_purchasing</th>
+                                    <th style="font-size: 13px">Di Approve Oleh</th>
 
                                 </tr>
                             </thead>

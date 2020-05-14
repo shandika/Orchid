@@ -17,7 +17,12 @@ $jum_pesan = $query->num_rows();
             <ul class="nav navbar-nav">
                 <?php if ($this->session->userdata('level') == 1) { ?>
                     <li class="">
-                        <a href="index.html"> <i class="menu-icon fa fa-newspaper-o"></i>Preorder Barang</a>
+                        <a href="<?= base_url('Purchasing') ?>"> <i class="menu-icon fa fa-newspaper-o"></i>Preorder Barang</a>
+                    </li>
+                <?php } ?>
+                <?php if ($this->session->userdata('level') == 1) { ?>
+                    <li class="">
+                        <a href="<?= base_url('Purchasing/status') ?>"> <i class="menu-icon fa fa-list"></i>Status PreOrder barang</a>
                     </li>
                 <?php } ?>
                 <?php if ($this->session->userdata('level') == 2) { ?>
@@ -53,6 +58,11 @@ $jum_pesan = $query->num_rows();
                 <?php if ($this->session->userdata('level') == 4) { ?>
                     <li class="">
                         <a href=" <?php echo base_url('Keuangan/index'); ?>"> <i class="menu-icon fa fa-book"></i>General Ledger</a>
+                    </li>
+                <?php } ?>
+                <?php if ($this->session->userdata('level') == 4) { ?>
+                    <li class="">
+                        <a href="<?php echo base_url('Keuangan/journal'); ?>"> <i class="menu-icon fa fa-money"></i>Marketing Fee</a>
                     </li>
                 <?php } ?>
                 <?php if ($this->session->userdata('level') == 4) { ?>
