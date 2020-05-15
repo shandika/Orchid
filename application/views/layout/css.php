@@ -19,3 +19,6 @@
 <!-- Toast -->
 <link rel="stylesheet" type="text/css" href="<?php echo base_url() . 'assets/plugins/toast/jquery.toast.min.css' ?>" />
 <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+
+<!-- magnific pop up -->
+<link rel="stylesheet" href="<?php echo base_url() ?>assets/assets/css/magnific-popup.css">
