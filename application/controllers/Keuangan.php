@@ -778,6 +778,7 @@ class Keuangan extends CI_Controller
                 'nominal' => $this->input->post('nominal')
             ];
             $this->keuangan->simpanDataGL($data, $namagl);
+            $this->keuangan->simpanDataGLutama($data);
             echo $this->session->set_flashdata('msg', 'success-add-data');
             redirect('Home/keuangan');
         }
