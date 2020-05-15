@@ -21,7 +21,6 @@
                                             <th>waktu tunggu</th>
                                             <th>Bukti Bayar</th>
                                             <th>Status Barang</th>
-                                            <th colspan="2">Action</th>
                                         </tr>
                                     </thead>
                                 <tbody>
@@ -50,10 +49,10 @@
                                             <td><?php echo $lama_pembayaran; ?></td>
                                             <td><?php echo $waktu_tunggu; ?></td>
                                             <td class="test-popup-link" href="<?= base_url('assets/images/bukti_pembayaran/') . $bukti; ?>" valign="middle" align="center">
-                                                <img src="<?= base_url('assets/images/bukti_pembayaran/') . $bukti; ?>" height="60">
+                                                <img src="<?= base_url('assets/images/bukti_pembayaran/') . $bukti; ?>" height="60" alt="BELUM DIBAYAR">
                                             </td>
                                             <td><?php echo $keuangan; ?></td>
-                                            <td>
+                                            <!-- <td>
                                                 <form action="<?= base_url('Purchasing/terima_barang') ?>" method="POST">
                                                     <input type="hidden" name="ID_po" value="<?= $baris->ID_po; ?>">
                                                     <button type="submit" class="btn btn-success"><i class="fa fa-get-pocket"></i></button>
@@ -64,7 +63,7 @@
                                                     <input type="hidden" name="ID_po" value="<?= $baris->ID_po; ?>">
                                                     <button onclick="return confirm ('Anda yakin ingin hapus data ini ?')" class="btn btn-danger"><i class="fa fa-undo"></i></button>
                                                 </form>
-                                            </td>
+                                            </td> -->
                                         </tr>
                                     <?php endforeach; ?>
                                 </tbody>

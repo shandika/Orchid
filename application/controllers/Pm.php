@@ -12,6 +12,7 @@ class Pm extends CI_Controller
     {
         parent::__construct();
         $this->load->model('Pm_model', 'model');
+        $this->load->model('Purchasing_model', 'purchasing');
         if ($this->session->userdata('masuk') != TRUE) {
             echo $this->session->set_flashdata('msg', 'Anda Harus Login Terlebih Dahulu !');
             redirect('Auth', 'refresh');
@@ -421,5 +422,29 @@ class Pm extends CI_Controller
 
         $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Data berhasil Disimpan</div>');
         redirect('Pm', 'refresh');
+    }
+
+    function terima_barang()
+    {
+        $title = 'Project Manager - Status Barang';
+        $data = array(
+            'title' => $title,
+            'query' => $this->db->query("SELECT po.dibayar,po.bukti_bayar,po.ID_keuangan,po.ID_po, po.ID_barang_pr,po.status_barang, po.ID_purchasing, po.tanggal_approve, barang_pr.nama_barang, barang_pr.harga_barang, barang_pr.jumlah, barang_pr.total_harga, barang_pr.nama_supplier, barang_pr.waktu_tunggu, barang_pr.jenis_pembayaran, barang_pr.lama_cicilan FROM po JOIN barang_pr ON po.ID_barang_pr=barang_pr.ID_pr"),
+        );
+        $this->template->load('layout/template_v', 'pm/terima_barang', $data);
+    }
+    function terima_barang_button()
+    {
+        $idpo = $this->input->post('ID_po');
+        $status = "Di Terima";
+        $this->purchasing->terima_barang($idpo, $status);
+        redirect('pm/terima_barang', 'refresh');
+    }
+    function return_barang_button()
+    {
+        $idpo = $this->input->post('ID_po');
+        $status = "Return";
+        $this->purchasing->terima_barang($idpo, $status);
+        redirect('pm/terima_barang', 'refresh');
     }
 }

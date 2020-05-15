@@ -64,15 +64,4 @@ class Purchasing extends CI_Controller
         }
         redirect('Purchasing', 'refresh');
     }
-
-    function terima_barang()
-    {
-        $idpo = $this->input->post('ID_po');
-        $status = "diterima";
-        $this->purchasing->terima_barang($idpo, $status);
-        redirect('Purchasing/status', 'refresh');
-    }
-    function return_barang()
-    {
-    }
 }

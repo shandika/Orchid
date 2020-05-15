@@ -115,6 +115,12 @@ class Pm_model extends CI_Model
         $hasil = $query->row();
         return $hasil->idunit;
     }
+    function ceknomorunit()
+    {
+        $query = $this->db->query("SELECT MAX(nomor) as idunit from unit WHERE nomor LIKE '%B%'");
+        $hasil = $query->row();
+        return $hasil->idunit;
+    }
 
     public function simpanDataUnit($id_unit, $id_project, $nomor, $type, $luas_b, $luas_t)
     {

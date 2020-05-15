@@ -12,6 +12,10 @@ class Keuangan_model extends CI_Model
     {
         $this->db->insert($namagl, $data);
     }
+    function simpanDataGLutama($data)
+    {
+        $this->db->insert('general_ledger', $data);
+    }
 
     function bayarPO()
     {

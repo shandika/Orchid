@@ -13,7 +13,12 @@
             <ul class="nav navbar-nav">
                 <?php if ($this->session->userdata('level') == 1) { ?>
                     <li class="">
-                        <a href="index.html"> <i class="menu-icon fa fa-newspaper-o"></i>Preorder Barang</a>
+                        <a href="<?= base_url('Purchasing') ?>"> <i class="menu-icon fa fa-newspaper-o"></i>Preorder Barang</a>
+                    </li>
+                <?php } ?>
+                <?php if ($this->session->userdata('level') == 1) { ?>
+                    <li class="">
+                        <a href="<?= base_url('Purchasing/status') ?>"> <i class="menu-icon fa fa-list-ol"></i>Preorder Barang</a>
                     </li>
                 <?php } ?>
                 <?php if ($this->session->userdata('level') == 2) { ?>
@@ -24,6 +29,11 @@
                 <?php if ($this->session->userdata('level') == 2) { ?>
                     <li class="">
                         <a href="<?php echo base_url('pm/pr'); ?>"> <i class="menu-icon fa fa-credit-card"></i>Purchasing Request </a>
+                    </li>
+                <?php } ?>
+                <?php if ($this->session->userdata('level') == 2) { ?>
+                    <li class="">
+                        <a href="<?php echo base_url('pm/terima_barang'); ?>"> <i class="menu-icon fa fa-archive"></i>Status barang</a>
                     </li>
                 <?php } ?>
                 <?php if ($this->session->userdata('level') == 3) { ?>
@@ -87,7 +97,7 @@
                         ?>
                         <small><span class="badge badge-success float-right mt-1">Notification</span></small></strong>
                 </div>
-                    <div class="notif_content"></div>
+                <div class="notif_content"></div>
             </div>
         <?php } ?>
     </nav>
