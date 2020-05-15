@@ -145,9 +145,11 @@
                         <div class="help-block with-errors"></div>
                     </div>
                     <div class="form-group">
-                        <label for="foto">Foto project :</label>
-                        <input type="file" class="form-control" id="foto" name="foto" rows="2" required=""></input>
-                        <div class="help-block with-errors"></div>
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="foto" name="foto" required="">
+                            <label class="custom-file-label" for="foto">Pilih gambar project </label>
+                            <div class="help-block with-errors"></div>
+                        </div>
                     </div>
                     <div class="form-group">
                         <input type="number" class="form-control" id="jumlah_unit" name="jumlah_unit" placeholder="Jumlah unit " required>
