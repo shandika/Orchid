@@ -540,8 +540,8 @@ class Keuangan extends CI_Controller
         $nomor_gl2 = $this->input->post('nomor_gl2');
         $nama_gl = $this->input->post('nama_gl');
         $nama_gl2 = $this->input->post('nama_gl2');
-        $debit = $this->input->post('debit_journal');
-        $kredit = $this->input->post('kredit_journal');
+        $debit = preg_replace('/[Rp.]/', '', $this->input->post('debit_journal'));
+        $kredit = preg_replace('/[Rp.]/', '', $this->input->post('kredit_journal'));
         $keterangan = $this->input->post('keterangan_journal');
         $tanggal = date("d/m/Y");
         $pembanding = 2;

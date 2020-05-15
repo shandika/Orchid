@@ -116,16 +116,28 @@ class Pm_model extends CI_Model
         return $hasil->idunit;
     }
 
-    public function simpanDataUnit($data)
+    public function simpanDataUnit($id_unit, $id_project, $nomor, $type, $luas_b, $luas_t)
     {
-        $this->db->insert_batch('unit', $data);
+        $data = [
+            'ID_unit' => $id_unit,
+            'ID_project' => $id_project,
+            'nomor' => $nomor,
+            'type' => $type,
+            'luas_bangunan' => $luas_b,
+            'luas_tanah' => $luas_t,
+            'status' => '0'
+        ];
+
+        $this->db->insert('unit', $data);
     }
-    public function cek_msg() {
+    public function cek_msg()
+    {
         $hsl = $this->db->query("SELECT ID_dp, ID_invoice_dp, nominal_angsuran_dp, angsuran_dp.status, customer.nama, customer.no_ktp FROM customer JOIN angsuran_dp ON customer.no_ktp = angsuran_dp.no_ktp WHERE angsuran_dp.status = 1 AND angsuran_dp.sisa_angsuran='0' ORDER BY angsuran_dp.ID_dp DESC");
         return $hsl;
     }
-    public function jum_msg() {
-        $query=$this->db->query("SELECT ID_dp, ID_invoice_dp, nominal_angsuran_dp, angsuran_dp.status, customer.nama, customer.no_ktp FROM customer JOIN angsuran_dp ON customer.no_ktp = angsuran_dp.no_ktp WHERE angsuran_dp.status = 1 AND angsuran_dp.sisa_angsuran='0' ORDER BY angsuran_dp.ID_dp DESC");
+    public function jum_msg()
+    {
+        $query = $this->db->query("SELECT ID_dp, ID_invoice_dp, nominal_angsuran_dp, angsuran_dp.status, customer.nama, customer.no_ktp FROM customer JOIN angsuran_dp ON customer.no_ktp = angsuran_dp.no_ktp WHERE angsuran_dp.status = 1 AND angsuran_dp.sisa_angsuran='0' ORDER BY angsuran_dp.ID_dp DESC");
         return $query->num_rows();
     }
 }
