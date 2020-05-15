@@ -10,5 +10,5 @@
     </div>
     <div id="ln">
     </div>
-    <button type="submit" class="btn btn-warning col-12"><i class="menu-icon fa fa-file-pdf-o"></i> Export to PDF</button>
+    <button type="submit" class="btn btn-warning col-12 mb-5"><i class="menu-icon fa fa-file-pdf-o"></i> Export to PDF</button>
 </form>

@@ -414,4 +414,59 @@ class Keuangan_model extends CI_Model
         $query = $this->db->query("SELECT * FROM $project WHERE nomor LIKE '8%'");
         return $query;
     }
+
+    // LK Pasiva 
+    // hutang lancar
+    public function pilih_hutangUsaha($project)
+    {
+        $query = $this->db->query("SELECT * FROM $project WHERE nomor LIKE '9%'");
+        return $query;
+    }
+    public function pilih_hutangKonsiyasi($project)
+    {
+        $query = $this->db->query("SELECT * FROM $project WHERE nomor LIKE '10%'");
+        return $query;
+    }
+    public function pilih_hutangLeverensir($project)
+    {
+        $query = $this->db->query("SELECT * FROM $project WHERE nomor LIKE '11%'");
+        return $query;
+    }
+    public function pilih_uangMukaP($project)
+    {
+        $query = $this->db->query("SELECT * FROM $project WHERE nomor LIKE '11a'");
+        return $query;
+    }
+    public function pilih_hutangPemegangSaham($project)
+    {
+        $query = $this->db->query("SELECT * FROM $project WHERE nomor LIKE '12%'");
+        return $query;
+    }
+    // LK Pasiva
+    // Modal
+    public function pilih_modalDisetor($project)
+    {
+        $query = $this->db->query("SELECT * FROM $project WHERE nomor LIKE '13%'");
+        return $query;
+    }
+    public function pilih_modalAdi($project)
+    {
+        $query = $this->db->query("SELECT * FROM $project WHERE nomor LIKE '13a%'");
+        return $query;
+    }
+    public function pilih_MArief($project)
+    {
+        $query = $this->db->query("SELECT * FROM $project WHERE nomor LIKE '13b%'");
+        return $query;
+    }
+    public function pilih_samsunar($project)
+    {
+        $query = $this->db->query("SELECT * FROM $project WHERE nomor LIKE '13c%'");
+        return $query;
+    }
+    public function pilih_adiDharma($project)
+    {
+        $query = $this->db->query("SELECT * FROM $project WHERE nomor LIKE '13d%'");
+        return $query;
+    }
 }

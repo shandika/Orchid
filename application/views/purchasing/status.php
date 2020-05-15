@@ -49,7 +49,9 @@
                                             <td><?php echo $jenis_pembayaran; ?></td>
                                             <td><?php echo $lama_pembayaran; ?></td>
                                             <td><?php echo $waktu_tunggu; ?></td>
-                                            <td><img src=" <?= base_url('assets/images/bukti_pembayaran/') . $bukti; ?>" class="card-img pt-3 px-2"></td>
+                                            <td class="test-popup-link" href="<?= base_url('assets/images/bukti_pembayaran/') . $bukti; ?>" valign="middle" align="center">
+                                                <img src="<?= base_url('assets/images/bukti_pembayaran/') . $bukti; ?>" height="60">
+                                            </td>
                                             <td><?php echo $keuangan; ?></td>
                                             <td>
                                                 <form action="<?= base_url('Purchasing/terima_barang') ?>" method="POST">
