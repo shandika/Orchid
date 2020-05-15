@@ -400,33 +400,25 @@ class Pm extends CI_Controller
     {
         $dariDB = $this->model->cekIdUnit();
         $nourut = substr($dariDB, 3, 4);
-        $kode1 =  $nourut + 1;
-        $kodenya = sprintf("%04s", $kode1);
-        $strkodenya = 'UN' . $kodenya;
-
-        $idUnit = $strkodenya;
-        $idProject = $_POST['idProject'];
-        $nomor = $_POST['nomor'];
-        $type = $_POST['type'];
-        $luasB = $_POST['luasBangunan'];
-        $luasT = $_POST['luasTanah'];
-        $data = array();
+        $jumlahnya = intval($this->input->post('jumlah'));
+        $idProject = $this->input->post('idProject');
+        $nomor = $this->input->post('nomor');
+        $type = $this->input->post('type');
+        $luasB = $this->input->post('luasBangunan');
+        $luasT = $this->input->post('luasTanah');
 
 
-        $i = 0;
-        foreach ($idProject as $idP) {
-            array_push($data, array(
-                'ID_unit' => $idUnit,
-                'ID_project' => $idP,
-                'nomor'     => $nomor[$i],
-                'type'      => $type[$i],
-                'luas_bangunan' => $luasB[$i],
-                'luas_tanah'    => $luasT[$i]
-            ));
-            $idUnit++;
-            $i++;
+        for ($i = 1; $i <= $jumlahnya; $i++) {
+            $kode1 =  $nourut + 1;
+            $kodenya = sprintf("%04s", $kode1);
+            $strkodenya = 'UN' . $kodenya;
+            $idUnit = $strkodenya;
+            $nomornya = $nomor . $i;
+            $this->model->simpanDataUnit($idUnit, $idProject, $nomornya, $type, $luasB, $luasT);
+            $nourut = $kode1;
         }
-        $this->model->simpanDataUnit($data);
+
+
         $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Data berhasil Disimpan</div>');
         redirect('Pm', 'refresh');
     }
