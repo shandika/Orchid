@@ -701,6 +701,15 @@ class Keuangan extends CI_Controller
         );
         $this->template->load('layout/template_v', 'keuangan/bayar_po', $data);
     }
+    public function admin_fee()
+    {
+        $title = 'Keuangan - Bayar PO';
+        $data = array(
+            'title' => $title,
+            'query' => $this->keuangan->admin_fee(),
+        );
+        $this->template->load('layout/template_v', 'keuangan/admin_fee', $data);
+    }
     public function laporan_laba_rugi()
     {
         $title = 'Keuangan - Laporan Keuangan';

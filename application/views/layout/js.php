@@ -531,8 +531,11 @@
             var harga = parseInt($("#harga").val());
             var l_a_b = parseInt($("#lama_angsuran_bulanan").val());
             var t_injek = parseInt($("#total_injeksi").val());
+            var diskon = parseInt($("#voucher").val());
+            var diskonnya = diskon / 100;
+            var hargasetelahdiskon = harga * diskonnya;
             var dp = parseInt($("#dp").val());
-            var total = (harga - dp - t_injek) / l_a_b;
+            var total = (harga - dp - t_injek - hargasetelahdiskon) / l_a_b;
             var bagi = total / 1000;
             var dibulatkan = Math.floor(bagi);
             var hasilnya = dibulatkan * 1000;

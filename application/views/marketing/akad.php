@@ -20,6 +20,10 @@
             <label for="inputAddress">Nomor KTP</label>
             <input class="form-control" type="text" placeholder="" name="no_ktp" id="no_ktp" readonly>
         </div>
+        <div class="form-group d-none">
+            <label for="inputAddress">Tanggal</label>
+            <input class="form-control" type="text" placeholder="" name="tanggal_akad" id="tanggal_akad" value="<?= $tanggal_akad ?>" readonly>
+        </div>
         <div class="form-row">
             <div class="form-group col-4">
                 <label for="inputAddress">DP</label>
@@ -64,7 +68,7 @@
             <label for="inputEmail3" class="col-sm-1 col-form-label">Voucher / Diskon</label>
             <div class="col-sm-11">
                 <select class="custom-select my-1 mr-sm-2" id="voucher" name="voucher">
-                    <option selected>Pilih Voucher</option>
+                    <option selected value="0">Pilih Voucher</option>
                     <?php foreach ($query2 as $key) : ?>
                         <option value="<?= $key->nominal; ?>"><?= $key->nama; ?> ( Senilai : <?= $key->nominal; ?> %)</option>
                     <?php endforeach; ?>

@@ -76,6 +76,11 @@ $jum_pesan = $query->num_rows();
                     </li>
                 <?php } ?>
                 <?php if ($this->session->userdata('level') == 4) { ?>
+                    <li class="">
+                        <a href="<?php echo base_url('Keuangan/admin_fee'); ?>"> <i class="menu-icon fa fa-money"></i>Marketing Fee</a>
+                    </li>
+                <?php } ?>
+                <?php if ($this->session->userdata('level') == 4) { ?>
                     <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-file-text"></i>Laporan Keuangan</a>
                         <ul class="sub-menu children dropdown-menu">

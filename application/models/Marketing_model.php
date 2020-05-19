@@ -88,7 +88,7 @@ class Marketing_model extends CI_Model
         return $hasil->idinvoiceinjek;
     }
 
-    function simpanUnitDipilih($id, $no_ktp, $dp, $lama_angsuran_dp, $angsuran_bulanan, $lama_angsuran_bulanan, $total_harga, $ktp_marketing, $id_unit, $id_project)
+    function simpanUnitDipilih($id, $no_ktp, $dp, $lama_angsuran_dp, $angsuran_bulanan, $lama_angsuran_bulanan, $total_harga, $ktp_marketing, $id_unit, $id_project, $tanggal_akad, $status_marketing_fee)
     {
         $data = [
             'ID_unit_dipesan' => $id,
@@ -101,6 +101,8 @@ class Marketing_model extends CI_Model
             'ktp_marketing' => $ktp_marketing,
             'ID_unit' => $id_unit,
             'ID_project' => $id_project,
+            'tanggal_akad' => $tanggal_akad,
+            'status_marketing_fee' => $status_marketing_fee
         ];
         $this->db->insert('unit_dipesan', $data);
         $this->marketing->update_unit($id_unit);

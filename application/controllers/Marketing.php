@@ -174,12 +174,14 @@ class Marketing extends CI_Controller
 		$dariDB = $this->marketing->cekidunitdipesan();
 		$nourut = substr($dariDB, 3, 4);
 		$kode = $nourut + 1;
+		$tanggal_akad = date('d/m/Y');
 
 		$data = array(
 			'title' => $title,
 			'query1' => $this->db->get('project')->result(),
 			'idunitdipesan' 	=> $kode,
-			'query2' => $this->db->get('voucher')->result()
+			'query2' => $this->db->get('voucher')->result(),
+			'tanggal_akad' => $tanggal_akad,
 
 		);
 		$this->template->load('layout/template_v', 'marketing/akad', $data);
@@ -224,7 +226,9 @@ class Marketing extends CI_Controller
 			$ktp_marketing = $this->input->post('ktp_marketing');
 			$unit = $this->input->post('unit');
 			$id_project = $this->input->post('project');
-			$tambah = $this->marketing->simpanUnitDipilih($id_akad, $no_ktp, $dp, $lama_dp, $bulanan, $lama_bulanan, $harga, $ktp_marketing, $unit, $id_project);
+			$tanggal_akad = $this->input->post('tanggal_akad');
+			$status_marketing_fee = "MENUNGGU";
+			$this->marketing->simpanUnitDipilih($id_akad, $no_ktp, $dp, $lama_dp, $bulanan, $lama_bulanan, $harga, $ktp_marketing, $unit, $id_project, $tanggal_akad, $status_marketing_fee);
 		}
 		// input proyeksi cicilan
 		//ambil ID data angsuran terbesar
