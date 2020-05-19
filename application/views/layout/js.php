@@ -791,11 +791,7 @@
                     document.getElementById("lama_bayar_pr").disabled = false;
                     break;
             }
-
         });
-
-
-
     });
 </script>
 <script type="text/javascript">
@@ -855,8 +851,6 @@
             var dibulatkan = Math.floor(bagi);
             var hasilnya = dibulatkan * 1000;
             $("#angsuran_baru_addendum").val(hasilnya);
-
-
         });
     });
 </script>
@@ -949,5 +943,15 @@
     $('.custom-file-input').on('change', function() {
         let fileName = $(this).val().split('\\').pop();
         $(this).next('.custom-file-label').addClass("selected").html(fileName);
+    });
+</script>
+
+<!-- Tambah admin fee -->
+<script>
+    $(document).on("click", ".tambahFee", function() {
+        let idUnit = $(this).data('id');
+        let harga = $(this).data('harga');
+        $("#idUnit").val(idUnit);
+        $('#harga').val(harga);
     });
 </script>

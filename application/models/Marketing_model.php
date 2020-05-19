@@ -180,4 +180,15 @@ class Marketing_model extends CI_Model
         ];
         $this->db->insert('angsuran_injek', $data);
     }
+
+    function cekidfee()
+    {
+        $query = $this->db->query("SELECT MAX(ID_marketing_fee) as id from marketing_fee");
+        $hasil = $query->row();
+        return $hasil->id;
+    }
+    function tambahDataMF($data)
+    {
+        $this->db->insert('marketing_fee', $data);
+    }
 }

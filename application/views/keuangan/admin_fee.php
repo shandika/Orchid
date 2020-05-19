@@ -1,7 +1,9 @@
 <div class="content mt-3">
     <div class="animated fadeIn">
         <div class="row">
-
+            <div class="col-lg-12">
+                <?= $this->session->flashdata('message'); ?>
+            </div>
             <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="card">
                     <div class="card-header">
@@ -40,13 +42,8 @@
                                         <td><?php echo $jenis_pembayaran; ?></td>
                                         <td><?php echo $lama_pembayaran; ?></td>
                                         <td><?php echo $dp; ?></td>
-
-
                                         <td>
-                                            <form action="<?= base_url() ?>" method="POST">
-                                                <input type="hidden" name="ID_po" value="<?= $baris->ID_unit_dipesan; ?>">
-                                                <button class="btn btn-success" data-toggle="modal"><i class="fa fa-plus"></i></button>
-                                            </form>
+                                            <button class="btn btn-success tambahFee" data-toggle="modal" data-target="#tambahModal" data-harga="<?= $baris->total_harga; ?>" data-id="<?= $baris->ID_unit_dipesan ?>"><i class="fa fa-plus"></i></button>
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>
@@ -60,29 +57,76 @@
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="buktiModal" tabindex="-1" role="dialog" aria-labelledby="buktiModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+<div class="modal fade" id="tambahModal" tabindex="-1" role="dialog" aria-labelledby="tambahModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg-10" role="dialog">
+
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="buktiModalLabel">Konfirmasi Bukti Pembayaran</h5>
+                <h5 class="modal-title" id="projectModalLabel">Tambah Data</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="<?= base_url('Keuangan/updatePO') ?>" class="mx-4" role="form" data-toggle="validator" method="POST" enctype="multipart/form-data">
+            <form action="<?= base_url('Keuangan/tambahMF'); ?>" class="mx-6" role="form" data-toggle="validator" method="POST" enctype="multipart/form-data">
+
                 <div class="modal-body">
-                    <input type="hidden" name="idPO" id="idPO" value="">
-                    <div class="form-group">
-                        <label for="bukti_bayar">Upload foto bukti pembayaran :</label>
-                        <input type="file" class="form-control" id="bukti_bayar" name="bukti_bayar" rows="2" required=""></input>
-                        <div class="help-block with-errors"></div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class=" form-group">
+                                <label for="id">ID Marketing</label>
+                                <input type="text" class="form-control" id="id" name="id" value="<?= $id; ?>" readonly>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="idUnit">ID unit</label>
+                                <input type="text" class="form-control" name="idUnit" id="idUnit" readonly>
+                                <input type="hidden" class="form-control" name="harga" id="harga" readonly>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="agen">Agen</label>
+                                <input type="text" class="form-control" name="agen" id="agen" required>
+                                <div class="help-block with-errors"></div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="inhouse">Inhouse</label>
+                                <input type="text" class="form-control" name="inhouse" id="inhouse" required>
+                                <div class="help-block with-errors"></div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="persenan">Persenan</label>
+                                <input type="text" class="form-control" name="persenan" id="persenan" required>
+                                <div class="help-block with-errors"></div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="closingFee">Nominal Closing Fee</label>
+                                <input type="number" class="form-control" name="closingFee" id="closingFee" required>
+                                <div class="help-block with-errors"></div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="direkturFee">Nominal Direkur Fee</label>
+                                <input type="number" class="form-control" name="direkturFee" id="direkturFee" required>
+                                <div class="help-block with-errors"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Simpan</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <input type="submit" class=" btn btn-primary" name="tambah" value="Simpan"></input>
                 </div>
-            </form>
+                <!-- </form> -->
+                <?= form_close(); ?>
         </div>
     </div>
 </div>
