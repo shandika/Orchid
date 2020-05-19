@@ -169,78 +169,122 @@
                     <div id="form-step-1" role="form" data-toggle="validator">
                         <div class="form-group">
                             <label for="name">Foto Copy KTP:</label>
-                            <input class="form-control" type="file" name="userfile[]" multiple="multiple" class="form-control" required="">
-                            <div class="help-block with-errors"></div>
+                            <!-- <input class="form-control" type="file" name="userfile[]" multiple="multiple" class="form-control" required=""> -->
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input form-control" name="userfile[]" multiple="multiple" required="">
+                                <label class="custom-file-label" for="foto">Pilih Foto Copy KTP</label>
+                                <div class="help-block with-errors"></div>
+                            </div>
                         </div>
                     </div>
                     <div id="form-step-1" role="form" data-toggle="validator">
                         <div class="form-group">
                             <label for="name">Foto Copy KK:</label>
-                            <input class="form-control" type="file" name="userfile[]" multiple="multiple" class="form-control" required="">
-                            <div class="help-block with-errors"></div>
+                            <!-- <input class="form-control" type="file" name="userfile[]" multiple="multiple" class="form-control" required=""> -->
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input form-control" name="userfile[]" multiple="multiple" required="">
+                                <label class="custom-file-label" for="foto">Pilih Foto Copy KK</label>
+                                <div class="help-block with-errors"></div>
+                            </div>
                         </div>
                     </div>
                     <div id="form-step-1" role="form" data-toggle="validator">
                         <div class="form-group">
                             <label for="name">Slip Gaji:</label>
-                            <input class="form-control" type="file" name="userfile[]" multiple="multiple" class="form-control" required="">
-                            <div class="help-block with-errors"></div>
+                            <!-- <input class="form-control" type="file" name="userfile[]" multiple="multiple" class="form-control" required=""> -->
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input form-control" name="userfile[]" multiple="multiple" required="">
+                                <label class="custom-file-label" for="foto">Pilih Slip Gaji</label>
+                                <div class="help-block with-errors"></div>
+                            </div>
                         </div>
                     </div>
                     <div id="form-step-1" role="form" data-toggle="validator">
                         <div class="form-group">
                             <label for="name">Laporan Keuangan Usaha:</label>
-                            <input class="form-control" type="file" name="userfile[]" multiple="multiple" class="form-control" required="">
-                            <div class="help-block with-errors"></div>
+                            <!-- <input class="form-control" type="file" name="userfile[]" multiple="multiple" class="form-control" required=""> -->
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input form-control" name="userfile[]" multiple="multiple" required="">
+                                <label class="custom-file-label" for="foto">Pilih Laporan Keuangan Usaha</label>
+                                <div class="help-block with-errors"></div>
+                            </div>
                         </div>
                     </div>
                     <div id="form-step-1" role="form" data-toggle="validator">
                         <div class="form-group">
                             <label for="name">Laporan Rekening:</label>
-                            <input class="form-control" type="file" name="userfile[]" multiple="multiple" class="form-control" required="">
-                            <div class="help-block with-errors"></div>
+                            <!-- <input class="form-control" type="file" name="userfile[]" multiple="multiple" class="form-control" required=""> -->
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input form-control" name="userfile[]" multiple="multiple" required="">
+                                <label class="custom-file-label" for="foto">Pilih Laporan Rekening</label>
+                                <div class="help-block with-errors"></div>
+                            </div>
                         </div>
                     </div>
                     <div id="form-step-1" role="form" data-toggle="validator">
                         <div class="form-group">
                             <label for="name">Surat Persetujaun Suami Istri:</label>
-                            <input class="form-control" type="file" name="userfile[]" multiple="multiple" class="form-control" required="">
-                            <div class="help-block with-errors"></div>
+                            <!-- <input class="form-control" type="file" name="userfile[]" multiple="multiple" class="form-control" required=""> -->
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input form-control" name="userfile[]" multiple="multiple" required="">
+                                <label class="custom-file-label" for="foto">Pilih Surat Persetujaun Suami Istri</label>
+                                <div class="help-block with-errors"></div>
+                            </div>
                         </div>
                     </div>
                     <div id="form-step-1" role="form" data-toggle="validator">
                         <div class="form-group">
                             <label for="name">Surat Persetujaun Pembayaran Kredit:</label>
-                            <input class="form-control" type="file" name="userfile[]" multiple="multiple" class="form-control" required="">
-                            <div class="help-block with-errors"></div>
+                            <!-- <input class="form-control" type="file" name="userfile[]" multiple="multiple" class="form-control" required=""> -->
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input form-control" name="userfile[]" multiple="multiple" required="">
+                                <label class="custom-file-label" for="foto">Pilih Surat Persetujaun Pembayaran Kredit</label>
+                                <div class="help-block with-errors"></div>
+                            </div>
                         </div>
                     </div>
                     <div id="form-step-1" role="form" data-toggle="validator">
                         <div class="form-group">
                             <label for="name">Surat Rekomendasi:</label>
-                            <input class="form-control" type="file" name="userfile[]" multiple="multiple" class="form-control" required="">
-                            <div class="help-block with-errors"></div>
+                            <!-- <input class="form-control" type="file" name="userfile[]" multiple="multiple" class="form-control" required=""> -->
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input form-control" name="userfile[]" multiple="multiple" required="">
+                                <label class="custom-file-label" for="foto">Pilih Surat Rekomendasi</label>
+                                <div class="help-block with-errors"></div>
+                            </div>
                         </div>
                     </div>
                     <div id="form-step-1" role="form" data-toggle="validator">
                         <div class="form-group">
                             <label for="name">Surat Perjanjian Agunan Barang:</label>
-                            <input class="form-control" type="file" name="userfile[]" multiple="multiple" class="form-control" required="">
-                            <div class="help-block with-errors"></div>
+                            <!-- <input class="form-control" type="file" name="userfile[]" multiple="multiple" class="form-control" required=""> -->
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input form-control" name="userfile[]" multiple="multiple" required="">
+                                <label class="custom-file-label" for="foto">Pilih Surat Perjanjian Agunan Barang</label>
+                                <div class="help-block with-errors"></div>
+                            </div>
                         </div>
                     </div>
                     <div id="form-step-1" role="form" data-toggle="validator">
                         <div class="form-group">
                             <label for="name">Surat Perjanjian Penjaminan Personal:</label>
-                            <input class="form-control" type="file" name="userfile[]" multiple="multiple" class="form-control" required="">
-                            <div class="help-block with-errors"></div>
+                            <!-- <input class="form-control" type="file" name="userfile[]" multiple="multiple" class="form-control" required=""> -->
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input form-control" name="userfile[]" multiple="multiple" required="">
+                                <label class="custom-file-label" for="foto">Pilih Surat Perjanjian Penjaminan Personal</label>
+                                <div class="help-block with-errors"></div>
+                            </div>
                         </div>
                     </div>
                     <div id="form-step-1" role="form" data-toggle="validator">
                         <div class="form-group">
                             <label for="name">Slip Gaji Penjamin Personal:</label>
-                            <input class="form-control" type="file" name="userfile[]" multiple="multiple" class="form-control" required="">
-                            <div class="help-block with-errors"></div>
+                            <!-- <input class="form-control" type="file" name="userfile[]" multiple="multiple" class="form-control" required=""> -->
+                            <div class="custom-file mb-3">
+                                <input type="file" class="custom-file-input form-control" name="userfile[]" multiple="multiple" required="">
+                                <label class="custom-file-label" for="foto">Pilih Slip Gaji Penjamin Personal</label>
+                                <div class="help-block with-errors"></div>
+                            </div>
                         </div>
                     </div>
                 </div>

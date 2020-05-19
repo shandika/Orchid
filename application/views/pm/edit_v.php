@@ -32,15 +32,20 @@
                     </div>
                     <div class="form-group row">
                         <input type="hidden" name="foto_lama" value="<?= $data->foto ?>" />
-                        <div class="col-sm-2">Gambar project</div>
+                        <div class="col-sm-2">Gambar :</div>
                         <div class="col-sm-9">
                             <div class="row">
                                 <div class="col-sm-4">
                                     <img src="<?= base_url('assets/images/project/') . $data->foto ?>" alt="">
                                 </div>
                                 <div class="col-sm-8">
-                                    <label for="foto"></label>
-                                    <input type="file" class="form-control" id="foto" name="foto" rows="2"></input>
+                                    <div class="form-group">
+                                        <div class="custom-file">
+                                            <input type="file" class="custom-file-input" id="foto" name="foto" required="">
+                                            <label class="custom-file-label" for="foto">Pilih gambar project </label>
+                                            <div class="help-block with-errors"></div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
