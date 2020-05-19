@@ -1,4 +1,8 @@
-<?php defined('BASEPATH') or exit('No direct script access allowed');
+<?php
+
+use Mpdf\Tag\Input;
+
+defined('BASEPATH') or exit('No direct script access allowed');
 
 class Keuangan extends CI_Controller
 {
@@ -703,10 +707,18 @@ class Keuangan extends CI_Controller
     }
     public function admin_fee()
     {
+        // id project
+        $dariDB = $this->marketing->cekidfee();
+        $nourut = substr($dariDB, 3, 4);
+        $kode1 =  $nourut + 1;
+        $kodenya = sprintf("%04s", $kode1);
+        $strkodenya = 'MF' . $kodenya;
+
         $title = 'Keuangan - Bayar PO';
         $data = array(
             'title' => $title,
             'query' => $this->keuangan->admin_fee(),
+            'id' => $strkodenya
         );
         $this->template->load('layout/template_v', 'keuangan/admin_fee', $data);
     }
@@ -2112,5 +2124,34 @@ class Keuangan extends CI_Controller
         echo "<label for='formGroupExampleInput'>Total CashFlow</label>";
         echo "<input type='text' class='form-control' id='CF15' name='CF15' value='$tc' placeholder='Otomatis Terisi' readonly>";
         echo "</div>";
+    }
+
+    public function tambahMF()
+    {
+        $id         = strip_tags($this->input->post('id'));
+        $idUnit     = strip_tags($this->input->post('idUnit'));
+        $harga      = strip_tags($this->input->post('harga'));
+        $agen       = strip_tags($this->input->post('agen'));
+        $inhouse    = strip_tags($this->input->post('inhouse'));
+        $persenan   = strip_tags($this->input->post('persenan'));
+        $marketingFee   = $persenan * $harga / 100;
+        $closingFee = strip_tags($this->input->post('closingFee'));
+        $direkturFee    = strip_tags($this->input->post('direkturFee'));
+
+        $data = [
+            'ID_marketing_fee'      => $id,
+            'ID_unit_dipesan'       => $idUnit,
+            'agen'                  => $agen,
+            'inhouse'               => $inhouse,
+            'persenan'              => $persenan,
+            'nominal_marketing_fee' => $marketingFee,
+            'nominal_closing_fee'   => $closingFee,
+            'direktur_fee'          => $direkturFee,
+            'total_fee'             => $marketingFee + $closingFee + $direkturFee
+        ];
+        $this->form_validation->set_rules('id', 'id', 'required');
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Data berhasil ditambah</div>');
+        $this->marketing->tambahDataMF($data);
+        redirect('keuangan/admin_fee', ' refresh');
     }
 }
