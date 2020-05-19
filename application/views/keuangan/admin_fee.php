@@ -101,7 +101,7 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="persenan">Persenan</label>
-                                <input type="text" class="form-control" name="persenan" id="persenan" required>
+                                <input type="number" step="0.01" class="form-control" name="persenan" id="persenan" required>
                                 <div class="help-block with-errors"></div>
                             </div>
                         </div>
