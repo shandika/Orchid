@@ -594,17 +594,25 @@
 
 <!-- Addendum optional -->
 
-<!-- Addendum injek -->
+<!-- Total Investasi Cashflow -->
 <script type="text/javascript">
-    function sum() {
+    function sum(){
         var beli = document.getElementById('CF7').value;
         var jual = document.getElementById('CF8').value;
+        var totop = document.getElementById('CF6').value;
+        var totfin = document.getElementById('CF14').value;
         var result = parseInt(beli) + parseInt(jual);
-
+        var total = parseInt(totop) + parseInt(totfin) + result;
         if (!isNaN(result)) {
             document.getElementById('CF9').value = result;
-        } else {
+        }else{
             document.getElementById('CF9').value = 0;
+        }
+
+        if (!isNaN(total)) {
+            document.getElementById('CF15').value = total;
+        }else{
+            document.getElementById('CF15').value = 0;
         }
     }
 </script>
