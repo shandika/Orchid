@@ -1341,7 +1341,7 @@ class Keuangan extends CI_Controller
         $neraca_barang = $this->keuangan->pilih_neraca_barang_jadi($project)->result();
         $neraca_pekerjaan = $this->keuangan->pilih_neraca_pekerjaan_dalam_progress($project)->result();
         $neraca_tanah_dan_bangunan = $this->keuangan->pilih_neraca_tanah_dan_bangunan($project)->result();
-        $neraca_peralatan_kantor = $this->keuangan->pilih_biaya_sewa_kantor($project)->result();
+        $neraca_peralatan_kantor = $this->keuangan->pilih_neraca_peralatan_kantor($project)->result();
 
 
         //neraca
@@ -1969,7 +1969,7 @@ class Keuangan extends CI_Controller
         $neraca_uang_muka = $this->keuangan->pilih_neraca_uang_muka($project)->result();
         $neraca_barang = $this->keuangan->pilih_neraca_barang_jadi($project)->result();
         $neraca_piutang_karyawan = $this->keuangan->pilih_neraca_piutang_karyawan($project)->result();
-        $neraca_peralatan_kantor = $this->keuangan->pilih_biaya_sewa_kantor($project)->result();
+        $neraca_peralatan_kantor = $this->keuangan->pilih_neraca_peralatan_kantor($project)->result();
         foreach ($neraca_uang_muka as $nf) {
             $tnf = $nf->nominal;
         }
@@ -2067,16 +2067,16 @@ class Keuangan extends CI_Controller
         echo "<input type='text' class='form-control' id='CF7' name='CF7' value='$tnj' placeholder='Otomatis Terisi' readonly>";
         echo "</div>";
 
-        $pat = 1;
+
         echo "<div class='form-group col-6'>";
         echo "<label for='formGroupExampleInput'>Penjualan Aset Tetap</label>";
-        echo "<input type='text' class='form-control' id='CF8' name='CF8' placeholder='Otomatis Terisi' readonly>";
+        echo "<input type='text' class='form-control' id='CF8' name='CF8' placeholder='Harap Diisi Manual sebelum export' onkeyup='sum()'>";
         echo "</div>";
 
-        $tic = $tnj + $pat;
+
         echo "<div class='form-group col-12'>";
         echo "<label for='formGroupExampleInput'>Total Investasi CashFlow</label>";
-        echo "<input type='text' class='form-control' id='CF9' name='CF9' value='$tic' placeholder='Otomatis Terisi' readonly>";
+        echo "<input type='text' class='form-control' id='CF9' name='CF9'placeholder='Otomatis Terisi' readonly>";
         echo "<br>";
         echo "</div>";
 
@@ -2085,31 +2085,21 @@ class Keuangan extends CI_Controller
         echo "<br>";
         echo "</div>";
 
-        $pemB = 1;
-        echo "<div class='form-group col-3'>";
-        echo "<label for='formGroupExampleInput'>Pembayaran Bank</label>";
-        echo "<input type='text' class='form-control' id='CF10' name='CF10' placeholder='Otomatis Terisi' readonly>";
-        echo "</div>";
 
-        $pps = 1;
-        echo "<div class='form-group col-3'>";
+        $pps = 0;
+        echo "<div class='form-group col-6'>";
         echo "<label for='formGroupExampleInput'>Pembayaran Pemegang Saham</label>";
         echo "<input type='text' class='form-control' id='CF11' name='CF11' placeholder='Otomatis Terisi' readonly>";
         echo "</div>";
 
-        $pinB = 1;
-        echo "<div class='form-group col-3'>";
-        echo "<label for='formGroupExampleInput'>Pinjaman Bank</label>";
-        echo "<input type='text' class='form-control' id='CF12' name='CF12' placeholder='Otomatis Terisi' readonly>";
-        echo "</div>";
 
 
-        echo "<div class='form-group col-3'>";
+        echo "<div class='form-group col-6'>";
         echo "<label for='formGroupExampleInput'>Pinjaman Pemegang Saham</label>";
         echo "<input type='text' class='form-control' id='CF13' name='CF13' value='$hutangPs' placeholder='Otomatis Terisi' readonly>";
         echo "</div>";
 
-        $tfc = $pemB + $pps + $pinB + $hutangPs;
+        $tfc =  $pps + $hutangPs;
         echo "<div class='form-group col-12'>";
         echo "<label for='formGroupExampleInput'>Total Financing CashFlow</label>";
         echo "<input type='text' class='form-control' id='CF14' name='CF14' value='$tfc' placeholder='Otomatis Terisi' readonly>";
@@ -2119,7 +2109,7 @@ class Keuangan extends CI_Controller
         echo "<br>";
         echo "</div>";
 
-        $tc = $toc + $tic + $tfc;
+        $tc = $toc  + $tfc;
         echo "<div class='form-group col-12'>";
         echo "<label for='formGroupExampleInput'>Total CashFlow</label>";
         echo "<input type='text' class='form-control' id='CF15' name='CF15' value='$tc' placeholder='Otomatis Terisi' readonly>";
