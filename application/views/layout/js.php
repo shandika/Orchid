@@ -471,6 +471,26 @@
     });
 </script>
 <script type="text/javascript">
+    $(document).ready(function() {
+        $("#nama_barang_pr").autocomplete({
+            source: "<?php echo site_url('Pm/get_pr/?'); ?>",
+
+            select: function(event, ui) {
+                $('[name="nama_barang_pr"]').val(ui.item.label);
+                Swal.fire({
+                    title: 'Perhatian !',
+                    text: 'Barang Sudah Pernah Dipesan 30 hari terakhir',
+                    type: 'warning'
+                }).then((result) => {
+                    if (result.value) {
+                        $('[name="nama_barang_pr"]').val('');
+                    }
+                })
+            }
+        });
+    });
+</script>
+<script type="text/javascript">
     $(document).ready(function() { // Ketika halaman sudah siap (sudah selesai di load)
 
         $("#project").change(function() { // Ketika user mengganti atau memilih data project
