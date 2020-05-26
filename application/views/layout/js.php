@@ -546,7 +546,6 @@
             $("#total_injeksi").val(total);
         });
 
-
         $("#lama_angsuran_bulanan").change(function() {
             var harga = parseInt($("#harga").val());
             var l_a_b = parseInt($("#lama_angsuran_bulanan").val());
@@ -596,13 +595,18 @@
 <!-- Addendum optional -->
 
 <!-- Addendum injek -->
-<script>
-    $(document).ready(function() {
-        $("#injek_baru_addendum").keyup(function() {
+<script type="text/javascript">
+    function sum() {
+        var beli = document.getElementById('CF7').value;
+        var jual = document.getElementById('CF8').value;
+        var result = parseInt(beli) + parseInt(jual);
 
-        });
-
-    });
+        if (!isNaN(result)) {
+            document.getElementById('CF9').value = result;
+        } else {
+            document.getElementById('CF9').value = 0;
+        }
+    }
 </script>
 <!-- Akhir Addendum injek -->
 <script>
