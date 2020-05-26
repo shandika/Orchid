@@ -447,4 +447,17 @@ class Pm extends CI_Controller
         $this->purchasing->terima_barang($idpo, $status);
         redirect('pm/terima_barang', 'refresh');
     }
+    function get_pr()
+    {
+        if (isset($_GET['term'])) {
+            $result = $this->model->search_barang_pr($_GET['term']);
+            if (count($result) > 0) {
+                foreach ($result as $row)
+                    $arr_result[] = array(
+                        'label' => $row->nama_barang,
+                    );
+                echo json_encode($arr_result);
+            }
+        }
+    }
 }

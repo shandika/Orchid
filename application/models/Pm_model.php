@@ -146,4 +146,9 @@ class Pm_model extends CI_Model
         $query = $this->db->query("SELECT ID_dp, ID_invoice_dp, nominal_angsuran_dp, angsuran_dp.status, customer.nama, customer.no_ktp FROM customer JOIN angsuran_dp ON customer.no_ktp = angsuran_dp.no_ktp WHERE angsuran_dp.status = 1 AND angsuran_dp.sisa_angsuran='0' ORDER BY angsuran_dp.ID_dp DESC");
         return $query->num_rows();
     }
+    function search_barang_pr($nama)
+    {
+        $hsl = $this->db->query("SELECT * FROM barang_pr WHERE nama_barang LIKE '%$nama%' AND tanggal_pr > CURRENT_DATE - INTERVAL 30 DAY")->result();
+        return $hsl;
+    }
 }
