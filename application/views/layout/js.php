@@ -921,7 +921,7 @@
         });
     }
 </script>
-<!-- Notif PM -->
+<!-- Notif -->
 <script type="text/javascript">
     $(document).ready(function() {
         setInterval(function() {
@@ -930,6 +930,16 @@
                 method: "POST",
                 success: function(data) {
                     $(".notif_content").html(data);
+                }
+            });
+        }, 10000);
+
+        setInterval(function() {
+            $.ajax({
+                url: "<?php echo base_url() ?>Home/notif_keuangan",
+                method: "POST",
+                success: function(data) {
+                    $(".notif_angsuran").html(data);
                 }
             });
         }, 10000);
