@@ -22,7 +22,7 @@ $jum_pesan = $query->num_rows();
                 <?php } ?>
                 <?php if ($this->session->userdata('level') == 1) { ?>
                     <li class="">
-                        <a href="<?= base_url('Purchasing/status') ?>"> <i class="menu-icon fa fa-list-ol"></i>Preorder Barang</a>
+                        <a href="<?= base_url('Purchasing/status') ?>"> <i class="menu-icon fa fa-list-ol"></i>Status Preorder Barang</a>
                     </li>
                 <?php } ?>
                 <?php if ($this->session->userdata('level') == 2) { ?>
@@ -48,6 +48,11 @@ $jum_pesan = $query->num_rows();
                 <?php if ($this->session->userdata('level') == 3) { ?>
                     <li class="">
                         <a href="<?php echo base_url('Marketing/akad'); ?>"> <i class="menu-icon fa fa-handshake-o"></i>Akad</a>
+                    </li>
+                <?php } ?>
+                <?php if ($this->session->userdata('level') == 3) { ?>
+                    <li class="">
+                        <a href="<?php echo base_url('Marketing/voucher'); ?>"> <i class="menu-icon fa fa-ticket"></i>Voucher</a>
                     </li>
                 <?php } ?>
                 <?php if ($this->session->userdata('level') == 4) { ?>

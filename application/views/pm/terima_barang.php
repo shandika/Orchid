@@ -7,7 +7,7 @@
                         <strong class="card-title">Data Pelanggan</strong>
                     </div>
                     <div class="card-body">
-                        <table id="tabelgl" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+                        <table id="bootstrap-data-table-export" class="table table-striped table-bordered" style="width:100%">
                             <thead>
                                 <thead>
                                     <tr>

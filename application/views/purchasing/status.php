@@ -1,28 +1,29 @@
+<div style="max-width: 1100px">
+    <br />
     <div class="content mt-3">
         <div class="animated fadeIn">
             <div class="row">
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
                         <div class="card-header">
-                            <strong class="card-title">Data Pelanggan</strong>
+                            <strong class="card-title">Data Preorder</strong>
                         </div>
                         <div class="card-body">
-                            <table id="tabelgl" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+                            <table id="tabelpelanggan" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
                                 <thead>
-                                    <thead>
-                                        <tr>
-                                            <th>Status Keuangan</th>
-                                            <th>Nama barang</th>
-                                            <th>Harga barang</th>
-                                            <th>jumlah barang</th>
-                                            <th>Nama supplier</th>
-                                            <th>jenis pembayaran</th>
-                                            <th>lama pembayaran</th>
-                                            <th>waktu tunggu</th>
-                                            <th>Bukti Bayar</th>
-                                            <th>Status Barang</th>
-                                        </tr>
-                                    </thead>
+                                    <tr>
+                                        <th>Status Keuangan</th>
+                                        <th>Nama barang</th>
+                                        <th>Harga barang</th>
+                                        <th>jumlah barang</th>
+                                        <th>Bukti Bayar</th>
+                                        <th>Status Barang</th>
+                                        <th>Nama supplier</th>
+                                        <th>jenis pembayaran</th>
+                                        <th>lama pembayaran</th>
+                                        <th>waktu tunggu</th>
+                                    </tr>
+                                </thead>
                                 <tbody>
                                     <?php
                                     foreach ($query->result() as $baris) :
@@ -44,14 +45,14 @@
                                             <td><?php echo $nama_barang; ?></td>
                                             <td><?php echo $harga_barang; ?></td>
                                             <td><?php echo $jumlah; ?></td>
-                                            <td><?php echo $nama_supplier; ?></td>
-                                            <td><?php echo $jenis_pembayaran; ?></td>
-                                            <td><?php echo $lama_pembayaran; ?></td>
-                                            <td><?php echo $waktu_tunggu; ?></td>
                                             <td class="test-popup-link" href="<?= base_url('assets/images/bukti_pembayaran/') . $bukti; ?>" valign="middle" align="center">
                                                 <img src="<?= base_url('assets/images/bukti_pembayaran/') . $bukti; ?>" height="60" alt="BELUM DIBAYAR">
                                             </td>
                                             <td><?php echo $keuangan; ?></td>
+                                            <td><?php echo $nama_supplier; ?></td>
+                                            <td><?php echo $jenis_pembayaran; ?></td>
+                                            <td><?php echo $lama_pembayaran; ?></td>
+                                            <td><?php echo $waktu_tunggu; ?></td>
                                             <!-- <td>
                                                 <form action="<?= base_url('Purchasing/terima_barang') ?>" method="POST">
                                                     <input type="hidden" name="ID_po" value="<?= $baris->ID_po; ?>">
@@ -75,4 +76,5 @@
 
             </div>
         </div><!-- .animated -->
-    </div>
+    </div><!-- .content -->
+</div>

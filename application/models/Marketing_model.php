@@ -24,6 +24,7 @@ class Marketing_model extends CI_Model
     function search_cust($nama)
     {
         $this->db->like('nama', $nama, 'BOTH');
+        $this->db->where('status_akad', 0);
         $this->db->order_by('nama', 'ASC');
         $this->db->limit(20);
         return $this->db->get('customer')->result();
@@ -132,7 +133,7 @@ class Marketing_model extends CI_Model
         $this->db->update('unit', $data);
     }
 
-    function proyeksi_angsuran($id, $ktp, $ke, $tanggal, $bulan, $tahun, $nominal, $sisa, $status, $invoice)
+    function proyeksi_angsuran($id, $ktp, $ke, $tanggal, $bulan, $tahun, $date, $nominal, $sisa, $status, $invoice)
     {
         $data = [
             'ID_angsuran_bulanan' => $id,
@@ -141,6 +142,7 @@ class Marketing_model extends CI_Model
             'tanggal' => $tanggal,
             'bulan' => $bulan,
             'tahun' => $tahun,
+            'date' => $date,
             'nominal_angsuran_bulanan' => $nominal,
             'sisa_angsuran' => $sisa,
             'status' => $status,
@@ -148,7 +150,7 @@ class Marketing_model extends CI_Model
         ];
         $this->db->insert('angsuran_bulanan', $data);
     }
-    function proyeksi_angsuran_dp($id, $ktp, $ke, $tanggal, $bulan, $tahun, $nominal, $sisa, $status, $invoice)
+    function proyeksi_angsuran_dp($id, $ktp, $ke, $tanggal, $bulan, $tahun, $date, $nominal, $sisa, $status, $invoice)
     {
         $data = [
             'ID_dp' => $id,
@@ -157,6 +159,7 @@ class Marketing_model extends CI_Model
             'tanggal' => $tanggal,
             'bulan' => $bulan,
             'tahun' => $tahun,
+            'date' => $date,
             'nominal_angsuran_dp' => $nominal,
             'sisa_angsuran' => $sisa,
             'status' => $status,
@@ -164,7 +167,7 @@ class Marketing_model extends CI_Model
         ];
         $this->db->insert('angsuran_dp', $data);
     }
-    function proyeksi_angsuran_injek($id, $ktp, $ke, $tanggal, $bulan, $tahun, $nominal, $sisa, $status, $invoice)
+    function proyeksi_angsuran_injek($id, $ktp, $ke, $tanggal, $bulan, $tahun, $date, $nominal, $sisa, $status, $invoice)
     {
         $data = [
             'ID_injek' => $id,
@@ -173,6 +176,7 @@ class Marketing_model extends CI_Model
             'tanggal' => $tanggal,
             'bulan' => $bulan,
             'tahun' => $tahun,
+            'date' => $date,
             'nominal_injek' => $nominal,
             'sisa_angsuran' => $sisa,
             'status' => $status,
