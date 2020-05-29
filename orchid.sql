@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 19 Bulan Mei 2020 pada 09.01
+-- Waktu pembuatan: 29 Bulan Mei 2020 pada 04.06
 -- Versi server: 10.4.11-MariaDB
 -- Versi PHP: 7.4.4
 
@@ -138,6 +138,7 @@ CREATE TABLE `angsuran_bulanan` (
   `tanggal` int(11) NOT NULL,
   `bulan` int(11) NOT NULL,
   `tahun` int(11) NOT NULL,
+  `date` date NOT NULL,
   `nominal_angsuran_bulanan` int(11) NOT NULL,
   `sisa_angsuran` int(11) NOT NULL,
   `status` tinyint(1) NOT NULL,
@@ -148,52 +149,19 @@ CREATE TABLE `angsuran_bulanan` (
 -- Dumping data untuk tabel `angsuran_bulanan`
 --
 
-INSERT INTO `angsuran_bulanan` (`ID_angsuran_bulanan`, `no_ktp`, `angsuran_ke`, `tanggal`, `bulan`, `tahun`, `nominal_angsuran_bulanan`, `sisa_angsuran`, `status`, `ID_invoice_angsuran_bulanan`) VALUES
-('AB0026', '3273172510970002', 14, 5, 7, 21, 5208000, 52088000, 0, 'IAB0026'),
-('AB0027', '3273172510970002', 15, 5, 8, 21, 5208000, 46880000, 0, 'IAB0027'),
-('AB0028', '3273172510970002', 16, 5, 9, 21, 5208000, 41672000, 0, 'IAB0028'),
-('AB0029', '3273172510970002', 17, 5, 10, 21, 5208000, 36464000, 0, 'IAB0029'),
-('AB0030', '3273172510970002', 18, 5, 11, 21, 5208000, 31256000, 0, 'IAB0030'),
-('AB0031', '3273172510970002', 19, 5, 12, 21, 5208000, 26048000, 0, 'IAB0031'),
-('AB0032', '3273172510970002', 20, 5, 1, 22, 5208000, 20840000, 0, 'IAB0032'),
-('AB0033', '3273172510970002', 21, 5, 2, 22, 5208000, 15632000, 0, 'IAB0033'),
-('AB0034', '3273172510970002', 22, 5, 3, 22, 5208000, 10424000, 0, 'IAB0034'),
-('AB0035', '3273172510970002', 23, 5, 4, 22, 5208000, 5216000, 0, 'IAB0035'),
-('AB0036', '3273172510970002', 24, 5, 5, 22, 5216000, 0, 0, 'IAB0036'),
-('AB0037', '3273172510970001', 1, 7, 6, 22, 4933000, 44401000, 1, 'IAB0037'),
-('AB0038', '3273172510970001', 2, 7, 7, 22, 4933000, 39468000, 1, 'IAB0038'),
-('AB0039', '3273172510970001', 3, 7, 8, 22, 4933000, 34535000, 1, 'IAB0039'),
-('AB0040', '3273172510970001', 4, 7, 9, 22, 4933000, 29602000, 1, 'IAB0040'),
-('AB0041', '3273172510970001', 5, 7, 10, 22, 4933000, 24669000, 1, 'IAB0041'),
-('AB0042', '3273172510970001', 6, 7, 11, 22, 4933000, 19736000, 1, 'IAB0042'),
-('AB0043', '3273172510970001', 7, 7, 12, 22, 4933000, 14803000, 1, 'IAB0043'),
-('AB0044', '3273172510970001', 8, 7, 1, 23, 4933000, 9870000, 1, 'IAB0044'),
-('AB0045', '3273172510970001', 9, 7, 2, 23, 4933000, 4937000, 0, 'IAB0045'),
-('AB0046', '3273172510970001', 10, 7, 3, 23, 4937000, 0, 0, 'IAB0046'),
-('AB0047', '3273172510970001', 1, 15, 6, 20, 6666000, 67834000, 0, 'IAB0047'),
-('AB0048', '3273172510970001', 2, 15, 7, 20, 6666000, 61168000, 0, 'IAB0048'),
-('AB0049', '3273172510970001', 3, 15, 8, 20, 6666000, 54502000, 0, 'IAB0049'),
-('AB0050', '3273172510970001', 4, 15, 9, 20, 6666000, 47836000, 0, 'IAB0050'),
-('AB0051', '3273172510970001', 5, 15, 10, 20, 6666000, 41170000, 0, 'IAB0051'),
-('AB0052', '3273172510970001', 6, 15, 11, 20, 6666000, 34504000, 0, 'IAB0052'),
-('AB0053', '3273172510970001', 7, 15, 12, 20, 6666000, 27838000, 0, 'IAB0053'),
-('AB0054', '3273172510970001', 8, 15, 1, 21, 6666000, 21172000, 0, 'IAB0054'),
-('AB0055', '3273172510970001', 9, 15, 2, 21, 6666000, 14506000, 0, 'IAB0055'),
-('AB0056', '3273172510970001', 10, 15, 3, 21, 6666000, 7840000, 0, 'IAB0056'),
-('AB0057', '3273172510970001', 11, 15, 4, 21, 7840000, 0, 0, 'IAB0057'),
-('AB0058', '3273172510970001', 12, 15, 5, 21, 7840000, 0, 0, 'IAB0058'),
-('AB0059', '3273172510970001', 1, 19, 6, 20, 5375000, 59125000, 0, 'IAB0059'),
-('AB0060', '3273172510970001', 2, 19, 7, 20, 5375000, 53750000, 0, 'IAB0060'),
-('AB0061', '3273172510970001', 3, 19, 8, 20, 5375000, 48375000, 0, 'IAB0061'),
-('AB0062', '3273172510970001', 4, 19, 9, 20, 5375000, 43000000, 0, 'IAB0062'),
-('AB0063', '3273172510970001', 5, 19, 10, 20, 5375000, 37625000, 0, 'IAB0063'),
-('AB0064', '3273172510970001', 6, 19, 11, 20, 5375000, 32250000, 0, 'IAB0064'),
-('AB0065', '3273172510970001', 7, 19, 12, 20, 5375000, 26875000, 0, 'IAB0065'),
-('AB0066', '3273172510970001', 8, 19, 1, 21, 5375000, 21500000, 0, 'IAB0066'),
-('AB0067', '3273172510970001', 9, 19, 2, 21, 5375000, 16125000, 0, 'IAB0067'),
-('AB0068', '3273172510970001', 10, 19, 3, 21, 5375000, 10750000, 0, 'IAB0068'),
-('AB0069', '3273172510970001', 11, 19, 4, 21, 5375000, 5375000, 0, 'IAB0069'),
-('AB0070', '3273172510970001', 12, 19, 5, 21, 5375000, 0, 0, 'IAB0070');
+INSERT INTO `angsuran_bulanan` (`ID_angsuran_bulanan`, `no_ktp`, `angsuran_ke`, `tanggal`, `bulan`, `tahun`, `date`, `nominal_angsuran_bulanan`, `sisa_angsuran`, `status`, `ID_invoice_angsuran_bulanan`) VALUES
+('AB0001', '3273172510970002', 1, 29, 6, 2020, '2020-06-29', 5833000, 64167000, 0, 'IAB0001'),
+('AB0002', '3273172510970002', 2, 29, 7, 2020, '2020-07-29', 5833000, 58334000, 0, 'IAB0002'),
+('AB0003', '3273172510970002', 3, 29, 8, 2020, '2020-08-29', 5833000, 52501000, 0, 'IAB0003'),
+('AB0004', '3273172510970002', 4, 29, 9, 2020, '2020-09-29', 5833000, 46668000, 0, 'IAB0004'),
+('AB0005', '3273172510970002', 5, 29, 10, 2020, '2020-10-29', 5833000, 40835000, 0, 'IAB0005'),
+('AB0006', '3273172510970002', 6, 29, 11, 2020, '2020-11-29', 5833000, 35002000, 0, 'IAB0006'),
+('AB0007', '3273172510970002', 7, 29, 12, 2020, '2020-12-29', 5833000, 29169000, 0, 'IAB0007'),
+('AB0008', '3273172510970002', 8, 29, 1, 2021, '2021-01-29', 5833000, 23336000, 0, 'IAB0008'),
+('AB0009', '3273172510970002', 9, 29, 2, 2021, '0000-00-00', 5833000, 17503000, 0, 'IAB0009'),
+('AB0010', '3273172510970002', 10, 29, 3, 2021, '2021-03-29', 5833000, 11670000, 0, 'IAB0010'),
+('AB0011', '3273172510970002', 11, 29, 4, 2021, '2021-04-29', 5833000, 5837000, 0, 'IAB0011'),
+('AB0012', '3273172510970002', 12, 29, 5, 2021, '2021-05-29', 5837000, 0, 0, 'IAB0012');
 
 -- --------------------------------------------------------
 
@@ -208,6 +176,7 @@ CREATE TABLE `angsuran_dp` (
   `tanggal` int(11) NOT NULL,
   `bulan` int(11) NOT NULL,
   `tahun` int(11) NOT NULL,
+  `date` date NOT NULL,
   `nominal_angsuran_dp` int(11) NOT NULL,
   `sisa_angsuran` int(11) NOT NULL,
   `status` tinyint(1) NOT NULL,
@@ -218,16 +187,10 @@ CREATE TABLE `angsuran_dp` (
 -- Dumping data untuk tabel `angsuran_dp`
 --
 
-INSERT INTO `angsuran_dp` (`ID_dp`, `no_ktp`, `angsuran_ke`, `tanggal`, `bulan`, `tahun`, `nominal_angsuran_dp`, `sisa_angsuran`, `status`, `ID_invoice_dp`) VALUES
-('ADP0001', '3273172510970001', 1, 15, 6, 20, 6666000, 13334000, 0, 'IDP0001'),
-('ADP0002', '3273172510970001', 2, 15, 7, 20, 6666000, 6668000, 0, 'IDP0002'),
-('ADP0003', '3273172510970001', 3, 15, 8, 20, 6668000, 0, 0, 'IDP0003'),
-('ADP0004', '3273172510970001', 1, 19, 6, 20, 5000000, 25000000, 0, 'IDP0004'),
-('ADP0005', '3273172510970001', 2, 19, 7, 20, 5000000, 20000000, 0, 'IDP0005'),
-('ADP0006', '3273172510970001', 3, 19, 8, 20, 5000000, 15000000, 0, 'IDP0006'),
-('ADP0007', '3273172510970001', 4, 19, 9, 20, 5000000, 10000000, 0, 'IDP0007'),
-('ADP0008', '3273172510970001', 5, 19, 10, 20, 5000000, 5000000, 0, 'IDP0008'),
-('ADP0009', '3273172510970001', 6, 19, 11, 20, 5000000, 0, 0, 'IDP0009');
+INSERT INTO `angsuran_dp` (`ID_dp`, `no_ktp`, `angsuran_ke`, `tanggal`, `bulan`, `tahun`, `date`, `nominal_angsuran_dp`, `sisa_angsuran`, `status`, `ID_invoice_dp`) VALUES
+('ADP0001', '3273172510970002', 1, 29, 6, 2020, '2020-06-29', 10000000, 20000000, 0, 'IDP0001'),
+('ADP0002', '3273172510970002', 2, 29, 7, 2020, '2020-07-29', 10000000, 10000000, 0, 'IDP0002'),
+('ADP0003', '3273172510970002', 3, 29, 8, 2020, '2020-08-29', 10000000, 0, 0, 'IDP0003');
 
 -- --------------------------------------------------------
 
@@ -242,6 +205,7 @@ CREATE TABLE `angsuran_injek` (
   `tanggal` int(11) NOT NULL,
   `bulan` int(11) NOT NULL,
   `tahun` int(11) NOT NULL,
+  `date` date NOT NULL,
   `nominal_injek` int(11) NOT NULL,
   `sisa_angsuran` int(11) NOT NULL,
   `status` tinyint(1) NOT NULL,
@@ -252,11 +216,9 @@ CREATE TABLE `angsuran_injek` (
 -- Dumping data untuk tabel `angsuran_injek`
 --
 
-INSERT INTO `angsuran_injek` (`ID_injek`, `no_ktp`, `angsuran_ke`, `tanggal`, `bulan`, `tahun`, `nominal_injek`, `sisa_angsuran`, `status`, `ID_invoice_injek`) VALUES
-('AIJ0001', '3273172510970001', 1, 15, 8, 21, 5000000, 5000000, 0, 'IIJ0001'),
-('AIJ0002', '3273172510970001', 2, 15, 8, 22, 5000000, 0, 0, 'IIJ0002'),
-('AIJ0003', '3273172510970001', 1, 19, 11, 21, 5000000, 5000000, 0, 'IIJ0003'),
-('AIJ0004', '3273172510970001', 2, 19, 11, 22, 5000000, 0, 0, 'IIJ0004');
+INSERT INTO `angsuran_injek` (`ID_injek`, `no_ktp`, `angsuran_ke`, `tanggal`, `bulan`, `tahun`, `date`, `nominal_injek`, `sisa_angsuran`, `status`, `ID_invoice_injek`) VALUES
+('AIJ0001', '3273172510970002', 1, 29, 8, 2021, '2021-08-29', 5000000, 5000000, 0, 'IIJ0001'),
+('AIJ0002', '3273172510970002', 2, 29, 8, 2022, '2022-08-29', 5000000, 0, 0, 'IIJ0002');
 
 -- --------------------------------------------------------
 
@@ -269,8 +231,16 @@ CREATE TABLE `angsuran_lain` (
   `no_ktp` varchar(20) NOT NULL,
   `nama_angsuran` varchar(100) NOT NULL,
   `angsuranke` int(11) NOT NULL,
+  `jumlah` int(11) NOT NULL,
   `nominal_angsuran_lain` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `angsuran_lain`
+--
+
+INSERT INTO `angsuran_lain` (`ID_angsuran_lain`, `no_ktp`, `nama_angsuran`, `angsuranke`, `jumlah`, `nominal_angsuran_lain`) VALUES
+('er5I6d', '3273172510970003', 'Mobil', 11, 36, 2000000);
 
 -- --------------------------------------------------------
 
@@ -290,9 +260,19 @@ CREATE TABLE `barang_pr` (
   `lama_cicilan` varchar(10) NOT NULL,
   `waktu_tunggu` varchar(100) NOT NULL,
   `status` varchar(100) NOT NULL,
-  `tanggal_pr` varchar(100) NOT NULL,
+  `tanggal_pr` date NOT NULL,
   `ID_pm` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `barang_pr`
+--
+
+INSERT INTO `barang_pr` (`ID_pr`, `ID_unit_dipesan`, `nama_barang`, `harga_barang`, `jumlah`, `total_harga`, `nama_supplier`, `jenis_pembayaran`, `lama_cicilan`, `waktu_tunggu`, `status`, `tanggal_pr`, `ID_pm`) VALUES
+('PR0001', 'UD0001', 'Genteng Baja', '5000', '50', '250000', 'Genteng ID', 'cash', '0', '5 hari', '1', '2020-05-21', 'admin_pm'),
+('PR0002', 'UD0001', 'BESI', '5000', '5', '25000', 'SUroto', 'cash', '0', '5 hari', '1', '2020-05-26', 'admin_pm'),
+('PR0003', 'UD0001', 'Paku', '500', '100', '50000', 'Paku ID', 'cash', '0', '2 hari', '1', '0000-00-00', 'admin_pm'),
+('PR0004', 'UD0001', 'Papan', '10000', '50', '500000', 'Papan ID', 'cash', '0', '5 hari', '1', '0000-00-00', 'admin_pm');
 
 -- --------------------------------------------------------
 
@@ -321,16 +301,17 @@ CREATE TABLE `customer` (
   `nama_kontak_darurat` varchar(50) NOT NULL,
   `alamat_kontak_darurat` text NOT NULL,
   `nomor_kontak_darurat` varchar(20) NOT NULL,
-  `status_pembangunan` tinyint(1) NOT NULL
+  `status_akad` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data untuk tabel `customer`
 --
 
-INSERT INTO `customer` (`no_ktp`, `nama`, `pekerjaan_sesuai_ktp`, `tempat_tanggal_lahir`, `status`, `jumlah_tanggungan`, `alamat`, `no_telepon`, `status_rumah`, `lama_menetap`, `pekerjaan`, `lama_bekerja`, `nama_tempat_bekerja`, `alamat_tempat_bekerja`, `income_bulanan`, `income_bulanan_pasangan`, `no_rekening`, `nama_kontak_darurat`, `alamat_kontak_darurat`, `nomor_kontak_darurat`, `status_pembangunan`) VALUES
+INSERT INTO `customer` (`no_ktp`, `nama`, `pekerjaan_sesuai_ktp`, `tempat_tanggal_lahir`, `status`, `jumlah_tanggungan`, `alamat`, `no_telepon`, `status_rumah`, `lama_menetap`, `pekerjaan`, `lama_bekerja`, `nama_tempat_bekerja`, `alamat_tempat_bekerja`, `income_bulanan`, `income_bulanan_pasangan`, `no_rekening`, `nama_kontak_darurat`, `alamat_kontak_darurat`, `nomor_kontak_darurat`, `status_akad`) VALUES
 ('3273172510970001', 'Octavian', 'Seniman', 'Bandung, 25 Oktober 1997', 'LAJANG', 0, 'JL.Kebon lega 1 rt.02 rw.02', '085923192389', 'Bersama orang Tua', 23, 'Seniman', 5, 'Wijaya Musik Entertaiment', 'Jalan Mananya ? ', 5000000, 0, '8100672571', 'Karwati', 'Kebon Lega 1', '083822584289', 0),
-('3273172510970002', 'Customer2', 'Tidak Ada', 'Bandung, 25 Oktober 1997', 'Lajang', 0, 'Kebon LEga 1', '085923192389', 'Tinggal Bersama Orang Tua', 23, 'Tidak Ada', 2, 'Tidak Ada', 'Tidak Ada', 5000000, 5000000, '555555', '555555', 'Tidak Ada', '555555', 0);
+('3273172510970002', 'Customer2', 'Tidak Ada', 'Bandung, 25 Oktober 1997', 'Lajang', 0, 'Kebon LEga 1', '085923192389', 'Tinggal Bersama Orang Tua', 23, 'Tidak Ada', 2, 'Tidak Ada', 'Tidak Ada', 5000000, 5000000, '555555', '555555', 'Tidak Ada', '555555', 1),
+('3273172510970003', 'octavian', '22', 'bandung', 'none', 0, 'none', '0', 'none', 2, '22', 22, '22', '22', 22, 22, '22', '22', '22', '22', 0);
 
 -- --------------------------------------------------------
 
@@ -359,7 +340,8 @@ CREATE TABLE `dokumen_pelengkap` (
 
 INSERT INTO `dokumen_pelengkap` (`no_ktp`, `fc_ktp`, `fc_kk`, `slip_gaji`, `laporan_keuangan_usaha`, `laporan_rekening`, `surat_persetujuan_suami_istri`, `surat_persetujuan_pembayaran_kredit`, `surat_rekomendasi`, `surat_perjanjian_agunan_barang`, `surat_perjanjian_penjaminan_personal`, `slip_gaji_penjamin_personal`) VALUES
 ('3273172510970001', '1587887872s.png', '1587887872c.png', '1587887872r.png', '1587887872e.png', '1587887872e1.png', '1587887872n.png', '1587887872c1.png', '1587887872a.png', '1587887872p.png', '1587887872t.png', '1587887872u.png'),
-('3273172510970002', '1588655758g.jpg', '1588655758r.jpg', '1588655758e.jpg', '1588655758e1.jpg', '1588655758n.jpg', '1588655758-.jpg', '1588655758c.jpg', '1588655758a.jpg', '1588655758c1.jpg', '1588655758t.jpg', '1588655758u.jpg');
+('3273172510970002', '1588655758g.jpg', '1588655758r.jpg', '1588655758e.jpg', '1588655758e1.jpg', '1588655758n.jpg', '1588655758-.jpg', '1588655758c.jpg', '1588655758a.jpg', '1588655758c1.jpg', '1588655758t.jpg', '1588655758u.jpg'),
+('3273172510970003', '1590567417c.png', '1590567417o.png', '1590567417d.png', '1590567417e.png', '1590567417.png', '1590567417p.png', '1590567417n.png', '1590567417g.png', '1590567417.png', '15905674171.png', '15905674172.png');
 
 -- --------------------------------------------------------
 
@@ -616,7 +598,7 @@ INSERT INTO `general_ledger_muara` (`nomor`, `nama`, `nominal`) VALUES
 ('17', 'Biaya Promosi/Marketing', '0'),
 ('18', 'Biaya sewa kantor', '0'),
 ('19', 'Marketing Fee', '0'),
-('2', 'Bank', '91000'),
+('2', 'Bank', '86000'),
 ('20', 'Biaya listrik', '16000'),
 ('21', 'Biaya kurir', '5000'),
 ('22', 'Biaya Gaji', '1000'),
@@ -883,7 +865,9 @@ INSERT INTO `journal` (`id_journal`, `nomor_gl`, `nama_gl`, `debit`, `kredit`, `
 ('IJN0015', '2', 'Bank', 50000, 0, '', '15/05/2020', 'PJ0001'),
 ('IJN0016', '13a', 'Modal Adi', 0, 50000, '', '15/05/2020', 'PJ0001'),
 ('IJN0017', '20', 'Biaya listrik', 10000, 0, '', '15/05/2020', 'PJ0001'),
-('IJN0018', '2', 'Bank', 0, 10000, '', '15/05/2020', 'PJ0001');
+('IJN0018', '2', 'Bank', 0, 10000, '', '15/05/2020', 'PJ0001'),
+('IJN0019', '8', 'Inventaris Kantor', 5000, 0, 'Buku', '26/05/2020', 'PJ0001'),
+('IJN0020', '2', 'Bank', 0, 5000, 'Buku', '26/05/2020', 'PJ0001');
 
 -- --------------------------------------------------------
 
@@ -935,6 +919,16 @@ CREATE TABLE `po` (
   `status_barang` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data untuk tabel `po`
+--
+
+INSERT INTO `po` (`ID_po`, `ID_barang_pr`, `ID_purchasing`, `tanggal_approve`, `dibayar`, `bukti_bayar`, `ID_keuangan`, `status_barang`) VALUES
+('PO0001', 'PR0001', 'admin_purchasing', '21-05-2020', 'dibayar', 'cfa0e27d60ba580097e386b7e9570f47.png', 'admin_keuangan', 'Approved'),
+('PO0002', 'PR0002', 'admin_purchasing', '21-05-2020', 'dibayar', '8b6470ccb7e04865d2b5212a0467dad0.png', 'admin_keuangan', 'Approved'),
+('PO0003', 'PR0003', 'admin_purchasing', '27-05-2020', 'menunggu', '', 'admin_keuangan', 'Approved'),
+('PO0004', 'PR0004', 'admin_purchasing', '27-05-2020', 'menunggu', '', 'admin_keuangan', 'Approved');
+
 -- --------------------------------------------------------
 
 --
@@ -960,7 +954,7 @@ CREATE TABLE `project` (
 INSERT INTO `project` (`ID_project`, `nama`, `alamat`, `deskripsi`, `foto`, `jumlah_unit`, `unit_kosong`, `unit_isi`, `nama_gl`) VALUES
 ('PJ0001', 'Muara', 'Jalan Peta No.205, Kota bandung ,  Jawa barat', 'Tempat dekat dengan pusat kota,10 menit dari pintu tol moch tohha', '667d62b08280496d149ed0c5a62b3c67.jpg', 100, 100, 0, 'general_ledger_muara'),
 ('PJ0002', 'Singgasana', 'Jalan Mekar Wangi abadi', 'Rumah Nyaman', '5db31501b68811102b2b087f830711f9.jpg', 100, 100, 0, 'general_ledger_singgasana'),
-('PJ0003', 'Dago Village Garden', 'Dago Atas', 'Tempat Nyaman', '1ebf556a7db670944754f898c89296fa.png', 100, 99, 1, 'general_ledger_dagovillagegarden');
+('PJ0003', 'Dago Village Garden', 'Dago Atas', 'Tempat Nyaman', '1ebf556a7db670944754f898c89296fa.png', 100, 96, 4, 'general_ledger_dagovillagegarden');
 
 -- --------------------------------------------------------
 
@@ -983,10 +977,10 @@ CREATE TABLE `unit` (
 --
 
 INSERT INTO `unit` (`ID_unit`, `ID_project`, `nomor`, `type`, `luas_bangunan`, `luas_tanah`, `status`) VALUES
-('UN0001', 'PJ0003', 'A', 36, 1000, 1000, 0),
+('UN0001', 'PJ0003', 'A', 36, 1000, 1000, 1),
 ('UN0002', 'PJ0003', 'B1', 36, 2000, 2000, 1),
-('UN0003', 'PJ0003', 'B2', 36, 2000, 2000, 0),
-('UN0004', 'PJ0003', 'B3', 36, 2000, 2000, 0),
+('UN0003', 'PJ0003', 'B2', 36, 2000, 2000, 1),
+('UN0004', 'PJ0003', 'B3', 36, 2000, 2000, 1),
 ('UN0005', 'PJ0003', 'B4', 36, 2000, 2000, 0),
 ('UN0006', 'PJ0003', 'B5', 36, 2000, 2000, 0),
 ('UN0007', 'PJ0003', 'B6', 36, 2000, 2000, 0),
@@ -1021,7 +1015,10 @@ CREATE TABLE `unit_dipesan` (
 --
 
 INSERT INTO `unit_dipesan` (`ID_unit_dipesan`, `no_ktp`, `DP`, `lama_angsuran_dp`, `angsuran_bulanan`, `lama_angsuran`, `total_harga`, `ktp_marketing`, `ID_unit`, `ID_project`, `tanggal_akad`, `status_marketing_fee`) VALUES
-('UD0001', '3273172510970001', 30000000, 6, 5375000, 12, 110000000, 'admin_marketing', 'UN0002', 'PJ0003', '19/05/2020', 'MENUNGGU');
+('UD0001', '3273172510970001', 30000000, 6, 5375000, 12, 110000000, 'admin_marketing', 'UN0002', 'PJ0003', '19/05/2020', 'MENUNGGU'),
+('UD0002', '3273172510970003', 30000000, 3, 5833000, 12, 110000000, 'admin_marketing', 'UN0001', 'PJ0003', '29/05/2020', 'MENUNGGU'),
+('UD0003', '3273172510970002', 30000000, 3, 5833000, 12, 110000000, 'admin_marketing', 'UN0003', 'PJ0003', '29/05/2020', 'MENUNGGU'),
+('UD0004', '3273172510970002', 30000000, 3, 5833000, 12, 110000000, 'admin_marketing', 'UN0004', 'PJ0003', '29/05/2020', 'MENUNGGU');
 
 -- --------------------------------------------------------
 
@@ -1043,7 +1040,8 @@ CREATE TABLE `voucher` (
 
 INSERT INTO `voucher` (`ID_voucher`, `nama`, `nominal`, `expired`, `max_used`) VALUES
 ('VC0001', 'Diskon Gila', '50', '2020-05-30', '10'),
-('VC0002', 'Diskon Ramadha', '5', '2020-05-16', '10');
+('VC0002', 'Diskon Ramadha', '5', '2020-05-16', '10'),
+('VC0003', 'Diskon Lebaran', '10', '2020-05-30', '10');
 
 --
 -- Indexes for dumped tables
