@@ -81,13 +81,6 @@
                     </div>
                     <div id="form-step-0" role="form" data-toggle="validator">
                         <div class="form-group">
-                            <label for="email">Email:</label>
-                            <input type="email" class="form-control" name="email" id="email" placeholder="Masukan Email valid" required>
-                            <div class="help-block with-errors"></div>
-                        </div>
-                    </div>
-                    <div id="form-step-0" role="form" data-toggle="validator">
-                        <div class="form-group">
                             <label for="stsrumah">Status Rumah:</label>
                             <input type="text" class="form-control" name="stsrumah" id="stsrumah" placeholder="Masukan Status Rumah" required>
                             <div class="help-block with-errors"></div>

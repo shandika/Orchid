@@ -84,7 +84,6 @@ class Marketing extends CI_Controller
 			'jumlah_tanggungan'			=> strip_tags($this->input->post('jmltanggungan')),
 			'alamat'					=> strip_tags($this->input->post('alamat')),
 			'no_telepon'				=> strip_tags($this->input->post('notlp')),
-			'email'				=> strip_tags($this->input->post('email')),
 			'status_rumah'				=> strip_tags($this->input->post('stsrumah')),
 			'lama_menetap'				=> strip_tags($this->input->post('lmmenetap')),
 			'pekerjaan'					=> strip_tags($this->input->post('pekerjaan')),
@@ -231,7 +230,6 @@ class Marketing extends CI_Controller
 			$id_project = $this->input->post('project');
 			$tanggal_akad = $this->input->post('tanggal_akad');
 			$status_marketing_fee = "MENUNGGU";
-			$this->marketing->update_customer($no_ktp);
 			$this->marketing->simpanUnitDipilih($id_akad, $no_ktp, $dp, $lama_dp, $bulanan, $lama_bulanan, $harga, $ktp_marketing, $unit, $id_project, $tanggal_akad, $status_marketing_fee);
 		}
 		// input proyeksi cicilan
