@@ -310,6 +310,13 @@
                     </div>
                     <div id="form-step-2" role="form" data-toggle="validator">
                         <div class="form-group">
+                            <label for="angsuranke">Total Angsuran</label>
+                            <input type="number" class="form-control" name="totalangsuran[]" required>
+                            <div class="help-block with-errors"></div>
+                        </div>
+                    </div>
+                    <div id="form-step-2" role="form" data-toggle="validator">
+                        <div class="form-group">
                             <label for="nominal_angsuran_lain">Nominal Angsuran Lain</label>
                             <input type="text" class="form-control" name="nominal_angsuran_lain[]" required>
                             <div class="help-block with-errors"></div>

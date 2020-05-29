@@ -95,7 +95,8 @@ class Marketing extends CI_Controller
 			'no_rekening'				=> strip_tags($this->input->post('norek')),
 			'nama_kontak_darurat'		=> strip_tags($this->input->post('nmktdarurat')),
 			'alamat_kontak_darurat'		=> strip_tags($this->input->post('alktdarurat')),
-			'nomor_kontak_darurat'		=> strip_tags($this->input->post('noktdarurat'))
+			'nomor_kontak_darurat'		=> strip_tags($this->input->post('noktdarurat')),
+			'status_akad'				=> '1',
 		);
 		$config['upload_path'] = './assets/images/dokumen_pelengkap/';
 		$config['allowed_types'] = 'gif|jpg|png|jpeg|bmp'; //type yang dapat diakses bisa anda sesuaikan
@@ -117,6 +118,7 @@ class Marketing extends CI_Controller
 				"no_ktp"				=> $_POST['noktp'],
 				"nama_angsuran"			=> $_POST['nama_angsuran'][$key],
 				"angsuranke"	 		=> $_POST['angsuranke'][$key],
+				"jumlah"	 		=> $_POST['totalangsuran'][$key],
 				"nominal_angsuran_lain" => $_POST['nominal_angsuran_lain'][$key]
 			);
 		}
@@ -252,7 +254,7 @@ class Marketing extends CI_Controller
 		//menentukan tanggal sekarang bulan dan tahun
 		$tanggal = 	date('d');
 		$bulan = date('m');
-		$tahun = date('y');
+		$tahun = date('Y');
 		$lama_injek = $this->input->post('lama_injeksi');
 		$no_ktp = $this->input->post('no_ktp');
 		$injek = $this->input->post('injeksi');
@@ -293,9 +295,10 @@ class Marketing extends CI_Controller
 			$bulan = $sesudah;				//merubah bulan menjadi bulan yang sudah di tambah
 			$nourut = $kode1;				//merubah nomor urut menjadi yang sudah di tambah
 			$nourut2 = $kodeinvoice;		//merubah invoice  menjadi yang sudah di tambah
-			$this->marketing->proyeksi_angsuran($strkodenya, $no_ktp, $angsuran_ke, $tanggal, $bulan, $tahun, $nominal_angsuran_bulanan, $sisa_angsuran, $status, $strkodeinvoice);
+			$datenya = $tahun . '-' . $bulan . '-' . $tanggal;
+			$this->marketing->proyeksi_angsuran($strkodenya, $no_ktp, $angsuran_ke, $tanggal, $bulan, $tahun, $datenya, $nominal_angsuran_bulanan, $sisa_angsuran, $status, $strkodeinvoice);
 		}
-		$tahun = date('y');
+		$tahun = date('Y');
 		for ($i = 1; $i <= $lama_dp; $i++) {
 			//penentuan ID_angsuran_bulanan + Invoice otomatis
 
@@ -324,9 +327,10 @@ class Marketing extends CI_Controller
 			$bulan = $sesudah;				//merubah bulan menjadi bulan yang sudah di tambah
 			$nourut3 = $kode1;				//merubah nomor urut menjadi yang sudah di tambah
 			$nourut4 = $kodeinvoice;		//merubah invoice  menjadi yang sudah di tambah
-			$this->marketing->proyeksi_angsuran_dp($strkodenya, $no_ktp, $angsuran_ke, $tanggal, $bulan, $tahun, $nominal_angsuran_dp, $sisa_angsuran, $status, $strkodeinvoice);
+			$datenya = $tahun . '-' . $bulan . '-' . $tanggal;
+			$this->marketing->proyeksi_angsuran_dp($strkodenya, $no_ktp, $angsuran_ke, $tanggal, $bulan, $tahun, $datenya, $nominal_angsuran_dp, $sisa_angsuran, $status, $strkodeinvoice);
 		}
-		$tahun = date('y');
+		$tahun = date('Y');
 		//injeksi
 		for ($i = 1; $i <= $lama_injek; $i++) {
 			//penentuan ID_angsuran_bulanan + Invoice otomatis
@@ -344,7 +348,8 @@ class Marketing extends CI_Controller
 			$sisa_angsuran = $nominal_injek - $injek;
 			$tahunnya = $tahun + 1;
 			$tahun = $tahunnya;
-			$this->marketing->proyeksi_angsuran_injek($strkodenya, $no_ktp, $angsuran_ke, $tanggal, $bulan, $tahunnya, $injek, $sisa_angsuran, $status, $strkodeinvoice);
+			$datenya = $tahun . '-' . $bulan . '-' . $tanggal;
+			$this->marketing->proyeksi_angsuran_injek($strkodenya, $no_ktp, $angsuran_ke, $tanggal, $bulan, $tahun, $datenya, $injek, $sisa_angsuran, $status, $strkodeinvoice);
 			$nominal_injek = $sisa_angsuran;
 		}
 

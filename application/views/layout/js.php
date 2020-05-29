@@ -2,10 +2,10 @@
 <script src="<?php echo base_url() ?>assets/vendors/popper.js/dist/umd/popper.min.js"></script>
 <script src="<?php echo base_url() ?>assets/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="<?php echo base_url() ?>assets/assets/js/main.js"></script>
+<script src="<?php echo base_url() ?>assets/assets/js/jquery-3.4.1.min.js"></script>
 <script src="<?php echo base_url() ?>assets/plugins/sweetalerts/sweetalert2.all.min.js"></script>
 <script src="<?php echo base_url() ?>assets/vendors/chart.js/dist/Chart.bundle.min.js"></script>
 <script src="<?php echo base_url() ?>assets/assets/js/dashboard.js"></script>
-<script src="<?php echo base_url() ?>assets/assets/js/jquery-3.4.1.min.js"></script>
 <script src="<?php echo base_url() ?>assets/assets/js/jquery-ui.min.js"></script>
 <script src="<?php echo base_url() ?>assets/assets/js/widgets.js"></script>
 <script src="<?php echo base_url() ?>assets/assets/js/bootstrap-datepicker.min.js"></script>
@@ -274,6 +274,7 @@
     });
 </script>
 
+
 <script>
     $(document).ready(function() { // Ketika halaman sudah diload dan siap
         $("#btn-tambah-form").click(function() { // Ketika tombol Tambah Data Form di klik
@@ -490,6 +491,7 @@
         });
     });
 </script>
+
 <script type="text/javascript">
     $(document).ready(function() { // Ketika halaman sudah siap (sudah selesai di load)
 
@@ -596,7 +598,7 @@
 
 <!-- Total Investasi Cashflow -->
 <script type="text/javascript">
-    function sum(){
+    function sum() {
         var beli = document.getElementById('CF7').value;
         var jual = document.getElementById('CF8').value;
         var totop = document.getElementById('CF6').value;
@@ -605,13 +607,13 @@
         var total = parseInt(totop) + parseInt(totfin) + result;
         if (!isNaN(result)) {
             document.getElementById('CF9').value = result;
-        }else{
+        } else {
             document.getElementById('CF9').value = 0;
         }
 
         if (!isNaN(total)) {
             document.getElementById('CF15').value = total;
-        }else{
+        } else {
             document.getElementById('CF15').value = 0;
         }
     }

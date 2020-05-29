@@ -54,43 +54,59 @@ class Keuangan extends CI_Controller
         $nama_bulan = date("F", strtotime('00-' . $bulan . '-01'));
         $nama_pdf = "Laporan_neraca_bulan_" . $nama_bulan;
         $mpdf = new \Mpdf\Mpdf();
+        $mpdf->SetWatermarkImage('https://rumah-halal.com/assets/images/logo3.png', 0.2, array(120, 150), '');
+        $mpdf->showWatermarkImage = true;
         $html = '<!DOCTYPE html>
         <html lang="en">
-        
+
         <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Document</title>
-            <style>
-                table {
-                    font-family: arial, sans-serif;
-                    border-collapse: collapse;
-                    width: 100%;
-                    margin-left: auto;
-                    margin-right: auto;
-                    margin-top: 30px;
-                }
-                
-                td,
-                th {
-                    border: 1px solid #dddddd;
-                    text-align: left;
-                    padding: 8px;
-                }
-            </style>
-        </head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <style>
+        table.tabel2 {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 30px;
+        }
         
-        <body>
-            <div style="text-align: center;">
-                <div style="float: right;vertical-align:top;margin-left: 40px;word-wrap: break-word;">
-                    <p style="line-height: 15px;font-size: 23px;font-weight: bold;">Laporan Neraca Royal Orchid Syariah</p>
-                    <p style="line-height: 10px;font-size: 18px;">' . $nama_gl . '</p>
-                    <p style="line-height: 10px;font-size: 18px;">Bulan ' . $nama_bulan . ' ' . $tahun . '</p>
-                    <p style="line-height: 10px;font-size: 15px;">Dicetak : ' . $cetak . '</p>
-                </div>
+        table.table1 {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        
+        table.tabel2 td,
+        th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 5px;
+        }
+    </style>
+    </head>
+
+    <body>
+    <table class="table1">
+    <tr>
+        <td width=15% style="text-align: start; vertical-align: middle;">
+            <div style="margin: 10px;">
+                <img src="https://rumah-halal.com/assets/images/logo3.png" alt="LOGO" width="70px" height="100px">
             </div>
-        
-            <table>
+        </td>
+        <td>
+            <div style="text-align: start; vertical-align: middle;">
+                <p style="line-height: 15px;font-size: 18px;font-weight: bold;">Laporan Neraca Royal Orchid Syariah
+                </p>
+                <p style="line-height: 10px;font-size: 16px;">' . $nama_gl . '</p>
+                <p style="line-height: 10px;font-size: 13px;">Bulan ' . $nama_bulan . ' ' . $tahun . '</p>
+                <p style="line-height: 10px;font-size: 12px;">Dicetak : ' . $cetak . '</p>
+            </div>
+        </td>
+    </tr>
+</table>
+    <table class="tabel2">
                 <tr>
                     <th colspan="3">Aktiva</th>
                 </tr>
@@ -266,15 +282,15 @@ class Keuangan extends CI_Controller
     </table>
         <table class="tabel2">
         <tr>
-        <td colspan="2">Penjualan</td>
+        <td colspan="2"><strong>Penjualan</strong></td>
         <td colspan="1">' . $penjualan_LR . '</td>
         </tr>
         <tr>
-        <td colspan="2">Harga Pokok Penjualan</td>
+        <td colspan="2"><strong>Harga Pokok Penjualan</strong></td>
         <td colspan="1">' . $harga_pokok_LR . '</td>
         </tr>
         <tr>
-        <td colspan="2">Laba Bruto</td>
+        <td colspan="2"><strong>Laba Bruto</strong></td>
         <td colspan="1">' . $laba_bruto . '</td>
         </tr>
         <tr>
@@ -352,15 +368,15 @@ class Keuangan extends CI_Controller
                 <td colspan="3"><br></td>
                 </tr>
                 <tr>
-                <td colspan="2">Laba Kotor Sebelum Pajak</td>
+                <td colspan="2"><strong>Laba Kotor Sebelum Pajak</strong></td>
                 <td colspan="1">' . $laba_kotor . '</td>
                 </tr>
                 <tr>
-                <td colspan="2">Pajak Penghasilan</td>
+                <td colspan="2"><strong>Pajak Penghasilan</strong></td>
                 <td colspan="1">' . $pajak_penghasilan . '</td>
                 </tr>
                 <tr>
-                <td colspan="2">Laba Setelah Pajak</td>
+                <td colspan="2"><strong>Laba Setelah Pajak</strong></td>
                 <td colspan="1">' . $laba_setelah_pajak . '</td>
                 </tr>
                 </table>
@@ -401,41 +417,55 @@ class Keuangan extends CI_Controller
         $mpdf               = new \Mpdf\Mpdf();
         $html               = '<!DOCTYPE html>
         <html lang="en">
-        
+
         <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Document</title>
-            <style>
-                table {
-                    font-family: arial, sans-serif;
-                    border-collapse: collapse;
-                    width: 100%;
-                    margin-left: auto;
-                    margin-right: auto;
-                    margin-top: 30px;
-                }
-                
-                td,
-                th {
-                    border: 1px solid #dddddd;
-                    text-align: left;
-                    padding: 8px;
-                }
-            </style>
-        </head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <style>
+        table.tabel2 {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 30px;
+        }
         
-        <body>
-            <div style="text-align: center;">
-                <div style="float: right;vertical-align:top;margin-left: 40px;word-wrap: break-word;">
-                    <p style="line-height: 15px;font-size: 23px;font-weight: bold;">Laporan Pasiva Royal Orchid Syariah</p>
-                    <p style="line-height: 10px;font-size: 18px;">' . $nama_gl . '</p>
-                    <p style="line-height: 10px;font-size: 18px;">Bulan ' . $nama_bulan . ' ' . $tahun . '</p>
-                    <p style="line-height: 10px;font-size: 15px;">Dicetak : ' . $cetak . '</p>
-                </div>
+        table.table1 {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        
+        table.tabel2 td,
+        th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 5px;
+        }
+    </style>
+    </head>
+
+    <body>
+    <table class="table1">
+    <tr>
+        <td width=15% style="text-align: start; vertical-align: middle;">
+            <div style="margin: 10px;">
+                <img src="' . base_url('assets/images/logo3.png') . '" alt="LOGO" width="70px" height="100px">
             </div>
-        
-            <table>
+        </td>
+        <td>
+            <div style="text-align: start; vertical-align: middle;">
+                <p style="line-height: 15px;font-size: 18px;font-weight: bold;">Laporan Pasiva Royal Orchid Syariah
+                </p>
+                <p style="line-height: 10px;font-size: 16px;">' . $nama_gl . '</p>
+                <p style="line-height: 10px;font-size: 13px;">Bulan ' . $nama_bulan . ' ' . $tahun . '</p>
+                <p style="line-height: 10px;font-size: 12px;">Dicetak : ' . $cetak . '</p>
+            </div>
+        </td>
+    </tr>
+</table>
+    <table class="tabel2">
                 <tr>
                     <th colspan="3" style="text-align: center;">Hutang Lancar</th>
                 </tr>
@@ -514,6 +544,7 @@ class Keuangan extends CI_Controller
         // Write some HTML code:
         $mpdf->WriteHTML($html);
 
+
         // Output a PDF file directly to the browser
         $mpdf->Output($nama_pdf, \Mpdf\Output\Destination::INLINE);
     }
@@ -543,41 +574,55 @@ class Keuangan extends CI_Controller
         $mpdf               = new \Mpdf\Mpdf();
         $html               = '<!DOCTYPE html>
         <html lang="en">
-        
+
         <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Document</title>
-            <style>
-                table {
-                    font-family: arial, sans-serif;
-                    border-collapse: collapse;
-                    width: 100%;
-                    margin-left: auto;
-                    margin-right: auto;
-                    margin-top: 30px;
-                }
-                
-                td,
-                th {
-                    border: 1px solid #dddddd;
-                    text-align: left;
-                    padding: 8px;
-                }
-            </style>
-        </head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <style>
+        table.tabel2 {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 30px;
+        }
         
-        <body>
-            <div style="text-align: center;">
-                <div style="float: right;vertical-align:top;margin-left: 40px;word-wrap: break-word;">
-                    <p style="line-height: 15px;font-size: 23px;font-weight: bold;">Laporan Cash Flow Royal Orchid Syariah</p>
-                    <p style="line-height: 10px;font-size: 18px;">' . $nama_gl . '</p>
-                    <p style="line-height: 10px;font-size: 18px;">Bulan ' . $nama_bulan . ' ' . $tahun . '</p>
-                    <p style="line-height: 10px;font-size: 15px;">Dicetak : ' . $cetak . '</p>
-                </div>
+        table.table1 {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        
+        table.tabel2 td,
+        th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 5px;
+        }
+    </style>
+    </head>
+
+    <body>
+    <table class="table1">
+    <tr>
+        <td width=15% style="text-align: start; vertical-align: middle;">
+            <div style="margin: 10px;">
+                <img src="' . base_url('assets/images/logo3.png') . '" alt="LOGO" width="70px" height="100px">
             </div>
-        
-            <table>
+        </td>
+        <td>
+            <div style="text-align: start; vertical-align: middle;">
+                <p style="line-height: 15px;font-size: 18px;font-weight: bold;">Laporan Cashflow Royal Orchid Syariah
+                </p>
+                <p style="line-height: 10px;font-size: 16px;">' . $nama_gl . '</p>
+                <p style="line-height: 10px;font-size: 13px;">Bulan ' . $nama_bulan . ' ' . $tahun . '</p>
+                <p style="line-height: 10px;font-size: 12px;">Dicetak : ' . $cetak . '</p>
+            </div>
+        </td>
+    </tr>
+</table>
+    <table class="tabel2">
                 <tr>
                     <th colspan="3" style="text-align: center;">Dari Oprasional</th>
                 </tr>
@@ -656,7 +701,7 @@ class Keuangan extends CI_Controller
                     <td><br></td>
                 </tr>
                 <tr>
-                    <td colspan="2"><strong>Total Cash Floww</strong></td>
+                    <td colspan="2"><strong>Total Cash Flow</strong></td>
                     <td colspan="1">' . $totalC . '</td>
                 </tr>
             </table>
@@ -1049,15 +1094,15 @@ class Keuangan extends CI_Controller
     {
         $project        =  $_GET['project_GL'];
         $data           =  $this->db->get($project)->result();
-        echo "<tr><th>Nomor GL</th><th>Nama GL</th><th>Nominal GL</th>";
+        echo "<thead><tr><th>Nomor GL</th><th>Nama GL</th><th>Nominal GL</th></thead>";
         foreach ($data as $r) {
 
-            echo "<tr>
+            echo "<tbody><tr>
                 <td>" .  strtoupper($r->nomor) . "</td>
                 <td>" .  strtoupper($r->nama) . "</td>
                 <td>" .  strtoupper($r->nominal) . "</td>";
 
-            echo "</tr>";
+            echo "</tr></tbody>";
         }
     }
     function sort_gl_utama()
