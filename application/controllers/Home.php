@@ -102,6 +102,46 @@ class Home extends CI_Controller
 		}
 		echo $output;
 	}
+	public function notif_keuangan() {
+		// Angsuran DP
+		$query = $this->db->query("SELECT ID_dp, angsuran_ke, ID_invoice_dp, nominal_angsuran_dp, angsuran_dp.date, angsuran_dp.status, customer.nama, customer.no_ktp FROM customer JOIN angsuran_dp ON customer.no_ktp = angsuran_dp.no_ktp WHERE angsuran_dp.date = date_add(curdate(),INTERVAL 7 DAY) AND angsuran_dp.status =0")->result();
+		$output = '';
+		foreach ($query as $d) {
+			$output .='
+				<div class="card-body">
+                    <p class="card-text">7 Hari Sebelum Jatuh Tempo Pembayaran Angsuran DP Ke-'.$d->angsuran_ke.' Atas Nama '.$d->nama.'</p>
+                    <hr />
+                </div>
+			';
+		}
+		echo $output;
+
+		// Angsuran Bulanan
+		$query = $this->db->query("SELECT ID_angsuran_bulanan, angsuran_ke, ID_invoice_angsuran_bulanan, nominal_angsuran_bulanan, angsuran_bulanan.date, angsuran_bulanan.status, customer.nama, customer.no_ktp FROM customer JOIN angsuran_bulanan ON customer.no_ktp = angsuran_bulanan.no_ktp WHERE angsuran_bulanan.date = date_add(curdate(),INTERVAL 7 DAY) AND angsuran_bulanan.status =0")->result();
+		$output = '';
+		foreach ($query as $d) {
+			$output .='
+				<div class="card-body">
+                    <p class="card-text">7 Hari Sebelum Jatuh Tempo Pembayaran Angsuran Bulanan Ke-'.$d->angsuran_ke.' Atas Nama '.$d->nama.'</p>
+                    <hr />
+                </div>
+			';
+		}
+		echo $output;
+
+		// Angsuran Injek
+		$query = $this->db->query("SELECT ID_injek, angsuran_ke, ID_invoice_injek, nominal_injek, angsuran_injek.date, angsuran_injek.status, customer.nama, customer.no_ktp FROM customer JOIN angsuran_injek ON customer.no_ktp = angsuran_injek.no_ktp WHERE angsuran_injek.date = date_add(curdate(),INTERVAL 7 DAY) AND angsuran_injek.status =0")->result();
+		$output = '';
+		foreach ($query as $d) {
+			$output .='
+				<div class="card-body">
+                    <p class="card-text">7 Hari Sebelum Jatuh Tempo Pembayaran Angsuran Injek Ke-'.$d->angsuran_ke.' Atas Nama '.$d->nama.'</p>
+                    <hr />
+                </div>
+			';
+		}
+		echo $output;
+	}
 	public function jum_notif() {
 		$result = $this->pm->jum_msg();
 		$data['tot'] = $result;
