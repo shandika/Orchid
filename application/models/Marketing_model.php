@@ -132,6 +132,14 @@ class Marketing_model extends CI_Model
         $this->db->where('ID_unit', $id_unit);
         $this->db->update('unit', $data);
     }
+    public function update_customer($ktp)
+    {
+        $data = [
+            'status_akad' => '1',
+        ];
+        $this->db->where('no_ktp', $ktp);
+        $this->db->update('customer', $data);
+    }
 
     function proyeksi_angsuran($id, $ktp, $ke, $tanggal, $bulan, $tahun, $date, $nominal, $sisa, $status, $invoice)
     {

@@ -52,7 +52,7 @@
         <div class="form-row">
             <div class="form-group col-4">
                 <label for="inputAddress">Injeksi</label>
-                <input type="number" class="form-control" id="injeksi" placeholder="Nominal Injek" name="injeksi">
+                <input type="text" class="form-control" id="injeksi" placeholder="Nominal Injek" name="injeksi">
             </div>
             <div class="form-group col-4">
                 <label for="inputAddress">Lama Injeksi (Tahun)</label>
