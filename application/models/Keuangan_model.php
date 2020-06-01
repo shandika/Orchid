@@ -479,4 +479,22 @@ class Keuangan_model extends CI_Model
         $query = $this->db->query("SELECT * FROM $project WHERE nomor LIKE '13d%'");
         return $query;
     }
+    function updateEmailAngsuranDP($id_dp)
+    {
+        $this->db->set('status_email', 1);
+        $this->db->where('ID_dp', $id_dp);
+        $this->db->update('angsuran_dp');
+    }
+    function updateEmailAngsuranBulanan($id_bulan)
+    {
+        $this->db->set('status_email', 1);
+        $this->db->where('ID_angsuran_bulanan', $id_bulan);
+        $this->db->update('angsuran_bulanan');
+    }
+    function updateEmailAngsuranInjek($id_injek)
+    {
+        $this->db->set('status_email', 1);
+        $this->db->where('ID_injek', $id_injek);
+        $this->db->update('angsuran_injek');
+    }
 }
