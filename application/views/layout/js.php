@@ -89,6 +89,19 @@
             bgColor: '#7EC857'
         });
     </script>
+<?php elseif ($this->session->flashdata('msg') == 'success-email') : ?>
+    <script type="text/javascript">
+        $.toast({
+            heading: 'Success',
+            text: "Berhasil Kirim Email",
+            showHideTransition: 'slide',
+            icon: 'success',
+            allowToastClose: false,
+            hideAfter: 5000,
+            position: 'top-right',
+            bgColor: '#7EC857'
+        });
+    </script>
 <?php elseif ($this->session->flashdata('msg') == 'success-login') : ?>
     <script type="text/javascript">
         Swal.fire({
@@ -131,6 +144,19 @@
             bgColor: 'orange'
         });
     </script>
+<?php elseif ($this->session->flashdata('msg') == 'error-email') : ?>
+    <script type="text/javascript">
+        $.toast({
+            heading: 'Perhatian !',
+            text: "Gagal Mengirim Email",
+            showHideTransition: 'slide',
+            icon: 'error',
+            allowToastClose: false,
+            hideAfter: 5000,
+            position: 'top-right',
+            bgColor: 'orange'
+        });
+    </script>
 <?php elseif ($this->session->flashdata('msg') == 'success-add-data') : ?>
     <script type="text/javascript">
         Swal.fire({
@@ -163,6 +189,7 @@
         })
     });
 </script>
+
 <script>
     const flashData = $('.flash-data').data('flashdata');
     const Toast = Swal.mixin({
@@ -943,6 +970,7 @@
                 }
             });
         }, 10000);
+
     });
 </script>
 </script>
