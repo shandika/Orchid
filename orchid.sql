@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 29 Bulan Mei 2020 pada 04.06
--- Versi server: 10.4.11-MariaDB
--- Versi PHP: 7.4.4
+-- Generation Time: Jun 01, 2020 at 07:02 PM
+-- Server version: 10.4.11-MariaDB
+-- PHP Version: 7.2.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -24,7 +25,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `akun_keuangan`
+-- Table structure for table `akun_keuangan`
 --
 
 CREATE TABLE `akun_keuangan` (
@@ -37,7 +38,7 @@ CREATE TABLE `akun_keuangan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `akun_keuangan`
+-- Dumping data for table `akun_keuangan`
 --
 
 INSERT INTO `akun_keuangan` (`ktp`, `nama`, `alamat`, `password`, `status`, `no_tlp`) VALUES
@@ -46,7 +47,7 @@ INSERT INTO `akun_keuangan` (`ktp`, `nama`, `alamat`, `password`, `status`, `no_
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `akun_marketing`
+-- Table structure for table `akun_marketing`
 --
 
 CREATE TABLE `akun_marketing` (
@@ -59,7 +60,7 @@ CREATE TABLE `akun_marketing` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `akun_marketing`
+-- Dumping data for table `akun_marketing`
 --
 
 INSERT INTO `akun_marketing` (`ktp`, `nama`, `alamat`, `password`, `status`, `no_tlp`) VALUES
@@ -68,7 +69,7 @@ INSERT INTO `akun_marketing` (`ktp`, `nama`, `alamat`, `password`, `status`, `no
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `akun_project_manager`
+-- Table structure for table `akun_project_manager`
 --
 
 CREATE TABLE `akun_project_manager` (
@@ -81,7 +82,7 @@ CREATE TABLE `akun_project_manager` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `akun_project_manager`
+-- Dumping data for table `akun_project_manager`
 --
 
 INSERT INTO `akun_project_manager` (`ktp`, `nama`, `alamat`, `password`, `status`, `no_tlp`) VALUES
@@ -90,7 +91,7 @@ INSERT INTO `akun_project_manager` (`ktp`, `nama`, `alamat`, `password`, `status
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `akun_purchasing`
+-- Table structure for table `akun_purchasing`
 --
 
 CREATE TABLE `akun_purchasing` (
@@ -103,7 +104,7 @@ CREATE TABLE `akun_purchasing` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `akun_purchasing`
+-- Dumping data for table `akun_purchasing`
 --
 
 INSERT INTO `akun_purchasing` (`ktp`, `nama`, `alamat`, `password`, `status`, `no_tlp`) VALUES
@@ -113,7 +114,7 @@ INSERT INTO `akun_purchasing` (`ktp`, `nama`, `alamat`, `password`, `status`, `n
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `angsuran_barang_pr`
+-- Table structure for table `angsuran_barang_pr`
 --
 
 CREATE TABLE `angsuran_barang_pr` (
@@ -128,7 +129,7 @@ CREATE TABLE `angsuran_barang_pr` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `angsuran_bulanan`
+-- Table structure for table `angsuran_bulanan`
 --
 
 CREATE TABLE `angsuran_bulanan` (
@@ -142,31 +143,32 @@ CREATE TABLE `angsuran_bulanan` (
   `nominal_angsuran_bulanan` int(11) NOT NULL,
   `sisa_angsuran` int(11) NOT NULL,
   `status` tinyint(1) NOT NULL,
+  `status_email` tinyint(1) NOT NULL DEFAULT 0,
   `ID_invoice_angsuran_bulanan` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `angsuran_bulanan`
+-- Dumping data for table `angsuran_bulanan`
 --
 
-INSERT INTO `angsuran_bulanan` (`ID_angsuran_bulanan`, `no_ktp`, `angsuran_ke`, `tanggal`, `bulan`, `tahun`, `date`, `nominal_angsuran_bulanan`, `sisa_angsuran`, `status`, `ID_invoice_angsuran_bulanan`) VALUES
-('AB0001', '3273172510970002', 1, 29, 6, 2020, '2020-06-29', 5833000, 64167000, 0, 'IAB0001'),
-('AB0002', '3273172510970002', 2, 29, 7, 2020, '2020-07-29', 5833000, 58334000, 0, 'IAB0002'),
-('AB0003', '3273172510970002', 3, 29, 8, 2020, '2020-08-29', 5833000, 52501000, 0, 'IAB0003'),
-('AB0004', '3273172510970002', 4, 29, 9, 2020, '2020-09-29', 5833000, 46668000, 0, 'IAB0004'),
-('AB0005', '3273172510970002', 5, 29, 10, 2020, '2020-10-29', 5833000, 40835000, 0, 'IAB0005'),
-('AB0006', '3273172510970002', 6, 29, 11, 2020, '2020-11-29', 5833000, 35002000, 0, 'IAB0006'),
-('AB0007', '3273172510970002', 7, 29, 12, 2020, '2020-12-29', 5833000, 29169000, 0, 'IAB0007'),
-('AB0008', '3273172510970002', 8, 29, 1, 2021, '2021-01-29', 5833000, 23336000, 0, 'IAB0008'),
-('AB0009', '3273172510970002', 9, 29, 2, 2021, '0000-00-00', 5833000, 17503000, 0, 'IAB0009'),
-('AB0010', '3273172510970002', 10, 29, 3, 2021, '2021-03-29', 5833000, 11670000, 0, 'IAB0010'),
-('AB0011', '3273172510970002', 11, 29, 4, 2021, '2021-04-29', 5833000, 5837000, 0, 'IAB0011'),
-('AB0012', '3273172510970002', 12, 29, 5, 2021, '2021-05-29', 5837000, 0, 0, 'IAB0012');
+INSERT INTO `angsuran_bulanan` (`ID_angsuran_bulanan`, `no_ktp`, `angsuran_ke`, `tanggal`, `bulan`, `tahun`, `date`, `nominal_angsuran_bulanan`, `sisa_angsuran`, `status`, `status_email`, `ID_invoice_angsuran_bulanan`) VALUES
+('AB0001', '3273172510970003', 1, 29, 6, 2020, '2020-06-08', 5833000, 64167000, 0, 1, 'IAB0001'),
+('AB0002', '3273172510970003', 2, 29, 7, 2020, '2020-07-29', 5833000, 58334000, 0, 0, 'IAB0002'),
+('AB0003', '3273172510970003', 3, 29, 8, 2020, '2020-08-29', 5833000, 52501000, 0, 0, 'IAB0003'),
+('AB0004', '3273172510970003', 4, 29, 9, 2020, '2020-09-29', 5833000, 46668000, 0, 0, 'IAB0004'),
+('AB0005', '3273172510970003', 5, 29, 10, 2020, '2020-10-29', 5833000, 40835000, 0, 0, 'IAB0005'),
+('AB0006', '3273172510970003', 6, 29, 11, 2020, '2020-11-29', 5833000, 35002000, 0, 0, 'IAB0006'),
+('AB0007', '3273172510970003', 7, 29, 12, 2020, '2020-12-29', 5833000, 29169000, 0, 0, 'IAB0007'),
+('AB0008', '3273172510970003', 8, 29, 1, 2021, '2021-01-29', 5833000, 23336000, 0, 0, 'IAB0008'),
+('AB0009', '3273172510970003', 9, 29, 2, 2021, '0000-00-00', 5833000, 17503000, 0, 0, 'IAB0009'),
+('AB0010', '3273172510970003', 10, 29, 3, 2021, '2021-03-29', 5833000, 11670000, 0, 0, 'IAB0010'),
+('AB0011', '3273172510970003', 11, 29, 4, 2021, '2021-04-29', 5833000, 5837000, 0, 0, 'IAB0011'),
+('AB0012', '3273172510970003', 12, 29, 5, 2021, '2021-05-29', 5837000, 0, 0, 0, 'IAB0012');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `angsuran_dp`
+-- Table structure for table `angsuran_dp`
 --
 
 CREATE TABLE `angsuran_dp` (
@@ -180,22 +182,23 @@ CREATE TABLE `angsuran_dp` (
   `nominal_angsuran_dp` int(11) NOT NULL,
   `sisa_angsuran` int(11) NOT NULL,
   `status` tinyint(1) NOT NULL,
+  `status_email` tinyint(1) NOT NULL DEFAULT 0,
   `ID_invoice_dp` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `angsuran_dp`
+-- Dumping data for table `angsuran_dp`
 --
 
-INSERT INTO `angsuran_dp` (`ID_dp`, `no_ktp`, `angsuran_ke`, `tanggal`, `bulan`, `tahun`, `date`, `nominal_angsuran_dp`, `sisa_angsuran`, `status`, `ID_invoice_dp`) VALUES
-('ADP0001', '3273172510970002', 1, 29, 6, 2020, '2020-06-29', 10000000, 20000000, 0, 'IDP0001'),
-('ADP0002', '3273172510970002', 2, 29, 7, 2020, '2020-07-29', 10000000, 10000000, 0, 'IDP0002'),
-('ADP0003', '3273172510970002', 3, 29, 8, 2020, '2020-08-29', 10000000, 0, 0, 'IDP0003');
+INSERT INTO `angsuran_dp` (`ID_dp`, `no_ktp`, `angsuran_ke`, `tanggal`, `bulan`, `tahun`, `date`, `nominal_angsuran_dp`, `sisa_angsuran`, `status`, `status_email`, `ID_invoice_dp`) VALUES
+('ADP0001', '3273172510970003', 1, 29, 6, 2020, '2020-06-08', 10000000, 20000000, 0, 0, 'IDP0001'),
+('ADP0002', '3273172510970003', 2, 29, 7, 2020, '2020-07-29', 10000000, 10000000, 0, 0, 'IDP0002'),
+('ADP0003', '3273172510970003', 3, 29, 8, 2020, '2020-08-29', 10000000, 0, 0, 0, 'IDP0003');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `angsuran_injek`
+-- Table structure for table `angsuran_injek`
 --
 
 CREATE TABLE `angsuran_injek` (
@@ -209,21 +212,26 @@ CREATE TABLE `angsuran_injek` (
   `nominal_injek` int(11) NOT NULL,
   `sisa_angsuran` int(11) NOT NULL,
   `status` tinyint(1) NOT NULL,
+  `status_email` tinyint(1) NOT NULL DEFAULT 0,
   `ID_invoice_injek` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `angsuran_injek`
+-- Dumping data for table `angsuran_injek`
 --
 
-INSERT INTO `angsuran_injek` (`ID_injek`, `no_ktp`, `angsuran_ke`, `tanggal`, `bulan`, `tahun`, `date`, `nominal_injek`, `sisa_angsuran`, `status`, `ID_invoice_injek`) VALUES
-('AIJ0001', '3273172510970002', 1, 29, 8, 2021, '2021-08-29', 5000000, 5000000, 0, 'IIJ0001'),
-('AIJ0002', '3273172510970002', 2, 29, 8, 2022, '2022-08-29', 5000000, 0, 0, 'IIJ0002');
+INSERT INTO `angsuran_injek` (`ID_injek`, `no_ktp`, `angsuran_ke`, `tanggal`, `bulan`, `tahun`, `date`, `nominal_injek`, `sisa_angsuran`, `status`, `status_email`, `ID_invoice_injek`) VALUES
+('AIJ0001', '3273172510970002', 1, 29, 8, 2021, '2021-08-29', 5000000, 5000000, 0, 0, 'IIJ0001'),
+('AIJ0002', '3273172510970002', 2, 29, 8, 2022, '2022-08-29', 5000000, 0, 0, 0, 'IIJ0002'),
+('AIJ0003', '3273172510970001', 1, 29, 8, 2021, '2021-08-29', 5000000, 5000000, 0, 0, 'IIJ0003'),
+('AIJ0004', '3273172510970001', 2, 29, 8, 2022, '2022-08-29', 5000000, 0, 0, 0, 'IIJ0004'),
+('AIJ0005', '3273172510970003', 1, 29, 8, 2021, '2020-06-05', 5000000, 5000000, 0, 0, 'IIJ0005'),
+('AIJ0006', '3273172510970003', 2, 29, 8, 2022, '2022-08-29', 5000000, 0, 0, 0, 'IIJ0006');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `angsuran_lain`
+-- Table structure for table `angsuran_lain`
 --
 
 CREATE TABLE `angsuran_lain` (
@@ -236,7 +244,7 @@ CREATE TABLE `angsuran_lain` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `angsuran_lain`
+-- Dumping data for table `angsuran_lain`
 --
 
 INSERT INTO `angsuran_lain` (`ID_angsuran_lain`, `no_ktp`, `nama_angsuran`, `angsuranke`, `jumlah`, `nominal_angsuran_lain`) VALUES
@@ -245,7 +253,7 @@ INSERT INTO `angsuran_lain` (`ID_angsuran_lain`, `no_ktp`, `nama_angsuran`, `ang
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `barang_pr`
+-- Table structure for table `barang_pr`
 --
 
 CREATE TABLE `barang_pr` (
@@ -265,7 +273,7 @@ CREATE TABLE `barang_pr` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `barang_pr`
+-- Dumping data for table `barang_pr`
 --
 
 INSERT INTO `barang_pr` (`ID_pr`, `ID_unit_dipesan`, `nama_barang`, `harga_barang`, `jumlah`, `total_harga`, `nama_supplier`, `jenis_pembayaran`, `lama_cicilan`, `waktu_tunggu`, `status`, `tanggal_pr`, `ID_pm`) VALUES
@@ -277,7 +285,7 @@ INSERT INTO `barang_pr` (`ID_pr`, `ID_unit_dipesan`, `nama_barang`, `harga_baran
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `customer`
+-- Table structure for table `customer`
 --
 
 CREATE TABLE `customer` (
@@ -289,6 +297,7 @@ CREATE TABLE `customer` (
   `jumlah_tanggungan` int(11) NOT NULL,
   `alamat` text NOT NULL,
   `no_telepon` varchar(20) NOT NULL,
+  `email` varchar(50) NOT NULL,
   `status_rumah` varchar(50) NOT NULL,
   `lama_menetap` int(11) NOT NULL,
   `pekerjaan` varchar(100) NOT NULL,
@@ -305,18 +314,18 @@ CREATE TABLE `customer` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `customer`
+-- Dumping data for table `customer`
 --
 
-INSERT INTO `customer` (`no_ktp`, `nama`, `pekerjaan_sesuai_ktp`, `tempat_tanggal_lahir`, `status`, `jumlah_tanggungan`, `alamat`, `no_telepon`, `status_rumah`, `lama_menetap`, `pekerjaan`, `lama_bekerja`, `nama_tempat_bekerja`, `alamat_tempat_bekerja`, `income_bulanan`, `income_bulanan_pasangan`, `no_rekening`, `nama_kontak_darurat`, `alamat_kontak_darurat`, `nomor_kontak_darurat`, `status_akad`) VALUES
-('3273172510970001', 'Octavian', 'Seniman', 'Bandung, 25 Oktober 1997', 'LAJANG', 0, 'JL.Kebon lega 1 rt.02 rw.02', '085923192389', 'Bersama orang Tua', 23, 'Seniman', 5, 'Wijaya Musik Entertaiment', 'Jalan Mananya ? ', 5000000, 0, '8100672571', 'Karwati', 'Kebon Lega 1', '083822584289', 0),
-('3273172510970002', 'Customer2', 'Tidak Ada', 'Bandung, 25 Oktober 1997', 'Lajang', 0, 'Kebon LEga 1', '085923192389', 'Tinggal Bersama Orang Tua', 23, 'Tidak Ada', 2, 'Tidak Ada', 'Tidak Ada', 5000000, 5000000, '555555', '555555', 'Tidak Ada', '555555', 1),
-('3273172510970003', 'octavian', '22', 'bandung', 'none', 0, 'none', '0', 'none', 2, '22', 22, '22', '22', 22, 22, '22', '22', '22', '22', 0);
+INSERT INTO `customer` (`no_ktp`, `nama`, `pekerjaan_sesuai_ktp`, `tempat_tanggal_lahir`, `status`, `jumlah_tanggungan`, `alamat`, `no_telepon`, `email`, `status_rumah`, `lama_menetap`, `pekerjaan`, `lama_bekerja`, `nama_tempat_bekerja`, `alamat_tempat_bekerja`, `income_bulanan`, `income_bulanan_pasangan`, `no_rekening`, `nama_kontak_darurat`, `alamat_kontak_darurat`, `nomor_kontak_darurat`, `status_akad`) VALUES
+('3273172510970001', 'Octavian', 'Seniman', 'Bandung, 25 Oktober 1997', 'LAJANG', 0, 'JL.Kebon lega 1 rt.02 rw.02', '085923192389', 'octaviansaja2@gmail.com', 'Bersama orang Tua', 23, 'Seniman', 5, 'Wijaya Musik Entertaiment', 'Jalan Mananya ? ', 5000000, 0, '8100672571', 'Karwati', 'Kebon Lega 1', '083822584289', 1),
+('3273172510970002', 'Customer2', 'Tidak Ada', 'Bandung, 25 Oktober 1997', 'Lajang', 0, 'Kebon LEga 1', '085923192389', 'octaviansaja2@gmail.com', 'Tinggal Bersama Orang Tua', 23, 'Tidak Ada', 2, 'Tidak Ada', 'Tidak Ada', 5000000, 5000000, '555555', '555555', 'Tidak Ada', '555555', 1),
+('3273172510970003', 'octavian', '22', 'bandung', 'none', 0, 'none', '0', 'kaxvengeance@gmail.com', 'none', 2, '22', 22, '22', '22', 22, 22, '22', '22', '22', '22', 1);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `dokumen_pelengkap`
+-- Table structure for table `dokumen_pelengkap`
 --
 
 CREATE TABLE `dokumen_pelengkap` (
@@ -335,7 +344,7 @@ CREATE TABLE `dokumen_pelengkap` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `dokumen_pelengkap`
+-- Dumping data for table `dokumen_pelengkap`
 --
 
 INSERT INTO `dokumen_pelengkap` (`no_ktp`, `fc_ktp`, `fc_kk`, `slip_gaji`, `laporan_keuangan_usaha`, `laporan_rekening`, `surat_persetujuan_suami_istri`, `surat_persetujuan_pembayaran_kredit`, `surat_rekomendasi`, `surat_perjanjian_agunan_barang`, `surat_perjanjian_penjaminan_personal`, `slip_gaji_penjamin_personal`) VALUES
@@ -346,7 +355,7 @@ INSERT INTO `dokumen_pelengkap` (`no_ktp`, `fc_ktp`, `fc_kk`, `slip_gaji`, `lapo
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `general_ledger`
+-- Table structure for table `general_ledger`
 --
 
 CREATE TABLE `general_ledger` (
@@ -356,7 +365,7 @@ CREATE TABLE `general_ledger` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `general_ledger`
+-- Dumping data for table `general_ledger`
 --
 
 INSERT INTO `general_ledger` (`nomor`, `nama`, `nominal`) VALUES
@@ -454,7 +463,7 @@ INSERT INTO `general_ledger` (`nomor`, `nama`, `nominal`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `general_ledger_dagovillagegarden`
+-- Table structure for table `general_ledger_dagovillagegarden`
 --
 
 CREATE TABLE `general_ledger_dagovillagegarden` (
@@ -464,7 +473,7 @@ CREATE TABLE `general_ledger_dagovillagegarden` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `general_ledger_dagovillagegarden`
+-- Dumping data for table `general_ledger_dagovillagegarden`
 --
 
 INSERT INTO `general_ledger_dagovillagegarden` (`nomor`, `nama`, `nominal`) VALUES
@@ -562,7 +571,7 @@ INSERT INTO `general_ledger_dagovillagegarden` (`nomor`, `nama`, `nominal`) VALU
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `general_ledger_muara`
+-- Table structure for table `general_ledger_muara`
 --
 
 CREATE TABLE `general_ledger_muara` (
@@ -572,7 +581,7 @@ CREATE TABLE `general_ledger_muara` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `general_ledger_muara`
+-- Dumping data for table `general_ledger_muara`
 --
 
 INSERT INTO `general_ledger_muara` (`nomor`, `nama`, `nominal`) VALUES
@@ -670,7 +679,7 @@ INSERT INTO `general_ledger_muara` (`nomor`, `nama`, `nominal`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `general_ledger_singgasana`
+-- Table structure for table `general_ledger_singgasana`
 --
 
 CREATE TABLE `general_ledger_singgasana` (
@@ -680,7 +689,7 @@ CREATE TABLE `general_ledger_singgasana` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `general_ledger_singgasana`
+-- Dumping data for table `general_ledger_singgasana`
 --
 
 INSERT INTO `general_ledger_singgasana` (`nomor`, `nama`, `nominal`) VALUES
@@ -778,7 +787,7 @@ INSERT INTO `general_ledger_singgasana` (`nomor`, `nama`, `nominal`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `invoice_angsuran_bulanan`
+-- Table structure for table `invoice_angsuran_bulanan`
 --
 
 CREATE TABLE `invoice_angsuran_bulanan` (
@@ -795,7 +804,7 @@ CREATE TABLE `invoice_angsuran_bulanan` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `invoice_dp`
+-- Table structure for table `invoice_dp`
 --
 
 CREATE TABLE `invoice_dp` (
@@ -812,7 +821,7 @@ CREATE TABLE `invoice_dp` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `invoice_injek`
+-- Table structure for table `invoice_injek`
 --
 
 CREATE TABLE `invoice_injek` (
@@ -829,7 +838,7 @@ CREATE TABLE `invoice_injek` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `journal`
+-- Table structure for table `journal`
 --
 
 CREATE TABLE `journal` (
@@ -844,7 +853,7 @@ CREATE TABLE `journal` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `journal`
+-- Dumping data for table `journal`
 --
 
 INSERT INTO `journal` (`id_journal`, `nomor_gl`, `nama_gl`, `debit`, `kredit`, `keterangan`, `tanggal_input`, `ID_project`) VALUES
@@ -872,7 +881,7 @@ INSERT INTO `journal` (`id_journal`, `nomor_gl`, `nama_gl`, `debit`, `kredit`, `
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `marketing_fee`
+-- Table structure for table `marketing_fee`
 --
 
 CREATE TABLE `marketing_fee` (
@@ -890,7 +899,7 @@ CREATE TABLE `marketing_fee` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `pembayaran_po`
+-- Table structure for table `pembayaran_po`
 --
 
 CREATE TABLE `pembayaran_po` (
@@ -905,7 +914,7 @@ CREATE TABLE `pembayaran_po` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `po`
+-- Table structure for table `po`
 --
 
 CREATE TABLE `po` (
@@ -920,7 +929,7 @@ CREATE TABLE `po` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `po`
+-- Dumping data for table `po`
 --
 
 INSERT INTO `po` (`ID_po`, `ID_barang_pr`, `ID_purchasing`, `tanggal_approve`, `dibayar`, `bukti_bayar`, `ID_keuangan`, `status_barang`) VALUES
@@ -932,7 +941,7 @@ INSERT INTO `po` (`ID_po`, `ID_barang_pr`, `ID_purchasing`, `tanggal_approve`, `
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `project`
+-- Table structure for table `project`
 --
 
 CREATE TABLE `project` (
@@ -948,18 +957,18 @@ CREATE TABLE `project` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `project`
+-- Dumping data for table `project`
 --
 
 INSERT INTO `project` (`ID_project`, `nama`, `alamat`, `deskripsi`, `foto`, `jumlah_unit`, `unit_kosong`, `unit_isi`, `nama_gl`) VALUES
 ('PJ0001', 'Muara', 'Jalan Peta No.205, Kota bandung ,  Jawa barat', 'Tempat dekat dengan pusat kota,10 menit dari pintu tol moch tohha', '667d62b08280496d149ed0c5a62b3c67.jpg', 100, 100, 0, 'general_ledger_muara'),
 ('PJ0002', 'Singgasana', 'Jalan Mekar Wangi abadi', 'Rumah Nyaman', '5db31501b68811102b2b087f830711f9.jpg', 100, 100, 0, 'general_ledger_singgasana'),
-('PJ0003', 'Dago Village Garden', 'Dago Atas', 'Tempat Nyaman', '1ebf556a7db670944754f898c89296fa.png', 100, 96, 4, 'general_ledger_dagovillagegarden');
+('PJ0003', 'Dago Village Garden', 'Dago Atas', 'Tempat Nyaman', '1ebf556a7db670944754f898c89296fa.png', 100, 94, 6, 'general_ledger_dagovillagegarden');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `unit`
+-- Table structure for table `unit`
 --
 
 CREATE TABLE `unit` (
@@ -973,7 +982,7 @@ CREATE TABLE `unit` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `unit`
+-- Dumping data for table `unit`
 --
 
 INSERT INTO `unit` (`ID_unit`, `ID_project`, `nomor`, `type`, `luas_bangunan`, `luas_tanah`, `status`) VALUES
@@ -981,8 +990,8 @@ INSERT INTO `unit` (`ID_unit`, `ID_project`, `nomor`, `type`, `luas_bangunan`, `
 ('UN0002', 'PJ0003', 'B1', 36, 2000, 2000, 1),
 ('UN0003', 'PJ0003', 'B2', 36, 2000, 2000, 1),
 ('UN0004', 'PJ0003', 'B3', 36, 2000, 2000, 1),
-('UN0005', 'PJ0003', 'B4', 36, 2000, 2000, 0),
-('UN0006', 'PJ0003', 'B5', 36, 2000, 2000, 0),
+('UN0005', 'PJ0003', 'B4', 36, 2000, 2000, 1),
+('UN0006', 'PJ0003', 'B5', 36, 2000, 2000, 1),
 ('UN0007', 'PJ0003', 'B6', 36, 2000, 2000, 0),
 ('UN0008', 'PJ0003', 'B7', 36, 2000, 2000, 0),
 ('UN0009', 'PJ0003', 'B8', 36, 2000, 2000, 0),
@@ -992,7 +1001,7 @@ INSERT INTO `unit` (`ID_unit`, `ID_project`, `nomor`, `type`, `luas_bangunan`, `
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `unit_dipesan`
+-- Table structure for table `unit_dipesan`
 --
 
 CREATE TABLE `unit_dipesan` (
@@ -1011,19 +1020,21 @@ CREATE TABLE `unit_dipesan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `unit_dipesan`
+-- Dumping data for table `unit_dipesan`
 --
 
 INSERT INTO `unit_dipesan` (`ID_unit_dipesan`, `no_ktp`, `DP`, `lama_angsuran_dp`, `angsuran_bulanan`, `lama_angsuran`, `total_harga`, `ktp_marketing`, `ID_unit`, `ID_project`, `tanggal_akad`, `status_marketing_fee`) VALUES
 ('UD0001', '3273172510970001', 30000000, 6, 5375000, 12, 110000000, 'admin_marketing', 'UN0002', 'PJ0003', '19/05/2020', 'MENUNGGU'),
 ('UD0002', '3273172510970003', 30000000, 3, 5833000, 12, 110000000, 'admin_marketing', 'UN0001', 'PJ0003', '29/05/2020', 'MENUNGGU'),
 ('UD0003', '3273172510970002', 30000000, 3, 5833000, 12, 110000000, 'admin_marketing', 'UN0003', 'PJ0003', '29/05/2020', 'MENUNGGU'),
-('UD0004', '3273172510970002', 30000000, 3, 5833000, 12, 110000000, 'admin_marketing', 'UN0004', 'PJ0003', '29/05/2020', 'MENUNGGU');
+('UD0004', '3273172510970002', 30000000, 3, 5833000, 12, 110000000, 'admin_marketing', 'UN0004', 'PJ0003', '29/05/2020', 'MENUNGGU'),
+('UD0005', '3273172510970001', 30000000, 3, 5833000, 12, 110000000, 'admin_marketing', 'UN0005', 'PJ0003', '29/05/2020', 'MENUNGGU'),
+('UD0006', '3273172510970003', 30000000, 3, 5833000, 12, 110000000, 'admin_marketing', 'UN0006', 'PJ0003', '29/05/2020', 'MENUNGGU');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `voucher`
+-- Table structure for table `voucher`
 --
 
 CREATE TABLE `voucher` (
@@ -1035,7 +1046,7 @@ CREATE TABLE `voucher` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `voucher`
+-- Dumping data for table `voucher`
 --
 
 INSERT INTO `voucher` (`ID_voucher`, `nama`, `nominal`, `expired`, `max_used`) VALUES
@@ -1048,39 +1059,39 @@ INSERT INTO `voucher` (`ID_voucher`, `nama`, `nominal`, `expired`, `max_used`) V
 --
 
 --
--- Indeks untuk tabel `akun_keuangan`
+-- Indexes for table `akun_keuangan`
 --
 ALTER TABLE `akun_keuangan`
   ADD PRIMARY KEY (`ktp`);
 
 --
--- Indeks untuk tabel `akun_marketing`
+-- Indexes for table `akun_marketing`
 --
 ALTER TABLE `akun_marketing`
   ADD PRIMARY KEY (`ktp`);
 
 --
--- Indeks untuk tabel `akun_project_manager`
+-- Indexes for table `akun_project_manager`
 --
 ALTER TABLE `akun_project_manager`
   ADD PRIMARY KEY (`ktp`);
 
 --
--- Indeks untuk tabel `akun_purchasing`
+-- Indexes for table `akun_purchasing`
 --
 ALTER TABLE `akun_purchasing`
   ADD PRIMARY KEY (`ktp`),
   ADD KEY `ktp` (`ktp`);
 
 --
--- Indeks untuk tabel `angsuran_barang_pr`
+-- Indexes for table `angsuran_barang_pr`
 --
 ALTER TABLE `angsuran_barang_pr`
   ADD PRIMARY KEY (`ID_angsuran_barang_pr`),
   ADD KEY `ID_barang_pr` (`ID_barang_pr`);
 
 --
--- Indeks untuk tabel `angsuran_bulanan`
+-- Indexes for table `angsuran_bulanan`
 --
 ALTER TABLE `angsuran_bulanan`
   ADD PRIMARY KEY (`ID_angsuran_bulanan`),
@@ -1088,7 +1099,7 @@ ALTER TABLE `angsuran_bulanan`
   ADD KEY `no_ktp` (`no_ktp`);
 
 --
--- Indeks untuk tabel `angsuran_dp`
+-- Indexes for table `angsuran_dp`
 --
 ALTER TABLE `angsuran_dp`
   ADD PRIMARY KEY (`ID_dp`),
@@ -1096,7 +1107,7 @@ ALTER TABLE `angsuran_dp`
   ADD KEY `no_ktp` (`no_ktp`);
 
 --
--- Indeks untuk tabel `angsuran_injek`
+-- Indexes for table `angsuran_injek`
 --
 ALTER TABLE `angsuran_injek`
   ADD PRIMARY KEY (`ID_injek`),
@@ -1104,14 +1115,14 @@ ALTER TABLE `angsuran_injek`
   ADD KEY `no_ktp` (`no_ktp`);
 
 --
--- Indeks untuk tabel `angsuran_lain`
+-- Indexes for table `angsuran_lain`
 --
 ALTER TABLE `angsuran_lain`
   ADD PRIMARY KEY (`ID_angsuran_lain`),
   ADD KEY `no_ktp` (`no_ktp`);
 
 --
--- Indeks untuk tabel `barang_pr`
+-- Indexes for table `barang_pr`
 --
 ALTER TABLE `barang_pr`
   ADD PRIMARY KEY (`ID_pr`),
@@ -1120,44 +1131,44 @@ ALTER TABLE `barang_pr`
   ADD KEY `ID_unit_dipesan` (`ID_unit_dipesan`);
 
 --
--- Indeks untuk tabel `customer`
+-- Indexes for table `customer`
 --
 ALTER TABLE `customer`
   ADD PRIMARY KEY (`no_ktp`);
 
 --
--- Indeks untuk tabel `dokumen_pelengkap`
+-- Indexes for table `dokumen_pelengkap`
 --
 ALTER TABLE `dokumen_pelengkap`
   ADD PRIMARY KEY (`no_ktp`),
   ADD KEY `no_ktp` (`no_ktp`);
 
 --
--- Indeks untuk tabel `general_ledger`
+-- Indexes for table `general_ledger`
 --
 ALTER TABLE `general_ledger`
   ADD PRIMARY KEY (`nomor`);
 
 --
--- Indeks untuk tabel `general_ledger_dagovillagegarden`
+-- Indexes for table `general_ledger_dagovillagegarden`
 --
 ALTER TABLE `general_ledger_dagovillagegarden`
   ADD PRIMARY KEY (`nomor`);
 
 --
--- Indeks untuk tabel `general_ledger_muara`
+-- Indexes for table `general_ledger_muara`
 --
 ALTER TABLE `general_ledger_muara`
   ADD PRIMARY KEY (`nomor`);
 
 --
--- Indeks untuk tabel `general_ledger_singgasana`
+-- Indexes for table `general_ledger_singgasana`
 --
 ALTER TABLE `general_ledger_singgasana`
   ADD PRIMARY KEY (`nomor`);
 
 --
--- Indeks untuk tabel `invoice_angsuran_bulanan`
+-- Indexes for table `invoice_angsuran_bulanan`
 --
 ALTER TABLE `invoice_angsuran_bulanan`
   ADD PRIMARY KEY (`ID_invoice_angsuran_bulanan`),
@@ -1165,7 +1176,7 @@ ALTER TABLE `invoice_angsuran_bulanan`
   ADD KEY `ID_admin` (`ID_admin`);
 
 --
--- Indeks untuk tabel `invoice_dp`
+-- Indexes for table `invoice_dp`
 --
 ALTER TABLE `invoice_dp`
   ADD PRIMARY KEY (`ID_invoice_dp`),
@@ -1173,7 +1184,7 @@ ALTER TABLE `invoice_dp`
   ADD KEY `ID_admin` (`ID_admin`);
 
 --
--- Indeks untuk tabel `invoice_injek`
+-- Indexes for table `invoice_injek`
 --
 ALTER TABLE `invoice_injek`
   ADD PRIMARY KEY (`ID_invoice_injek`),
@@ -1181,7 +1192,7 @@ ALTER TABLE `invoice_injek`
   ADD KEY `ID_admin` (`ID_admin`);
 
 --
--- Indeks untuk tabel `journal`
+-- Indexes for table `journal`
 --
 ALTER TABLE `journal`
   ADD PRIMARY KEY (`id_journal`),
@@ -1189,14 +1200,14 @@ ALTER TABLE `journal`
   ADD KEY `ID_project` (`ID_project`);
 
 --
--- Indeks untuk tabel `marketing_fee`
+-- Indexes for table `marketing_fee`
 --
 ALTER TABLE `marketing_fee`
   ADD PRIMARY KEY (`ID_marketing_fee`),
   ADD KEY `ID_unit_dipesan` (`ID_unit_dipesan`);
 
 --
--- Indeks untuk tabel `pembayaran_po`
+-- Indexes for table `pembayaran_po`
 --
 ALTER TABLE `pembayaran_po`
   ADD PRIMARY KEY (`ID_pembayaran_po`),
@@ -1204,7 +1215,7 @@ ALTER TABLE `pembayaran_po`
   ADD KEY `ID_finance` (`ID_keuangan`);
 
 --
--- Indeks untuk tabel `po`
+-- Indexes for table `po`
 --
 ALTER TABLE `po`
   ADD PRIMARY KEY (`ID_po`),
@@ -1212,20 +1223,20 @@ ALTER TABLE `po`
   ADD KEY `ID_purchasing` (`ID_purchasing`);
 
 --
--- Indeks untuk tabel `project`
+-- Indexes for table `project`
 --
 ALTER TABLE `project`
   ADD PRIMARY KEY (`ID_project`);
 
 --
--- Indeks untuk tabel `unit`
+-- Indexes for table `unit`
 --
 ALTER TABLE `unit`
   ADD PRIMARY KEY (`ID_unit`),
   ADD KEY `ID_project` (`ID_project`);
 
 --
--- Indeks untuk tabel `unit_dipesan`
+-- Indexes for table `unit_dipesan`
 --
 ALTER TABLE `unit_dipesan`
   ADD PRIMARY KEY (`ID_unit_dipesan`),
@@ -1235,111 +1246,91 @@ ALTER TABLE `unit_dipesan`
   ADD KEY `ktp_marketing` (`ktp_marketing`);
 
 --
--- Indeks untuk tabel `voucher`
+-- Indexes for table `voucher`
 --
 ALTER TABLE `voucher`
   ADD PRIMARY KEY (`ID_voucher`);
 
 --
--- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
+-- Constraints for dumped tables
 --
 
 --
--- Ketidakleluasaan untuk tabel `angsuran_bulanan`
+-- Constraints for table `angsuran_bulanan`
 --
 ALTER TABLE `angsuran_bulanan`
   ADD CONSTRAINT `angsuran_bulanan_ibfk_2` FOREIGN KEY (`no_ktp`) REFERENCES `customer` (`no_ktp`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `angsuran_dp`
+-- Constraints for table `angsuran_dp`
 --
 ALTER TABLE `angsuran_dp`
   ADD CONSTRAINT `angsuran_dp_ibfk_2` FOREIGN KEY (`no_ktp`) REFERENCES `customer` (`no_ktp`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `angsuran_injek`
+-- Constraints for table `angsuran_injek`
 --
 ALTER TABLE `angsuran_injek`
   ADD CONSTRAINT `angsuran_injek_ibfk_2` FOREIGN KEY (`no_ktp`) REFERENCES `customer` (`no_ktp`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `angsuran_lain`
+-- Constraints for table `angsuran_lain`
 --
 ALTER TABLE `angsuran_lain`
   ADD CONSTRAINT `angsuran_lain_ibfk_1` FOREIGN KEY (`no_ktp`) REFERENCES `customer` (`no_ktp`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `barang_pr`
+-- Constraints for table `barang_pr`
 --
 ALTER TABLE `barang_pr`
   ADD CONSTRAINT `barang_pr_ibfk_1` FOREIGN KEY (`ID_unit_dipesan`) REFERENCES `unit_dipesan` (`ID_unit_dipesan`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `barang_pr_ibfk_2` FOREIGN KEY (`ID_pm`) REFERENCES `akun_project_manager` (`ktp`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `dokumen_pelengkap`
+-- Constraints for table `dokumen_pelengkap`
 --
 ALTER TABLE `dokumen_pelengkap`
   ADD CONSTRAINT `dokumen_pelengkap_ibfk_1` FOREIGN KEY (`no_ktp`) REFERENCES `customer` (`no_ktp`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `invoice_angsuran_bulanan`
+-- Constraints for table `invoice_angsuran_bulanan`
 --
 ALTER TABLE `invoice_angsuran_bulanan`
   ADD CONSTRAINT `invoice_angsuran_bulanan_ibfk_1` FOREIGN KEY (`ID_angsuran_bulanan`) REFERENCES `angsuran_bulanan` (`ID_angsuran_bulanan`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `invoice_angsuran_bulanan_ibfk_2` FOREIGN KEY (`ID_invoice_angsuran_bulanan`) REFERENCES `angsuran_bulanan` (`ID_invoice_angsuran_bulanan`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `invoice_dp`
+-- Constraints for table `invoice_dp`
 --
 ALTER TABLE `invoice_dp`
   ADD CONSTRAINT `invoice_dp_ibfk_1` FOREIGN KEY (`ID_dp`) REFERENCES `angsuran_dp` (`ID_dp`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `invoice_dp_ibfk_2` FOREIGN KEY (`ID_invoice_dp`) REFERENCES `angsuran_dp` (`ID_invoice_dp`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `invoice_injek`
+-- Constraints for table `invoice_injek`
 --
 ALTER TABLE `invoice_injek`
   ADD CONSTRAINT `invoice_injek_ibfk_1` FOREIGN KEY (`ID_injek`) REFERENCES `angsuran_injek` (`ID_injek`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `invoice_injek_ibfk_2` FOREIGN KEY (`ID_invoice_injek`) REFERENCES `angsuran_injek` (`ID_invoice_injek`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `journal`
+-- Constraints for table `journal`
 --
 ALTER TABLE `journal`
   ADD CONSTRAINT `journal_ibfk_2` FOREIGN KEY (`ID_project`) REFERENCES `project` (`ID_project`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `marketing_fee`
+-- Constraints for table `marketing_fee`
 --
 ALTER TABLE `marketing_fee`
   ADD CONSTRAINT `marketing_fee_ibfk_1` FOREIGN KEY (`ID_unit_dipesan`) REFERENCES `unit_dipesan` (`ID_unit_dipesan`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `pembayaran_po`
---
-ALTER TABLE `pembayaran_po`
-  ADD CONSTRAINT `pembayaran_po_ibfk_1` FOREIGN KEY (`ID_po`) REFERENCES `preorder` (`ID_po`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Ketidakleluasaan untuk tabel `po`
+-- Constraints for table `po`
 --
 ALTER TABLE `po`
   ADD CONSTRAINT `po_ibfk_1` FOREIGN KEY (`ID_purchasing`) REFERENCES `akun_purchasing` (`ktp`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `po_ibfk_2` FOREIGN KEY (`ID_barang_pr`) REFERENCES `barang_pr` (`ID_pr`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Ketidakleluasaan untuk tabel `unit`
---
-ALTER TABLE `unit`
-  ADD CONSTRAINT `unit_ibfk_1` FOREIGN KEY (`ID_project`) REFERENCES `project` (`ID_project`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Ketidakleluasaan untuk tabel `unit_dipesan`
---
-ALTER TABLE `unit_dipesan`
-  ADD CONSTRAINT `unit_dipesan_ibfk_1` FOREIGN KEY (`no_ktp`) REFERENCES `customer` (`no_ktp`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `unit_dipesan_ibfk_2` FOREIGN KEY (`ID_unit`) REFERENCES `unit` (`ID_unit`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `unit_dipesan_ibfk_3` FOREIGN KEY (`ktp_marketing`) REFERENCES `akun_marketing` (`ktp`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
