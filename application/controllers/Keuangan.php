@@ -836,6 +836,39 @@ class Keuangan extends CI_Controller
         );
         $this->template->load('layout/template_v', 'keuangan/journal', $data);
     }
+    public function pengajuan()
+    {
+        $title = 'Keuangan - Pengajuan';
+        $ktp = $this->uri->segment(3);
+        $data = array(
+            'title' => $title,
+            'query' => $this->marketing->tampilDataPelanggan_keuangan(),
+            'ktpnya' => $ktp,
+        );
+        $this->template->load('layout/template_v', 'keuangan/pengajuan', $data);
+    }
+    public function editpengajuan()
+    {
+        $title = 'Keuangan - Pengajuan';
+        $ktp = $this->uri->segment(3);
+        $data = array(
+            'title' => $title,
+            'query' => $this->marketing->tampilDataPelanggan_keuangan(),
+            'datacust1' => $this->marketing->tampilDataPelangganpilihan($ktp),
+        );
+        $this->template->load('layout/template_v', 'keuangan/edit_pengajuan', $data);
+    }
+    public function updaterata_rata()
+    {
+        $saldo = preg_replace("/[^0-9]/", "", $this->input->post('rata_rata_saldo'));
+        $cashin = preg_replace("/[^0-9]/", "", $this->input->post('rata_rata_cashin'));
+        $ktp = $this->input->post('ktp_pengajuan');
+
+        $this->keuangan->updatepengajuan($saldo, $cashin, $ktp);
+        echo $this->session->set_flashdata('msg', 'success-add-data');
+        redirect('Keuangan/pengajuan');
+    }
+
     public function addendum()
     {
         $title = 'Keuangan - Addendum';

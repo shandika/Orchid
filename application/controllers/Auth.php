@@ -17,6 +17,8 @@ class Auth extends CI_Controller
                 redirect('Home/marketing', 'refresh');
             } elseif ($level == 4) {
                 redirect('Home/keuangan', 'refresh');
+            } elseif ($level == 7) {
+                redirect('Home/keuangan', 'refresh');
             } elseif ($level == 5) {
                 $title = 'REGISTATION';
                 $data = array(
@@ -126,6 +128,23 @@ class Auth extends CI_Controller
                 }
                 echo $this->session->set_flashdata('msg', 'success-login');
                 redirect('Home/keuangan', 'refresh');
+            }
+            $cekbod = $this->auth->cekBod($k, $p);
+            if ($cekbod->num_rows() > 0) {
+                //login berhasil, buat session
+                foreach ($cekbod->result() as $login) {
+                    $sesi = array(
+                        'ktp'       => $login->ktp,
+                        'nama'      => $login->nama,
+                        'alamat'    => $login->alamat,
+                        'password'  => $login->password,
+                        'level'     => 7,
+                    );
+                    $this->session->set_userdata('masuk', TRUE);
+                    $this->session->set_userdata($sesi);
+                }
+                echo $this->session->set_flashdata('msg', 'success-login');
+                redirect('Home/bod', 'refresh');
             } else {
                 echo $this->session->set_flashdata('msg', 'Username atau Password Tidak Sesuai !');
                 redirect('Auth', 'refresh');
@@ -156,7 +175,7 @@ class Auth extends CI_Controller
         $db = $this->input->post('jabatan');
         $nama = $this->input->post('nama');
         $alamat = $this->input->post('alamat');
-        $no_telp = $this->input->post('no_telp');
+        $no_telp = $this->input->post('no_tlp');
         $psw1 = $this->input->post('password1');
         $psw2 = $this->input->post('password2');
 
@@ -180,6 +199,10 @@ class Auth extends CI_Controller
             $k = ($ktp);
         } elseif ($db == 'akun_keuangan') {
             $this->form_validation->set_rules('ktp', 'ktp', 'required|trim|xss_clean|is_unique[akun_keuangan.ktp]');
+            $ktp = $this->input->post('ktp');
+            $k = ($ktp);
+        } elseif ($db == 'akun_bod') {
+            $this->form_validation->set_rules('ktp', 'ktp', 'required|trim|xss_clean|is_unique[akun_bod.ktp]');
             $ktp = $this->input->post('ktp');
             $k = ($ktp);
         }

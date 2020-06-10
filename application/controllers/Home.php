@@ -68,10 +68,23 @@ class Home extends CI_Controller
 
 		$data = array(
 			'title' => $title,
-			'query' => $this->keuangan->tampilDataGL(),
+			'query3' => $this->keuangan->tampilDataGL(),
 			'query2' => $this->db->get('project')->result(),
+			'query' => $this->marketing->tampilDataPelanggan_keuangan(),
 		);
-		$this->template->load('layout/template_v', 'keuangan/general_ledger', $data);
+		$this->template->load('layout/template_v', 'keuangan/pengajuan', $data);
+	}
+	public function bod()
+	{
+		$title = 'BOD - Pengajuan';
+
+		$data = array(
+			'title' => $title,
+			'query3' => $this->keuangan->tampilDataGL(),
+			'query2' => $this->db->get('project')->result(),
+			'query' => $this->marketing->tampilDataPelanggan_keuangan(),
+		);
+		$this->template->load('layout/template_v', 'bod/bod', $data);
 	}
 
 	public function pm()

@@ -59,6 +59,7 @@
                                 <option value="akun_project_manager" id="akun_project_manager" name="akun_project_manager">Project manager</option>
                                 <option value="akun_purchasing" id="akun_purchasing" name="akun_purchasing">Purchasing</option>
                                 <option value="akun_keuangan" id="akun_keuangan" name="akun_keuangan">Keuangan</option>
+                                <option value="akun_bod" id="akun_bod" name="akun_bod">Board of Director</option>
                             </select>
                         </div>
                         <div class="form-group">

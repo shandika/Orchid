@@ -130,6 +130,25 @@ class Keuangan_model extends CI_Model
         $this->db->where('nomor', $nomor);
         $this->db->update($dbnya, $data);
     }
+    public function updatepengajuan($saldo, $cahsin, $ktp)
+    {
+        $data = [
+            'rata_rata_saldo_akhir_bulanan' => $saldo,
+            'rata_rata_cashin_bulanan' => $cahsin,
+            'acc_keuangan'  => 'Approved',
+        ];
+        $this->db->where('no_ktp', $ktp);
+        $this->db->update('customer', $data);
+    }
+    public function update_bod($bodnote, $ktp)
+    {
+        $data = [
+            'bod_note' => $bodnote,
+            'acc_bod'  => 'Approved',
+        ];
+        $this->db->where('no_ktp', $ktp);
+        $this->db->update('customer', $data);
+    }
 
     public function bayarangsuran($idinvoice, $idangsuran, $tanggal, $nominal, $type, $namabank, $nomorbank)
     {
@@ -201,6 +220,7 @@ class Keuangan_model extends CI_Model
         $query3 = $this->db->query("SELECT SUM(nominal_injek) as nominal FROM angsuran_injek WHERE status = '0' AND no_ktp = '$ktp'")->result();
         return $query3;
     }
+
     public function rubah_injek($ktp)
     {
         $query = $this->db->query("SELECT SUM(nominal_injek) as nominal FROM angsuran_injek WHERE status = '0' AND no_ktp = '$ktp'");

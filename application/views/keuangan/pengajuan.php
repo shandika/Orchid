@@ -14,8 +14,8 @@
                                     <tr>
                                         <th>No KTP</th>
                                         <th>Nama</th>
-                                        <th>Approve Keuangan</th>
-                                        <th>Approve BOD</th>
+                                        <th>Status Acc Keuangan</th>
+                                        <th>Status Acc BOD</th>
                                         <th>Nilai 1</th>
                                         <th>Nilai 2</th>
                                         <th>Aksi</th>
@@ -78,7 +78,7 @@
                                             <td><?php echo $kuis1; ?></td>
                                             <td><?php echo $kuis2; ?></td>
                                             <td>
-                                                <a title="Lihat Detail Dokumen" href="<?php echo base_url() . 'Marketing/editdata/' . $ktp; ?>" class="btn btn-primary btn-xs">Lihat </a>
+                                                <a title="Lihat Detail Dokumen" href="<?php echo base_url() . 'Keuangan/editpengajuan/' . $ktp; ?>" class="btn btn-primary btn-xs">Lihat </a>
                                             </td>
                                             <td><?php echo $ttl; ?></td>
                                             <td><?php echo $status; ?></td>

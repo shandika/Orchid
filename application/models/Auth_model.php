@@ -39,6 +39,13 @@ class Auth_model extends CI_Model
         $this->db->limit(1);
         return $this->db->get("akun_keuangan");
     }
+    function cekBod($k, $p)
+    {
+        $this->db->where("ktp", $k);
+        $this->db->where("password", $p);
+        $this->db->limit(1);
+        return $this->db->get("akun_bod");
+    }
     function registrasi($k, $n, $a, $p, $s, $ntlp, $db)
     {
         $data = [

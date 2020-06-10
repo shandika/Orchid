@@ -14,8 +14,8 @@
                                     <tr>
                                         <th>No KTP</th>
                                         <th>Nama</th>
-                                        <th>Status Acc Keuangan</th>
-                                        <th>Status Acc BOD</th>
+                                        <th>Approve Keuangan</th>
+                                        <th>Approve BOD</th>
                                         <th>Nilai 1</th>
                                         <th>Nilai 2</th>
                                         <th>Aksi</th>
@@ -127,14 +127,14 @@
         $lmbekerja            = $baris->lama_bekerja;
         $nmtpbekerja          = $baris->nama_tempat_bekerja;
         $altpbekerja          = $baris->alamat_tempat_bekerja;
-        $inbulanan            = intval($baris->income_bulanan);
-        $inblnpasangan        = intval($baris->income_bulanan_pasangan);
+        $inbulanan            = 'Rp. ' . number_format($baris->income_bulanan, 0, ',', '.');
+        $inblnpasangan        = 'Rp. ' . number_format($baris->income_bulanan_pasangan, 0, ',', '.');
         $norek                = $baris->no_rekening;
         $namakontakdarurat    = $baris->nama_kontak_darurat;
         $alamatkontakdarurat  = $baris->alamat_kontak_darurat;
         $nomorkontakdarurat   = $baris->nomor_kontak_darurat;
         $email = $baris->email;
-        $totpeng = intval($baris->total_pengeluaran);
+        $totpeng                = 'Rp. ' . number_format($baris->total_pengeluaran, 0, ',', '.');
     ?>
     <?php endforeach; ?>
     <div class="content mt-3">
@@ -146,7 +146,7 @@
                             <strong class="card-title">Update Data Diri</strong>
                         </div>
                         <div class="card-body">
-                            <form action="">
+                            <form action="<?= base_url('Marketing/updateDataCustomer') ?>" method="POST">
                                 <div class="form-row">
                                     <!-- Awal Baris-->
                                     <div class="form-group col-md-4">
@@ -166,15 +166,11 @@
                                 <div class="form-row">
                                     <div class="form-group col-md-4">
                                         <label for="inputAddress">Tempat, Tanggal lahir</label>
-                                        <input type="text" class="form-control" id="ktp" placeholder="Bandung, 25 oktober 1997" name="ktp" value="<?= $ttl ?>">
+                                        <input type="text" class="form-control" id="ttl" placeholder="Bandung, 25 oktober 1997" name="ttl" value="<?= $ttl ?>">
                                     </div>
                                     <div class="form-group col-md-4">
                                         <label for="inputAddress">Status</label>
-                                        <select class="form-control" id="status" name="status">
-                                            <option value="Lajang">Lajang</option>
-                                            <option value="Menikah">Menikah</option>
-                                            <option value="Duda/Janda">Duda/Janda</option>
-                                        </select>
+                                        <input type="text" class="form-control" id="status" placeholder="Bandung, 25 oktober 1997" name="status" value="<?= $status ?>">
                                     </div>
                                     <div class="form-group col-md-4">
                                         <label for="inputAddress">Jumlah Tanggungan</label>
@@ -193,7 +189,7 @@
                                     </div>
                                     <div class="form-group col-md-4">
                                         <label for="inputAddress">Email</label>
-                                        <input type="number" class="form-control" id="email" placeholder="" name="email" value="<?= $email ?>">
+                                        <input type="text" class="form-control" id="email" placeholder="" name="email" value="<?= $email ?>">
                                     </div>
                                 </div> <!-- Akhir baris -->
                                 <!-- Awal Baris-->
@@ -230,11 +226,11 @@
                                 <div class="form-row">
                                     <div class="form-group col-md-3">
                                         <label for="inputAddress">Income / bulan</label>
-                                        <input type="text" class="form-control" id="incomebulan" placeholder="" name="incomebulan" value="<?= $inbulanan ?>">
+                                        <input type="text" class="form-control" id="incomebulannya" placeholder="" name="incomebulannya" value="<?= $inbulanan ?>">
                                     </div>
                                     <div class="form-group col-md-3">
                                         <label for="inputAddress">Income Pasangan / bulan</label>
-                                        <input type="text" class="form-control" id="incomepasangan" placeholder="" name="incomepasangan" value="<?= $inblnpasangan ?>">
+                                        <input type="text" class="form-control" id="incomepasangannya" placeholder="" name="incomepasangannya" value="<?= $inblnpasangan ?>">
                                     </div>
                                     <div class="form-group col-md-3">
                                         <label for="inputAddress">Total pengeluaran</label>
@@ -249,17 +245,18 @@
                                 <div class="form-row">
                                     <div class="form-group col-md-4">
                                         <label for="inputAddress">Nama Kontak Darurat</label>
-                                        <input type="text" class="form-control" id="namakondar" placeholder="" name="incomebulan" value="<?= $namakontakdarurat ?>">
+                                        <input type="text" class="form-control" id="namakondar" placeholder="" name="namakondar" value="<?= $namakontakdarurat ?>">
                                     </div>
                                     <div class="form-group col-md-4">
                                         <label for="inputAddress">Alamat Kontak Darurat</label>
-                                        <textarea type="text" class="form-control" id="alamatkondar" placeholder="" name="incomepasangan" value="" rows="3"><?= $alamatkontakdarurat ?></textarea>
+                                        <textarea type="text" class="form-control" id="alamatkondar" placeholder="" name="alamatkondar" value="" rows="3"><?= $alamatkontakdarurat ?></textarea>
                                     </div>
                                     <div class="form-group col-md-4">
                                         <label for="inputAddress">Nomor Telepon Kontak Darurat</label>
-                                        <input type="text" class="form-control" id="teleponkondar" placeholder="" name="norek" value="<?= $nomorkontakdarurat ?>">
+                                        <input type="text" class="form-control" id="teleponkondar" placeholder="" name="teleponkondar" value="<?= $nomorkontakdarurat ?>">
                                     </div>
                                 </div> <!-- Akhir baris -->
+                                <button class="btn btn-success btn-block" type="submit">Update Data</button>
                             </form>
                         </div>
                     </div>
@@ -268,6 +265,20 @@
             </div>
         </div><!-- .animated -->
     </div><!-- .content -->
+    <?php foreach ($gambar->result() as $baris) :
+        $fcktp                  = $baris->fc_ktp;
+        $fckk = $baris->fc_kk;
+        $sg = $baris->slip_gaji;
+        $lku = $baris->laporan_keuangan_usaha;
+        $lr = $baris->laporan_rekening;
+        $spsi = $baris->surat_persetujuan_suami_istri;
+        $sppk = $baris->surat_persetujuan_pembayaran_kredit;
+        $sr = $baris->surat_rekomendasi;
+        $spab = $baris->surat_perjanjian_agunan_barang;
+        $sppp = $baris->surat_perjanjian_penjaminan_personal;
+        $sgpp = $baris->slip_gaji_penjamin_personal;
+    ?>
+    <?php endforeach; ?>
     <div class="container">
         <br />
         <div class="content mt-3">
@@ -279,14 +290,18 @@
                                 <strong class="card-title">Update Data Dokumen Pelengkap</strong>
                             </div>
                             <div class="card-body">
-                                <form method="POST" action="<?= base_url('Marketing/updatedokumen') ?>">
+                                <form method="POST" action="<?= base_url('Marketing/updatedokumen') ?>" enctype="multipart/form-data">
                                     <div class="form-group col-md-4 d-none">
                                         <label for="inputAddress">KTP</label>
                                         <input type="text" class="form-control" id="noktp" placeholder="" name="noktp" value="<?= $ktp ?>">
                                     </div>
                                     <div id="form-step-1" role="form" data-toggle="validator" class="col-md-4">
                                         <div class="form-group">
-                                            <label for="name">Foto Copy KTP:</label>
+                                            <label for="name">Fotocopy KTP</label>
+                                            <br>
+                                            <div class="test-popup-link" href="<?= base_url('assets/images/dokumen_pelengkap/') . $fcktp; ?>">
+                                                <img width="120px" height="120px" src="<?= base_url('assets/images/dokumen_pelengkap/') . $fcktp; ?>" alt="KOSONG" class="img-thumbnail ">
+                                            </div>
                                             <div class="custom-file">
                                                 <input type="file" class="custom-file-input form-control" name="userfile[]" multiple="multiple" required="">
                                                 <label class="custom-file-label" for="foto"></label>
@@ -297,6 +312,10 @@
                                     <div id="form-step-1" role="form" data-toggle="validator" class="col-md-4">
                                         <div class="form-group">
                                             <label for="name">Foto Copy KK:</label>
+                                            <br>
+                                            <div class="test-popup-link" href="<?= base_url('assets/images/dokumen_pelengkap/') . $fckk; ?>">
+                                                <img width="120px" height="120px" src="<?= base_url('assets/images/dokumen_pelengkap/') . $fckk; ?>" alt="KOSONG" class="img-thumbnail ">
+                                            </div>
                                             <div class="custom-file">
                                                 <input type="file" class="custom-file-input form-control" name="userfile[]" multiple="multiple" required="">
                                                 <label class="custom-file-label" for="foto"></label>
@@ -307,6 +326,10 @@
                                     <div id="form-step-1" role="form" data-toggle="validator" class="col-md-4">
                                         <div class="form-group">
                                             <label for="name">Slip Gaji:</label>
+                                            <br>
+                                            <div class="test-popup-link" href="<?= base_url('assets/images/dokumen_pelengkap/') . $sg; ?>">
+                                                <img width="120px" height="120px" src="<?= base_url('assets/images/dokumen_pelengkap/') . $sg; ?>" alt="KOSONG" class="img-thumbnail ">
+                                            </div>
                                             <div class="custom-file">
                                                 <input type="file" class="custom-file-input form-control" name="userfile[]" multiple="multiple" required="">
                                                 <label class="custom-file-label" for="foto"></label>
@@ -317,6 +340,10 @@
                                     <div id="form-step-1" role="form" data-toggle="validator" class="col-md-4">
                                         <div class="form-group">
                                             <label for="name">Laporan Keuangan Usaha:</label>
+                                            <br>
+                                            <div class="test-popup-link" href="<?= base_url('assets/images/dokumen_pelengkap/') . $lku; ?>">
+                                                <img width="120px" height="120px" src="<?= base_url('assets/images/dokumen_pelengkap/') . $lku; ?>" alt="KOSONG" class="img-thumbnail ">
+                                            </div>
                                             <div class="custom-file">
                                                 <input type="file" class="custom-file-input form-control" name="userfile[]" multiple="multiple" required="">
                                                 <label class="custom-file-label" for="foto"></label>
@@ -327,6 +354,10 @@
                                     <div id="form-step-1" role="form" data-toggle="validator" class="col-md-4">
                                         <div class="form-group">
                                             <label for="name">Laporan Rekening:</label>
+                                            <br>
+                                            <div class="test-popup-link" href="<?= base_url('assets/images/dokumen_pelengkap/') . $lr; ?>">
+                                                <img width="120px" height="120px" src="<?= base_url('assets/images/dokumen_pelengkap/') . $lr; ?>" alt="KOSONG" class="img-thumbnail ">
+                                            </div>
                                             <div class="custom-file">
                                                 <input type="file" class="custom-file-input form-control" name="userfile[]" multiple="multiple" required="">
                                                 <label class="custom-file-label" for="foto"></label>
@@ -337,6 +368,10 @@
                                     <div id="form-step-1" role="form" data-toggle="validator" class="col-md-4">
                                         <div class="form-group">
                                             <label for="name">Surat Persetujaun Suami Istri:</label>
+                                            <br>
+                                            <div class="test-popup-link" href="<?= base_url('assets/images/dokumen_pelengkap/') . $spsi; ?>">
+                                                <img width="120px" height="120px" src="<?= base_url('assets/images/dokumen_pelengkap/') . $spsi; ?>" alt="KOSONG" class="img-thumbnail ">
+                                            </div>
                                             <div class="custom-file">
                                                 <input type="file" class="custom-file-input form-control" name="userfile[]" multiple="multiple" required="">
                                                 <label class="custom-file-label" for="foto"></label>
@@ -347,6 +382,10 @@
                                     <div id="form-step-1" role="form" data-toggle="validator" class="col-md-4">
                                         <div class="form-group">
                                             <label for="name">Surat Persetujaun Pembayaran Kredit:</label>
+                                            <br>
+                                            <div class="test-popup-link" href="<?= base_url('assets/images/dokumen_pelengkap/') . $sppk; ?>">
+                                                <img width="120px" height="120px" src="<?= base_url('assets/images/dokumen_pelengkap/') . $sppk; ?>" alt="KOSONG" class="img-thumbnail ">
+                                            </div>
                                             <div class="custom-file">
                                                 <input type="file" class="custom-file-input form-control" name="userfile[]" multiple="multiple" required="">
                                                 <label class="custom-file-label" for="foto"></label>
@@ -357,6 +396,10 @@
                                     <div id="form-step-1" role="form" data-toggle="validator" class="col-md-4">
                                         <div class="form-group">
                                             <label for="name">Surat Rekomendasi:</label>
+                                            <br>
+                                            <div class="test-popup-link" href="<?= base_url('assets/images/dokumen_pelengkap/') . $sr; ?>">
+                                                <img width="120px" height="120px" src="<?= base_url('assets/images/dokumen_pelengkap/') . $sr; ?>" alt="KOSONG" class="img-thumbnail ">
+                                            </div>
                                             <div class="custom-file">
                                                 <input type="file" class="custom-file-input form-control" name="userfile[]" multiple="multiple" required="">
                                                 <label class="custom-file-label" for="foto"></label>
@@ -367,6 +410,10 @@
                                     <div id="form-step-1" role="form" data-toggle="validator" class="col-md-4">
                                         <div class="form-group">
                                             <label for="name">Surat Perjanjian Agunan Barang:</label>
+                                            <br>
+                                            <div class="test-popup-link" href="<?= base_url('assets/images/dokumen_pelengkap/') . $spab; ?>">
+                                                <img width="120px" height="120px" src="<?= base_url('assets/images/dokumen_pelengkap/') . $spab; ?>" alt="KOSONG" class="img-thumbnail ">
+                                            </div>
                                             <div class="custom-file">
                                                 <input type="file" class="custom-file-input form-control" name="userfile[]" multiple="multiple" required="">
                                                 <label class="custom-file-label" for="foto"></label>
@@ -377,6 +424,10 @@
                                     <div id="form-step-1" role="form" data-toggle="validator" class="col-md-4">
                                         <div class="form-group">
                                             <label for="name">Surat Perjanjian Penjaminan Personal:</label>
+                                            <br>
+                                            <div class="test-popup-link" href="<?= base_url('assets/images/dokumen_pelengkap/') . $sppp; ?>">
+                                                <img width="120px" height="120px" src="<?= base_url('assets/images/dokumen_pelengkap/') . $sppp; ?>" alt="KOSONG" class="img-thumbnail ">
+                                            </div>
                                             <div class="custom-file">
                                                 <input type="file" class="custom-file-input form-control" name="userfile[]" multiple="multiple" required="">
                                                 <label class="custom-file-label" for="foto"></label>
@@ -387,6 +438,10 @@
                                     <div id="form-step-1" role="form" data-toggle="validator" class="col-md-4">
                                         <div class="form-group">
                                             <label for="name">Slip Gaji Penjamin Personal:</label>
+                                            <br>
+                                            <div class="test-popup-link" href="<?= base_url('assets/images/dokumen_pelengkap/') . $sgpp; ?>">
+                                                <img width="120px" height="120px" src="<?= base_url('assets/images/dokumen_pelengkap/') . $sgpp; ?>" alt="KOSONG" class="img-thumbnail ">
+                                            </div>
                                             <div class="custom-file mb-3">
                                                 <input type="file" class="custom-file-input form-control" name="userfile[]" multiple="multiple" required="">
                                                 <label class="custom-file-label" for="foto"></label>
@@ -394,14 +449,13 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div id="form-step-1" role="form" data-toggle="validator" class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="name" style="text-align: center;">Klik tombol untuk update Dokumen</label>
-                                            <div class="custom-file mb-3">
-                                                <button class="btn btn-primary form-control" type="submit">Update Dokumen</button>
-                                            </div>
+                                    <div class="form-group">
+                                        <label for="name" style="text-align: center;">Klik tombol untuk update Dokumen</label>
+                                        <div class="custom-file mb-3">
+                                            <button class="btn btn-primary form-control" type="submit">Update Dokumen</button>
                                         </div>
                                     </div>
+
                                 </form>
                             </div>
                         </div>

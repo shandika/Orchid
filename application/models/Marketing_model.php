@@ -16,11 +16,23 @@ class Marketing_model extends CI_Model
     }
     function updatedokumen($gambar)
     {
-        $this->db->insert('dokumen_pelengkap', $gambar);
+        $this->db->update('dokumen_pelengkap', $gambar);
     }
 
     function tampilDataPelanggan()
     {
+        $query = $this->db->get('customer');
+        return $query;
+    }
+    function tampilDataPelanggan_bod()
+    {
+        $this->db->where('acc_bod', 'menunggu');
+        $query = $this->db->get('customer');
+        return $query;
+    }
+    function tampilDataPelanggan_keuangan()
+    {
+        $this->db->where('acc_keuangan', 'menunggu');
         $query = $this->db->get('customer');
         return $query;
     }
@@ -36,7 +48,12 @@ class Marketing_model extends CI_Model
     }
     function tampildataajuan($ktp)
     {
-        $query = $this->db->query("SELECT * FROM `unit_dipesan` JOIN project ON unit_dipesan.ID_project = project.ID_project JOIN unit ON unit_dipesan.ID_unit = unit.ID_unit WHERE unit_dipesan.no_ktp = '$ktp'");
+        $query = $this->db->query("SELECT * FROM unit_dipesan JOIN project ON unit_dipesan.ID_project = project.ID_project JOIN unit ON unit_dipesan.ID_unit = unit.ID_unit WHERE unit_dipesan.no_ktp = '$ktp'");
+        return $query;
+    }
+    function tampilgambar($ktp)
+    {
+        $query = $this->db->query("SELECT * FROM dokumen_pelengkap WHERE no_ktp =  '$ktp'");
         return $query;
     }
 
@@ -230,5 +247,11 @@ class Marketing_model extends CI_Model
         ];
         $this->db->insert('marketing_fee', $data);
         $this->db->query("UPDATE unit_dipesan SET status_marketing_fee = 'TERHITUNG' WHERE unit_dipesan.ID_unit_dipesan = '$idUnit'; ");
+    }
+
+    function updatedatacustomer($ktp, $data)
+    {
+        $this->db->where('no_ktp', $ktp);
+        $this->db->update('customer', $data);
     }
 }
