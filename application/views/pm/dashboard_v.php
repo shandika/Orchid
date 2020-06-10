@@ -1,13 +1,3 @@
-<div class="breadcrumbs mb-3">
-    <div class="col-sm-4">
-        <div class="page-header float-left">
-            <div class="page-title">
-                <h1>Data Project</h1>
-            </div>
-        </div>
-    </div>
-</div>
-
 <div class="container">
     <div class="row">
         <div class="col-lg-6">

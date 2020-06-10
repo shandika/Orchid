@@ -14,17 +14,37 @@ class Marketing_model extends CI_Model
         $this->db->insert('dokumen_pelengkap', $gambar);
         $this->db->insert_batch('angsuran_lain', $result);
     }
+    function updatedokumen($gambar)
+    {
+        $this->db->insert('dokumen_pelengkap', $gambar);
+    }
 
     function tampilDataPelanggan()
     {
         $query = $this->db->get('customer');
         return $query;
     }
+    function tampilDataPelangganpilihan($ktp)
+    {
+        $query = $this->db->query("SELECT * FROM customer where no_ktp='$ktp'");
+        return $query;
+    }
+    function tampilDataAngsuranLain($ktp)
+    {
+        $query = $this->db->query("SELECT * FROM angsuran_lain JOIN customer ON customer.no_ktp = angsuran_lain.no_ktp WHERE customer.no_ktp = '$ktp'");
+        return $query;
+    }
+    function tampildataajuan($ktp)
+    {
+        $query = $this->db->query("SELECT * FROM `unit_dipesan` JOIN project ON unit_dipesan.ID_project = project.ID_project JOIN unit ON unit_dipesan.ID_unit = unit.ID_unit WHERE unit_dipesan.no_ktp = '$ktp'");
+        return $query;
+    }
+
 
     function search_cust($nama)
     {
         $this->db->like('nama', $nama, 'BOTH');
-        $this->db->where('status_akad', 0);
+        $this->db->where('status_akad', 1);
         $this->db->order_by('nama', 'ASC');
         $this->db->limit(20);
         return $this->db->get('customer')->result();
@@ -108,6 +128,7 @@ class Marketing_model extends CI_Model
         $this->db->insert('unit_dipesan', $data);
         $this->marketing->update_unit($id_unit);
         $query = $this->db->query("UPDATE project SET unit_kosong = unit_kosong - 1, unit_isi = unit_isi + 1 WHERE ID_project='$id_project'");
+        $query = $this->db->query("UPDATE customer SET status_akad = 1 WHERE no_ktp='$no_ktp'");
         return $query;
     }
 
@@ -146,6 +167,7 @@ class Marketing_model extends CI_Model
             'nominal_angsuran_bulanan' => $nominal,
             'sisa_angsuran' => $sisa,
             'status' => $status,
+            'status_email' => '0',
             'ID_invoice_angsuran_bulanan' => $invoice
         ];
         $this->db->insert('angsuran_bulanan', $data);
@@ -163,6 +185,7 @@ class Marketing_model extends CI_Model
             'nominal_angsuran_dp' => $nominal,
             'sisa_angsuran' => $sisa,
             'status' => $status,
+            'status_email' => '0',
             'ID_invoice_dp' => $invoice
         ];
         $this->db->insert('angsuran_dp', $data);
@@ -180,6 +203,7 @@ class Marketing_model extends CI_Model
             'nominal_injek' => $nominal,
             'sisa_angsuran' => $sisa,
             'status' => $status,
+            'status_email' => '0',
             'ID_invoice_injek' => $invoice
         ];
         $this->db->insert('angsuran_injek', $data);
@@ -191,8 +215,20 @@ class Marketing_model extends CI_Model
         $hasil = $query->row();
         return $hasil->id;
     }
-    function tambahDataMF($data)
+    function tambahDataMF($id, $idUnit, $agen, $inhouse, $persenan, $marketingFee, $closingFee, $direkturFee)
     {
+        $data = [
+            'ID_marketing_fee'      => $id,
+            'ID_unit_dipesan'       => $idUnit,
+            'agen'                  => $agen,
+            'inhouse'               => $inhouse,
+            'persenan'              => $persenan,
+            'nominal_marketing_fee' => $marketingFee,
+            'nominal_closing_fee'   => $closingFee,
+            'direktur_fee'          => $direkturFee,
+            'total_fee'             => $marketingFee + $closingFee + $direkturFee
+        ];
         $this->db->insert('marketing_fee', $data);
+        $this->db->query("UPDATE unit_dipesan SET status_marketing_fee = 'TERHITUNG' WHERE unit_dipesan.ID_unit_dipesan = '$idUnit'; ");
     }
 }

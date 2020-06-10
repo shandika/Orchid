@@ -229,7 +229,25 @@ class Keuangan extends CI_Controller
         $cetak = date('d/m/Y');
         $nama_bulan = date("F", strtotime('00-' . $bulan . '-01'));
         $nama_pdf = "Laporan_Penjualan&Laba_bulan_" . $nama_bulan;
-        $mpdf = new \Mpdf\Mpdf();
+        $mpdf               = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => 'A4-P']);
+        $mpdf->SetWatermarkImage('https://rumah-halal.com/assets/images/logo3.png', 0.2, array(120, 150), '');
+        $mpdf->showWatermarkImage = true;
+        $mpdf->setAutoTopMargin = 'stretch';
+        $mpdf->setAutoBottomMargin = 'stretch';
+        $mpdf->SetHTMLHeader('
+        <div  style="display: table;clear: both;">
+        <div  style="float: left;width: 20%;">
+            <img src="https://rumah-halal.com/assets/images/logo3.png" alt="LOGO" width="70px" height="100px">
+        </div>
+        <div  style="float: left;width: 80%;">
+            <p style="line-height: 15px;font-size: 18px;font-weight: bold;">Laporan Penjualan & Laba Royal Orchid Syariah
+            </p>
+            <p style="line-height: 10px;font-size: 16px;">' . $nama_gl . '</p>
+            <p style="line-height: 10px;font-size: 13px;">Bulan ' . $nama_bulan . ' ' . $tahun . '</p>
+            <p style="line-height: 10px;font-size: 12px;">Dicetak : ' . $cetak . '</p>
+        </div>
+    </div>
+        ');
         $html = '<!DOCTYPE html>
             <html lang="en">
 
@@ -262,24 +280,6 @@ class Keuangan extends CI_Controller
         </head>
 
         <body>
-        <table class="table1">
-        <tr>
-            <td width=15% style="text-align: start; vertical-align: middle;">
-                <div style="margin: 10px;">
-                    <img src="' . base_url('assets/images/logo3.png') . '" alt="LOGO" width="70px" height="100px">
-                </div>
-            </td>
-            <td>
-                <div style="text-align: start; vertical-align: middle;">
-                    <p style="line-height: 15px;font-size: 18px;font-weight: bold;">Laporan Penjualan dan Laba Royal Orchid Syariah
-                    </p>
-                    <p style="line-height: 10px;font-size: 16px;">' . $nama_gl . '</p>
-                    <p style="line-height: 10px;font-size: 13px;">Bulan ' . $nama_bulan . ' ' . $tahun . '</p>
-                    <p style="line-height: 10px;font-size: 12px;">Dicetak : ' . $cetak . '</p>
-                </div>
-            </td>
-        </tr>
-    </table>
         <table class="tabel2">
         <tr>
         <td colspan="2"><strong>Penjualan</strong></td>
@@ -393,6 +393,19 @@ class Keuangan extends CI_Controller
 
     public function cetak_pasiva()
     {
+        $neraca_kas_kecil = $this->input->post('neraca_kas_kecil');
+        $neraca_bank = $this->input->post('neraca_bank');
+        $neraca_piutang_usaha = $this->input->post('neraca_piutang_usaha');
+        $neraca_piutang_kredit_rumah = $this->input->post('neraca_piutang_kredit_rumah');
+        $neraca_piutang_karyawan = $this->input->post('neraca_piutang_karyawan');
+        $neraca_uang_muka = $this->input->post('neraca_uang_muka');
+        $neraca_barang = $this->input->post('neraca_barang');
+        $neraca_pekerjaan = $this->input->post('neraca_pekerjaan');
+        $neraca_total_aktiva_lancar = $neraca_bank + $neraca_kas_kecil + $neraca_pekerjaan + $neraca_piutang_karyawan + $neraca_barang + $neraca_piutang_usaha + $neraca_piutang_kredit_rumah + $neraca_uang_muka;
+        $neraca_tanah_dan_bangunan = $this->input->post('neraca_tanah_dan_bangunan');
+        $neraca_peralatan_kantor = $this->input->post('neraca_peralatan_kantor');
+        $neraca_total_aktiva_tidak_lancar = $neraca_tanah_dan_bangunan + $neraca_peralatan_kantor;
+        $total_neraca = $neraca_total_aktiva_lancar + $neraca_total_aktiva_tidak_lancar;
         $hutangUsaha        = $this->input->post('hu');
         $hutangKonsiyasi    = $this->input->post('hk');
         $hutangLeverensir   = $this->input->post('hl');
@@ -414,7 +427,25 @@ class Keuangan extends CI_Controller
         $cetak              = date('d/m/Y');
         $nama_bulan         = date("F", strtotime('00-' . $bulan . '-01'));
         $nama_pdf           = "Laporan_neraca_bulan_" . $nama_bulan;
-        $mpdf               = new \Mpdf\Mpdf();
+        $mpdf               = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => 'A4-P']);
+        $mpdf->SetWatermarkImage('https://rumah-halal.com/assets/images/logo3.png', 0.2, array(120, 150), '');
+        $mpdf->showWatermarkImage = true;
+        $mpdf->setAutoTopMargin = 'stretch';
+        $mpdf->setAutoBottomMargin = 'stretch';
+        $mpdf->SetHTMLHeader('
+        <div  style="display: table;clear: both;">
+        <div  style="float: left;width: 20%;">
+            <img src="https://rumah-halal.com/assets/images/logo3.png" alt="LOGO" width="70px" height="100px">
+        </div>
+        <div  style="float: left;width: 80%;">
+            <p style="line-height: 15px;font-size: 18px;font-weight: bold;">Laporan Pasiva & Passiva Royal Orchid Syariah
+            </p>
+            <p style="line-height: 10px;font-size: 16px;">' . $nama_gl . '</p>
+            <p style="line-height: 10px;font-size: 13px;">Bulan ' . $nama_bulan . ' ' . $tahun . '</p>
+            <p style="line-height: 10px;font-size: 12px;">Dicetak : ' . $cetak . '</p>
+        </div>
+    </div>
+        ');
         $html               = '<!DOCTYPE html>
         <html lang="en">
 
@@ -447,25 +478,10 @@ class Keuangan extends CI_Controller
     </head>
 
     <body>
-    <table class="table1">
-    <tr>
-        <td width=15% style="text-align: start; vertical-align: middle;">
-            <div style="margin: 10px;">
-                <img src="' . base_url('assets/images/logo3.png') . '" alt="LOGO" width="70px" height="100px">
-            </div>
-        </td>
-        <td>
-            <div style="text-align: start; vertical-align: middle;">
-                <p style="line-height: 15px;font-size: 18px;font-weight: bold;">Laporan Pasiva Royal Orchid Syariah
-                </p>
-                <p style="line-height: 10px;font-size: 16px;">' . $nama_gl . '</p>
-                <p style="line-height: 10px;font-size: 13px;">Bulan ' . $nama_bulan . ' ' . $tahun . '</p>
-                <p style="line-height: 10px;font-size: 12px;">Dicetak : ' . $cetak . '</p>
-            </div>
-        </td>
-    </tr>
-</table>
     <table class="tabel2">
+    <tr>
+                    <th colspan="3" style="text-align: center;">Passiva</th>
+                </tr>
                 <tr>
                     <th colspan="3" style="text-align: center;">Hutang Lancar</th>
                 </tr>
@@ -539,6 +555,103 @@ class Keuangan extends CI_Controller
                     <td colspan="1">' . $totalPasiva . '</td>
                 </tr>
             </table>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <table class="tabel2">
+                <tr>
+                    <th colspan="3">Aktiva</th>
+                </tr>
+                <tr>
+                    <th colspan="3" style="text-align: center;">Aktiva Lancar</th>
+                </tr>
+                <tr>
+                    <td colspan="2">Kas Kecil</td>
+                    <td colspan="1">' . $neraca_kas_kecil . '</td>
+                </tr>
+                <tr>
+                    <td colspan="2">Bank</td>
+                    <td colspan="1">' . $neraca_bank . '</td>
+                </tr>
+                <tr>
+                    <td><br></td>
+                </tr>
+                <tr>
+                    <td colspan="2">Piutang Usaha</td>
+                    <td colspan="1">' . $neraca_piutang_usaha . '</td>
+                </tr>
+                <tr>
+                    <td colspan="2">Piutang Usaha Kredit Rumah</td>
+                    <td colspan="1">' . $neraca_piutang_kredit_rumah . '</td>
+                </tr>
+                <tr>
+                    <td colspan="2">Piutang Karyawan</td>
+                    <td colspan="1">' . $neraca_piutang_karyawan . '</td>
+                </tr>
+                <tr>
+                    <td colspan="2">Uang Muka</td>
+                    <td colspan="1">' . $neraca_uang_muka . '</td>
+                </tr>
+                <tr>
+                    <th colspan="3" style="text-align: center;">Persediaan</th>
+                </tr>
+                <tr>
+                    <td colspan="2">Barang Jadi</td>
+                    <td colspan="1">' . $neraca_barang . '</td>
+                </tr>
+                <tr>
+                    <td colspan="2">Pekerjaan dalam progress</td>
+                    <td colspan="1">' . $neraca_pekerjaan . '</td>
+                </tr>
+                <tr>
+                    <td><br></td>
+                </tr>
+                <tr>
+                    <td colspan="2">Total Aktiva Lancar</td>
+                    <td colspan="1">' . $neraca_total_aktiva_lancar . '</td>
+                </tr>
+                <tr>
+                    <td><br></td>
+                </tr>
+                <tr>
+                    <th colspan="3" style="text-align: center;">Aktiva Tidak Lancar</th>
+                </tr>
+                <tr>
+                    <td colspan="2">Tanah dan bangunan</td>
+                    <td colspan="1">' . $neraca_tanah_dan_bangunan . '</td>
+                </tr>
+                <tr>
+                    <td colspan="2">Peralatan Kantor</td>
+                    <td colspan="1">' . $neraca_peralatan_kantor . '</td>
+                </tr>
+                <tr>
+                    <td><br></td>
+                </tr>
+                <tr>
+                    <tr>
+                        <td colspan="2">Total Aktiva Tidak Lancar</td>
+                        <td colspan="1">' . $neraca_total_aktiva_tidak_lancar . '</td>
+                    </tr>
+                    <tr>
+                        <td><br></td>
+                    </tr>
+                    <tr>
+                        <tr>
+                            <td colspan="2">Total Aktiva</td>
+                            <td colspan="1">' . $total_neraca . '</td>
+                        </tr>
+            </table>
         </body>
         </html>';
         // Write some HTML code:
@@ -557,7 +670,7 @@ class Keuangan extends CI_Controller
         $setoranPS          = $this->input->post('CF5');
         $totalOC            = $this->input->post('CF6');
         $pembelianAset      = $this->input->post('CF7');
-        $penjualanAset      = $this->input->post('CF8');
+        $penjualanAset      = number_format($this->input->post('CF8'), 0, ',', '.');;
         $totalIC            = $this->input->post('CF9');
         $pembayaranB        = $this->input->post('CF10');
         $pembayaranPS       = $this->input->post('CF11');
@@ -571,7 +684,25 @@ class Keuangan extends CI_Controller
         $cetak              = date('d/m/Y');
         $nama_bulan         = date("F", strtotime('00-' . $bulan . '-01'));
         $nama_pdf           = "Laporan_neraca_bulan_" . $nama_bulan;
-        $mpdf               = new \Mpdf\Mpdf();
+        $mpdf               = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => 'A4-P']);
+        $mpdf->SetWatermarkImage('https://rumah-halal.com/assets/images/logo3.png', 0.2, array(120, 150), '');
+        $mpdf->showWatermarkImage = true;
+        $mpdf->setAutoTopMargin = 'stretch';
+        $mpdf->setAutoBottomMargin = 'stretch';
+        $mpdf->SetHTMLHeader('
+        <div  style="display: table;clear: both;">
+        <div  style="float: left;width: 20%;">
+            <img src="https://rumah-halal.com/assets/images/logo3.png" alt="LOGO" width="70px" height="100px">
+        </div>
+        <div  style="float: left;width: 80%;">
+            <p style="line-height: 15px;font-size: 18px;font-weight: bold;">Laporan Cashflow Royal Orchid Syariah
+            </p>
+            <p style="line-height: 10px;font-size: 16px;">' . $nama_gl . '</p>
+            <p style="line-height: 10px;font-size: 13px;">Bulan ' . $nama_bulan . ' ' . $tahun . '</p>
+            <p style="line-height: 10px;font-size: 12px;">Dicetak : ' . $cetak . '</p>
+        </div>
+    </div>
+        ');
         $html               = '<!DOCTYPE html>
         <html lang="en">
 
@@ -604,24 +735,6 @@ class Keuangan extends CI_Controller
     </head>
 
     <body>
-    <table class="table1">
-    <tr>
-        <td width=15% style="text-align: start; vertical-align: middle;">
-            <div style="margin: 10px;">
-                <img src="' . base_url('assets/images/logo3.png') . '" alt="LOGO" width="70px" height="100px">
-            </div>
-        </td>
-        <td>
-            <div style="text-align: start; vertical-align: middle;">
-                <p style="line-height: 15px;font-size: 18px;font-weight: bold;">Laporan Cashflow Royal Orchid Syariah
-                </p>
-                <p style="line-height: 10px;font-size: 16px;">' . $nama_gl . '</p>
-                <p style="line-height: 10px;font-size: 13px;">Bulan ' . $nama_bulan . ' ' . $tahun . '</p>
-                <p style="line-height: 10px;font-size: 12px;">Dicetak : ' . $cetak . '</p>
-            </div>
-        </td>
-    </tr>
-</table>
     <table class="tabel2">
                 <tr>
                     <th colspan="3" style="text-align: center;">Dari Oprasional</th>
@@ -740,6 +853,14 @@ class Keuangan extends CI_Controller
         );
         $this->template->load('layout/template_v', 'keuangan/angsuran', $data);
     }
+    public function angsuran_injek()
+    {
+        $title = 'Keuangan - Bayar Injek';
+        $data = array(
+            'title' => $title,
+        );
+        $this->template->load('layout/template_v', 'keuangan/bayar_injek', $data);
+    }
 
     public function bayar_po()
     {
@@ -763,6 +884,7 @@ class Keuangan extends CI_Controller
         $data = array(
             'title' => $title,
             'query' => $this->keuangan->admin_fee(),
+            'query2' => $this->keuangan->marketing_fee(),
             'id' => $strkodenya
         );
         $this->template->load('layout/template_v', 'keuangan/admin_fee', $data);
@@ -860,7 +982,7 @@ class Keuangan extends CI_Controller
                         'no_ktp' => $row->no_ktp,
                         'id_invoice' => $row->ID_invoice_dp,
                         'id_angsuran' => $row->ID_dp,
-                        'nominal_pembayaran' => $row->nominal_angsuran_dp,
+                        'nominal_pembayaran' => number_format($row->nominal_angsuran_dp, 0, ',', '.'),
                     );
                 echo json_encode($arr_result);
             } else {
@@ -872,10 +994,27 @@ class Keuangan extends CI_Controller
                             'no_ktp' => $row->no_ktp,
                             'id_invoice' => $row->ID_invoice_angsuran_bulanan,
                             'id_angsuran' => $row->ID_angsuran_bulanan,
-                            'nominal_pembayaran' => $row->nominal_angsuran_bulanan,
+                            'nominal_pembayaran' => number_format($row->nominal_angsuran_bulanan, 0, ',', '.'),
                         );
                     echo json_encode($arr_result);
                 }
+            }
+        }
+    }
+    function get_autocomplete_injek()
+    {
+        if (isset($_GET['term'])) {
+            $result = $this->keuangan->search_injek($_GET['term']);
+            if (count($result) > 0) {
+                foreach ($result as $row)
+                    $arr_result[] = array(
+                        'label' => $row->nama,
+                        'no_ktp' => $row->no_ktp,
+                        'id_invoice' => $row->ID_invoice_injek,
+                        'id_angsuran' => $row->ID_injek,
+                        'nominal_pembayaran' => number_format($row->nominal_injek, 0, ',', '.'),
+                    );
+                echo json_encode($arr_result);
             }
         }
     }
@@ -931,7 +1070,7 @@ class Keuangan extends CI_Controller
         $strkodenya = 'IJN' . $kodenya;
 
 
-        if ($nama_gl2 == "Bank") {
+        if ($nama_gl2 != null) {
             $dariDB2 = $this->keuangan->ceksaldo($nomor_gl2, $dbnya);
             $kreditnya = intval($dariDB2) - $kredit;
         } else {
@@ -952,17 +1091,18 @@ class Keuangan extends CI_Controller
         $query = $this->keuangan->tambahjournal($strkodenya, $nomor_gl2, $nama_gl2, "0", $kredit, $keterangan, $tanggal, $id_project, $kreditnya, $dbnya);
 
         echo $this->session->set_flashdata('msg', 'success-add-data');
-        redirect('Keuangan/journal');
+        redirect('Keuangan/journal', 'refresh');
     }
 
     function tambahangsuran()
     {
-        $nama = $this->input->post('nama_angsuran');
+        $nama = strtoupper($this->input->post('nama_angsuran'));
         $idinvoice = $this->input->post('id_invoice');
         $idbayar = $this->input->post('id_angsuran');
+        $potongid = substr($idbayar, 0, 3);
         $tanggal_bayar = date('d-m-Y');
-        $nominal = $this->input->post('nominal_pembayaran');
-        $type = $this->input->post('type_bayar_angsuran');
+        $nominal = filter_var($this->input->post('nominal_pembayaran'), FILTER_SANITIZE_NUMBER_INT);
+        $type = strtoupper($this->input->post('type_bayar_angsuran'));
         $nama_bank = $this->input->post('nama_bank_angsuran');
         $nomor_bank = $this->input->post('nomor_bank_angsuran');
         $hasil_rupiah = number_format($nominal, 2, ',', '.');
@@ -972,8 +1112,13 @@ class Keuangan extends CI_Controller
         $this->form_validation->set_rules('type_bayar_angsuran', 'Type Bayar Angsuran', 'required|trim');
         // $this->form_validation->set_rules('nama_bank_angsuran', 'Nama BANK Angsuran', 'required|trim');
         // $this->form_validation->set_rules('nomor_bank_angsuran', 'Nomor BANK Angsuran', 'required|trim');
+        if ($potongid == "ADP") {
+            $angsurannya = "DP";
+        } else {
+            $angsurannya = "Bulanan";
+        }
         $mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => [210, 148]]);
-        $nama_pdf = "Invoice_Pembayaran";
+        $nama_pdf = "Invoice_Pembayaran_" . $angsurannya . "_" . $idinvoice;
         $html = '<!DOCTYPE html>
         <html lang="en">
         
@@ -1040,7 +1185,7 @@ class Keuangan extends CI_Controller
                 </tr>
                 <tr>
                     <td width=30%> Untuk pembayaran :</td>
-                    <td width=80%>Pembayaran Angsuran</td>
+                    <td width=80%>Pembayaran Angsuran ' . $angsurannya . '</td>
                 </tr>
                 <tr>
                     <td width=30% style="font-size: 18px; font-weight: bold;">Rp.</td>
@@ -1089,6 +1234,140 @@ class Keuangan extends CI_Controller
             redirect('Keuangan/angsuran');
         }
     }
+    function tambahangsuran_injek()
+    {
+        $nama = strtoupper($this->input->post('nama_angsuran_injek'));
+        $idinvoice = $this->input->post('id_invoice_injek');
+        $idbayar = $this->input->post('id_angsuran_injek');
+        $tanggal_bayar = date('d-m-Y');
+        $nominal = filter_var($this->input->post('nominal_pembayaran_injek'), FILTER_SANITIZE_NUMBER_INT);
+        $type = strtoupper($this->input->post('type_bayar_angsuran_injek'));
+        $nama_bank = $this->input->post('nama_bank_angsuran_injek');
+        $nomor_bank = $this->input->post('nomor_bank_angsuran_injek');
+        $hasil_rupiah = number_format($nominal, 2, ',', '.');
+        $this->form_validation->set_rules('id_invoice_injek', 'ID Invoice Angsuran', 'required|trim');
+        $this->form_validation->set_rules('id_angsuran_injek', 'ID Angsuran', 'required|trim');
+        $this->form_validation->set_rules('nominal_pembayaran_injek', 'Nominal Pembayran', 'required|trim');
+        $this->form_validation->set_rules('type_bayar_angsuran_injek', 'Type Bayar Angsuran', 'required|trim');
+        // $this->form_validation->set_rules('nama_bank_angsuran', 'Nama BANK Angsuran', 'required|trim');
+        // $this->form_validation->set_rules('nomor_bank_angsuran', 'Nomor BANK Angsuran', 'required|trim');
+        $mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => [210, 148]]);
+        $nama_pdf = "Invoice_Pembayaran_injek_" . $idinvoice;
+        $html = '<!DOCTYPE html>
+        <html lang="en">
+        
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Document</title>
+            <style>
+                table.tabel2 {
+                    font-family: arial, sans-serif;
+                    border-collapse: collapse;
+                    width: 100%;
+                    margin-left: auto;
+                    margin-right: auto;
+                    margin-top: 10px;
+                }
+                
+                table.table1 {
+                    border-collapse: collapse;
+                    margin-bottom: 20px;
+                }
+                
+                table.tabel2 td,
+                th {
+                    border: 1px solid #dddddd;
+                    text-align: left;
+                    padding: 3px;
+                }
+            </style>
+        </head><body>
+        <table class="table1">
+        <tr>
+            <td width=13% style="text-align: start; vertical-align: middle;">
+                <div style="margin: 10px;">
+                <img src="' . base_url('assets/images/logo3.png') . '" alt="LOGO" width="60px" height="80px">
+                </div>
+            </td>
+            <td width=70% style="text-align: start; vertical-align: middle;">
+                <div style="text-align: start; vertical-align: middle;">
+                    <p style="line-height: 15px;font-size: 18px;font-weight: bold;">Royal Orchid Syariah
+                    </p>
+                    <p style="line-height: 10px;font-size: 13px;">JL. Reog No.17A</p>
+                    <p style="line-height: 10px;font-size: 13px;">Telp (022)87352781</p>
+                    <p style="line-height: 10px;font-size: 13px;">www.royalorchidsyariah.com</p>
+                </div>
+            </td>
+            <td width=20% style="text-align: start;">
+                <div style="text-align: start; vertical-align: middle;">
+                    <p style="line-height: 15px;font-size: 18px;font-weight: bold;">Invoice Pembayaran
+                    </p>
+                    <p style="line-height: 10px;font-size: 13px;">Nomor : ' . $idinvoice . '</p>
+                </div>
+            </td>
+        </tr>
+    </table>
+            <table class="tabel2" style:"margin-top:10px">
+                <tr>
+                    <td width=30%>Sudah diterima dari :</td>
+                    <td width=80%>' . $nama . '</td>
+                </tr>
+                <tr>
+                    <td width=30%>Banyaknya :</td>
+                    <td width=80%>1</td>
+                </tr>
+                <tr>
+                    <td width=30%> Untuk pembayaran :</td>
+                    <td width=80%>Pembayaran Angsuran Injeksi</td>
+                </tr>
+                <tr>
+                    <td width=30% style="font-size: 18px; font-weight: bold;">Rp.</td>
+                    <td width=80% style="font-size: 18px; font-weight: bold;">' . $hasil_rupiah . '</td>
+                </tr>
+                <tr>
+                <td width=30%>Jenis bayar :</td>
+                <td width=80%>' . $type . '</td>
+                </tr>
+                <tr>
+                <td width=30%>Nama Bank :</td>
+                <td width=80%>' . $nama_bank . '</td>
+                </tr>
+                <tr>
+                <td width=30%> Nomor Rekening :</td>
+                <td width=80%>' . $nomor_bank . '</td>
+                </tr>
+            </table>
+            <table width="100%" style="vertical-align: bottom;margin-top:10px">
+    <tr>
+        <td width="33%"></td>
+        <td width="33%" align="center"></td>
+        <td width="33%" style="text-align: right;">
+        <div>
+            <p>Bandung, ' . $tanggal_bayar . '</p>
+            <br><br><br><br>
+            <p>(' . $nama . ')</p>
+        </div></td>
+    </tr>
+</table>
+        </body>
+        </html>
+            ';
+        // Write some HTML code:
+
+        $mpdf->WriteHTML($html);
+        $mpdf->Output($nama_pdf, \Mpdf\Output\Destination::INLINE);
+        // Output a PDF file directly to the browser
+
+        if ($this->form_validation->run() == false) {
+            echo $this->session->set_flashdata('msg', 'error-register');
+            redirect('Keuangan/bayar_injek');
+        } else {
+            $this->keuangan->bayarangsuran($idinvoice, $idbayar, $tanggal_bayar, $nominal, $type, $nama_bank, $nomor_bank);
+            echo $this->session->set_flashdata('msg', 'success-add-data');
+            redirect('Keuangan/bayar_injek');
+        }
+    }
 
     function sort_gl()
     {
@@ -1096,11 +1375,11 @@ class Keuangan extends CI_Controller
         $data           =  $this->db->get($project)->result();
         echo "<thead><tr><th>Nomor GL</th><th>Nama GL</th><th>Nominal GL</th></thead>";
         foreach ($data as $r) {
-
+            $nominal = number_format(abs($r->nominal), 0, ',', '.');
             echo "<tbody><tr>
                 <td>" .  strtoupper($r->nomor) . "</td>
                 <td>" .  strtoupper($r->nama) . "</td>
-                <td>" .  strtoupper($r->nominal) . "</td>";
+                <td>" .  strtoupper($nominal) . "</td>";
 
             echo "</tr></tbody>";
         }
@@ -1110,11 +1389,11 @@ class Keuangan extends CI_Controller
         $data = $this->db->get('general_ledger')->result();
         echo "<tr><th>Nomor GL</th><th>Nama GL</th><th>Nominal GL</th>";
         foreach ($data as $r) {
-
+            $nominal = number_format(abs($r->nominal), 0, ',', '.');
             echo "<tr>
                 <td>" .  strtoupper($r->nomor) . "</td>
                 <td>" .  strtoupper($r->nama) . "</td>
-                <td>" .  strtoupper($r->nominal) . "</td>";
+                <td>" .  strtoupper($nominal) . "</td>";
 
             echo "</tr>";
         }
@@ -1122,7 +1401,9 @@ class Keuangan extends CI_Controller
     function rubah_angsuran()
     {
         $ktp        = $_GET['no_ktp_addendum'];
-        $data = $this->keuangan->rubah_angsuran($ktp)->result();
+        $data = $this->keuangan->rubah_angsuran($ktp);
+        $data2 = $this->keuangan->rubah_angsuran2($ktp);
+        $data3 = $this->keuangan->rubah_angsuran3($ktp);
         $injek = $this->keuangan->rubah_injek($ktp)->result();
         // foreach ($injek as $i) {
         //     echo "<div class='form-group col-3'>";
@@ -1130,10 +1411,17 @@ class Keuangan extends CI_Controller
         //     echo "<input type='text' class='form-control' id='sisa_angsuran_injek_addendum_angsuran' name='sisa_angsuran_injek_addendum_angsuran' value='$i->nominal' readonly>";
         //     echo "</div>";
         // }
+        foreach ($data2 as $a) {
+            $isinya2 = $a->nominal;
+        }
+        foreach ($data3 as $b) {
+            $isinya3 = $b->nominal;
+        }
         foreach ($data as $r) {
+            $isinya = number_format($r->nominal, 0, ',', '.');
             echo "<div class='form-group col-3'>";
             echo "<label for='exampleFormControlInput1'>Sisa Angsuran Sebelumnya</label>";
-            echo "<input type='text' class='form-control' value='$r->nominal'  id='sisa_angsuran_sebelumnya_addendum' name='sisa_angsuran_sebelumnya_addendum' readonly>";
+            echo "<input type='text' class='form-control' value='$isinya'  id='sisa_angsuran_sebelumnya_addendum' name='sisa_angsuran_sebelumnya_addendum' readonly>";
             echo "</div>";
         }
     }
@@ -1141,19 +1429,21 @@ class Keuangan extends CI_Controller
     {
         $ktp        = $_GET['no_ktp_addendum'];
         $data = $this->keuangan->rubah_injek($ktp)->result();
-        $bulan = $this->keuangan->rubah_angsuran($ktp)->result();
+        $bulan = $this->keuangan->rubah_angsuran($ktp);
         $lama = $this->keuangan->update_injek($ktp)->result();
 
         foreach ($data as $r) {
+            $sisa = number_format($r->nominal, 0, ',', '.');
             echo "<div class='form-group col-2'>";
             echo "<label for='exampleFormControlInput1'>Sisa Angsuran Injek</label>";
-            echo "<input type='text' class='form-control' id='sisa_angsuran_injek_addendum' name='sisa_angsuran_injek_addendum' value='$r->nominal' readonly>";
+            echo "<input type='text' class='form-control' id='sisa_angsuran_injek_addendum' name='sisa_angsuran_injek_addendum' value='$sisa' readonly>";
             echo "</div>";
         }
         foreach ($bulan as $b) {
+            $bulanan = number_format($b->nominal, 0, ',', '.');
             echo "<div class='form-group col-2'>";
             echo "<label for='exampleFormControlInput1'>Sisa Angsuran Pokok</label>";
-            echo "<input type='text' class='form-control' id='sisa_angsuran_pokok_addendum' name='sisa_angsuran_pokok_addendum' value='$b->nominal' readonly>";
+            echo "<input type='text' class='form-control' id='sisa_angsuran_pokok_addendum' name='sisa_angsuran_pokok_addendum' value='$bulanan' readonly>";
             echo "</div>";
         }
         foreach ($lama as $l) {
@@ -1222,15 +1512,15 @@ class Keuangan extends CI_Controller
         $unit_dipilih_project = $this->input->post('unit_baru_project_addendum');
         $project_baru = $this->input->post('project_baru_addendum');
         $project_sebelumnya = $this->input->post('project_sebelumnya_addendum');
-        $sisa_angsuran_injek = intval($this->input->post('sisa_angsuran_injek_addendum'));
-        $sisa_angsuran_bulanan = intval($this->input->post('sisa_angsuran_pokok_addendum'));
+        $sisa_angsuran_injek = intval(filter_var($this->input->post('sisa_angsuran_injek_addendum'), FILTER_SANITIZE_NUMBER_INT));
+        $sisa_angsuran_bulanan = intval(filter_var($this->input->post('sisa_angsuran_pokok_addendum'), FILTER_SANITIZE_NUMBER_INT));
         $sisa_total = $sisa_angsuran_bulanan + $sisa_angsuran_injek;
-        $injek_baru = intval($this->input->post('injek_baru_addendum'));
-        $lama_injek_baru = intval($this->input->post('lama_injek_baru_addendum'));
+        $injek_baru = intval(filter_var($this->input->post('injek_baru_addendum'), FILTER_SANITIZE_NUMBER_INT));
+        $lama_injek_baru = intval(filter_var($this->input->post('lama_injek_baru_addendum'), FILTER_SANITIZE_NUMBER_INT));
         $totalnya = $sisa_total - ($injek_baru * $lama_injek_baru);
         $total_injek = $injek_baru * $lama_injek_baru;
 
-        $lamanya_angsuran = $this->input->post('lama_angsuran_pokok_addendum');
+        $lamanya_angsuran = $this->input->post('lama_angsuran_bulanan_addendum');
         $total = $totalnya / $lamanya_angsuran;
         $bagi = $total / 1000;
         $dibulatkan = floor($bagi);
@@ -1249,8 +1539,9 @@ class Keuangan extends CI_Controller
                 $tanggal =     date('d');
                 $bulan = date('m');
                 $tahun = date('y');
-                $nominal_angsuran_bulanan = $this->input->post('angsuran_baru_addendum');
-                $sisa_angsuran_sebelumnya = $this->input->post('sisa_angsuran_sebelumnya_addendum');
+                $date = date('Y-m-d');
+                $nominal_angsuran_bulanan = intval(filter_var($this->input->post('angsuran_baru_addendum'), FILTER_SANITIZE_NUMBER_INT));
+                $sisa_angsuran_sebelumnya = intval(filter_var($this->input->post('sisa_angsuran_sebelumnya_addendum'), FILTER_SANITIZE_NUMBER_INT));
                 $harganya = $sisa_angsuran_sebelumnya;
                 $status = 0;
                 $this->keuangan->update_addendum_angsuran($no_ktp);
@@ -1259,7 +1550,7 @@ class Keuangan extends CI_Controller
                     //penentuan ID_angsuran_bulanan + Invoice otomatis
                     $kode1 =  $nourut + 1;
                     $kodenya = sprintf("%04s", $kode1);
-                    $strkodenya = 'AB' . $kodenya;
+                    $strkodenya = 'ABL' . $kodenya;
                     $kodeinvoice = $nourut2 + 1;
                     $kodenyainvoice = sprintf("%04s", $kodeinvoice);
                     $strkodeinvoice = "IAB" . $kodenyainvoice;
@@ -1282,7 +1573,7 @@ class Keuangan extends CI_Controller
                     $bulan = $sesudah;                //merubah bulan menjadi bulan yang sudah di tambah
                     $nourut = $kode1;                //merubah nomor urut menjadi yang sudah di tambah
                     $nourut2 = $kodeinvoice;        //merubah invoice  menjadi yang sudah di tambah
-                    $this->marketing->proyeksi_angsuran($strkodenya, $no_ktp, $angsuran_ke, $tanggal, $bulan, $tahun, $nominal_angsuran_bulanan, $sisa_angsuran, $status, $strkodeinvoice);
+                    $this->marketing->proyeksi_angsuran($strkodenya, $no_ktp, $angsuran_ke, $tanggal, $bulan, $tahun, $date, $nominal_angsuran_bulanan, $sisa_angsuran, $status, $strkodeinvoice);
                 }
                 echo $this->session->set_flashdata('msg', 'success-add-data');
                 redirect('Keuangan/addendum');
@@ -1313,6 +1604,7 @@ class Keuangan extends CI_Controller
                 $tanggal =     date('d');
                 $bulan = date('m');
                 $tahun = date('y');
+                $date = date('Y-m-d');
                 $status = 0;
                 for ($i = 1; $i <= $lama_injek_baru; $i++) {
                     //penentuan ID_angsuran_bulanan + Invoice otomatis
@@ -1330,7 +1622,7 @@ class Keuangan extends CI_Controller
                     $sisa_angsuran = $total_injek - $injek_baru;
                     $tahunnya = $tahun + 1;
                     $tahun = $tahunnya;
-                    $this->marketing->proyeksi_angsuran_injek($strkodenya, $no_ktp, $angsuran_ke, $tanggal, $bulan, $tahunnya, $injek_baru, $sisa_angsuran, $status, $strkodeinvoice);
+                    $this->marketing->proyeksi_angsuran_injek($strkodenya, $no_ktp, $angsuran_ke, $tanggal, $bulan, $date, $tahunnya, $injek_baru, $sisa_angsuran, $status, $strkodeinvoice);
                     $total_injek = $sisa_angsuran;
                 }
                 for ($i = 1; $i <= $lamanya_angsuran; $i++) {
@@ -1366,7 +1658,7 @@ class Keuangan extends CI_Controller
                     $bulan = $sesudah;                //merubah bulan menjadi bulan yang sudah di tambah
                     $nourut = $kode1;                //merubah nomor urut menjadi yang sudah di tambah
                     $nourut2 = $kodeinvoice;        //merubah invoice  menjadi yang sudah di tambah
-                    $this->marketing->proyeksi_angsuran($strkodenya, $no_ktp, $angsuran_ke, $tanggal, $bulan, $tahun, $hasilnya, $sisa_angsuran, $status, $strkodeinvoice);
+                    $this->marketing->proyeksi_angsuran($strkodenya, $no_ktp, $angsuran_ke, $tanggal, $bulan, $tahun, $date, $hasilnya, $sisa_angsuran, $status, $strkodeinvoice);
                 }
                 echo $this->session->set_flashdata('msg', 'success-add-data');
                 redirect('Keuangan/addendum');
@@ -1524,22 +1816,25 @@ class Keuangan extends CI_Controller
 
         //Laba Rugi
         foreach ($penjualan as $a) {
+            $harganya = $a->nominal;
+            $harganyatampil = number_format($a->nominal, 0, ',', '.');
             echo "<div class='form-group col-4'>";
             echo "<label for='formGroupExampleInput'>Penjualan</label>";
-            echo "<input type='text' class='form-control' id='penjualan_LR' name='penjualan_LR' value='$a->nominal' readonly>";
+            echo "<input type='text' class='form-control' id='penjualan_LR' name='penjualan_LR' value='$harganyatampil' readonly>";
             echo "</div>";
-            $harganya = $a->nominal;
         }
         foreach ($harga_pokok as $b) {
-            echo "<div class='form-group col-4'>";
-            echo "<label for='formGroupExampleInput'>Harga pokok Penjualan</label>";
-            echo "<input type='text' class='form-control' id='harga_pokok_LR' name='harga_pokok_LR' value='$b->nominal' readonly>";
-            echo "</div>";
             $pokoknya = $b->nominal;
             $laba_bruto = $harganya - $pokoknya;
+            $pokoknyatampil = number_format($b->nominal, 0, ',', '.');
+            $lababrutotampil = number_format($laba_bruto, 0, ',', '.');
+            echo "<div class='form-group col-4'>";
+            echo "<label for='formGroupExampleInput'>Harga pokok Penjualan</label>";
+            echo "<input type='text' class='form-control' id='harga_pokok_LR' name='harga_pokok_LR' value='$pokoknyatampil' readonly>";
+            echo "</div>";
             echo "<div class='form-group col-4'>";
             echo "<label for='formGroupExampleInput'>Laba Bruto</label>";
-            echo "<input type='text' class='form-control' id='laba_bruto' name='laba_bruto' value='$laba_bruto' readonly>";
+            echo "<input type='text' class='form-control' id='laba_bruto' name='laba_bruto' value='$lababrutotampil' readonly>";
             echo "</div>";
             echo "<div class='col-12'>";
             echo "<h5 style='text-align: center' class='col-12'>Biaya Operasional</h5>";
@@ -1548,109 +1843,124 @@ class Keuangan extends CI_Controller
             echo "<br>";
         }
         foreach ($biaya_oprasi as $c) {
+            $tc = $c->nominal;
+            $tct = number_format($tc, 0, ',', '.');
             echo "<div class='form-group col-3'>";
             echo "<label for='formGroupExampleInput'>Biaya Operasional Kantor</label>";
-            echo "<input type='text' class='form-control' id='lr1' name='lr1' value='$c->nominal' readonly>";
+            echo "<input type='text' class='form-control' id='lr1' name='lr1' value='$tct' readonly>";
             echo "</div>";
-            $tc = $c->nominal;
         }
         foreach ($biaya_promosi as $d) {
+            $td = $d->nominal;
+            $tdt = number_format($td, 0, ',', '.');
             echo "<div class='form-group col-3'>";
             echo "<label for='formGroupExampleInput'>Biaya Promosi & Marketing</label>";
-            echo "<input type='text' class='form-control' id='lr2' name='lr2' value='$d->nominal' readonly>";
+            echo "<input type='text' class='form-control' id='lr2' name='lr2' value='$tdt' readonly>";
             echo "</div>";
-            $td = $d->nominal;
         }
         foreach ($biaya_sewa_kantor as $e) {
+            $te = $e->nominal;
+            $tet = number_format($te, 0, ',', '.');
             echo "<div class='form-group col-3'>";
             echo "<label for='formGroupExampleInput'>Biaya Sewa kantor</label>";
-            echo "<input type='text' class='form-control' id='lr3' name='lr3' value='$e->nominal' readonly>";
+            echo "<input type='text' class='form-control' id='lr3' name='lr3' value='$tet' readonly>";
             echo "</div>";
-            $te = $e->nominal;
         }
         foreach ($biaya_marketing_fee as $f) {
+            $tf = $f->nominal;
+            $tft = number_format($tf, 0, ',', '.');
             echo "<div class='form-group col-3'>";
             echo "<label for='formGroupExampleInput'>Biaya Marketing Fee</label>";
-            echo "<input type='text' class='form-control' id='lr4' name='lr4' value='$f->nominal' readonly>";
+            echo "<input type='text' class='form-control' id='lr4' name='lr4' value='$tft' readonly>";
             echo "</div>";
-            $tf = $f->nominal;
         }
         foreach ($biaya_kurir as $g) {
+            $tg = $g->nominal;
+            $tgt = number_format($tg, 0, ',', '.');
             echo "<div class='form-group col-3'>";
             echo "<label for='formGroupExampleInput'>Biaya Kurir</label>";
-            echo "<input type='text' class='form-control' id='lr5' name='lr5' value='$g->nominal' readonly>";
+            echo "<input type='text' class='form-control' id='lr5' name='lr5' value='$tgt' readonly>";
             echo "</div>";
-            $tg = $g->nominal;
         }
         foreach ($biaya_listrik as $h) {
+            $th = $h->nominal;
+            $tht = number_format($th, 0, ',', '.');
             echo "<div class='form-group col-3'>";
             echo "<label for='formGroupExampleInput'>Biaya Bayar Listrik</label>";
-            echo "<input type='text' class='form-control' id='lr6' name='lr6' value='$h->nominal' readonly>";
+            echo "<input type='text' class='form-control' id='lr6' name='lr6' value='$tht' readonly>";
             echo "</div>";
-            $th = $h->nominal;
         }
         foreach ($biaya_gaji_karyawan as $i) {
+            $ti = $i->nominal;
+            $tit = number_format($ti, 0, ',', '.');
             echo "<div class='form-group col-3'>";
             echo "<label for='formGroupExampleInput'>Biaya Gaji Karyawan</label>";
-            echo "<input type='text' class='form-control' id='lr7' name='lr7' value='$i->nominal' readonly>";
+            echo "<input type='text' class='form-control' id='lr7' name='lr7' value='$tit' readonly>";
             echo "</div>";
-            $ti = $i->nominal;
         }
         foreach ($biaya_perijinan as $j) {
+            $tj = $j->nominal;
+            $tjt = number_format($tj, 0, ',', '.');
             echo "<div class='form-group col-3'>";
             echo "<label for='formGroupExampleInput'>Biaya Perijinan</label>";
-            echo "<input type='text' class='form-control' id='lr8' name='lr8' value='$j->nominal' readonly>";
+            echo "<input type='text' class='form-control' id='lr8' name='lr8' value='$tjt' readonly>";
             echo "</div>";
-            $tj = $j->nominal;
         }
         foreach ($biaya_tukang as $k) {
+            $tk = $k->nominal;
+            $tkt = number_format($tk, 0, ',', '.');
             echo "<div class='form-group col-3'>";
             echo "<label for='formGroupExampleInput'>Biaya Tukang</label>";
-            echo "<input type='text' class='form-control' id='lr9' name='lr9' value='$k->nominal' readonly>";
+            echo "<input type='text' class='form-control' id='lr9' name='lr9' value='$tkt' readonly>";
             echo "</div>";
-            $tk = $k->nominal;
         }
         foreach ($biaya_sewa_mobil as $l) {
+            $tl = $l->nominal;
+            $tlt = number_format($tl, 0, ',', '.');
             echo "<div class='form-group col-3'>";
             echo "<label for='formGroupExampleInput'>Biaya Sewa Mobil</label>";
-            echo "<input type='text' class='form-control' id='lr10' name='lr10' value='$l->nominal' readonly>";
+            echo "<input type='text' class='form-control' id='lr10' name='lr10' value='$tlt' readonly>";
             echo "</div>";
-            $tl = $l->nominal;
         }
         foreach ($biaya_bensin as $m) {
+            $tm = $m->nominal;
+            $tmt = number_format($tm, 0, ',', '.');
             echo "<div class='form-group col-3'>";
             echo "<label for='formGroupExampleInput'>Biaya Bensin, Toll dan Parkir</label>";
-            echo "<input type='text' class='form-control' id='lr11' name='lr11' value='$m->nominal' readonly>";
+            echo "<input type='text' class='form-control' id='lr11' name='lr11' value='$tmt' readonly>";
             echo "</div>";
-            $tm = $m->nominal;
         }
         foreach ($biaya_admin_bank as $n) {
+            $tn = $n->nominal;
+            $tnt = number_format($tn, 0, ',', '.');
             echo "<div class='form-group col-3'>";
             echo "<label for='formGroupExampleInput'>Biaya Admin Bank</label>";
-            echo "<input type='text' class='form-control' id='lr12' name='lr12' value='$n->nominal' readonly>";
+            echo "<input type='text' class='form-control' id='lr12' name='lr12' value='$tnt' readonly>";
             echo "</div>";
-            $tn = $n->nominal;
         }
         foreach ($biaya_pendaptan_bunga as $o) {
+            $to = $o->nominal;
+            $tot = number_format($to, 0, ',', '.');
             echo "<div class='form-group col-3'>";
             echo "<label for='formGroupExampleInput'>Pendapatan Bunga</label>";
-            echo "<input type='text' class='form-control' id='lr13' name='lr13' value='$o->nominal' readonly>";
+            echo "<input type='text' class='form-control' id='lr13' name='lr13' value='$tot' readonly>";
             echo "</div>";
-            $to = $o->nominal;
         }
         foreach ($biaya_entertaiment as $p) {
+            $tp = $p->nominal;
+            $tpt = number_format($tp, 0, ',', '.');
             echo "<div class='form-group col-3'>";
             echo "<label for='formGroupExampleInput'>Biaya Entertaiment</label>";
-            echo "<input type='text' class='form-control' id='lr14' name='lr14' value='$p->nominal' readonly>";
+            echo "<input type='text' class='form-control' id='lr14' name='lr14' value='$tpt' readonly>";
             echo "</div>";
-            $tp = $p->nominal;
         }
         foreach ($biaya_donasi as $q) {
+            $tq = $q->nominal;
+            $tqt = number_format($tq, 0, ',', '.');
             echo "<div class='form-group col-3'>";
             echo "<label for='formGroupExampleInput'>Biaya Donasi dan Sumbangan</label>";
-            echo "<input type='text' class='form-control' id='lr15' name='lr15' value='$q->nominal' readonly>";
+            echo "<input type='text' class='form-control' id='lr15' name='lr15' value='$tqt' readonly>";
             echo "</div>";
-            $tq = $q->nominal;
         }
         foreach ($biaya_pembangunan as $t) {
             $tt = $t->nominal;
@@ -1658,36 +1968,41 @@ class Keuangan extends CI_Controller
         foreach ($biaya_pematangan_lahan as $r) {
             $tr = $r->nominal;
             $trr = $tr + $tt;
+            $trrt = number_format($trr, 0, ',', '.');
             echo "<div class='form-group col-3'>";
             echo "<label for='formGroupExampleInput'>Biaya Pematangan Lahan & Pembangunan</label>";
-            echo "<input type='text' class='form-control' id='lr16' name='lr16' value='$trr' readonly>";
+            echo "<input type='text' class='form-control' id='lr16' name='lr16' value='$trrt' readonly>";
             echo "</div>";
         }
         foreach ($biaya_pembebanan_unit as $s) {
+            $ts = $s->nominal;
+            $tst = number_format($ts, 0, ',', '.');
             echo "<div class='form-group col-3'>";
             echo "<label for='formGroupExampleInput'>Biaya Pembebanan Per Unit</label>";
-            echo "<input type='text' class='form-control' id='lr17' name='lr17' value='$s->nominal' readonly>";
+            echo "<input type='text' class='form-control' id='lr17' name='lr17' value='$tst' readonly>";
             echo "</div>";
-            $ts = $s->nominal;
             $laba_kotor = $tc + $td + $te + $tf + $tg + $th + $ti + $tj + $tk + $tl + $tm + $tn + $to + $tp + $tq + $ts + $trr + $laba_bruto;
+            $labakotottampil = number_format($laba_kotor, 0, ',', '.');
             echo " <div class='col-12'>";
             echo "<br>";
             echo "</div>";
             echo "<div class='form-group col-4'>";
             echo "<label for='formGroupExampleInput'>Laba Kotor Sebelum pajak</label>";
-            echo "<input type='text' class='form-control' id='laba_kotor' name='laba_kotor' value='$laba_kotor' readonly>";
+            echo "<input type='text' class='form-control' id='laba_kotor' name='laba_kotor' value='$labakotottampil' readonly>";
             echo "</div>";
         }
         foreach ($biaya_pajak as $u) {
+            $tu = $u->nominal;
+            $tut = number_format($tu, 0, ',', '.');
             echo "<div class='form-group col-4'>";
             echo "<label for='formGroupExampleInput'>Pajak penghasilan</label>";
-            echo "<input type='text' class='form-control' id='pajak_penghasilan' name='pajak_penghasilan' value='$u->nominal' readonly>";
+            echo "<input type='text' class='form-control' id='pajak_penghasilan' name='pajak_penghasilan' value='$tut' readonly>";
             echo "</div>";
-            $tu = $u->nominal;
             $tv = $laba_kotor - $tu;
+            $tvt = number_format($tv, 0, ',', '.');
             echo "<div class='form-group col-4'>";
             echo "<label for='formGroupExampleInput'>Laba Setelah Pajak</label>";
-            echo "<input type='text' class='form-control' id='laba_setelah_pajak' name='laba_setelah_pajak' value='$tv' readonly>";
+            echo "<input type='text' class='form-control' id='laba_setelah_pajak' name='laba_setelah_pajak' value='$tvt' readonly>";
             echo "</div>";
         }
         //Akhir LAba Rugi
@@ -1697,6 +2012,49 @@ class Keuangan extends CI_Controller
     function sort_pasiva()
     {
         $project            = $_GET['project_pasiva'];
+        //neraca
+        $neraca_kas = $this->keuangan->pilih_neraca_kas_kecil($project)->result();
+        $neraca_bank = $this->keuangan->pilih_neraca_bank($project)->result();
+        $neraca_piutang_usaha = $this->keuangan->pilih_neraca_piutang_usaha($project)->result();
+        $neraca_piutang_kredit_rumah = $this->keuangan->pilih_neraca_piutang_kredit_rumah($project)->result();
+        $neraca_piutang_karyawan = $this->keuangan->pilih_neraca_piutang_karyawan($project)->result();
+        $neraca_uang_muka = $this->keuangan->pilih_neraca_uang_muka($project)->result();
+        $neraca_barang = $this->keuangan->pilih_neraca_barang_jadi($project)->result();
+        $neraca_pekerjaan = $this->keuangan->pilih_neraca_pekerjaan_dalam_progress($project)->result();
+        $neraca_tanah_dan_bangunan = $this->keuangan->pilih_neraca_tanah_dan_bangunan($project)->result();
+        $neraca_peralatan_kantor = $this->keuangan->pilih_neraca_peralatan_kantor($project)->result();
+        foreach ($neraca_kas as $ner_kas) {
+            $nk = $ner_kas->nominal;
+        }
+        foreach ($neraca_bank as $ner_bank) {
+            $nb = $ner_bank->nominal;
+        }
+        foreach ($neraca_piutang_usaha as $ner_piutang_usaha) {
+            $npu = $ner_piutang_usaha->nominal;
+        }
+        foreach ($neraca_piutang_kredit_rumah as $ner_piutang_rumah) {
+            $npku = $ner_piutang_rumah->nominal;
+        }
+        foreach ($neraca_piutang_karyawan as $ner_piutang_kar) {
+            $npk = $ner_piutang_kar->nominal;
+        }
+        foreach ($neraca_uang_muka as $ner_umuk) {
+            $num = $ner_umuk->nominal;
+        }
+        foreach ($neraca_barang as $ner_bar) {
+            $nbrg = $ner_bar->nominal;
+        }
+        foreach ($neraca_pekerjaan as $ner_pekerja) {
+            $npkerja = $ner_pekerja->nominal;
+        }
+        foreach ($neraca_tanah_dan_bangunan as $ner_tdb) {
+            $ntdb = $ner_tdb->nominal;
+        }
+        foreach ($neraca_peralatan_kantor as $ner_perkan) {
+            $npkantor = $ner_perkan->nominal;
+        }
+
+        $totaktiva = $nk + $nb + $npu + $npku + $npk + $num + $nbrg + $npkerja + $ntdb + $npkantor;
         //Laba Rugi
         // data load laba setela pajak 
         $penjualan      =  $this->keuangan->pilih_penjualan($project)->result();
@@ -1787,6 +2145,7 @@ class Keuangan extends CI_Controller
         foreach ($biaya_pajak as $u) {
             $tu = $u->nominal;
             $tv = $laba_kotor - $tu;
+            $tvt = number_format($tv, 0, ',', '.');
         }
         // Pasiva 
         $hutang_usaha       = $this->keuangan->pilih_hutangUsaha($project)->result();
@@ -1800,56 +2159,70 @@ class Keuangan extends CI_Controller
         $samsunar           = $this->keuangan->pilih_samsunar($project)->result();
         $adi_dharma         = $this->keuangan->pilih_adiDharma($project)->result();
 
+        echo "<div class='row'>";
+        echo "<div style='width: 50%;'>";
+        echo "<div style='width: 100%;'>";
         echo "<div class='col-12'>";
-        echo "<h5 style='text-align: center' class='col-12'>Hutang Lancar</h5>";
+        echo "<h4 style='text-align: center' class='col-12'>Passiva</h4>";
         echo "<br>";
         echo "</div>";
+        echo "<div>";
+        echo "<h6 class='col-12'>Hutang lancar</h6>";
+        echo "</div>";
+        echo "<br>";
         foreach ($hutang_usaha as $hu) {
+            $hus = $hu->nominal;
+            $hust = number_format($hus, 0, ',', '.');
             echo "<div class='form-group col-3'>";
             echo "<label for='formGroupExampleInput'>Hutang usaha</label>";
-            echo "<input type='text' class='form-control' id='hu' name='hu' value='$hu->nominal' placeholder='Otomatis Terisi' readonly>";
+            echo "<input type='text' class='form-control' id='hu' name='hu' value='$hust' placeholder='Otomatis Terisi' readonly>";
             echo "</div>";
-            $hus = $hu->nominal;
         }
         foreach ($hutang_konsiyasi as $hk) {
+            $hkon = $hk->nominal;
+            $hkont = number_format($hkon, 0, ',', '.');
             echo "<div class='form-group col-3'>";
             echo "<label for='formGroupExampleInput'>Hutang Konsiyasi</label>";
-            echo "<input type='text' class='form-control' id='hk' name='hk' value='$hk->nominal' placeholder='Otomatis Terisi' readonly>";
+            echo "<input type='text' class='form-control' id='hk' name='hk' value='$hkont' placeholder='Otomatis Terisi' readonly>";
             echo "</div>";
-            $hkon = $hk->nominal;
         }
         foreach ($hutang_leverensir as $hl) {
+            $hlev = $hl->nominal;
+            $hlevt = number_format($hlev, 0, ',', '.');
             echo "<div class='form-group col-3'>";
             echo "<label for='formGroupExampleInput'>Hutang Leverensir</label>";
-            echo "<input type='text' class='form-control' id='hl' name='hl' value='$hl->nominal' placeholder='Otomatis Terisi' readonly>";
+            echo "<input type='text' class='form-control' id='hl' name='hl' value='$hlevt' placeholder='Otomatis Terisi' readonly>";
             echo "</div>";
-            $hlev = $hl->nominal;
         }
         foreach ($uang_mukapenjualan as $ump) {
+            $um = $ump->nominal;
+            $umt = number_format($um, 0, ',', '.');
             echo "<div class='form-group col-3'>";
             echo "<label for='formGroupExampleInput'>Uang Muka Penjualan</label>";
-            echo "<input type='text' class='form-control' id='ump' name='ump' value='$ump->nominal' placeholder='Otomatis Terisi' readonly>";
+            echo "<input type='text' class='form-control' id='ump' name='ump' value='$umt' placeholder='Otomatis Terisi' readonly>";
             echo "</div>";
-            $um = $ump->nominal;
         }
         $thl = $hus + $hkon + $hlev + $um;
+        $thlt = number_format($thl, 0, ',', '.');
         echo "<div class='form-group col-6'>";
         echo "<label for='formGroupExampleInput'>Total Hutang Lancar</label>";
-        echo "<input type='text' class='form-control' id='thl' name='thl' value='$thl' placeholder='Otomatis Terisi' readonly>";
+        echo "<input type='text' class='form-control' id='thl' name='thl' value='$thlt' placeholder='Otomatis Terisi' readonly>";
         echo "</div>";
         foreach ($hutang_ps as $hps) {
+            $hutangPs = $hps->nominal;
+            $hutangpst = number_format($hutangPs, 0, ',', '.');
             echo "<div class='form-group col-6'>";
             echo "<label for='formGroupExampleInput'>Hutang Pemegang Saham</label>";
-            echo "<input type='text' class='form-control' id='hps' name='hps' value='$hps->nominal' placeholder='Otomatis Terisi' readonly>";
+            echo "<input type='text' class='form-control' id='hps' name='hps' value='$hutangpst' placeholder='Otomatis Terisi' readonly>";
             echo "<br>";
             echo "</div>";
-            $hutangPs = $hps->nominal;
         }
 
         $th = $thl + $hutangPs;
+        $tht = number_format($th, 0, ',', '.');
         echo "<div class='form-group col-12'>";
         echo "    <label for='formGroupExampleInput'>Total hutang</label>";
-        echo "<input type='text' class='form-control' id='th' name='th' value ='$th' placeholder='Otomatis Terisi' readonly>";
+        echo "<input type='text' class='form-control' id='th' name='th' value ='$tht' placeholder='Otomatis Terisi' readonly>";
         echo "<br>";
         echo "</div>";
 
@@ -1859,60 +2232,221 @@ class Keuangan extends CI_Controller
         echo "</div>";
         echo "<br>";
         foreach ($modal_disetor as $md) {
+            $tmd = $md->nominal;
+            $tmdt = number_format($tmd, 0, ',', '.');
             echo "<div class='form-group col-3'>";
             echo "<label for='formGroupExampleInput'>Modal Disetor</label>";
-            echo "<input type='text' class='form-control' id='md' name='md' value='$md->nominal' placeholder='Otomatis Terisi' readonly>";
+            echo "<input type='text' class='form-control' id='md' name='md' value='$tmdt' placeholder='Otomatis Terisi' readonly>";
             echo "</div>";
-            $tmd = $md->nominal;
         }
         foreach ($modal_adi as $ma) {
+            $tmad = $ma->nominal;
+            $tmadt = number_format($tmad, 0, ',', '.');
             echo "<div class='form-group col-3'>";
             echo "<label for='formGroupExampleInput'>Modal Adi</label>";
-            echo "<input type='text' class='form-control' id='ma' name='ma' value='$ma->nominal' placeholder='Otomatis Terisi' readonly>";
+            echo "<input type='text' class='form-control' id='ma' name='ma' value='$tmadt' placeholder='Otomatis Terisi' readonly>";
             echo "</div>";
-            $tmad = $ma->nominal;
         }
         foreach ($m_arief as $mar) {
+            $tmar = $mar->nominal;
+            $tmart = number_format($tmar, 0, ',', '.');
             echo "<div class='form-group col-3'>";
             echo "<label for='formGroupExampleInput'>Mohamad arief</label>";
-            echo "<input type='text' class='form-control' id='mar' name='mar' value='$mar->nominal' placeholder='Otomatis Terisi' readonly>";
+            echo "<input type='text' class='form-control' id='mar' name='mar' value='$tmart' placeholder='Otomatis Terisi' readonly>";
             echo "</div>";
-            $tmar = $mar->nominal;
         }
         foreach ($samsunar as $s) {
+            $tms = $s->nominal;
+            $tmst = number_format($tms, 0, ',', '.');
             echo "<div class='form-group col-3'>";
             echo "<label for='formGroupExampleInput'>Samsunar</label>";
-            echo "<input type='text' class='form-control' id='s' name='s' value='$s->nominal' placeholder='Otomatis Terisi' readonly>";
+            echo "<input type='text' class='form-control' id='s' name='s' value='$tmst' placeholder='Otomatis Terisi' readonly>";
             echo "</div>";
-            $tms = $s->nominal;
         }
         foreach ($adi_dharma as $ad) {
+            $tmadr = $ad->nominal;
+            $tmadrt = number_format($tmadr, 0, ',', '.');
             echo "<div class='form-group col-3'>";
             echo "<label for='formGroupExampleInput'>Adi Dharma</label>";
-            echo "<input type='text' class='form-control' id='ad' name='ad' value='$ad->nominal' placeholder='Otomatis Terisi' readonly>";
+            echo "<input type='text' class='form-control' id='ad' name='ad' value='$tmadrt' placeholder='Otomatis Terisi' readonly>";
             echo "</div>";
-            $tmadr = $ad->nominal;
         }
 
         echo "<div class='form-group col-9'>";
         echo "<label for='formGroupExampleInput'>Saldo Laba Ditahan</label>";
-        echo "<input type='text' class='form-control' id='sld' name='sld' value='$tv' placeholder='Otomatis Terisi' readonly>";
+        echo "<input type='text' class='form-control' id='sld' name='sld' value='$tvt' placeholder='Otomatis Terisi' readonly>";
         echo "</div>";
 
         $tm = $tmd + $tmad + $tmar + $tms + $tmadr + $tv;
+        $tmt = number_format($tm, 0, ',', '.');
         echo "<div class='form-group col-12'>";
         echo "<label for='formGroupExampleInput'>Total Modal</label>";
-        echo "<input type='text' class='form-control' id='tm' name='tm' value='$tm' placeholder='Otomatis Terisi' readonly>";
+        echo "<input type='text' class='form-control' id='tm' name='tm' value='$tmt' placeholder='Otomatis Terisi' readonly>";
         echo "</div>";
 
         $totalPasiva = $th + $tm;
+        $totalpasivat = number_format($totalPasiva, 0, ',', '.');
         echo "<div class='col-12'>";
+        echo "<br>";
         echo "<br>";
         echo "</div>";
         echo "<div class='form-group col-12'>";
         echo "<label for='formGroupExampleInput'>Total Pasiva</label>";
-        echo "<input type='text' class='form-control' id='tpas' name='tpas' value='$totalPasiva' placeholder='Otomatis Terisi' readonly>";
+        echo "<input type='text' class='form-control' id='tpas' name='tpas' value='$totalpasivat' placeholder='Otomatis Terisi' readonly>";
         echo "</div>";
+
+        $totneraca = $totaktiva - $totalPasiva;
+        $totneracat = number_format($totneraca, 0, ',', '.');
+        echo "<div class='form-group col-12'>";
+        echo "<label for='formGroupExampleInput'>Selisih</label>";
+        echo "<input type='text' class='form-control' id='tpas' name='tpas' value='$totneracat' placeholder='Otomatis Terisi' readonly>";
+        echo "</div>";
+        echo "</div>";
+        echo "</div>";
+
+
+        //layout2
+        echo "<div style='width: 50%;'>";
+        echo "<div style='width: 100%;'>";
+        echo "<div class='col-12'>";
+        //neraca
+        foreach ($neraca_kas as $na) {
+            $tna = $na->nominal;
+            $tnat = number_format($tna, 0, ',', '.');
+            echo "<div class='col-12'>";
+            echo "<h4 style='text-align: center' class='col-12'>Aktiva</h4>";
+            echo "<br>";
+            echo "</div>";
+            echo "<br>";
+            echo "<div>";
+            echo "<h6 class='col-12'>Aktiva Lancar</h6>";
+            echo "</div>";
+            echo "<br>";
+            echo "<div class='form-group col-4'>";
+            echo "<label for='formGroupExampleInput'>Kas Kecil</label>";
+            echo "<input type='text' class='form-control' id='neraca_kas_kecil' name='neraca_kas_kecil' value='$tnat' readonly>";
+            echo "</div>";
+        }
+        foreach ($neraca_bank as $nb) {
+            $tnb = $nb->nominal;
+            $tnbt = number_format($tnb, 0, ',', '.');
+            echo "<div class='form-group col-4'>";
+            echo "<label for='formGroupExampleInput'>Bank</label>";
+            echo "<input type='text' class='form-control' id='neraca_bank' name='neraca_bank' value='$tnbt' readonly>";
+            echo "</div>";
+        }
+        foreach ($neraca_piutang_usaha as $nc) {
+            $tnc = $nc->nominal;
+            $tnct = number_format($tnc, 0, ',', '.');
+            echo "<div class='form-group col-4'>";
+            echo "<label for='formGroupExampleInput'>Piutang Usaha</label>";
+            echo "<input type='text' class='form-control' id='neraca_piutang_usaha' name='neraca_piutang_usaha' value='$tnct' readonly>";
+            echo "</div>";
+        }
+        foreach ($neraca_piutang_kredit_rumah as $nd) {
+            $tnd = $nd->nominal;
+            $tndt = number_format($tnd, 0, ',', '.');
+            echo "<div class='form-group col-4'>";
+            echo "<label for='formGroupExampleInput'>Piutang Usaha Kredit Rumah</label>";
+            echo "<input type='text' class='form-control' id='neraca_piutang_kredit_rumah' name='neraca_piutang_kredit_rumah' value='$tndt' readonly>";
+            echo "</div>";
+        }
+        foreach ($neraca_piutang_karyawan as $ne) {
+            $tne = $ne->nominal;
+            $tnet = number_format($tne, 0, ',', '.');
+            echo "<div class='form-group col-4'>";
+            echo "<label for='formGroupExampleInput'>Piutang karyawan</label>";
+            echo "<input type='text' class='form-control' id='neraca_piutang_karyawan' name='neraca_piutang_karyawan' value='$tnet' readonly>";
+            echo "</div>";
+        }
+        foreach ($neraca_uang_muka as $nf) {
+            $tnf = $nf->nominal;
+            $tnft = number_format($tnf, 0, ',', '.');
+            echo "<div class='form-group col-4'>";
+            echo "<label for='formGroupExampleInput'>Uang Muka</label>";
+            echo "<input type='text' class='form-control' id='neraca_uang_muka' name='neraca_uang_muka' value='$nf->nominal' readonly>";
+            echo "</div>";
+            echo "<div class='col-12'>";
+            echo "<br>";
+            echo "<div class='col-12'>";
+            echo "<h5 style='text-align: center' class='col-12'>Persediaan</h5>";
+            echo "<br>";
+            echo "</div>";
+            echo "<br>";
+            echo "</div>";
+        }
+        foreach ($neraca_barang as $ng) {
+            $tng = $ng->nominal;
+            $tngt = number_format($tng, 0, ',', '.');
+            echo "<div class='form-group col-4'>";
+            echo "<label for='formGroupExampleInput'>Barang Jadi</label>";
+            echo "<input type='text' class='form-control' id='neraca_barang' name='neraca_barang' value='$tngt' readonly>";
+            echo "</div>";
+        }
+        foreach ($neraca_pekerjaan as $nh) {
+            $tnh = $nh->nominal;
+            $tnht = number_format($tnh, 0, ',', '.');
+            echo "<div class='form-group col-4'>";
+            echo "<label for='formGroupExampleInput'>Pekerjaan dalam progress</label>";
+            echo "<input type='text' class='form-control' id='neraca_pekerjaan' name='neraca_pekerjaan' value='$tnht' readonly>";
+            echo "</div>";
+            $tnz = $tna + $tnb + $tnc + $tnd + $tne + $tnf + $tng + $tnh;
+            $tnzt = number_format($tnz, 0, ',', '.');
+            echo "<div class='form-group col-12'>";
+            echo "<label for='formGroupExampleInput'>Total Aktiva Lancar</label>";
+            echo "<input type='text' class='form-control' id='neraca_total_aktiva_lancar' name='neraca_total_aktiva_lancar' value='$tnzt' readonly>";
+            echo "</div>";
+            echo "<div class='col-12'>";
+            echo "<br>";
+            echo "</div>";
+            echo "<div class='col-12'>";
+            echo "<div class='col-12'>";
+            echo "<h5 style='text-align: center' class='col-12'>Aktiva Tidak Lancar</h5>";
+            echo "<br>";
+            echo "</div>";
+            echo "<br>";
+            echo "</div>";
+        }
+        foreach ($neraca_tanah_dan_bangunan as $ni) {
+            $tni = $ni->nominal;
+            $tnit = number_format($tni, 0, ',', '.');
+            echo "<div class='form-group col-4'>";
+            echo "<label for='formGroupExampleInput'>Tanah dan Bangunan</label>";
+            echo "<input type='text' class='form-control' id='neraca_tanah_dan_bangunan' name='neraca_tanah_dan_bangunan' value='$tnit' readonly>";
+            echo "</div>";
+        }
+        foreach ($neraca_peralatan_kantor as $nj) {
+            $tnj = $nj->nominal;
+            $tnjt = number_format($tnj, 0, ',', '.');
+            echo "<div class='form-group col-4'>";
+            echo "<label for='formGroupExampleInput'>Peralatan Kantor</label>";
+            echo "<input type='text' class='form-control' id='neraca_peralatan_kantor' name='neraca_peralatan_kantor' value='$tnjt' readonly>";
+            echo "</div>";
+            $tnx = $tni + $tnj;
+            $tnxt = number_format($tnx, 0, ',', '.');
+            $tnv = $tnx + $tnz;
+            $tnvt = number_format($tnv, 0, ',', '.');
+            echo "<div class='form-group col-12'>";
+            echo "<label for='formGroupExampleInput'>Total Aktiva Tidak Lancar</label>";
+            echo "<input type='text' class='form-control' id='neraca_aktiva_tidak_lancar' name='neraca_aktiva_tidak_lancar' value='$tnxt' readonly>";
+            echo "</div>";
+            echo "<div class='form-group col-12'>";
+            echo "<br>";
+            echo "<br>";
+            echo "<br>";
+            echo "<br>";
+            echo "<br>";
+            echo "<br>";
+            echo "<br>";
+            echo "<br>";
+            echo "<br>";
+            echo "<br>";
+            echo "<br>";
+            echo "<br>";
+            echo "<label for='formGroupExampleInput'>Total Aktiva</label>";
+            echo "<input type='text' class='form-control' id='neraca_aktiva_tidak_lancar' name='neraca_aktiva_tidak_lancar' value='$tnvt' readonly>";
+            echo "</div>";
+        }
     }
 
     function sort_cf()
@@ -2007,6 +2541,7 @@ class Keuangan extends CI_Controller
         }
         foreach ($biaya_pajak as $u) {
             $tu = $u->nominal;
+            $tut = number_format($tu, 0, ',', '.');
             $tv = $laba_kotor - $tu;
         }
 
@@ -2026,6 +2561,7 @@ class Keuangan extends CI_Controller
         }
         foreach ($neraca_peralatan_kantor as $nj) {
             $tnj = $nj->nominal;
+            $tnjt = number_format($tnj, 0, ',', '.');
         }
 
         // Pasiva
@@ -2038,6 +2574,7 @@ class Keuangan extends CI_Controller
         $adi_dharma         = $this->keuangan->pilih_adiDharma($project)->result();
         foreach ($uang_mukapenjualan as $ump) {
             $um = $ump->nominal;
+            $umt = number_format($um, 0, ',', '.');
         }
         foreach ($modal_disetor as $md) {
             $tmd = $md->nominal;
@@ -2056,6 +2593,7 @@ class Keuangan extends CI_Controller
         }
         foreach ($hutang_ps as $hps) {
             $hutangPs = $hps->nominal;
+            $hutangpst = number_format($hutangPs, 0, ',', '.');
         }
         // View cashflow
         echo "<div class='col-12'>";
@@ -2067,37 +2605,41 @@ class Keuangan extends CI_Controller
         $psNer = $tnf;
         $psNer2 = $tng;
         $pS = $psRL - $psNer - $psNer2;
+        $pst = number_format($pS, 0, ',', '.');
         echo "<div class='form-group col-4'>";
         echo "<label for='formGroupExampleInput'>Pembayaran Supplier</label>";
-        echo "<input type='text' class='form-control' id='CF1' name='CF1' value='$pS' placeholder='Otomatis Terisi' readonly>";
+        echo "<input type='text' class='form-control' id='CF1' name='CF1' value='$pst' placeholder='Otomatis Terisi' readonly>";
         echo "</div>";
 
         $pkk = $ti - $tne;
+        $pkkt = number_format($pkk, 0, ',', '.');
         echo "<div class='form-group col-4'>";
         echo "<label for='formGroupExampleInput'>Pembayaran Kepada Karyawan</label>";
-        echo "<input type='text' class='form-control' id='CF2' name='CF2' value='$pkk' placeholder='Otomatis Terisi' readonly>";
+        echo "<input type='text' class='form-control' id='CF2' name='CF2' value='$pkkt' placeholder='Otomatis Terisi' readonly>";
         echo "</div>";
 
         echo "<div class='form-group col-4'>";
         echo "<label for='formGroupExampleInput'>Pembayaran Pajak</label>";
-        echo "<input type='text' class='form-control' id='CF3' name='CF3' value='$tu' placeholder='Otomatis Terisi' readonly>";
+        echo "<input type='text' class='form-control' id='CF3' name='CF3' value='$tut' placeholder='Otomatis Terisi' readonly>";
         echo "</div>";
 
         echo "<div class='form-group col-4'>";
         echo "<label for='formGroupExampleInput'>Penerimaan dari Pelanggan</label>";
-        echo "<input type='text' class='form-control' id='CF4' name='CF4' value='$um' placeholder='Otomatis Terisi' readonly>";
+        echo "<input type='text' class='form-control' id='CF4' name='CF4' value='$umt' placeholder='Otomatis Terisi' readonly>";
         echo "</div>";
 
         $sps = $tmd + $tmad + $tmar + $tms + $tmadr;
+        $spst = number_format($sps, 0, ',', '.');
         echo "<div class='form-group col-4'>";
         echo "<label for='formGroupExampleInput'>Setoran pemegang Saham</label>";
-        echo "<input type='text' class='form-control' id='CF5' name='CF5' value='$sps' placeholder='Otomatis Terisi' readonly>";
+        echo "<input type='text' class='form-control' id='CF5' name='CF5' value='$spst' placeholder='Otomatis Terisi' readonly>";
         echo "</div>";
 
         $toc = $pS + $pkk + $tu + $um + $sps;
+        $toct = number_format($toc, 0, ',', '.');
         echo "<div class='form-group col-12'>";
         echo "<label for='formGroupExampleInput'>Total Operasional CashFlow</label>";
-        echo "<input type='text' class='form-control' id='CF6' name='CF6' value='$toc' placeholder='Otomatis Terisi' readonly>";
+        echo "<input type='text' class='form-control' id='CF6' name='CF6' value='$toct' placeholder='Otomatis Terisi' readonly>";
         echo "<br>";
         echo "</div>";
 
@@ -2109,7 +2651,7 @@ class Keuangan extends CI_Controller
         echo "<br>";
         echo "<div class='form-group col-6'>";
         echo "<label for='formGroupExampleInput'>Pembelian Aset Tetap</label>";
-        echo "<input type='text' class='form-control' id='CF7' name='CF7' value='$tnj' placeholder='Otomatis Terisi' readonly>";
+        echo "<input type='text' class='form-control' id='CF7' name='CF7' value='$tnjt' placeholder='Otomatis Terisi' readonly>";
         echo "</div>";
 
 
@@ -2141,13 +2683,14 @@ class Keuangan extends CI_Controller
 
         echo "<div class='form-group col-6'>";
         echo "<label for='formGroupExampleInput'>Pinjaman Pemegang Saham</label>";
-        echo "<input type='text' class='form-control' id='CF13' name='CF13' value='$hutangPs' placeholder='Otomatis Terisi' readonly>";
+        echo "<input type='text' class='form-control' id='CF13' name='CF13' value='$hutangpst' placeholder='Otomatis Terisi' readonly>";
         echo "</div>";
 
         $tfc =  $pps + $hutangPs;
+        $tfct = number_format($tfc, 0, ',', '.');
         echo "<div class='form-group col-12'>";
         echo "<label for='formGroupExampleInput'>Total Financing CashFlow</label>";
-        echo "<input type='text' class='form-control' id='CF14' name='CF14' value='$tfc' placeholder='Otomatis Terisi' readonly>";
+        echo "<input type='text' class='form-control' id='CF14' name='CF14' value='$tfct' placeholder='Otomatis Terisi' readonly>";
         echo "</div>";
 
         echo "<div class='col-12'>";
@@ -2155,9 +2698,10 @@ class Keuangan extends CI_Controller
         echo "</div>";
 
         $tc = $toc  + $tfc;
+        $tct = number_format($tc, 0, ',', '.');
         echo "<div class='form-group col-12'>";
         echo "<label for='formGroupExampleInput'>Total CashFlow</label>";
-        echo "<input type='text' class='form-control' id='CF15' name='CF15' value='$tc' placeholder='Otomatis Terisi' readonly>";
+        echo "<input type='text' class='form-control' id='CF15' name='CF15' value='$tct' placeholder='Otomatis Terisi' readonly>";
         echo "</div>";
     }
 
@@ -2173,20 +2717,10 @@ class Keuangan extends CI_Controller
         $closingFee = strip_tags($this->input->post('closingFee'));
         $direkturFee    = strip_tags($this->input->post('direkturFee'));
 
-        $data = [
-            'ID_marketing_fee'      => $id,
-            'ID_unit_dipesan'       => $idUnit,
-            'agen'                  => $agen,
-            'inhouse'               => $inhouse,
-            'persenan'              => $persenan,
-            'nominal_marketing_fee' => $marketingFee,
-            'nominal_closing_fee'   => $closingFee,
-            'direktur_fee'          => $direkturFee,
-            'total_fee'             => $marketingFee + $closingFee + $direkturFee
-        ];
+
         $this->form_validation->set_rules('id', 'id', 'required');
         $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Data berhasil ditambah</div>');
-        $this->marketing->tambahDataMF($data);
+        $this->marketing->tambahDataMF($id, $idUnit, $agen, $inhouse, $persenan, $marketingFee, $closingFee, $direkturFee);
         redirect('keuangan/admin_fee', ' refresh');
     }
 }

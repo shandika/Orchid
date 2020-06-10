@@ -30,7 +30,7 @@
 
 <!-- magnific pop up -->
 <script src="<?php echo base_url() ?>assets/assets/js/jquery.magnific-popup.min.js"></script>
-
+<script src="<?php echo base_url() ?>assets/assets/js/jquery.maskMoney.js" type="text/javascript"></script>
 <!-- Pusher -->
 <!-- <script src="https://js.pusher.com/6.0/pusher.min.js"></script> -->
 <script>
@@ -300,6 +300,11 @@
         });
     });
 </script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#tabeladmin').DataTable();
+    });
+</script>
 
 
 <script>
@@ -476,6 +481,22 @@
 </script>
 <script type="text/javascript">
     $(document).ready(function() {
+        $("#nama_angsuran_injek").autocomplete({
+            source: "<?php echo site_url('Keuangan/get_autocomplete_injek/?'); ?>",
+
+            select: function(event, ui) {
+                $('[name="nama_angsuran_injek"]').val(ui.item.label);
+                $('[name="no_ktp_angsuran_injek"]').val(ui.item.no_ktp);
+                $('[name="id_invoice_injek"]').val(ui.item.id_invoice);
+                $('[name="id_angsuran_injek"]').val(ui.item.id_angsuran);
+                $('[name="nominal_pembayaran_injek"]').val(ui.item.nominal_pembayaran);
+            }
+        });
+
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function() {
         $("#nama_gl").autocomplete({
             source: "<?php echo site_url('Keuangan/get_gl/?'); ?>",
 
@@ -553,7 +574,8 @@
 <script>
     $(document).ready(function() {
         $("#lama_angsuran_dp").change(function() {
-            var dp = parseInt($("#dp").val());
+            var dpclean = $("#dp").val().replace(/[^\d]/g, '');
+            var dp = parseInt(dpclean);
             var l_a_d = parseInt($("#lama_angsuran_dp").val());
 
             if (l_a_d == 0) {
@@ -562,31 +584,35 @@
                 var total = (dp / l_a_d);
                 var bagi = total / 1000;
                 var dibulatkan = Math.floor(bagi);
-                var hasilnya = dibulatkan * 1000;
+                var hasilnya = parseInt(dibulatkan * 1000).toLocaleString('id-ID');
                 $("#angsuran_dp").val(hasilnya);
             }
 
         });
 
         $("#lama_injeksi").keyup(function() {
-            var injeksi = parseInt($("#injeksi").val());
+            var injekclean = $("#injeksi").val().replace(/[^\d]/g, '');
+            var injeksi = parseInt(injekclean);
             var lama_injeksi = parseInt($("#lama_injeksi").val());
-            var total = (injeksi * lama_injeksi);
+            var total = (injeksi * lama_injeksi).toLocaleString('id-ID');
             $("#total_injeksi").val(total);
         });
 
         $("#lama_angsuran_bulanan").change(function() {
-            var harga = parseInt($("#harga").val());
+            var hargaclean = $("#harga").val().replace(/[^\d]/g, '');
+            var harga = parseInt(hargaclean);
             var l_a_b = parseInt($("#lama_angsuran_bulanan").val());
-            var t_injek = parseInt($("#total_injeksi").val());
+            var tinjekclean = $("#total_injeksi").val().replace(/[^\d]/g, '');
+            var t_injek = parseInt(tinjekclean);
             var diskon = parseInt($("#voucher").val());
             var diskonnya = diskon / 100;
             var hargasetelahdiskon = harga * diskonnya;
-            var dp = parseInt($("#dp").val());
+            var dpclean = $("#dp").val().replace(/[^\d]/g, '');
+            var dp = parseInt(dpclean);
             var total = (harga - dp - t_injek - hargasetelahdiskon) / l_a_b;
             var bagi = total / 1000;
             var dibulatkan = Math.floor(bagi);
-            var hasilnya = dibulatkan * 1000;
+            var hasilnya = (dibulatkan * 1000).toLocaleString('id-ID');
             $("#angsuran_bulanan").val(hasilnya);
 
         });
@@ -626,20 +652,21 @@
 <!-- Total Investasi Cashflow -->
 <script type="text/javascript">
     function sum() {
-        var beli = document.getElementById('CF7').value;
+
+        var beli = document.getElementById('CF7').value.replace(/[^\d]/g, '');
         var jual = document.getElementById('CF8').value;
-        var totop = document.getElementById('CF6').value;
-        var totfin = document.getElementById('CF14').value;
+        var totop = document.getElementById('CF6').value.replace(/[^\d]/g, '');
+        var totfin = document.getElementById('CF14').value.replace(/[^\d]/g, '');
         var result = parseInt(beli) + parseInt(jual);
         var total = parseInt(totop) + parseInt(totfin) + result;
         if (!isNaN(result)) {
-            document.getElementById('CF9').value = result;
+            document.getElementById('CF9').value = result.toLocaleString('id-ID');
         } else {
             document.getElementById('CF9').value = 0;
         }
 
         if (!isNaN(total)) {
-            document.getElementById('CF15').value = total;
+            document.getElementById('CF15').value = total.toLocaleString('id-ID');
         } else {
             document.getElementById('CF15').value = 0;
         }
@@ -871,6 +898,12 @@
                 "<div class='help-block with-errors'></div>" +
                 "</div>" +
                 "</div>" +
+                "<div class='col-sm-2 ml-4'>" +
+                "<div class='form-group'>" +
+                "<input type='text' class='form-control' id='jumlah' name='jumlah[]' placeholder='10' >required" +
+                "<div class='help-block with-errors'></div>" +
+                "</div>" +
+                "</div>" +
                 "<div class='col-sm-2  ml-4'>" +
                 "<div class='form-group'>" +
                 "<input type='number' class='form-control' id='type' name='type[]' data-toggle='validator' placeholder='Type Unit'> required" +
@@ -905,12 +938,13 @@
     $(document).ready(function() {
 
         $("#lama_angsuran_bulanan_addendum").change(function() {
-            var harga = parseInt($("#sisa_angsuran_sebelumnya_addendum").val());
+            var hargaclean = $("#sisa_angsuran_sebelumnya_addendum").val().replace(/[^\d]/g, '');
+            var harga = parseInt(hargaclean);
             var l_a_b = parseInt($("#lama_angsuran_bulanan_addendum").val());
             var total = harga / l_a_b;
             var bagi = total / 1000;
             var dibulatkan = Math.floor(bagi);
-            var hasilnya = dibulatkan * 1000;
+            var hasilnya = (dibulatkan * 1000).toLocaleString('id-ID');
             $("#angsuran_baru_addendum").val(hasilnya);
         });
     });
@@ -933,6 +967,11 @@
                 $("#lr").html(html);
             }
         });
+    }
+</script>
+<script type="text/javascript">
+    function activebutton() {
+        document.getElementById('buttonjournal').removeAttribute('disabled');
     }
 </script>
 <!-- Neraca -->
@@ -1026,4 +1065,14 @@
         $("#idUnit").val(idUnit);
         $('#harga').val(harga);
     });
+</script>
+<script>
+    $(function() {
+        $('#dp, #injeksi, #harga, #inbulanan, #inblnpasangan, #harga_barang_pr, #injek_baru_addendum, #incomebulan, #incomepasangan').maskMoney({
+            prefix: 'Rp. ',
+            thousands: '.',
+            decimal: ',',
+            precision: 0
+        });
+    })
 </script>

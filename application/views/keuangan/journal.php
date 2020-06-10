@@ -1,27 +1,8 @@
-<div class="breadcrumbs">
-    <div class="col-sm-4">
-        <div class="page-header float-left">
-            <div class="page-title">
-                <h1>Dashboard</h1>
-            </div>
-        </div>
-    </div>
-    <div class="col-sm-8">
-        <div class="page-header float-right">
-            <div class="page-title">
-                <ol class="breadcrumb text-right">
-                    <li class="active">Dashboard</li>
-                </ol>
-            </div>
-        </div>
-    </div>
-</div>
-
 <form method="POST" action="<?= base_url('Keuangan/tambahjournal') ?>">
     <div class="form-group">
         <label for="formGroupExampleInput">Pilih Project</label>
-        <select class="custom-select my-1 mr-sm-2" id="project_journal" name="project_journal">
-            <option selected>Pilih Project</option>
+        <select class="custom-select my-1 mr-sm-2" id="project_journal" name="project_journal" onchange="activebutton()">
+            <option selected value="0">Pilih Project</option>
             <?php foreach ($query1 as $key) : ?>
                 <option value="<?= $key->ID_project; ?>"><?= $key->ID_project; ?> / <?= $key->nama; ?></option>
             <?php endforeach; ?>
@@ -55,5 +36,5 @@
         <label for="formGroupExampleInput2">Keterangan</label>
         <input type="text" class="form-control" id="keterangan_journal" name="keterangan_journal" placeholder="masukan keterangan tambahan">
     </div>
-    <button type="submit" class="btn btn-success col-md-12">Input</button>
+    <button type="submit" class="btn btn-success col-md-12" disabled id="buttonjournal" name="buttonjournal">Input</button>
 </form>

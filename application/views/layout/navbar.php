@@ -68,6 +68,11 @@
                 <?php } ?>
                 <?php if ($this->session->userdata('level') == 4) { ?>
                     <li class="">
+                        <a href=" <?php echo base_url('Keuangan/angsuran_injek'); ?>"> <i class="menu-icon fa fa-shopping-cart"></i>Bayar Injek</a>
+                    </li>
+                <?php } ?>
+                <?php if ($this->session->userdata('level') == 4) { ?>
+                    <li class="">
                         <a href="<?php echo base_url('Keuangan/addendum'); ?>"> <i class="menu-icon fa fa-calendar-plus-o"></i>Addendum</a>
                     </li>
                 <?php } ?>
@@ -86,8 +91,8 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-file-text"></i>Laporan Keuangan</a>
                         <ul class="sub-menu children dropdown-menu">
                             <li><i class="menu-icon fa fa-money"></i><a href="<?php echo base_url('Keuangan/laporan_laba_rugi'); ?>">Laba & Rugi</a></li>
-                            <li><i class="menu-icon fa fa-balance-scale"></i><a href="<?php echo base_url('Keuangan/laporan_neraca'); ?>">Neraca</a></li>
-                            <li><i class="menu-icon fa fa-area-chart"></i><a href="<?php echo base_url('Keuangan/laporan_pasiva'); ?>">Pasiva</a></li>
+                            <!-- <li><i class="menu-icon fa fa-balance-scale"></i><a href="<?php echo base_url('Keuangan/laporan_neraca'); ?>">Neraca</a></li> -->
+                            <li><i class="menu-icon fa fa-area-chart"></i><a href="<?php echo base_url('Keuangan/laporan_pasiva'); ?>">Neraca</a></li>
                             <li><i class="menu-icon fa fa-bar-chart"></i><a href="<?php echo base_url('Keuangan/laporan_cashflow'); ?>">Cash Flow</a></li>
                         </ul>
                     </li>

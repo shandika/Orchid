@@ -338,7 +338,7 @@ class Pm extends CI_Controller
         $id_pr = $this->input->post('ID_pr');
         $id_ud = $this->input->post('ID_unit_dipesan_pr');
         $nama_barang = $this->input->post('nama_barang_pr');
-        $harga_barang = $this->input->post('harga_barang_pr');
+        $harga_barang = filter_var($this->input->post('harga_barang_pr'), FILTER_SANITIZE_NUMBER_INT);
         $jumlah_barang_pr = $this->input->post('jumlah_barang_pr');
         $total_harga = $harga_barang * $jumlah_barang_pr;
         $nama_supplier_pr = $this->input->post('nama_supplier_pr');

@@ -7,7 +7,7 @@
             <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="card">
                     <div class="card-header">
-                        <strong class="card-title">Marketing Fee</strong>
+                        <strong class="card-title">Marketing Fee Belum Dibayar</strong>
                     </div>
                     <div class="card-body">
                         <table id="tabelbayarpo" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
@@ -55,6 +55,86 @@
         </div>
     </div><!-- .animated -->
 </div>
+<div class="breadcrumbs">
+    <div class="col-sm-4">
+        <div class="page-header float-left">
+            <div class="page-title">
+                <h1>Data Marketing Fee</h1>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="content mt-3">
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="card">
+                    <div class="card-header">
+                        <strong class="card-title">Data Marketing Fee</strong>
+                    </div>
+                    <div class="card-body">
+                        <table id="tabelpelanggan" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>Nama Marketing</th>
+                                    <th>Tanggal Akad</th>
+                                    <th>Type</th>
+                                    <th>Kavling</th>
+                                    <th>Harga Acuan</th>
+                                    <th>DP 30%</th>
+                                    <th>Agen</th>
+                                    <th>Inhouse</th>
+                                    <th>Marketing Fee %</th>
+                                    <th>Marketing Fee</th>
+                                    <th>Closing Fee</th>
+                                    <th>Direktur Fee</th>
+                                    <th>Total Fee</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                foreach ($query2->result() as $baris) :
+                                    $harga_barang                 = $baris->nama;
+                                    $jumlah             = $baris->tanggal_akad;
+                                    $nama_supplier                  = $baris->type;
+                                    $jenis_pembayaran               = $baris->nomor;
+                                    $lama_pembayaran        = number_format($baris->total_harga, 0, ',', '.');
+                                    $dp        = number_format($baris->DP, 0, ',', '.');
+                                    $dp1        = $baris->agen;
+                                    $dp2        = $baris->inhouse;
+                                    $dp3       = $baris->persenan . "%";
+                                    $dp4        = number_format($baris->nominal_marketing_fee, 0, ',', '.');
+                                    $dp5        = number_format($baris->nominal_closing_fee, 0, ',', '.');
+                                    $dp6        = number_format($baris->direktur_fee, 0, ',', '.');
+                                    $dp7        = number_format($baris->total_fee, 0, ',', '.');
+
+                                ?>
+                                    <tr>
+                                        <td><?php echo $harga_barang; ?></td>
+                                        <td><?php echo $jumlah; ?></td>
+                                        <td><?php echo $nama_supplier; ?></td>
+                                        <td><?php echo $jenis_pembayaran; ?></td>
+                                        <td><?php echo $lama_pembayaran; ?></td>
+                                        <td><?php echo $dp; ?></td>
+                                        <td><?php echo $dp1; ?></td>
+                                        <td><?php echo $dp2; ?></td>
+                                        <td><?php echo $dp3; ?></td>
+                                        <td><?php echo $dp4; ?></td>
+                                        <td><?php echo $dp5; ?></td>
+                                        <td><?php echo $dp6; ?></td>
+                                        <td><?php echo $dp7; ?></td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div><!-- .animated -->
+</div><!-- .content -->
 
 <!-- Modal -->
 <div class="modal fade" id="tambahModal" tabindex="-1" role="dialog" aria-labelledby="tambahModalLabel" aria-hidden="true">

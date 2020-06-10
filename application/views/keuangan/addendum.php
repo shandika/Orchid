@@ -16,11 +16,11 @@
         <label for="exampleFormControlInput1">Nomor KTP</label>
         <input type="text" class="form-control" id="no_ktp_addendum" name="no_ktp_addendum" placeholder="nomor KTP" readonly>
     </div>
-    <div class="form-group">
+    <div class="form-group col-12">
         <label for="formGroupExampleInput">Pilih Addendum</label>
         <select class="custom-select my-1 mr-sm-2" id="jenis_addendum" name="jenis_addendum" onchange="loadAddendum()">
             <option value="kosong" selected>Pilih Addendum</option>
-            <option value="rubah_angsuran">Rubah Angsuran</option>
+            <option value="rubah_angsuran">Rubah Angsuran Bulanan</option>
             <option value="rubah_injek">Rubah Injek</option>
             <option value="rubah_unit">Rubah Unit</option>
             <option value="rubah_project">Rubah Project</option>
@@ -116,5 +116,5 @@
         </div>
     </div>
     <!-- Akhir Form Rubah project -->
-    <button type="submit" class="btn btn-success col-md-12">Input</button>
+    <button type="submit" class="btn btn-success col-md-12">SIMPAN</button>
 </form>

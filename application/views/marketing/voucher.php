@@ -73,5 +73,3 @@
         </div>
     </div><!-- .animated -->
 </div><!-- .content -->
-
-</div>
