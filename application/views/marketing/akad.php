@@ -42,7 +42,7 @@
             </div>
             <div class="form-group col-4">
                 <label for="inputAddress">Angsuran DP</label>
-                <input type="number" class="form-control" id="angsuran_dp" placeholder="Nominal Angsuran DP" name="angsuran_dp">
+                <input type="text" class="form-control" id="angsuran_dp" placeholder="Nominal Angsuran DP" name="angsuran_dp">
             </div>
         </div>
         <div class="form-row">
@@ -52,7 +52,7 @@
         <div class="form-row">
             <div class="form-group col-4">
                 <label for="inputAddress">Injeksi</label>
-                <input type="number" class="form-control" id="injeksi" placeholder="Nominal Injek" name="injeksi">
+                <input type="text" class="form-control" id="injeksi" placeholder="Nominal Injek" name="injeksi">
             </div>
             <div class="form-group col-4">
                 <label for="inputAddress">Lama Injeksi (Tahun)</label>
@@ -60,7 +60,7 @@
             </div>
             <div class="form-group col-4">
                 <label for="inputAddress">Total Injeksi</label>
-                <input type="number" name="total_injeksi" id="total_injeksi" class="form-control">
+                <input type="text" name="total_injeksi" id="total_injeksi" class="form-control">
                 <br>
             </div>
         </div>
@@ -81,7 +81,7 @@
         <div class="form-row">
             <div class="form-group col-4">
                 <label for="inputAddress">Harga</label>
-                <input type="number" class="form-control" id="harga" name="harga" placeholder="Masukan Harga">
+                <input type="text" class="form-control" id="harga" name="harga" placeholder="Masukan Harga">
             </div>
             <div class="form-group col-4">
                 <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Lama Angsuran </label>
@@ -102,7 +102,7 @@
             </div>
             <div class="form-group col-4">
                 <label for="inputAddress">Angsuran perbulan</label>
-                <input type="number" class="form-control" id="angsuran_bulanan" name="angsuran_bulanan" placeholder="Nominal angsuran per bulan">
+                <input type="text" class="form-control" id="angsuran_bulanan" name="angsuran_bulanan" placeholder="Nominal angsuran per bulan">
             </div>
         </div>
         <div class="form-group row">

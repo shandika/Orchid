@@ -25,7 +25,12 @@ class Keuangan_model extends CI_Model
 
     function admin_fee()
     {
-        $query = $this->db->query("SELECT unit_dipesan.ID_unit_dipesan,unit_dipesan.status_marketing_fee, akun_marketing.nama, unit_dipesan.tanggal_akad, unit.type, unit.nomor, unit_dipesan.total_harga, unit_dipesan.DP from unit_dipesan JOIN akun_marketing ON unit_dipesan.ktp_marketing=akun_marketing.ktp JOIN unit ON unit_dipesan.ID_unit = unit.ID_unit");
+        $query = $this->db->query("SELECT unit_dipesan.ID_unit_dipesan,unit_dipesan.status_marketing_fee, akun_marketing.nama, unit_dipesan.tanggal_akad, unit.type, unit.nomor, unit_dipesan.total_harga, unit_dipesan.DP from unit_dipesan JOIN akun_marketing ON unit_dipesan.ktp_marketing=akun_marketing.ktp JOIN unit ON unit_dipesan.ID_unit = unit.ID_unit WHERE unit_dipesan.status_marketing_fee = 'MENUNGGU'");
+        return $query;
+    }
+    function marketing_fee()
+    {
+        $query = $this->db->query("SELECT akun_marketing.nama, unit_dipesan.tanggal_akad, unit.type, unit.nomor, unit_dipesan.total_harga, unit_dipesan.DP, marketing_fee.agen, marketing_fee.inhouse, marketing_fee.persenan, marketing_fee.nominal_marketing_fee, marketing_fee.nominal_closing_fee, marketing_fee.direktur_fee, marketing_fee.total_fee from unit_dipesan JOIN akun_marketing ON unit_dipesan.ktp_marketing=akun_marketing.ktp JOIN unit ON unit_dipesan.ID_unit = unit.ID_unit JOIN marketing_fee ON unit_dipesan.ID_unit_dipesan = marketing_fee.ID_unit_dipesan");
         return $query;
     }
     function updatePO($id, $ID_keuangan, $bukti)
@@ -61,12 +66,17 @@ class Keuangan_model extends CI_Model
     }
     function search_cust($nama)
     {
-        $hsl = $this->db->query("SELECT ID_dp, ID_invoice_dp, nominal_angsuran_dp, angsuran_dp.status, customer.nama, customer.no_ktp FROM customer JOIN angsuran_dp ON customer.no_ktp = angsuran_dp.no_ktp WHERE customer.nama LIKE '$nama%' AND angsuran_dp.status = 0 LIMIT 1")->result();
+        $hsl = $this->db->query("SELECT ID_dp, ID_invoice_dp, nominal_angsuran_dp, angsuran_dp.status, customer.nama, customer.no_ktp FROM customer JOIN angsuran_dp ON customer.no_ktp = angsuran_dp.no_ktp WHERE customer.nama LIKE '%$nama%' and angsuran_dp.status = 0 LIMIT 1 ")->result();
         return $hsl;
     }
     function search_bulanan($nama)
     {
-        $hsl = $this->db->query("SELECT ID_angsuran_bulanan, ID_invoice_angsuran_bulanan, nominal_angsuran_bulanan, angsuran_bulanan.status, customer.nama, customer.no_ktp FROM customer JOIN angsuran_bulanan ON customer.no_ktp = angsuran_bulanan.no_ktp WHERE customer.nama LIKE '$nama%' AND angsuran_bulanan.status = 0 LIMIT 1")->result();
+        $hsl = $this->db->query("SELECT ID_angsuran_bulanan, ID_invoice_angsuran_bulanan, nominal_angsuran_bulanan, angsuran_bulanan.status, customer.nama, customer.no_ktp FROM customer JOIN angsuran_bulanan ON customer.no_ktp = angsuran_bulanan.no_ktp WHERE customer.nama LIKE '%$nama%' AND angsuran_bulanan.status = 0 LIMIT 1")->result();
+        return $hsl;
+    }
+    function search_injek($nama)
+    {
+        $hsl = $this->db->query("SELECT ID_injek, ID_invoice_injek, nominal_injek, angsuran_injek.status, customer.nama, customer.no_ktp FROM customer JOIN angsuran_injek ON customer.no_ktp = angsuran_injek.no_ktp WHERE customer.nama LIKE '%$nama%' AND angsuran_injek.status = 0 LIMIT 1")->result();
         return $hsl;
     }
     function get_invoice($no_ktp)
@@ -178,8 +188,18 @@ class Keuangan_model extends CI_Model
     }
     public function rubah_angsuran($ktp)
     {
-        $query = $this->db->query("SELECT SUM(nominal_angsuran_bulanan) as nominal FROM angsuran_bulanan WHERE status = '0' AND no_ktp = '$ktp'");
+        $query = $this->db->query("SELECT SUM(nominal_angsuran_bulanan) as nominal FROM angsuran_bulanan WHERE status = '0' AND no_ktp = '$ktp'")->result();
         return $query;
+    }
+    public function rubah_angsuran2($ktp)
+    {
+        $query2 = $this->db->query("SELECT SUM(nominal_angsuran_dp) as nominal FROM angsuran_dp WHERE status = '0' AND no_ktp = '$ktp'")->result();
+        return $query2;
+    }
+    public function rubah_angsuran3($ktp)
+    {
+        $query3 = $this->db->query("SELECT SUM(nominal_injek) as nominal FROM angsuran_injek WHERE status = '0' AND no_ktp = '$ktp'")->result();
+        return $query3;
     }
     public function rubah_injek($ktp)
     {
