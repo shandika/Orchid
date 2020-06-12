@@ -826,6 +826,345 @@ class Keuangan extends CI_Controller
         // Output a PDF file directly to the browser
         $mpdf->Output($nama_pdf, \Mpdf\Output\Destination::INLINE);
     }
+    public function cetak_po()
+    {
+        $nama            = "Lopran Preorder";
+        $bulan              = date('m');
+        $tahun              = date('Y');
+        $cetak              = date('d/m/Y');
+        $nama_bulan         = date("F", strtotime('00-' . $bulan . '-01'));
+        $nama_pdf           = "Laporan_preorder_" . $nama_bulan;
+        $mpdf               = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => 'A4-L']);
+        $mpdf->SetWatermarkImage('https://rumah-halal.com/assets/images/logo3.png', 0.2, array(120, 150), '');
+        $mpdf->showWatermarkImage = true;
+        $mpdf->setAutoTopMargin = 'stretch';
+        $mpdf->setAutoBottomMargin = 'stretch';
+        $mpdf->SetHTMLHeader('
+        <div  style="display: table;clear: both; margin-left:10%;">
+            <div  style="float: left;width: 10%; margin-left: 10%;">
+                <img src="https://rumah-halal.com/assets/images/logo3.png" alt="LOGO" width="70px" height="100px">
+            </div>
+            <div  style="float: left;width: 80%;">
+                <div class="col-col-sm-12">
+                    <p style="line-height: 10px;font-size: 18px;font-weight: bold;">FORM STANDARD ROYAL ORCHID SYARIAH GROUP</p>
+                </div>
+                <div class="row" style="float: left;width: 30%;">
+                    <div class="col-sm-12">
+                        <p style="line-height: 10px;font-size: 14px;font-weight: bold;">FORM SELEKSI SUPPLIER </p>
+                    </div>
+                    <div class="col-sm-12">
+                    <p style="line-height: 10px;font-size: 13px;">Berlaku Efektif : ' . $cetak . '</p>
+                    </div>
+                </div>
+                    <p style="line-height: 10px;font-size: 12px;">Doc No. : ' . $nama_bulan . ' ' . $tahun . '</p>
+                    <p style="line-height: 10px;font-size: 12px;">Revisi : ' . $cetak . '</p>
+                    <p style="line-height: 10px;font-size: 12px;">Hal : - </p>
+            </div>
+        </div>
+        <hr size="5px">
+        ');
+        $html               = '<!DOCTYPE html>
+        <html lang="en">
+
+        <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>' . $nama . '</title>
+        <style>
+        table.tabel2 {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 10px;
+        }
+        
+        table.table1 {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        
+        table.tabel2 td,
+        th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 5px;
+            text-align: center;
+        }
+        
+        table.tabel3 {
+            font-family: arial, sans-serif;
+            border: 0px solid #dddddd;
+            margin-left: 30px;
+            margin-right: auto;
+            margin-top: 10%;
+        }
+        table.tabel3 td,
+        th{
+            text-align: left;
+            padding: 5px;
+            text-align: center;
+        }
+
+    </style>
+    </head>
+
+    <body>
+    <h5>No PR :</h5>
+    <h5>Tgl PR :</h5>
+    
+        <table class="tabel2">
+            <thead>
+                <tr>
+                    <th rowspan="3" scope="col">No.</th>
+                    <th rowspan="3" scope="col">Nama Barang</th>
+                    <th rowspan="3" scope="col">Jenis / Tipe</th>
+                    <th rowspan="3" scope="col">Qty</th>
+                    <th colspan="6" scope="col">Nama Vendor</th>
+                    <tr>
+                    <th colspan="2" scope="col">Vendor 1</th>
+                    <th colspan="2" scope="col">Vendor 2</th>
+                    <th colspan="2" scope="col">Vendor 3</th>
+                    <tr>
+                        <th>Harga Per Item</th>
+                        <th>Total</th>
+                        <th>Harga Per Item</th>
+                        <th>Total</th>
+                        <th>Harga Per Item</th>
+                        <th>Total</th>
+                    </tr>
+                    </tr>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                </tr>
+            </tbody>
+               
+        </table>
+        <table class="tabel3">
+            <thead>
+                <tr>
+                    <th scope="col">Prepare by   </th>
+                    <th scope="col">Approved by</th>
+                    <td width="300px"></td>
+                    <td> Note :</td>
+                    <td>.............................................................</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="col" height="100px"></th>
+                    <th scope="col" height="100px"></th>
+                </tr>
+                <tr>
+                    <td scope="col" height="40px">.....................................</td>
+                    <td scope="col" height="40px">.....................................</td>
+                </tr>
+                <tr>
+                    <td scope="col">Purchasing</td>
+                    <td scope="col">Board of Dirctor</td>
+                </tr>
+            </tbody>
+        </table>       
+        </body>
+        </html>';
+        // Write some HTML code:
+        $mpdf->WriteHTML($html);
+
+        // Output a PDF file directly to the browser
+        $mpdf->Output($nama_pdf, \Mpdf\Output\Destination::INLINE);
+    }
+    public function cetak_po1()
+    {
+        $nama            = "Lopran Preorder";
+        $bulan              = date('m');
+        $tahun              = date('Y');
+        $cetak              = date('d/m/Y');
+        $nama_bulan         = date("F", strtotime('00-' . $bulan . '-01'));
+        $nama_pdf           = "Laporan_preorder_" . $nama_bulan;
+        $mpdf               = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => 'A4-P']);
+        $mpdf->SetWatermarkImage('https://rumah-halal.com/assets/images/logo3.png', 0.2, array(120, 150), '');
+        $mpdf->showWatermarkImage = true;
+        $mpdf->setAutoTopMargin = 'stretch';
+        $mpdf->setAutoBottomMargin = 'stretch';
+        $mpdf->SetHTMLHeader('
+        <div  style="display: table;clear: both;">
+            <div  style="float: left;width: 10%; margin-left: 5%; padding-right: 20px;">
+                <img src="https://rumah-halal.com/assets/images/logo3.png" alt="LOGO" width="70px" height="100px">
+            </div>
+            <div  style="float: left;width: 80%;">
+                <div class="col-col-sm-12">
+                    <p style="line-height: 10px;font-size: 18px;font-weight: bold;">FORM STANDARD ROYAL ORCHID SYARIAH GROUP</p>
+                </div>
+                <div class="row" style="float: left;width: 45%;">
+                    <div class="col-sm-12">
+                        <p style="line-height: 10px;font-size: 14px;font-weight: bold;">PURCHASE ORDER FORM </p>
+                    </div>
+                    <div class="col-sm-12">
+                    <p style="line-height: 10px;font-size: 13px;">Berlaku Efektif : ' . $cetak . '</p>
+                    </div>
+                </div>
+                    <p style="line-height: 10px;font-size: 12px;">Doc No. : ' . $nama_bulan . ' ' . $tahun . '</p>
+                    <p style="line-height: 10px;font-size: 12px;">Revisi : ' . $cetak . '</p>
+                    <p style="line-height: 10px;font-size: 12px;">Hal : - </p>
+            </div>
+        </div>
+        <hr size="5px">
+        ');
+        $html               = '<!DOCTYPE html>
+        <html lang="en">
+
+        <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>' . $nama . '</title>
+        <style>
+        table.tabel2 {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        table.table1 {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        
+        table.tabel2 td,
+        th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            font-size: 12px;
+            padding: 0px;
+        }
+        
+        table.tabel3 {
+            font-family: arial, sans-serif;
+            border: 0px solid #dddddd;
+            margin-left: 30px;
+            margin-right: auto;
+            margin-top: 10%;
+        }
+        table.tabel3 td,
+        th{
+            text-align: left;
+            padding: 5px;
+        }
+        p {
+            font-size: 12px;
+            text-align:justify;
+        }
+
+    </style>
+    </head>
+
+    <body>    
+        <table class="tabel2">
+            <thead>
+                <tr>
+                    <th width="350px">Kepada  :</th>
+                    <th>No PO   :</th>
+                </tr>
+                <tr>
+                    <th>Alamat  :</th>
+                    <th>Tanggal   :</th>
+                </tr>
+                <tr>
+                    <th>Up :</th>
+                    <th></th>
+                </tr>
+                <tr>
+                    <th>Mobile :</th>
+                    <th>Quotation   :</th>
+                </tr>
+                <tr>
+                    <th></th>
+                    <th>Tanggal   :</th>
+                </tr>
+            </thead>               
+        </table>
+        <p>Dengan Hormat, </p>
+        <p style="align:justify;">Dengan ini kami bermaksud untuk melakukan pemesanan barang yang sesuai dalam penawaran Bapak Surya sebagai berikut : </p>
+        <table class="tabel2">
+            <thead>
+                <tr>
+                    <th width="1px">No.</th>
+                    <th>Jenis Barang</th>
+                    <th>Jumlah</th>
+                    <th>Harga Satuan</th>
+                    <th>Harga Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th width="1px">1</th>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th width="1px">2</th>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th colspan="4" style="text-align: right;">Total</th>
+                    <td></td>
+                </tr>
+            </tbody>               
+        </table>
+        <p>Termin Pembayaran :</p>
+        <p>1. Pembayaran dilakukan ...... hari setiap tanggal invoice.</p>
+        <p>2. Pembayaran dilakukan setiap tanggal 10 dan untuk dokumen masuk dan lengkap maksimal pada tanggal 5 setiap bulannya atau pembayaran dilakukan setiap tanggal 25 untuk dokumen masuk dan lengkap maksimal pada tanggal 20 setiap bulannya dan di transfer ke no rekening ............</p>
+
+        <p>Ketentuan Tambahan :</p>
+        <p>1. Apabila barang tidak sesuai spesifikasi, maka barang akan dikembalikan ke pihak ............... dan seluruh pembayaran dikembalikan ke Royal Orchid Syariah</p>
+        <p>2. Segala biaya yang timbul akibat tidak sesuainya spesifikasi barang, merupakan tanggung jawab...............</P>
+        <p>3. Harga tersebut diatas adalah kondisi barang sampai di gedung Royal Orchid Syariah. Alamat gedung Royal Orchid Syariah : ....................................................... </p>
+
+        <p>Demikian surat pemesanan ini kami sampaikan atas perhatian dan kerjasama yang baik kami ucapkan terima kasih.</p>
+        <br>
+        <p>Hormat Kami,</p>
+        <br>
+        <p><u>Arief Sungkar</u></p>
+        <p>Direktur Utama</p>
+        </body>
+        </html>';
+        // Write some HTML code:
+        $mpdf->WriteHTML($html);
+
+        // Output a PDF file directly to the browser
+        $mpdf->Output($nama_pdf, \Mpdf\Output\Destination::INLINE);
+    }
 
     public function journal()
     {
@@ -925,6 +1264,14 @@ class Keuangan extends CI_Controller
             'query' => $this->db->get('project')->result(),
         );
         $this->template->load('layout/template_v', 'keuangan/cashflow', $data);
+    }
+    public function laporan_po()
+    {
+        $title = 'Keuangan - Laporan PO';
+        $data = array(
+            'title' => $title,
+        );
+        $this->template->load('layout/template_v', 'keuangan/po', $data);
     }
     function updatePO()
     {
