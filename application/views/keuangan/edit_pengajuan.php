@@ -14,8 +14,8 @@
                                     <tr>
                                         <th>No KTP</th>
                                         <th>Nama</th>
-                                        <th>Approve Keuangan</th>
-                                        <th>Approve BOD</th>
+                                        <th>Status Acc Keuangan</th>
+                                        <th>Status Acc BOD</th>
                                         <th>Nilai 1</th>
                                         <th>Nilai 2</th>
                                         <th>Aksi</th>
@@ -78,7 +78,7 @@
                                             <td><?php echo $kuis1; ?></td>
                                             <td><?php echo $kuis2; ?></td>
                                             <td>
-                                                <a title="Lihat Detail Dokumen" href="<?php echo base_url() . 'Marketing/editdata/' . $ktp; ?>" class="btn btn-primary btn-xs">Lihat </a>
+                                                <a title="Lihat Detail Dokumen" href="<?php echo base_url() . 'Keuangan/editpengajuan/' . $ktp; ?>" class="btn btn-primary btn-xs">Lihat </a>
                                             </td>
                                             <td><?php echo $ttl; ?></td>
                                             <td><?php echo $status; ?></td>
@@ -101,6 +101,69 @@
                                     <?php endforeach; ?>
                                 </tbody>
                             </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div><!-- .animated -->
+    </div><!-- .content -->
+    <?php foreach ($datacust1->result() as $baris) :
+        $ktp                  = $baris->no_ktp;
+        $nama                 = $baris->nama;
+        $pekerjaan            = $baris->pekerjaan_sesuai_ktp;
+        $status_keuangan   = $baris->acc_keuangan;
+        $status_bod   = $baris->acc_bod;
+        $kuis1   = $baris->nilai_verifikasi_1;
+        $kuis2   = $baris->nilai_verifikasi_2;
+        $ttl                  = $baris->tempat_tanggal_lahir;
+        $status               = $baris->status;
+        $jmltanggungan        = $baris->jumlah_tanggungan;
+        $alamat               = $baris->alamat;
+        $notlp                = $baris->no_telepon;
+        $stsrumah             = $baris->status_rumah;
+        $lmmenetap            = $baris->lama_menetap;
+        $pekerjaan1            = $baris->pekerjaan;
+        $lmbekerja            = $baris->lama_bekerja;
+        $nmtpbekerja          = $baris->nama_tempat_bekerja;
+        $altpbekerja          = $baris->alamat_tempat_bekerja;
+        $inbulanan            = intval($baris->income_bulanan);
+        $inblnpasangan        = intval($baris->income_bulanan_pasangan);
+        $norek                = $baris->no_rekening;
+        $namakontakdarurat    = $baris->nama_kontak_darurat;
+        $alamatkontakdarurat  = $baris->alamat_kontak_darurat;
+        $nomorkontakdarurat   = $baris->nomor_kontak_darurat;
+        $email = $baris->email;
+        $totpeng = intval($baris->total_pengeluaran);
+    ?>
+    <?php endforeach; ?>
+    <div class="content mt-3">
+        <div class="animated fadeIn">
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <strong class="card-title">Update Data Diri</strong>
+                        </div>
+                        <div class="card-body">
+                            <form action="<?= base_url('Keuangan/updaterata_rata') ?>" method="POST">
+                                <div class="form-row">
+                                    <!-- Awal Baris-->
+                                    <div class="form-group col-md-4">
+                                        <label for="inputAddress">KTP</label>
+                                        <input type="text" class="form-control" id="ktp_pengajuan" placeholder="" name="ktp_pengajuan" value="<?= $ktp ?>">
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label for="inputAddress">Rata-Rata Saldo Akhir Bulanan</label>
+                                        <input type="text" class="form-control" id="rata_rata_saldo" placeholder="" name="rata_rata_saldo" value="">
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label for="inputAddress">Rata-Rata Cashin Bulanan</label>
+                                        <input type="text" class="form-control" id="rata_rata_cashin" placeholder="" name="rata_rata_cashin" value="">
+                                    </div>
+                                </div> <!-- Akhir baris -->
+                                <button class="btn btn-primary btn-block" type="submit">UPDATE</button>
+                            </form>
                         </div>
                     </div>
                 </div>

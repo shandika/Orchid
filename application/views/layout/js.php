@@ -1068,7 +1068,7 @@
 </script>
 <script>
     $(function() {
-        $('#dp, #injeksi, #harga, #inbulanan, #inblnpasangan, #harga_barang_pr, #injek_baru_addendum, #incomebulan, #incomepasangan').maskMoney({
+        $('#dp, #injeksi, #harga, #inbulanan, #inblnpasangan, #harga_barang_pr, #injek_baru_addendum, #incomebulannya, #incomepasangannya, #rata_rata_saldo, #rata_rata_cashin').maskMoney({
             prefix: 'Rp. ',
             thousands: '.',
             decimal: ',',

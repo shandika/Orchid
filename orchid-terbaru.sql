@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 10 Jun 2020 pada 03.13
+-- Waktu pembuatan: 10 Jun 2020 pada 09.06
 -- Versi server: 10.4.11-MariaDB
 -- Versi PHP: 7.4.4
 
@@ -20,6 +20,28 @@ SET time_zone = "+00:00";
 --
 -- Database: `orchid`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `akun_bod`
+--
+
+CREATE TABLE `akun_bod` (
+  `ktp` varchar(100) NOT NULL,
+  `nama` varchar(200) NOT NULL,
+  `alamat` text NOT NULL,
+  `password` varchar(200) NOT NULL,
+  `status` tinyint(1) NOT NULL,
+  `no_tlp` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `akun_bod`
+--
+
+INSERT INTO `akun_bod` (`ktp`, `nama`, `alamat`, `password`, `status`, `no_tlp`) VALUES
+('admin_bod', 'octavian', 'adadeh', 'd033e22ae348aeb5660fc2140aec35850c4da997', 1, '85923192389');
 
 -- --------------------------------------------------------
 
@@ -263,7 +285,9 @@ CREATE TABLE `customer` (
   `nomor_kontak_darurat` varchar(20) NOT NULL,
   `status_akad` tinyint(1) NOT NULL,
   `nilai_verifikasi_1` varchar(100) NOT NULL,
+  `hasil_1` varchar(100) NOT NULL,
   `nilai_verifikasi_2` varchar(100) NOT NULL,
+  `hasil_2` varchar(100) NOT NULL,
   `acc_keuangan` varchar(200) NOT NULL,
   `acc_bod` varchar(200) NOT NULL,
   `bod_note` varchar(200) NOT NULL,
@@ -275,8 +299,8 @@ CREATE TABLE `customer` (
 -- Dumping data untuk tabel `customer`
 --
 
-INSERT INTO `customer` (`no_ktp`, `nama`, `pekerjaan_sesuai_ktp`, `tempat_tanggal_lahir`, `status`, `jumlah_tanggungan`, `alamat`, `no_telepon`, `email`, `status_rumah`, `lama_menetap`, `pekerjaan`, `lama_bekerja`, `nama_tempat_bekerja`, `alamat_tempat_bekerja`, `income_bulanan`, `income_bulanan_pasangan`, `total_pengeluaran`, `no_rekening`, `nama_kontak_darurat`, `alamat_kontak_darurat`, `nomor_kontak_darurat`, `status_akad`, `nilai_verifikasi_1`, `nilai_verifikasi_2`, `acc_keuangan`, `acc_bod`, `bod_note`, `rata_rata_saldo_akhir_bulanan`, `rata_rata_cashin_bulanan`) VALUES
-('3273172510970001', 'Octav', 'test', 'test', 'test', 22, 'test', '251025', 'test@gmail.com', 'test', 22, 'test', 1, 'test', 'test', 222, 222, '5000000', '222', '222', '222', '222', 0, 'Direkomendasikan', 'Direkomendasikan', 'Menunggu', 'Menunggu', '', '', '');
+INSERT INTO `customer` (`no_ktp`, `nama`, `pekerjaan_sesuai_ktp`, `tempat_tanggal_lahir`, `status`, `jumlah_tanggungan`, `alamat`, `no_telepon`, `email`, `status_rumah`, `lama_menetap`, `pekerjaan`, `lama_bekerja`, `nama_tempat_bekerja`, `alamat_tempat_bekerja`, `income_bulanan`, `income_bulanan_pasangan`, `total_pengeluaran`, `no_rekening`, `nama_kontak_darurat`, `alamat_kontak_darurat`, `nomor_kontak_darurat`, `status_akad`, `nilai_verifikasi_1`, `hasil_1`, `nilai_verifikasi_2`, `hasil_2`, `acc_keuangan`, `acc_bod`, `bod_note`, `rata_rata_saldo_akhir_bulanan`, `rata_rata_cashin_bulanan`) VALUES
+('3273172510970001', 'Octav', 'mahasiswa', 'Bandung, 25 Oktober 1997', 'Lajang', 1, 'jl.kebon lega 1 rt.02/02 no.19', '085923192389', 'Octaviansaja2@gmail.com', 'Lajang', 22, 'Freelance', 1, 'Sona Jaya Technology', 'Antapani', 123345678, 99999999, '5000000', '089824136787', 'Rini', 'Moch Tohha', '085923192389', 0, '163', 'Direkomendasikan', '5', 'Direkomendasikan', 'Approved', 'Approved', 'Terima Pengajuan', '500000000', '30000000');
 
 -- --------------------------------------------------------
 
@@ -298,6 +322,13 @@ CREATE TABLE `dokumen_pelengkap` (
   `surat_perjanjian_penjaminan_personal` varchar(255) NOT NULL,
   `slip_gaji_penjamin_personal` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `dokumen_pelengkap`
+--
+
+INSERT INTO `dokumen_pelengkap` (`no_ktp`, `fc_ktp`, `fc_kk`, `slip_gaji`, `laporan_keuangan_usaha`, `laporan_rekening`, `surat_persetujuan_suami_istri`, `surat_persetujuan_pembayaran_kredit`, `surat_rekomendasi`, `surat_perjanjian_agunan_barang`, `surat_perjanjian_penjaminan_personal`, `slip_gaji_penjamin_personal`) VALUES
+('3273172510970001', 'person_1.jpg', 'person_2.jpg', 'person_3.jpg', 'person_4.jpg', '1591772708o.jpg', '1591772708n.jpg', '1591772708i.png', '1591772708k.png', '1591772708a.png', '1591772708p.jpg', '1591772709g.jpg');
 
 -- --------------------------------------------------------
 
@@ -1157,6 +1188,12 @@ INSERT INTO `voucher` (`ID_voucher`, `nama`, `nominal`, `expired`, `max_used`) V
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indeks untuk tabel `akun_bod`
+--
+ALTER TABLE `akun_bod`
+  ADD PRIMARY KEY (`ktp`);
 
 --
 -- Indeks untuk tabel `akun_keuangan`

@@ -21,6 +21,11 @@
                         <a href="<?= base_url('Purchasing/status') ?>"> <i class="menu-icon fa fa-list-ol"></i>Status Preorder Barang</a>
                     </li>
                 <?php } ?>
+                <?php if ($this->session->userdata('level') == 7) { ?>
+                    <li class="">
+                        <a href="<?= base_url('Bod') ?>"> <i class="menu-icon fa fa-list-ol"></i>Pengajuan Customer</a>
+                    </li>
+                <?php } ?>
                 <?php if ($this->session->userdata('level') == 2) { ?>
                     <li class="">
                         <a href="<?php echo base_url('Home/pm'); ?>"> <i class="menu-icon fa fa-home"></i>Project</a>
@@ -49,6 +54,11 @@
                 <?php if ($this->session->userdata('level') == 3) { ?>
                     <li class="">
                         <a href="<?php echo base_url('Marketing/voucher'); ?>"> <i class="menu-icon fa fa-ticket"></i>Voucher</a>
+                    </li>
+                <?php } ?>
+                <?php if ($this->session->userdata('level') == 4) { ?>
+                    <li class="">
+                        <a href="<?php echo base_url('Keuangan/pengajuan'); ?>"> <i class="menu-icon fa fa-users"></i>Daftar Pengajuan</a>
                     </li>
                 <?php } ?>
                 <?php if ($this->session->userdata('level') == 4) { ?>

@@ -40,6 +40,7 @@ class Marketing extends CI_Controller
 			'query1' => $this->marketing->tampilDataAngsuranLain($ktp),
 			'datacust1' => $this->marketing->tampilDataPelangganpilihan($ktp),
 			'dataajuan' => $this->marketing->tampildataajuan($ktp),
+			'gambar' => $this->marketing->tampilgambar($ktp),
 		);
 		$this->template->load('layout/template_v', 'marketing/editdata', $data);
 	}
@@ -150,7 +151,7 @@ class Marketing extends CI_Controller
 	{
 		$this->load->library('upload');
 		$dataInfo = array();
-		$cpt = count($_FILES['userfile']['name']);
+		$cpt = sizeof($_FILES['userfile']['name']);
 		$files = $_FILES;
 		for ($i = 0; $i < $cpt; $i++) {
 			$_FILES['userfile']['name'] = $files['userfile']['name'][$i];
@@ -209,6 +210,40 @@ class Marketing extends CI_Controller
 			echo $this->session->set_flashdata('msg', 'error-reset');
 			redirect('Marketing', 'refresh');
 		}
+	}
+
+	public function updateDataCustomer()
+	{
+		$ktp = $this->input->post('ktp');
+		$data = array(
+			'no_ktp'					=> strip_tags($this->input->post('ktp')),
+			'nama'						=> strip_tags($this->input->post('nama')),
+			'pekerjaan_sesuai_ktp'		=> strip_tags($this->input->post('psk')),
+			'tempat_tanggal_lahir'		=> strip_tags($this->input->post('ttl')),
+			'status'					=> strip_tags($this->input->post('status')),
+			'jumlah_tanggungan'			=> strip_tags($this->input->post('tanggungan')),
+			'alamat'					=> strip_tags($this->input->post('alamat')),
+			'no_telepon'				=> strip_tags($this->input->post('notelp')),
+			'email'						=> strip_tags($this->input->post('email')),
+			'status_rumah'				=> strip_tags($this->input->post('statusrumah')),
+			'lama_menetap'				=> strip_tags($this->input->post('lama_menetap')),
+			'pekerjaan'					=> strip_tags($this->input->post('pekerjaan')),
+			'lama_bekerja'				=> strip_tags($this->input->post('lama_bekerja')),
+			'nama_tempat_bekerja'		=> strip_tags($this->input->post('namatemker')),
+			'alamat_tempat_bekerja'		=> strip_tags($this->input->post('alamattemker')),
+			'income_bulanan'			=> preg_replace("/[^0-9]/", "", $this->input->post('incomebulannya')),
+			'income_bulanan_pasangan'	=> preg_replace("/[^0-9]/", "", $this->input->post('incomepasangannya')),
+			'total_pengeluaran'			=> preg_replace("/[^0-9]/", "", $this->input->post('totalpengeluaran')),
+			'no_rekening'				=> strip_tags($this->input->post('norek')),
+			'nama_kontak_darurat'		=> $this->input->post('namakondar'),
+			'alamat_kontak_darurat'		=> $this->input->post('alamatkondar'),
+			'nomor_kontak_darurat'		=> $this->input->post('teleponkondar'),
+			'status_akad'				=> '0',
+		);
+
+		$this->marketing->updatedatacustomer($ktp, $data);
+		echo $this->session->set_flashdata('msg', 'success-add-data');
+		redirect('Marketing', 'refresh');
 	}
 
 	function get_autocomplete()
