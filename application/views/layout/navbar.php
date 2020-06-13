@@ -104,6 +104,7 @@
                             <!-- <li><i class="menu-icon fa fa-balance-scale"></i><a href="<?php echo base_url('Keuangan/laporan_neraca'); ?>">Neraca</a></li> -->
                             <li><i class="menu-icon fa fa-area-chart"></i><a href="<?php echo base_url('Keuangan/laporan_pasiva'); ?>">Neraca</a></li>
                             <li><i class="menu-icon fa fa-bar-chart"></i><a href="<?php echo base_url('Keuangan/laporan_cashflow'); ?>">Cash Flow</a></li>
+                            <li><i class="menu-icon fa fa-shopping-cart"></i><a href="<?php echo base_url('Keuangan/laporan_po'); ?>">Laporan PO</a></li>
                         </ul>
                     </li>
                 <?php } ?>
